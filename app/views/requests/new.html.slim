@@ -1,0 +1,111 @@
+.hero
+  .plan
+    h1 Unique Trip Experiences
+    h4 travel like a local not a tourist
+
+    a.btn.btn-primary.btn-lg role='button' href='#getrecommendations' Get Recommendations For Free
+  .slogan
+    p Custom travel recommendations from trusted locals
+section.value
+  h2 We're the travel agent for a new generation of travelers
+  ul.list-inline
+    li
+      = image_tag('loveyourtrip.png')
+      h3 Love your trip
+      p We recommend experiences you'll want to brag about
+    li
+      = image_tag('cutplanninghours.png')
+      h3 Cut hours of planning
+      p We do all the research and planning for you
+    li
+      = image_tag('discovercoolstuff.png')
+      h3 Discover hidden gems
+      p We give you the local and up to date scoop
+section.what.row
+  h2 Like having a local friend everywhere you travel
+  ul.list-inline
+    li.thumbnail
+      = image_tag('lodging.png')
+      .caption
+        h3 Lodging
+        p unique places in ideal locations
+    li.thumbnail
+      = image_tag('thingstosee.png')
+      .caption
+        h3 Things To See
+        p authentic places your friend would take you to
+  ul.list-inline
+    li.thumbnail
+      = image_tag('holeinthewall.png')
+      .caption
+        h3 Dining
+        p delicious hot spots and hole-in-the-walls
+    li.thumbnail
+      = image_tag('thingstodo.png')
+      .caption
+        h3 Things To Do
+        p fun essentials and uncommon adventures
+.anchor#howitworks
+section.how
+  .container
+    .row
+      = image_tag('howitworks_lines.png')
+      h2 How It Works
+    ul.list-inline
+      li
+        = image_tag('howitworks_icon1.png')
+        h3 Submit Request
+        p Give us some basic information about the special trip you want.
+      li
+        = image_tag('howitworks_icon2.png')
+        h3 Sit Back
+        p Our local guides assemble custom recommendations for you.
+      li
+        = image_tag('howitworks_icon3.png')
+        h3 Give Feedback
+        p We'll email you some initial ideas and get your quick feedback.
+      li
+        = image_tag('howitworks_icon4.png')
+        h3 Receive Trip Plan
+        p Receive your personal trip plan complete with images, links, details and tips
+
+.testimonials
+.anchor#getrecommendations
+section.request
+  .container
+    = bootstrap_nested_form_for Request.new do |f|
+      h2 Where do you want to go?
+      fieldset
+        .row
+          .col-md-6
+            = f.text_field :destination, placeholder: 'e.g. San Francisco, CA', label: "I'm traveling to"
+          .col-md-3
+            = f.datetime_picker :arrival, placeholder: 'MM/DD/YYYY', label: "I'm getting there on", format: "%Y-%m-%d"
+          .col-md-3
+            = f.datetime_picker :departure, placeholder: 'MM/DD/YYYY', label: "And leaving there on", format: "%Y-%m-%d"
+
+      h2 What kind of trip are you looking for?
+      fieldset
+        .row
+          .col-md-6
+            = f.text_field :companions, placeholder: 'e.g My wife and two kids', label: "I'm traveling with"
+          .col-md-6
+            = f.text_field :budget, placeholder: '$600'
+            span Per Person (Not including transit)
+        .row
+          .col-md-12
+            = f.collection_radio_buttons :trip_type, Request::REQUEST_TYPES, :presence, :presence, label: 'I want this trip mostly to be about', inline: true
+        .row
+          .col-md-12
+            = f.text_area :details, label: "I really care about", placeholder: 'e.g. Gourmet food, unique experiences, relaxing with friends, adventure and exploration'
+
+      h2 Who should we send the recommendations to?
+      fieldset
+        .row
+          .col-md-6
+            = f.text_field :first_name, label: 'My first name is'
+          .col-md-6
+            = f.text_field :email, label: 'My email is', prepend: '@'
+      .row.submit
+        = f.submit 'Request Recommendations', class: 'btn btn-primary btn-lg'
+        =image_tag('scribbletext2.png')

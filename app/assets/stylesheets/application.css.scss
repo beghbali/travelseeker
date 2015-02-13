@@ -1,0 +1,252 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require rails_bootstrap_forms
+ *= require_self
+ */
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "bootstrap-datetimepicker";
+
+$navbar-height: 5em;
+
+.bs-callout {
+    padding: 20px;
+    margin: 20px 0;
+    border: 1px solid #eee;
+    border-left-width: 5px;
+    border-radius: 3px;
+}
+.bs-callout h4 {
+    margin-top: 0;
+    margin-bottom: 5px;
+}
+.bs-callout p:last-child {
+    margin-bottom: 0;
+}
+.bs-callout code {
+    border-radius: 3px;
+}
+.bs-callout+.bs-callout {
+    margin-top: -5px;
+}
+.bs-callout-default {
+    border-left-color: #777;
+}
+.bs-callout-default h4 {
+    color: #777;
+}
+.bs-callout-primary {
+    border-left-color: #428bca;
+}
+.bs-callout-primary h4 {
+    color: #428bca;
+}
+.bs-callout-success {
+    border-left-color: #5cb85c;
+}
+.bs-callout-success h4 {
+    color: #5cb85c;
+}
+.bs-callout-danger {
+    border-left-color: #d9534f;
+}
+.bs-callout-danger h4 {
+    color: #d9534f;
+}
+.bs-callout-warning {
+    border-left-color: #f0ad4e;
+}
+.bs-callout-warning h4 {
+    color: #f0ad4e;
+}
+.bs-callout-info {
+    border-left-color: #5bc0de;
+}
+.bs-callout-info h4 {
+    color: #5bc0de;
+}
+
+.requests#new {
+  font-family: 'Avenir Black';
+}
+
+.requests#thank_you {
+  .thank_you {
+    margin-top: $navbar-height+3em;
+  }
+}
+.navbar {
+  height: $navbar-height;
+  background-color: white;
+  font-family: 'Avenir Heavy';
+  border-bottom: 1px solid gray;
+  font-size: 1.4em;
+  a {
+    color:black;
+  }
+  .container-fluid > * {
+    padding: 1em;
+  }
+}
+
+section {
+  padding: 2em;
+}
+
+.hero {
+  overflow: hidden;
+  margin-top: $navbar-height;
+  padding-top: 2em;
+  background-image: asset_url('burma.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  text-align: center;
+  height: 40em;
+  position: relative;
+  .slogan {
+    position: absolute;
+    bottom: 0;
+    background-color: #ddab24;
+    opacity: 0.9;
+    width: 100%;
+    height: 4em;
+    color: white;
+    font-weight: bold;
+    font-size: 1.3em;
+    line-height: 4em;
+  }
+}
+
+.value{
+  text-align: center;
+
+  ul {
+    padding: 1em;
+    list-style:none;
+    h3 {
+      font-family: 'Avenir Heavy';
+    }
+    p {
+      font-family: 'Avenir Light';
+      width: 60%;
+      margin: 0 auto;
+    }
+  }
+}
+
+.what {
+  background-color: LightGray;
+  text-align: center;
+  ul {
+    list-style: none;
+    li {
+      width: 15%;
+      box-shadow: 0 0 5px black;
+      margin: 2em;
+    }
+  }
+  .thumbnail {
+    background-color: white;
+    border: 0;
+    height: 15em;
+    padding:0;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    img {
+      height: 60%;
+      width: 100%;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;;
+    }
+    .caption {
+      margin: 0.2em;
+      padding:0;
+    }
+  }
+}
+
+.how {
+  background-image: asset_url('howitworks_bg.png');
+  color: white;
+  text-align: center;
+  font-family: 'Avenir Heavy';
+  font-size: 1em;
+  h2 {
+    margin-top: -0.75em;
+  }
+  h3 {
+    text-transform: uppercase;
+  }
+  p {
+    width: 60%;
+    margin: 0 auto;
+  }
+  ul {
+    list-style: none;
+    li {
+      width: 24%;
+    }
+  }
+}
+
+.request {
+  fieldset {
+    border: 2px solid #ce9f24;
+    background-color: #fdf6e4;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    .row {
+      margin-left: 0;
+      padding: 0.75em;
+    }
+  }
+  .submit {
+    margin-top: 1em;
+    padding: 1em;
+  }
+
+  input[type=submit] {
+    min-width: 15em;
+  }
+  input[type=submit] + img {
+    margin-left: 1em;
+  }
+
+  label.control-label {
+    display: block;
+  }
+
+}
+
+.anchor {
+  display: block;
+  height: $navbar-height;
+  margin-top: -$navbar-height;
+  visibility: hidden;
+}
+
+footer {
+  background-color: #303030;
+  color: white;
+  text-align: center;
+  ul {
+    list-style: none;
+  }
+  .row {
+    padding: 0.5em;
+  }
+}

@@ -1,0 +1,9 @@
+branch-defaults:
+  default:
+    environment: production
+global:
+  application_name: zentrips
+  default_ec2_keyname: aws-eb
+  default_platform: Ruby 2.1 (Passenger Standalone)
+  default_region: us-west-1
+  profile: eb-cli
