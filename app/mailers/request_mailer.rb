@@ -1,10 +1,11 @@
 class RequestMailer < ActionMailer::Base
 
+  default from: 'support@zentrips.co'
+
   def new_request(params)
-    $ses.send_email(
-      source: 'support@zentrips.co',
+    mail(
       to: 'support@zentrips.co',
       subject: "Zentrip [new-request]: #{params[:name]}, #{params[:destination]}, #{params[:arrival]}, #{params[:budget]}",
-      text_body: params.map{|k,v| "#{k}: #{v}"}.join("\n"))
+      body: params.map{|k,v| "#{k}: #{v}"}.join("\n"))
   end
 end
