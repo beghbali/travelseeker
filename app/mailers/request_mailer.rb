@@ -1,7 +1,7 @@
 class RequestMailer < ActionMailer::Base
 
   def new_request(params)
-    ses.send_email(
+    $ses.send_email(
       source: 'support@zentrips.co',
       to: 'support@zentrips.co',
       subject: "Zentrip [new-request]: #{params[:name]}, #{params[:destination]}, #{params[:arrival]}, #{params[:budget]}",
