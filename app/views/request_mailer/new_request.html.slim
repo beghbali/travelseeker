@@ -1,1 +1,5 @@
-= @params.map{|k,v| "#{k}: #{v}"}.join("\n")
+table
+- @params.each do |k, v|
+  tr
+    td = "#{k}:"
+    td = v
