@@ -76,7 +76,8 @@ $navbar-height: 5em;
 }
 
 .requests#new {
-  font-family: 'Avenir Black';
+  /*font-family: 'Avenir Black';*/
+  font-family: sans-serif;
 }
 
 .requests#thank_you {
@@ -87,7 +88,7 @@ $navbar-height: 5em;
 .navbar {
   height: $navbar-height;
   background-color: white;
-  font-family: 'Avenir Heavy';
+  /*font-family: 'Avenir Heavy';*/
   border-bottom: 1px solid gray;
   font-size: 1.4em;
   a {
@@ -113,6 +114,12 @@ section {
   text-align: center;
   height: 40em;
   position: relative;
+  .plan a {
+    margin-top: 1em;
+  }
+  .plan div {
+    padding-top: 1em;
+  }
   .slogan {
     position: absolute;
     bottom: 0;
@@ -134,10 +141,10 @@ section {
     padding: 1em;
     list-style:none;
     h3 {
-      font-family: 'Avenir Heavy';
+      /*font-family: 'Avenir Heavy';*/
     }
     p {
-      font-family: 'Avenir Light';
+      /*font-family: 'Avenir Light';*/
       width: 60%;
       margin: 0 auto;
     }
@@ -150,7 +157,7 @@ section {
   ul {
     list-style: none;
     li {
-      width: 15%;
+      max-width: 15%;
       box-shadow: 0 0 5px black;
       margin: 2em;
     }
@@ -158,7 +165,6 @@ section {
   .thumbnail {
     background-color: white;
     border: 0;
-    height: 15em;
     padding:0;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
@@ -181,22 +187,24 @@ section {
   background-image: asset_url('howitworks_bg.png');
   color: white;
   text-align: center;
-  font-family: 'Avenir Heavy';
+  /*font-family: 'Avenir Heavy';*/
   font-size: 1em;
   h2 {
     margin-top: -0.75em;
   }
   h3 {
     text-transform: uppercase;
+    text-align: left;
   }
   p {
-    width: 60%;
     margin: 0 auto;
   }
   ul {
+    padding: 1em;
     list-style: none;
     li {
       width: 24%;
+      text-align: left;
     }
   }
 }

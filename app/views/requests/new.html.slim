@@ -1,13 +1,14 @@
 .hero
   .plan
-    h1 Unique Trip Experiences
-    h4 travel like a local not a tourist
+    h1 Travel Like a Local, Not a Tourist
 
-    a.btn.btn-primary.btn-lg role='button' href='#getrecommendations' Get Recommendations For Free
+    a.btn.btn-primary.btn-lg role='button' href='#getrecommendations' Get Unique Trip Recommendations For Free
+    div
+      = link_to 'see a sample', asset_path('seattle.pdf')
   .slogan
     p Custom travel recommendations from trusted locals
 section.value
-  h2 We're the travel agent for a new generation of travelers
+  h2 We're the travel concierge for a new generation of travelers
   ul.list-inline
     li
       = image_tag('loveyourtrip.png')
@@ -105,7 +106,7 @@ section.request
           .col-md-6
             = f.text_field :first_name, label: 'My first name is'
           .col-md-6
-            = f.text_field :email, label: 'My email is', prepend: '@'
+            = f.text_field :email, label: 'My email is'
       .row.submit
         = f.submit 'Request Recommendations', class: 'btn btn-primary btn-lg'
         =image_tag('scribbletext2.png')
