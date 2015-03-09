@@ -1,0 +1,12 @@
+.symbol {
+  display: inline-block;
+  content: '$';
+}
+
+.symbol-empty {
+  color: #ccc;
+}
+
+.symbol-filled {
+  color: black;
+}

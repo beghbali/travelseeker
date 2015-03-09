@@ -17,6 +17,7 @@
 @import "bootstrap-datetimepicker";
 
 $navbar-height: 5em;
+$navbar-color: white;
 
 .bs-callout {
     padding: 20px;
@@ -82,23 +83,32 @@ $navbar-height: 5em;
 
 .requests#thank_you {
   .thank_you {
-    margin-top: $navbar-height+3em;
+    margin-top: $navbar-height;
+    &.hero {
+      background-image: asset_url('thailand.jpg');
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+    }
   }
 }
-.navbar {
+.navbar{
   height: $navbar-height;
-  background-color: white;
+  background-color: $navbar-color;
   /*font-family: 'Avenir Heavy';*/
   border-bottom: 1px solid gray;
   font-size: 1.4em;
   a {
     color:black;
   }
-  .container-fluid > * {
-    padding: 1em;
-  }
 }
 
+.navbar-fixed-top {
+  .navbar-collapse ul {
+    margin-top: 1em;
+    background-color: $navbar-color;
+  }
+}
 section {
   padding: 2em;
 }
@@ -154,12 +164,20 @@ section {
 .what {
   background-color: LightGray;
   text-align: center;
+
   ul {
     list-style: none;
+    overflow: hidden;
+    display: inline-block;
+
     li {
-      max-width: 15%;
       box-shadow: 0 0 5px black;
       margin: 2em;
+      text-align: left;
+      float: left;
+      p {
+        min-height: 3em;
+      }
     }
   }
   .thumbnail {
@@ -178,7 +196,8 @@ section {
     }
     .caption {
       margin: 0.2em;
-      padding:0;
+      padding-left: 1em;
+      padding-right: 1em;
     }
   }
 }
@@ -203,8 +222,8 @@ section {
     padding: 1em;
     list-style: none;
     li {
-      width: 24%;
       text-align: left;
+      float: left;
     }
   }
 }
@@ -221,6 +240,9 @@ section {
       margin-left: 0;
       padding: 0.75em;
     }
+  }
+  .symbol-empty, .symbol-filled {
+    padding-top: 1em;
   }
   .submit {
     margin-top: 1em;

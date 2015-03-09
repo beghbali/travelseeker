@@ -1,8 +1,8 @@
 .hero
   .plan
-    h1 Travel Like a Local, Not a Tourist
+    h1 Travel like a local, not a tourist
 
-    a.btn.btn-primary.btn-lg role='button' href='#getrecommendations' Get Unique Trip Recommendations For Free
+    a.btn.btn-primary.btn-lg role='button' href='#getrecommendations' Get Authentic Recommendations For Free
     div
       = link_to 'see a sample', asset_path('seattle.pdf')
   .slogan
@@ -24,24 +24,26 @@ section.value
       p We give you the local and up to date scoop
 section.what.row
   h2 Like having a local friend everywhere you travel
-  ul.list-inline
-    li.thumbnail
+
+  ul
+    li.thumbnail.col-md-5
       = image_tag('lodging.png')
       .caption
         h3 Lodging
         p unique places in ideal locations
-    li.thumbnail
+    li.thumbnail.col-md-5
       = image_tag('thingstosee.png')
       .caption
         h3 Things To See
         p authentic places your friend would take you to
-  ul.list-inline
-    li.thumbnail
+
+  ul
+    li.thumbnail.col-md-5
       = image_tag('holeinthewall.png')
       .caption
         h3 Dining
         p delicious hot spots and hole-in-the-walls
-    li.thumbnail
+    li.thumbnail.col-md-5
       = image_tag('thingstodo.png')
       .caption
         h3 Things To Do
@@ -50,22 +52,23 @@ section.what.row
 section.how
   .container
     .row
-      = image_tag('howitworks_lines.png')
+      div.hidden-xs
+        = image_tag('howitworks_lines.png')
       h2 How It Works
     ul.list-inline
-      li
+      li.col-md-3
         = image_tag('howitworks_icon1.png')
         h3 Submit Request
         p Give us some basic information about the special trip you want.
-      li
+      li.col-md-3
         = image_tag('howitworks_icon2.png')
         h3 Sit Back
         p Our local guides assemble custom recommendations for you.
-      li
+      li.col-md-3
         = image_tag('howitworks_icon3.png')
         h3 Give Feedback
         p We'll email you some initial ideas and get your quick feedback.
-      li
+      li.col-md-3
         = image_tag('howitworks_icon4.png')
         h3 Receive Trip Plan
         p Receive your personal trip plan complete with images, links, details and tips
@@ -91,11 +94,8 @@ section.request
           .col-md-6
             = f.text_field :companions, placeholder: 'e.g My wife and two kids', label: "I'm traveling with"
           .col-md-6
-            = f.text_field :budget, placeholder: '$600'
-            span Per Person (Not including transit)
-        .row
-          .col-md-12
-            = f.collection_radio_buttons :trip_type, Request::REQUEST_TYPES, :presence, :presence, label: 'I want this trip mostly to be about', inline: true
+            label.control-label Budget
+            = f.hidden_field :budget, class: 'rating', 'data-filled' => "glyphicon glyphicon-usd symbol-filled", 'data-empty' => "glyphicon glyphicon-usd symbol-empty", 'data-stop' => '4'
         .row
           .col-md-12
             = f.text_area :details, label: "I really care about", placeholder: 'e.g. Gourmet food, unique experiences, relaxing with friends, adventure and exploration'
@@ -104,9 +104,9 @@ section.request
       fieldset
         .row
           .col-md-6
-            = f.text_field :first_name, label: 'My first name is'
+            = f.text_field :first_name, label: 'My first name is', placeholder: 'e.g. Joseph'
           .col-md-6
-            = f.text_field :email, label: 'My email is'
+            = f.text_field :email, label: 'My email is', placeholder: 'e.g. jsmith@gmail.com'
       .row.submit
         = f.submit 'Request Recommendations', class: 'btn btn-primary btn-lg'
-        =image_tag('scribbletext2.png')
+        =image_tag('scribbletext3.png', class: 'hidden-xs')
