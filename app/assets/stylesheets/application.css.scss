@@ -16,7 +16,7 @@
 @import "bootstrap";
 @import "bootstrap-datetimepicker";
 
-$navbar-height: 5em;
+$navbar-height: 4em;
 $navbar-color: white;
 
 .bs-callout {
@@ -258,6 +258,10 @@ section {
 
   label.control-label {
     display: block;
+  }
+
+  .rating-symbol {
+    cursor: pointer;
   }
 
 }

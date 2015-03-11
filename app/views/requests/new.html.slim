@@ -4,7 +4,7 @@
 
     a.btn.btn-primary.btn-lg role='button' href='#getrecommendations' Get Authentic Recommendations For Free
     div
-      = link_to 'see a sample', asset_path('seattle.pdf')
+      = link_to 'see a sample', asset_path('Alex Aarhus.pdf')
   .slogan
     p Custom travel recommendations from trusted locals
 section.value
@@ -94,7 +94,7 @@ section.request
           .col-md-6
             = f.text_field :companions, placeholder: 'e.g My wife and two kids', label: "I'm traveling with"
           .col-md-6
-            label.control-label Budget
+            label.control-label Budget (click to select)
             = f.hidden_field :budget, class: 'rating', 'data-filled' => "glyphicon glyphicon-usd symbol-filled", 'data-empty' => "glyphicon glyphicon-usd symbol-empty", 'data-stop' => '4'
         .row
           .col-md-12
