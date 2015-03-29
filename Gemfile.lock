@@ -43,6 +43,8 @@ GEM
     bootstrap_form-datetimepicker (0.0.1)
       bootstrap_form
     builder (3.1.4)
+    byebug (4.0.4)
+      columnize (= 0.9.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -50,6 +52,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.0)
+    columnize (0.9.0)
     erubis (2.7.0)
     execjs (2.2.2)
     hike (1.2.3)
@@ -137,6 +140,7 @@ DEPENDENCIES
   bootstrap3-datetimepicker-rails (~> 4.0.0)
   bootstrap_form
   bootstrap_form-datetimepicker
+  byebug
   coffee-rails (~> 4.0.0)
   jbuilder (~> 1.2)
   jquery-rails

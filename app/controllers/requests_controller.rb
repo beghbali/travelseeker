@@ -2,7 +2,7 @@ class RequestsController < ApplicationController
   layout 'requests'
 
   def new
-
+    @destination = params[:destination]
   end
 
   def create

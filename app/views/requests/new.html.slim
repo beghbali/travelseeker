@@ -1,4 +1,4 @@
-.hero
+.hero style=background_image_for(@destination)
   .plan
     h1 Travel like a local, not a tourist
 
@@ -110,3 +110,17 @@ section.request
       .row.submit
         = f.submit 'Request Recommendations', class: 'btn btn-primary btn-lg'
         =image_tag('scribbletext3.png', class: 'hidden-xs')
+/ section
+/   .carousel.slide#guides data-ride='carousel'
+/     ol.carousel-indicators
+/       li.active data-target='#guides' data-slide-to='0'
+/       li data-target='#guides' data-slide-to='1'
+/       li data-target='#guides' data-slide-to='2'
+/     .carousel-inner role='listbox'
+/       .item.active
+/         p hello there fellows
+/       .item
+/         p dum dum
+/       .item
+/         div style="background-color: red;"
+/         div style="background-color: black;"
