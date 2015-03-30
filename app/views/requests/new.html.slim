@@ -1,10 +1,12 @@
-.hero style=background_image_for(@destination)
+.hero style=css_for(@request.destination)
   .plan
-    h1 Travel like a local, not a tourist
-
+    - if @request.destination.present?
+      h1 Experience #{@request.destination} like a local, not a tourist
+    - else
+      h1 Travel like a local, not a tourist
     a.btn.btn-primary.btn-lg role='button' href='#getrecommendations' Get Authentic Recommendations For Free
     div
-      = link_to 'see a sample', asset_path('Alex Aarhus.pdf')
+      = link_to 'see a sample', asset_path('Alex Aarhus.pdf'), style: "color: #{text_color_for(@request.destination)}"
   .slogan
     p Custom travel recommendations from trusted locals
 section.value
@@ -77,7 +79,7 @@ section.how
 .anchor#getrecommendations
 section.request
   .container
-    = bootstrap_nested_form_for Request.new do |f|
+    = bootstrap_nested_form_for @request || Request.new do |f|
       h2 Where do you want to go?
       fieldset
         .row

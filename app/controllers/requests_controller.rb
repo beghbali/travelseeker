@@ -2,7 +2,7 @@ class RequestsController < ApplicationController
   layout 'requests'
 
   def new
-    @destination = params[:destination]
+    @request = Request.new destination: params[:destination].try(:camelize)
   end
 
   def create
