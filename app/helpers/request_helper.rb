@@ -20,6 +20,12 @@ module RequestHelper
     end
   end
 
+  %w(lodging thingstosee thingstodo dining).each do |image_type|
+    define_method "#{image_type}_image" do
+      @request.destination.blank? ? image_tag("#{image_type}.png") : image_tag("#{image_type}_#{@request.destination.downcase}.jpg")
+    end
+  end
+
   private def to_dest(destination)
     destination.try(:downcase).try(:to_sym)
   end
