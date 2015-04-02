@@ -79,6 +79,10 @@ $navbar-color: white;
 .requests#new {
   /*font-family: 'Avenir Black';*/
   font-family: sans-serif;
+  .btn {
+    word-wrap: break-word;
+    white-space: normal;
+  }
 }
 
 .requests#thank_you {
@@ -168,13 +172,15 @@ section {
   ul {
     list-style: none;
     overflow: hidden;
-    /*display: inline-block;*/
+    width: 100%;
+    text-align: center;
 
     li {
       box-shadow: 0 0 5px black;
       margin: 2em;
       text-align: left;
-      float: left;
+      display: inline-block;
+      float:none;
       p {
         min-height: 3em;
       }
@@ -188,6 +194,7 @@ section {
     border-top-left-radius: 5px;
     border-bottom-right-radius: 5px;
     border-bottom-left-radius: 5px;
+    /*width: 40%;*/
     img {
       height: 60%;
       width: 100%;
@@ -204,6 +211,7 @@ section {
 
 .how {
   background-image: asset_url('howitworks_bg.png');
+  background-size: cover;
   color: white;
   text-align: center;
   /*font-family: 'Avenir Heavy';*/
