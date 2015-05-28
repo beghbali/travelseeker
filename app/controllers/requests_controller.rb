@@ -7,8 +7,15 @@ class RequestsController < ApplicationController
 
   def create
     params.require(:request).permit!
-    RequestMailer.new_request(params[:request]).deliver
-    redirect_to thank_you_requests_path
+    @request = Request.new(params[:request])
+
+    if @request.valid?
+      RequestMailer.new_request(params[:request]).deliver
+      redirect_to thank_you_requests_path
+    else
+      params[:goto] = '#getrecommendations'
+      render :new
+    end
   end
 
   def thank_you

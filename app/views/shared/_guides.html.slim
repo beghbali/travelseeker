@@ -1,0 +1,57 @@
+ .container
+  .carousel.slide#guides data-ride='carousel' data-interval='5000'
+    ol.carousel-indicators
+      li.active data-target='#guides' data-slide-to='0'
+      li data-target='#guides' data-slide-to='1'
+    .carousel-inner role='listbox'
+
+      .item.active
+        .row
+          h2 Meet a Los Angeles local Guide
+        .row
+          .col-md-6
+            .col-md-4
+              = image_tag('jeslyn.png')
+            .col-md-8
+              h2 Jeslyn M
+              p Los Angeles and surrounding area
+              ul
+                li
+                  h4 Favorite Restaurant
+                  p Baco Mercat, 408 S. Main St., Los Angeles CA
+                li
+                  h4 Best People Watching
+                  p Runyon Canyon hike (great views too)
+                li
+                  h4 Most Romantic Spot
+                  p Watching sunset on the Santa Monica beach
+          .col-md-6.details
+            p I moved to LA after finishing law school have lived here for 3 years. The city has endless neighborhoods to explore, diverse ethnic cuisine, and - surprise! - you don't need a car to get everywhere.
+            p Downtown LA is on the upswing of a fantastic Renaissance, and it is exploding with bars, art galleries, and artesinal food. And Main Street in Santa Monica, coupled with the beach, and Venice canals is also amazing for a stroll.
+
+
+      .item
+        .row
+          h2 Meet a Copenhagen local Guide
+        .row
+          .col-md-6
+            .col-md-4
+              = image_tag('soren.png')
+            .col-md-8
+              h2 Søren R
+              p Copenhagen
+              ul
+                li
+                  h4 Favorite Restaurant
+                  p
+                    = link_to 'Restaurant Pluto', 'http://www.restaurantpluto.dk/en/frontpage/'
+                li
+                  h4 Best place to take kids
+                  p
+                    =link_to 'The Zoo', 'http://uk.zoo.dk/VisitZoo.aspx'
+                    |, there is also a great playground and kids zoo.
+
+          .col-md-6.details
+            p The food scene is great here, the Nordic style cooking has really taken off the past 10 years, with Noma (the worlds best restaurant) heading the pack.
+
+            p Summer in Copenhagen is great and there is always a lot of events during June - August.

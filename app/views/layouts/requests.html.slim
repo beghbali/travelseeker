@@ -4,6 +4,8 @@ html lang="en"
     meta charset="utf-8"
     meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"
     meta name="viewport" content="width=device-width, initial-scale=1.0"
+    meta property="og:description" content="Travel like a local, not a tourist"
+    meta property="og:image" content=image_url("burma.jpg")
     title= content_for?(:title) ? yield(:title) : "Zentrips"
     = csrf_meta_tags
 
@@ -21,19 +23,21 @@ html lang="en"
 
 
   body class="#{controller_name}" id="#{action_name}"
+    = render 'shared/facebook'
     nav.navbar.navbar-fixed-top
       .container-fluid
         .navbar-header
           a.navbar-brand href="/"
             =image_tag('zentrips_logo_2.png')
-          a class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-menu"
+          button class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-menu"
             span class="sr-only" Toggle navigation
             span class="glyphicon glyphicon-menu-hamburger"
 
         div class="navbar-collapse collapse" id="navbar-collapse-menu"
           ul class="nav navbar-nav navbar-right" data-toggle="collapse" data-target="#navbar-collapse-menu"
-            li = link_to 'How It Works', '#howitworks'
-            li = link_to 'Get Recommendations', '#getrecommendations'
+            li = link_to 'How It Works', howitworks_path
+            li = link_to 'Get Recommendations', getrecommendations_path
+            li = mail_to 'support@zentrips.co', 'Contact'
 
 
     = yield
@@ -44,8 +48,12 @@ html lang="en"
         .row
           div &copy; 2015 Zentrips
         .row
-          div support@zentrips.co
+          = mail_to 'support@zentrips.co', 'support@zentrips.co'
         .row
           = image_tag('social_share.png')
-    =render 'shared/google_adwords'
-    =render 'shared/google_analytics'
+        .row
+          = link_to 'Seattle', destination_path('seattle')
+          = link_to 'Copenhagen', destination_path('copenhagen')
+          = link_to 'London', destination_path('london')
+    = render 'shared/google_analytics'
+    = render 'shared/google_conversion'

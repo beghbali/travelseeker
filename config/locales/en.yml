@@ -21,3 +21,25 @@
 
 en:
   hello: "Hello world"
+
+  faq:
+    q1: Does Zentrips plan the trip as well? Are you a travel agency?
+    a1: "We give you recommendations of what to do, where to eat, and where to stay. All of our recommendations link directly to the applicable websites, so you can easily book everything. We've had a lot of requests to help massage the recommendations into a trip itinerary as well as handle all the bookings and logistics for our clients; we plan to add that as an additional of paid service option."
+    q2: Does Zentrips include air travel and trains?
+    a2: "Not at this time. We're focused on individual destinations right now; we give basic advice for getting around a city, but don't yet link multiple destinations together. We anticipate to offer that later, as part of the bookings and logistics tier of service."
+    q3: Is Zentrips just luxury 5-star hotels?
+    a3: "No, we cover a wide range of price points, depending on what you want. We're not focused on saving money or finding deals. But we do adjust our recommendations based on the approximate budget you tell us."
+    q4: "Can Zentrips accommodate special needs, such as limited mobility?"
+    a4: "Absolutely. Our recommendations are highly personalized to fit your unique travel desires and needs."
+    q5: "Who are the people behind the scenes, providing the recommendations?"
+    a5: "All trip ideas are carefully sourced from people who intimately know the area, either as locals or a fellow traveler. Right now all sources are friends or friends of friends of Rory and Bashir, the two founders. Only one person works are on any one client's order, so the information about where you're traveling and when is closely held."
+    q6: "Does Zentrips allow users to explore everything there is to do city?"
+    a6: "Right now we recommend a handful of carefully-curated ideas for you, typically 8-15 ideas per location. We expect to launch later this spring a version of the experience that let's you explore many more ideas within a location."
+    q7: "Does Zentrips take travel safety into account?"
+    a7: "Yes, to the extent we reasonably can. We recommend specific neighborhoods to book lodging in, and won't recommend dodgy areas such as the Tenderloin in San Francisco! Activity and dining recommendations are carefully vetted so they themselves are safe; we mention when getting to them might take you through a less safe area. Since we link to every applicable website, you can easily cross-reference our recommendations with your information sources, should you wish to do so. As with all travel, both domestic and international, your safety is ultimately in your own hands. Be vigilant and travel smartly."
+    q8: "How do you plan to make money? Is there a catch?"
+    a8: |
+      <ol>
+        <li> Our service is free while we're in beta mode; the price we ask for is your feedback, so we can build a kickass product. After beta is up, we anticipate rolling out a free product that helps you find activities, dining and lodging you'll love; a paid level of service will give insider tips, map things out, suggest daily itineraries, and provide a phone hotline for service. Eventually we plan to add a full-service paid tier, that will  handle booking your trip for you and planning for you all the nitty-gritty logistical trip details.</li>
+        <li> We will never sell your information or make it available to 3rd parties. We do not plan to make money off of referrals, because that gives mixed incentives for the recommendations we give. We want to recommend establishments you'll truly love, not the establishments that are willing to pay us the most money to send you their way.</li>
+      <ol>

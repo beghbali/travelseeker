@@ -26,6 +26,22 @@ module RequestHelper
     end
   end
 
+  def plan
+    if @request.destination.present?
+      "Experience #{@request.destination} like a local, not a tourist"
+    else
+      "Travel like a local, not a tourist"
+    end
+  end
+
+  def slogan
+    if @request.destination.present?
+      "Custom travel recommendations from trusted #{@request.destination} local tour guides"
+    else
+      "Custom travel recommendations from trusted locals"
+    end
+  end
+
   private def to_dest(destination)
     destination.try(:downcase).try(:to_sym)
   end

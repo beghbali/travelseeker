@@ -1,14 +1,17 @@
 .hero style=css_for(@request.destination)
   .plan
-    - if @request.destination.present?
-      h1 Experience #{@request.destination} like a local, not a tourist
-    - else
-      h1 Travel like a local, not a tourist
-    a.btn.btn-primary.btn-lg role='button' href='#getrecommendations' Get Authentic Recommendations For Free
+    / a.btn.btn-success.btn-lg role='button' href='#getrecommendations' Get Authentic Recommendations For Free
     div
-      = link_to 'see a sample', asset_path('Alex Aarhus.pdf'), style: "color: #{text_color_for(@request.destination)}"
-  .slogan
-    p Custom travel recommendations from trusted locals
+      h1 = plan
+      .row
+        .col-md-2.col-md-offset-5
+          = link_to asset_path('Alex Aarhus.pdf'), style: "color: #{text_color_for(@request.destination)}" do
+            i.glyphicon.glyphicon-list-alt
+            div see a sample
+      .row
+        = link_to 'Get Authentic Recommendations', '#getrecommendations', class: 'btn btn-success btn-lg'
+  .slogan.slogan-bottom
+    p = slogan
 section.value
   h2 We're the travel concierge for a new generation of travelers
   ul.list-inline
@@ -33,24 +36,24 @@ section.what
       = lodging_image
       .caption
         h3 Lodging
-        p unique places in ideal locations
+        p Unique places in ideal locations
     li.thumbnail.col-xs-12.col-md-5
       = thingstosee_image
       .caption
         h3 Things To See
-        p authentic places your friend would take you to
+        p Authentic places your friend would take you to
 
   ul.row
     li.thumbnail.col-xs-12.col-md-5
       = dining_image
       .caption
         h3 Dining
-        p delicious hot spots and hole-in-the-walls
+        p Delicious hot spots and hole-in-the-walls
     li.thumbnail.col-xs-12.col-md-5
       = thingstodo_image
       .caption
         h3 Things To Do
-        p fun essentials and uncommon adventures
+        p Fun essentials and uncommon adventures
 .anchor#howitworks
 section.how
   .container
@@ -64,66 +67,60 @@ section.how
         h3 Submit Request
         p Give us some basic information about the special trip you want.
       li.col-md-3
-        = image_tag('howitworks_icon2.png')
-        h3 Sit Back
-        p Our local guides assemble custom recommendations for you.
-      li.col-md-3
         = image_tag('howitworks_icon3.png')
-        h3 Give Feedback
-        p We'll email you some initial ideas and get your quick feedback.
+        h3 Flip Through Ideas
+        p We'll email you some initial ideas. Give a thumbs up to the ideas you like.
       li.col-md-3
         = image_tag('howitworks_icon4.png')
         h3 Receive Trip Plan
-        p Receive your personal trip plan complete with images, links, details and tips
+        p Receive your personal trip plan complete with images, links, details and tips.
+        = link_to 'see example', asset_path('Alex Aarhus.pdf'), style: "color: #{text_color_for(@request.destination)}"
+      li.col-md-3
+        i.glyphicon.glyphicon-plus
+        h3 Upgrade to Trip Itinerary
+        p For a small fee, you'll receive a personalized trip plan complete with maps and groupings.
 
 .testimonials
-.anchor#getrecommendations
+section.guides
+  = render 'shared/guides'
+.anchor#getrecommendations data-goto="#{params[:goto]}"
 section.request
   .container
-    = bootstrap_nested_form_for @request || Request.new do |f|
-      h2 Where do you want to go?
-      fieldset
-        .row
-          .col-md-6
-            = f.text_field :destination, placeholder: 'e.g. San Francisco, CA', label: "I'm traveling to"
-          .col-md-3
-            = f.datetime_picker :arrival, placeholder: 'MM/DD/YYYY', label: "I'm getting there on", format: "%Y-%m-%d"
-          .col-md-3
-            = f.datetime_picker :departure, placeholder: 'MM/DD/YYYY', label: "And leaving there on", format: "%Y-%m-%d"
+    - if to_dest(@request.destination) == :seattle
+      .row
+        .col-md-4.col-md-offset-4
+          = link_to 'Browse Seattle Ideas', 'https://www.getfeedback.com/r/dwsxcfQS', class: 'btn btn-primary btn-lg feedback'
+    - else
+      = bootstrap_nested_form_for @request || Request.new do |f|
+        h2 Where do you want to go?
+        fieldset
+          .row
+            .col-md-6
+              = f.text_field :destination, placeholder: 'e.g. San Francisco, CA', label: "I'm traveling to", class: 'destination'
+            .col-md-3
+              = f.datetime_picker :arrival, placeholder: 'MM/DD/YYYY', label: "I'm getting there on", format: "%Y-%m-%d"
+            .col-md-3
+              = f.datetime_picker :departure, placeholder: 'MM/DD/YYYY', label: "And leaving there on", format: "%Y-%m-%d"
 
-      h2 What kind of trip are you looking for?
-      fieldset
-        .row
-          .col-md-6
-            = f.text_field :companions, placeholder: 'e.g My wife and two kids', label: "I'm traveling with"
-          .col-md-6
-            label.control-label Budget (click to select)
-            = f.hidden_field :budget, class: 'rating', 'data-filled' => "glyphicon glyphicon-usd symbol-filled", 'data-empty' => "glyphicon glyphicon-usd symbol-empty", 'data-stop' => '4'
-        .row
-          .col-md-12
-            = f.text_area :details, label: "I really care about", placeholder: 'e.g. Gourmet food, unique experiences, relaxing with friends, adventure and exploration'
+        h2 What kind of trip are you looking for?
+        fieldset
+          .row
+            .col-md-6
+              = f.text_field :companions, placeholder: 'e.g My wife and two kids', label: "I'm traveling with", class: 'companions'
+            .col-md-6
+              label.control-label Budget (click to select)
+              = f.hidden_field :budget, class: 'rating', 'data-filled' => "glyphicon glyphicon-usd symbol-filled", 'data-empty' => "glyphicon glyphicon-usd symbol-empty", 'data-stop' => '4'
+          .row
+            .col-md-12
+              = f.text_area :details, label: "I really care about", placeholder: 'e.g. Gourmet food, unique experiences, relaxing with friends, adventure and exploration'
 
-      h2 Who should we send the recommendations to?
-      fieldset
-        .row
-          .col-md-6
-            = f.text_field :first_name, label: 'My first name is', placeholder: 'e.g. Joseph'
-          .col-md-6
-            = f.text_field :email, label: 'My email is', placeholder: 'e.g. jsmith@gmail.com'
-      .row.submit
-        = f.submit 'Request Recommendations', class: 'btn btn-primary btn-lg'
-        =image_tag('scribbletext3.png', class: 'hidden-xs')
-/ section
-/   .carousel.slide#guides data-ride='carousel'
-/     ol.carousel-indicators
-/       li.active data-target='#guides' data-slide-to='0'
-/       li data-target='#guides' data-slide-to='1'
-/       li data-target='#guides' data-slide-to='2'
-/     .carousel-inner role='listbox'
-/       .item.active
-/         p hello there fellows
-/       .item
-/         p dum dum
-/       .item
-/         div style="background-color: red;"
-/         div style="background-color: black;"
+        h2 Who should we send the recommendations to?
+        fieldset
+          .row
+            .col-md-6
+              = f.text_field :first_name, label: 'My first name is', placeholder: 'e.g. Joseph'
+            .col-md-6
+              = f.text_field :email, label: 'My email is', placeholder: 'e.g. jsmith@gmail.com', class: 'email'
+        .row.submit
+          = f.submit 'Request Recommendations', class: 'btn btn-primary btn-lg'
+          =image_tag('scribbletext3.png', class: 'hidden-xs')

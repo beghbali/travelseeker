@@ -18,6 +18,7 @@
 
 $navbar-height: 4em;
 $navbar-color: white;
+$guides-header-color: #62A1B6;
 
 .bs-callout {
     padding: 20px;
@@ -117,6 +118,20 @@ section {
   padding: 2em;
 }
 
+.fb-share-button {
+  line-height: 1.75em;
+}
+
+.short-form {
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: rgba(98, 161, 182, 0.6);
+  margin: 0 auto;
+  width: 50%;
+  padding: 0.5em;
+}
 .hero {
   overflow: hidden;
   margin-top: $navbar-height;
@@ -128,15 +143,28 @@ section {
   text-align: center;
   height: 40em;
   position: relative;
+
   .plan a {
     margin-top: 1em;
   }
   .plan div {
     padding-top: 1em;
+    .glyphicon {
+      font-size: 5em;
+    }
+    i + div {
+      padding: 0;
+    }
+  }
+  .slogan-bottom {
+    bottom: 0;
+  }
+
+  .slogan-top {
+    top: 0;
   }
   .slogan {
     position: absolute;
-    bottom: 0;
     background-color: #ddab24;
     opacity: 0.9;
     width: 100%;
@@ -216,6 +244,9 @@ section {
   text-align: center;
   /*font-family: 'Avenir Heavy';*/
   font-size: 1em;
+  .glyphicon {
+    font-size: 3em;
+  }
   h2 {
     margin-top: -0.75em;
   }
@@ -249,6 +280,9 @@ section {
       padding: 0.75em;
     }
   }
+  .btn.feedback {
+    font-size: 2em;
+  }
   .symbol-empty, .symbol-filled {
     padding-top: 1em;
   }
@@ -273,7 +307,51 @@ section {
   }
 
 }
+.guides {
+  background-color: LightGray;
+  h2 {
+    display: inline;
+  }
+}
 
+.carousel {
+  .item {
+    background-color: white;
+    padding: 0 1em;
+    margin-top: 2em;
+    .row:first-child {
+      height: 4em;
+      background-color: $guides-header-color;
+      padding: 1em;
+      color: white;
+    }
+    .row:last-child {
+      padding-top: 2em;
+      height: 30em;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    h4 + p {
+      color: Grey;
+    }
+    h2 + p {
+      margin-bottom: 2em;
+    }
+
+    .details {
+      border-left: thin solid black;
+      line-height: 2em;
+      padding: 0 3em;
+      height: 80%;
+    }
+  }
+  .carousel-indicators li{
+    border-color: $guides-header-color;
+    background-color: rgba(98, 161, 182, 0);
+  }
+}
 .anchor {
   display: block;
   height: $navbar-height;
@@ -290,5 +368,20 @@ footer {
   }
   .row {
     padding: 0.5em;
+    &:last-child {
+      a {
+        padding: 1em;
+      }
+    }
+  }
+}
+
+.application#faq {
+  margin-top: $navbar-height;
+  h1 {
+    margin: 2em 0;
+  }
+  h2 {
+    color: #428bca;
   }
 }

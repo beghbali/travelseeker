@@ -1,0 +1,7 @@
+.container.faq
+  h1 Frequently Asked Questions
+
+  - I18n.t('faq').each_slice(2) do |qa|
+    h2 = qa.first.last
+    p = raw qa.last.last
+
