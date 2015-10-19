@@ -9,11 +9,11 @@
         = link_to 'Browse Trip Ideas', 'https://www.getfeedback.com/r/dwsxcfQS', class: 'btn btn-success btn-lg'
   .slogan.slogan-bottom
     p
-      | Custom travel recommendations from people like you
+      = slogan
       =< link_to 'See a sample.', asset_path('Seattle Free Ideas Example.pdf')
 section.value
   h2
-    | Easily find activities, dining, and lodging you'll love.
+    = value
   ul.list-inline
     li
       = image_tag('loveyourtrip.png')
@@ -29,7 +29,7 @@ section.value
       p We give you the local and up to date scoop
 section.what
   .row
-    h2 Like having a local friend everywhere you travel
+    h2 = what
 
   ul.row
     li.thumbnail.col-xs-12.col-md-5

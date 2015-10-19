@@ -28,7 +28,12 @@ module RequestHelper
 
   def plan
     if @request.destination.present?
-      "Experience #{@request.destination} like a local, not a tourist"
+      case params[:version]
+      when 2
+        "Easily find awsome things to do in #{@request.destination}"
+      else
+        "Experience #{@request.destination} like a local, not a tourist"
+      end
     else
       "Travel like a local, not a tourist"
     end
@@ -36,9 +41,41 @@ module RequestHelper
 
   def slogan
     if @request.destination.present?
-      "Custom travel recommendations from trusted #{@request.destination} local tour guides"
+      case params[:version]
+      when 2
+        "The personal guidebook you always wished for"
+      else
+        "Custom travel recommendations from people like you"
+      end
     else
       "Custom travel recommendations from trusted locals"
+    end
+  end
+
+  def value
+    if @request.destination.present?
+      case params[:version]
+      when 2
+        "Unbiased #{@request.destination} activity ideas and planning help"
+      else
+        "Easily find activities, dining, and lodging you'll love"
+      end
+    else
+      "We're the travel concierge for a new generation of travelers"
+    end
+  end
+
+  def what
+
+    if @request.destination.present?
+      case params[:version]
+      when 2
+        "Like having your friend recommend the best experiences"
+      else
+        "Like having a local friend everywhere you travel"
+      end
+    else
+      "Like having a local friend everywhere you travel"
     end
   end
 
