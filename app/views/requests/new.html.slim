@@ -8,11 +8,12 @@
       .row
         = link_to 'Browse Trip Ideas', 'https://www.getfeedback.com/r/dwsxcfQS', class: 'btn btn-success btn-lg'
   .slogan.slogan-bottom
-    p = slogan
+    p
+      | Custom travel recommendations from people like you
+      =< link_to 'See a sample.', asset_path('Seattle Free Ideas Example.pdf')
 section.value
   h2
     | Easily find activities, dining, and lodging you'll love.
-    =< link_to 'See a sample.', asset_path('Seattle Free Ideas Example.pdf')
   ul.list-inline
     li
       = image_tag('loveyourtrip.png')
