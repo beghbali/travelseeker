@@ -5,23 +5,22 @@
       h1 = plan
       .row
         .col-md-2.col-md-offset-5
-          = link_to asset_path('Alex Aarhus.pdf'), style: "color: #{text_color_for(@request.destination)}" do
-            i.glyphicon.glyphicon-list-alt
-            div see a sample
       .row
         = link_to 'Browse Trip Ideas', 'https://www.getfeedback.com/r/dwsxcfQS', class: 'btn btn-success btn-lg'
   .slogan.slogan-bottom
     p = slogan
 section.value
-  h2 We're the travel concierge for a new generation of travelers
+  h2
+    | Easily find activities, dining, and lodging you'll love.
+    =< link_to 'See a sample.', asset_path('Seattle Free Ideas Example.pdf')
   ul.list-inline
     li
       = image_tag('loveyourtrip.png')
-      h3 Love your trip
-      p We recommend experiences you'll want to brag about
+      h3 Enjoy a great trip
+      p We don't get paid by the places we recommend
     li
       = image_tag('cutplanninghours.png')
-      h3 Cut hours of planning
+      h3 We've done all the research for you
       p We do all the research and planning for you
     li
       = image_tag('discovercoolstuff.png')
@@ -62,23 +61,22 @@ section.how
         = image_tag('howitworks_lines.png')
       h2 How It Works
     ul.list-inline
-      li.col-md-3
-        = image_tag('howitworks_icon1.png')
-        h3 Submit Request
-        p Give us some basic information about the special trip you want.
-      li.col-md-3
+      li.col-md-4
         = image_tag('howitworks_icon3.png')
-        h3 Flip Through Ideas
-        p We'll email you some initial ideas. Give a thumbs up to the ideas you like.
-      li.col-md-3
+        h3 Get inspired
+        p Easily flip through our trip ideas. Thumbs up the ones you are interested in.
+      li.col-md-4
         = image_tag('howitworks_icon4.png')
-        h3 Receive Trip Plan
-        p Receive your personal trip plan complete with images, links, details and tips.
-        = link_to 'see example', asset_path('Alex Aarhus.pdf'), style: "color: #{text_color_for(@request.destination)}"
-      li.col-md-3
+        h3 Get the details
+        p
+          | We'll email you a list of recommendations for free, including images, descriptions and links.
+          =< link_to 'See free sample.', asset_path('Seattle Free Ideas Example.pdf')
+      li.col-md-4
         i.glyphicon.glyphicon-plus
-        h3 Upgrade to Trip Itinerary
-        p For a small fee, you'll receive a personalized trip plan complete with maps and groupings.
+        h3 Get your custom itinerary plan
+        p
+          | For a small fee, you'll receive your custom itinerary complete with opening hours, maps, lodging options, and suggested outings.
+          =< link_to 'See paid sample', asset_path('Seattle Paid Itinerary Example.pdf')
 
 .testimonials
 section.guides
