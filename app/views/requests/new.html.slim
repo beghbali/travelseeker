@@ -1,3 +1,4 @@
+- getfeedback = survey(@request.destination)
 .hero style=css_for(@request.destination)
   .plan
     / a.btn.btn-success.btn-lg role='button' href='#getrecommendations' Get Authentic Recommendations For Free
@@ -6,7 +7,10 @@
       .row
         .col-md-2.col-md-offset-5
       .row
-        = link_to 'Browse Trip Ideas', 'https://www.getfeedback.com/r/dwsxcfQS', class: 'btn btn-success btn-lg'
+        - if getfeedback
+          = link_to 'Browse Trip Ideas', getfeedback, class: 'btn btn-success btn-lg'
+        - else
+          = link_to 'Tell us about your trip', '#getrecommendations', class: 'btn btn-success btn-lg'
   .slogan.slogan-bottom
     p
       = slogan
@@ -85,7 +89,6 @@ section.guides
 .anchor#getrecommendations data-goto="#{params[:goto]}"
 section.request
   .container
-    - getfeedback = survey(@request.destination)
     - if getfeedback
       .row
         .col-md-5.col-md-offset-4

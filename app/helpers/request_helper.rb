@@ -13,7 +13,7 @@ module RequestHelper
 
   def text_color_for(destination)
     case to_dest(destination)
-    when :seattle, :london, :berkeley
+    when :seattle, :london
       'white'
     else
       'inherit'
