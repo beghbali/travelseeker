@@ -13,11 +13,18 @@ module RequestHelper
 
   def text_color_for(destination)
     case to_dest(destination)
-    when :seattle, :london
+    when :seattle, :london, :berkeley
       'white'
     else
       'inherit'
     end
+  end
+
+  def survey(destination)
+    {
+      seattle: 'https://www.getfeedback.com/r/dwsxcfQS',
+      berkeley: 'https://www.getfeedback.com/r/pKva6Idf'
+    }[to_dest(destination)]
   end
 
   %w(lodging thingstosee thingstodo dining).each do |image_type|

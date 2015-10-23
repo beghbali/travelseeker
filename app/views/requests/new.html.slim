@@ -85,10 +85,11 @@ section.guides
 .anchor#getrecommendations data-goto="#{params[:goto]}"
 section.request
   .container
-    - if to_dest(@request.destination) == :seattle
+    - getfeedback = survey(@request.destination)
+    - if getfeedback
       .row
         .col-md-5.col-md-offset-4
-          = link_to 'Browse Trip Ideas', 'https://www.getfeedback.com/r/dwsxcfQS', class: 'btn btn-success btn-lg feedback'
+          = link_to 'Browse Trip Ideas', getfeedback, class: 'btn btn-success btn-lg feedback'
     - else
       = bootstrap_nested_form_for @request || Request.new do |f|
         h2 Where do you want to go?
