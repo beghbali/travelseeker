@@ -42,7 +42,6 @@ html lang="en"
 
     = yield
 
-
     footer
       .container
         .row
@@ -52,8 +51,11 @@ html lang="en"
         .row
           = image_tag('social_share.png')
         .row
+          = link_to 'Berkeley', destination_path('berkeley')
           = link_to 'Seattle', destination_path('seattle')
           = link_to 'Copenhagen', destination_path('copenhagen')
           = link_to 'London', destination_path('london')
     = render 'shared/google_analytics'
     = render 'shared/google_conversion'
+    = render 'shared/google_conversion_browse'
+    = render 'shared/olark'

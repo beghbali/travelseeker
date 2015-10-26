@@ -37,7 +37,7 @@ module RequestHelper
     if @request.destination.present?
       case params[:version]
       when 2
-        "Easily find awsome things to do in #{@request.destination}"
+        "Easily find awesome things to do in #{@request.destination}"
       else
         "Experience #{@request.destination} like a local, not a tourist"
       end
