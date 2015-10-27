@@ -38,6 +38,8 @@ module RequestHelper
       case params[:version]
       when 2
         "Easily find awesome things to do in #{@request.destination}"
+      when 3
+        "Plan your ideal #{@request.destination} trip in less than 10 minutes"
       else
         "Experience #{@request.destination} like a local, not a tourist"
       end
@@ -50,12 +52,14 @@ module RequestHelper
     if @request.destination.present?
       case params[:version]
       when 2
-        "The personal guidebook you always wished for"
+        "The personal guidebook you always wished for. #{link_to 'See a sample.', asset_path('Seattle Free Ideas Example.pdf')}"
+      when 3
+        "Your personal travel advisor for #{@request.destination}. Get free #{link_to 'activity ideas', asset_path('Seattle Free Ideas Example.pdf')}, Upgrade to full #{link_to 'itinerary recommendation', asset_path('Seattle Paid Itinerary Example.pdf')}"
       else
-        "Custom travel recommendations from people like you"
+        "Custom travel recommendations from people like you. #{link_to 'See a sample.', asset_path('Seattle Free Ideas Example.pdf')}"
       end
     else
-      "Custom travel recommendations from trusted locals"
+      "Custom travel recommendations from trusted locals. #{link_to 'See a sample.', asset_path('Seattle Free Ideas Example.pdf')}"
     end
   end
 

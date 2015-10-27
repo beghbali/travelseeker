@@ -16,6 +16,7 @@ Zentrips::Application.routes.draw do
 
   get 'destination/(:destination)' => 'requests#new', as: :destination
   get 'discover/(:destination)' => 'requests#new', as: :discover, version: 2
+  get 'explore/(:destination)' => 'requests#new', as: :explore, version: 3
   get 'faq' => 'application#faq'
   root 'requests#new'
 end
