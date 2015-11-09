@@ -1,0 +1,58 @@
+// Place all the styles related to the Clips controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+//*= require shared
+
+$value-color: #FFD9B3;
+
+body {
+  font-family: sans-serif;
+}
+
+.value {
+  h2 {
+    padding-bottom: 1em;
+    text-align: center;
+  }
+  ul {
+    overflow: hidden;
+    text-align: center;
+  }
+  span.glyphicon {
+    font-size: 5em;
+  }
+
+}
+
+.input {
+  background-color: $value-color;
+}
+
+.clips {
+
+  .nav-tabs {
+    li {
+      width: 33.5%;
+      &:first-of-type {
+        width: 33%;
+      }
+
+    }
+
+  }
+  ul.resources {
+    li {
+      overflow: hidden;
+      border-bottom: 1px solid;
+      padding: 2em;
+    }
+  }
+
+  #clipmap {
+    width: 100%;
+    height: 40em;
+  }
+
+}
+

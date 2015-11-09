@@ -1,0 +1,41 @@
+section.value
+  h2
+    | A better bucket list
+  ul.list-inline
+    li.col-md-4
+      span.glyphicon.glyphicon-floppy-saved aria-hidden="true"
+      p Remember interesting restaurants, activities and hotels
+    li.col-md-4
+      span.glyphicon.glyphicon-th-list
+      p All the information you need, auto-organized and in one place
+    li.col-md-4
+      span.glyphicon.glyphicon-map-marker
+      p Make better decisions, from visualizing everything on a map
+
+
+section.input
+  h4 To get started, paste in a link to a hotel, attraction, activity or inspiration
+
+  = bootstrap_nested_form_for @clip || Clip.new do |f|
+    = f.text_field :uri, placeholder: 'paste in a link', hide_label: true
+
+section.clips
+  ul.nav.nav-tabs
+    li.active role="presentation"
+      =link_to "Map", "#map", 'data-toggle' => 'tab', role: 'tab', 'aria-controls' => "map"
+    li role="presentation"
+      =link_to "Clips", "#clips", 'data-toggle' => 'tab', role: 'tab', 'aria-controls' => "clips"
+    li role="presentation"
+      =link_to "Resources", "#resources", 'data-toggle' => 'tab', role: 'tab', 'aria-controls' => "resources"
+
+
+.tab-content
+  #map.tab-pane.active role='tabpanel'
+    #clipmap
+  #clips.tab-pane role='tabpanel'
+    = render @clips
+  #resources.tab-pane role='tabpanel'
+    =render 'shared/resources'
+
+
+script async='true' defer='defer' src='https://maps.googleapis.com/maps/api/js?&callback=initMap'

@@ -11,14 +11,16 @@ html lang="en"
 
     /! Le HTML5 shim, for IE6-8 support of HTML elements
     /[if lt IE 9]
-      = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
+    = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"
     = stylesheet_link_tag "application", :media => "all"
+    = stylesheet_link_tag params[:controller]
     = favicon_link_tag 'apple-touch-icon-144x144-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '144x144'
     = favicon_link_tag 'apple-touch-icon-114x114-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '114x114'
     = favicon_link_tag 'apple-touch-icon-72x72-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png', :sizes => '72x72'
     = favicon_link_tag 'apple-touch-icon-precomposed.png', :rel => 'apple-touch-icon-precomposed', :type => 'image/png'
     = favicon_link_tag 'favicon.ico', :rel => 'shortcut icon'
     = javascript_include_tag "application"
+    = javascript_include_tag params[:controller]
 
 
 
@@ -36,8 +38,9 @@ html lang="en"
         div class="navbar-collapse collapse" id="navbar-collapse-menu"
           ul class="nav navbar-nav navbar-right" data-toggle="collapse" data-target="#navbar-collapse-menu"
             li = link_to 'How It Works', howitworks_path
-            li = link_to 'Get Recommendations', getrecommendations_path
-            li = mail_to 'support@zentrips.co', 'Contact'
+            li = link_to 'About', about_path
+            li = link_to 'Blog', blog_path
+            li = link_to 'Sign in', 'new_user_path'
 
     .content
       = yield
@@ -50,11 +53,5 @@ html lang="en"
           = mail_to 'support@zentrips.co', 'support@zentrips.co'
         .row
           = image_tag('social_share.png')
-        .row
-          = link_to 'Berkeley', destination_path('berkeley')
-          = link_to 'Seattle', destination_path('seattle')
-          = link_to 'Copenhagen', destination_path('copenhagen')
-          = link_to 'London', destination_path('london')
     = render 'shared/google_analytics'
-    = render 'shared/google_conversion_browse'
     = render 'shared/olark'

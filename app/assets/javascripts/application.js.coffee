@@ -1,14 +1,13 @@
 #= require jquery
 #= require jquery_ujs
 #= require turbolinks
-#= require_tree .
 #= require moment
 #= require bootstrap-datetimepicker
 #= require jquery_nested_form
 #= require bootstrap-transitions
 #= require bootstrap-collapse
 #= require bootstrap-carousel
-
+#= require bootstrap-tab
 $ ->
   goto_anchor = $('[data-goto]').data('goto')
 

@@ -8,17 +8,14 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
- *= require_tree .
+ *= require bootstrap-rating
  *= require rails_bootstrap_forms
  *= require_self
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "bootstrap-datetimepicker";
-
-$navbar-height: 4em;
-$navbar-color: white;
-$guides-header-color: #62A1B6;
+@import "shared";
 
 .bs-callout {
     padding: 20px;
@@ -77,18 +74,8 @@ $guides-header-color: #62A1B6;
     color: #5bc0de;
 }
 
-.requests#new {
-  /*font-family: 'Avenir Black';*/
-  font-family: sans-serif;
-  .btn {
-    word-wrap: break-word;
-    white-space: normal;
-  }
-}
-
 .requests#thank_you {
   .thank_you {
-    margin-top: $navbar-height;
     &.hero {
       background-image: asset_url('couple-beach.jpg');
       background-repeat: no-repeat;
@@ -97,292 +84,245 @@ $guides-header-color: #62A1B6;
     }
   }
 }
-.navbar{
-  height: $navbar-height;
-  background-color: $navbar-color;
-  /*font-family: 'Avenir Heavy';*/
-  border-bottom: 1px solid gray;
-  font-size: 1.4em;
-  a {
-    color:black;
-  }
-}
 
-.navbar-fixed-top {
-  .navbar-collapse ul {
-    margin-top: 1em;
-    background-color: $navbar-color;
-  }
-}
-section {
-  padding: 2em;
-}
-
-.fb-share-button {
-  line-height: 1.75em;
-}
-
-.short-form {
-  border-top-right-radius: 5px;
-  border-top-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
-  background-color: rgba(98, 161, 182, 0.6);
-  margin: 0 auto;
-  width: 50%;
-  padding: 0.5em;
-}
-.hero {
-  overflow: hidden;
-  margin-top: $navbar-height;
-  padding-top: 2em;
-  background-image: asset_url('burma.jpg');
-  background-repeat: no-repeat;
-  background-position: center;
-  background-size: cover;
-  text-align: center;
-  height: 40em;
-  position: relative;
-
-  .plan a {
-    margin-top: 1em;
-  }
-  .plan div {
-    padding-top: 1em;
-    .glyphicon {
-      font-size: 5em;
-    }
-    i + div {
-      padding: 0;
-    }
-  }
-  .slogan-bottom {
-    bottom: 0;
+.requests#new {
+  /*font-family: 'Avenir Black';*/
+  font-family: sans-serif;
+  .btn {
+    word-wrap: break-word;
+    white-space: normal;
   }
 
-  .slogan-top {
-    top: 0;
+
+
+  .short-form {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: rgba(98, 161, 182, 0.6);
+    margin: 0 auto;
+    width: 50%;
+    padding: 0.5em;
   }
-  .slogan {
-    position: absolute;
-    background-color: #ddab24;
-    opacity: 0.9;
-    width: 100%;
-    height: 4em;
-    color: white;
-    font-weight: bold;
-    font-size: 1.3em;
-    line-height: 4em;
-  }
-}
-
-.value{
-  text-align: center;
-
-  ul {
-    padding: 1em;
-    list-style:none;
-    h3 {
-      /*font-family: 'Avenir Heavy';*/
-    }
-    p {
-      /*font-family: 'Avenir Light';*/
-      width: 60%;
-      margin: 0 auto;
-    }
-  }
-}
-
-.what {
-  background-color: LightGray;
-  text-align: center;
-
-  ul {
-    list-style: none;
+  .hero {
     overflow: hidden;
-    width: 100%;
+    padding-top: 2em;
+    background-image: asset_url('burma.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    text-align: center;
+    height: 40em;
+    position: relative;
+
+    .plan a {
+      margin-top: 1em;
+    }
+    .plan div {
+      padding-top: 1em;
+      .glyphicon {
+        font-size: 5em;
+      }
+      i + div {
+        padding: 0;
+      }
+    }
+    .slogan-bottom {
+      bottom: 0;
+    }
+
+    .slogan-top {
+      top: 0;
+    }
+    .slogan {
+      position: absolute;
+      background-color: #ddab24;
+      opacity: 0.9;
+      width: 100%;
+      height: 4em;
+      color: white;
+      font-weight: bold;
+      font-size: 1.3em;
+      line-height: 4em;
+    }
+  }
+
+  .value{
     text-align: center;
 
-    li {
-      box-shadow: 0 0 5px black;
-      margin: 2em;
-      text-align: left;
-      display: inline-block;
-      float:none;
+    ul {
+      padding: 1em;
+      list-style:none;
+      h3 {
+        /*font-family: 'Avenir Heavy';*/
+      }
       p {
-        min-height: 3em;
+        /*font-family: 'Avenir Light';*/
+        width: 60%;
+        margin: 0 auto;
       }
     }
   }
-  .thumbnail {
-    background-color: white;
-    border: 0;
-    padding:0;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    /*width: 40%;*/
-    img {
-      height: 60%;
-      width: 100%;
-      border-top-right-radius: 5px;
-      border-top-left-radius: 5px;;
-    }
-    .caption {
-      margin: 0.2em;
-      padding-left: 1em;
-      padding-right: 1em;
-    }
-  }
-}
 
-.how {
-  background-image: asset_url('howitworks_bg.png');
-  background-size: cover;
-  color: white;
-  text-align: center;
-  /*font-family: 'Avenir Heavy';*/
-  font-size: 1em;
-  .glyphicon {
-    font-size: 3em;
-  }
-  h2 {
-    margin-top: -0.75em;
-  }
-  h3 {
-    text-transform: uppercase;
-    text-align: left;
-  }
-  p {
-    margin: 0 auto;
-  }
-  ul {
-    padding: 1em;
-    list-style: none;
-    li {
-      text-align: left;
-      float: left;
-    }
-  }
-}
+  .what {
+    background-color: LightGray;
+    text-align: center;
 
-.request {
-  fieldset {
-    border: 2px solid #ce9f24;
-    background-color: #fdf6e4;
-    border-top-right-radius: 5px;
-    border-top-left-radius: 5px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
-    .row {
-      margin-left: 0;
-      padding: 0.75em;
-    }
-  }
-  .btn.feedback {
-    font-size: 2em;
-  }
-  .symbol-empty, .symbol-filled {
-    padding-top: 1em;
-  }
-  .submit {
-    margin-top: 1em;
-    padding: 1em;
-  }
-
-  input[type=submit] {
-    min-width: 15em;
-  }
-  input[type=submit] + img {
-    margin-left: 1em;
-  }
-
-  label.control-label {
-    display: block;
-  }
-
-  .rating-symbol {
-    cursor: pointer;
-  }
-
-}
-.guides {
-  background-color: LightGray;
-  h2 {
-    display: inline;
-  }
-}
-
-.carousel {
-  .item {
-    background-color: white;
-    padding: 0 1em;
-    margin-top: 2em;
-    .row:first-child {
-      height: 4em;
-      background-color: $guides-header-color;
-      padding: 1em;
-      color: white;
-    }
-    .row:last-child {
-      padding-top: 2em;
-      height: 30em;
-    }
     ul {
       list-style: none;
-      padding: 0;
-    }
-    h4 + p {
-      color: Grey;
-    }
-    h2 + p {
-      margin-bottom: 2em;
-    }
+      overflow: hidden;
+      width: 100%;
+      text-align: center;
 
-    .details {
-      font-size: 1.5em;
-      border-left: thin solid black;
-      line-height: 2em;
-      padding: 0 3em;
-      height: 80%;
+      li {
+        box-shadow: 0 0 5px black;
+        margin: 2em;
+        text-align: left;
+        display: inline-block;
+        float:none;
+        p {
+          min-height: 3em;
+        }
+      }
     }
-  }
-  .carousel-indicators li{
-    border-color: $guides-header-color;
-    background-color: rgba(98, 161, 182, 0);
-  }
-}
-.anchor {
-  display: block;
-  height: $navbar-height;
-  margin-top: -$navbar-height;
-  visibility: hidden;
-}
-
-footer {
-  background-color: #303030;
-  color: white;
-  text-align: center;
-  ul {
-    list-style: none;
-  }
-  .row {
-    padding: 0.5em;
-    &:last-child {
-      a {
-        padding: 1em;
+    .thumbnail {
+      background-color: white;
+      border: 0;
+      padding:0;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      /*width: 40%;*/
+      img {
+        height: 60%;
+        width: 100%;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;;
+      }
+      .caption {
+        margin: 0.2em;
+        padding-left: 1em;
+        padding-right: 1em;
       }
     }
   }
-}
 
-.application#faq {
-  margin-top: $navbar-height;
-  h1 {
-    margin: 2em 0;
+  .how {
+    background-image: asset_url('howitworks_bg.png');
+    background-size: cover;
+    color: white;
+    text-align: center;
+    /*font-family: 'Avenir Heavy';*/
+    font-size: 1em;
+    .glyphicon {
+      font-size: 3em;
+    }
+    h2 {
+      margin-top: -0.75em;
+    }
+    h3 {
+      text-transform: uppercase;
+      text-align: left;
+    }
+    p {
+      margin: 0 auto;
+    }
+    ul {
+      padding: 1em;
+      list-style: none;
+      li {
+        text-align: left;
+        float: left;
+      }
+    }
   }
-  h2 {
-    color: #428bca;
+
+  .request {
+    fieldset {
+      border: 2px solid #ce9f24;
+      background-color: #fdf6e4;
+      border-top-right-radius: 5px;
+      border-top-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      .row {
+        margin-left: 0;
+        padding: 0.75em;
+      }
+    }
+    .btn.feedback {
+      font-size: 2em;
+    }
+    .symbol-empty, .symbol-filled {
+      padding-top: 1em;
+    }
+    .submit {
+      margin-top: 1em;
+      padding: 1em;
+    }
+
+    input[type=submit] {
+      min-width: 15em;
+    }
+    input[type=submit] + img {
+      margin-left: 1em;
+    }
+
+    label.control-label {
+      display: block;
+    }
+
+    .rating-symbol {
+      cursor: pointer;
+    }
+
+  }
+  .guides {
+    background-color: LightGray;
+    h2 {
+      display: inline;
+    }
+  }
+
+  .carousel {
+    .item {
+      background-color: white;
+      padding: 0 1em;
+      margin-top: 2em;
+      .row:first-child {
+        height: 4em;
+        background-color: $guides-header-color;
+        padding: 1em;
+        color: white;
+      }
+      .row:last-child {
+        padding-top: 2em;
+        height: 30em;
+      }
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+      h4 + p {
+        color: Grey;
+      }
+      h2 + p {
+        margin-bottom: 2em;
+      }
+
+      .details {
+        font-size: 1.5em;
+        border-left: thin solid black;
+        line-height: 2em;
+        padding: 0 3em;
+        height: 80%;
+      }
+    }
+    .carousel-indicators li{
+      border-color: $guides-header-color;
+      background-color: rgba(98, 161, 182, 0);
+    }
   }
 }

@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150203063151) do
+ActiveRecord::Schema.define(version: 20151106163228) do
+
+  create_table "clips", force: true do |t|
+    t.string   "uri"
+    t.string   "session_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "requests", force: true do |t|
     t.string   "destination"

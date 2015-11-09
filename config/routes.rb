@@ -1,4 +1,6 @@
 Zentrips::Application.routes.draw do
+  resources :clips
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -18,5 +20,7 @@ Zentrips::Application.routes.draw do
   get 'discover/(:destination)' => 'requests#new', as: :discover, version: 2
   get 'explore/(:destination)' => 'requests#new', as: :explore, version: 3
   get 'faq' => 'application#faq'
-  root 'requests#new'
+  get 'about' => 'application#about'
+  get 'blog' => redirect('https://zentrips.squarespace.com/')
+  root 'clips#index'
 end

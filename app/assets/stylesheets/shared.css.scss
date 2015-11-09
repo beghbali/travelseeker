@@ -1,0 +1,65 @@
+$navbar-height: 4em;
+$navbar-color: white;
+$guides-header-color: #62A1B6;
+
+.content {
+  margin-top: $navbar-height;
+}
+
+.navbar{
+  height: $navbar-height;
+  background-color: $navbar-color;
+  /*font-family: 'Avenir Heavy';*/
+  border-bottom: 1px solid gray;
+  font-size: 1.4em;
+  a {
+    color:black;
+  }
+}
+
+.navbar-fixed-top {
+  .navbar-collapse ul {
+    margin-top: 1em;
+    background-color: $navbar-color;
+  }
+}
+section {
+  padding: 2em;
+}
+
+.fb-share-button {
+  line-height: 1.75em;
+}
+
+.anchor {
+  display: block;
+  height: $navbar-height;
+  visibility: hidden;
+}
+
+footer {
+  background-color: #303030;
+  color: white;
+  text-align: center;
+  margin-top: 4em;
+  ul {
+    list-style: none;
+  }
+  .row {
+    padding: 0.5em;
+    &:last-child {
+      a {
+        padding: 1em;
+      }
+    }
+  }
+}
+
+.application#faq {
+  h1 {
+    margin: 2em 0;
+  }
+  h2 {
+    color: #428bca;
+  }
+}
