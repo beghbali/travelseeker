@@ -21,7 +21,7 @@ module Zentrips
     # config.i18n.default_locale = :de
     config.assets.paths << "#{Rails.root}/app/assets/fonts"
     config.assets.paths << "#{Rails.root}/app/assets/trips"
-    config.assets.precompile += %w( clips.js.coffee )
+    config.assets.precompile += %w( clips.js clips.css )
 
     config.generators do |g|
       g.template_engine :slim
