@@ -99,6 +99,7 @@ GEM
     faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
     fuzzy_match (2.0.4)
+    hashie (3.4.3)
     highline (1.6.21)
     hike (1.2.3)
     i18n (0.7.0)
@@ -223,6 +224,7 @@ DEPENDENCIES
   bootstrap_form-datetimepicker
   byebug
   coffee-rails (~> 4.0.0)
+  hashie
   jbuilder (~> 1.2)
   jquery-rails
   momentjs-rails (>= 2.9.0)

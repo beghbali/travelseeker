@@ -19,8 +19,19 @@ class Clip < ActiveRecord::Base
     YelpMetaData.business_id_from_url(uri)
   end
 
+  def tripadvisor_business_id
+    TripadvisorMetaData.business_id_from_url(uri)
+  end
+
   def metadata
-    @metadata ||= (yelp? ? YelpMetaData.new(yelp_business_id) : nil) #this needs to support tripadvisor and others
+    @metadata ||=
+      if yelp?
+        YelpMetaData.new(yelp_business_id)
+      elsif tripadvisor?
+        TripadvisorMetaData.new(tripadvisor_business_id)
+      else
+        nil
+      end
   end
 
 end

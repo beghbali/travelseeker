@@ -36,6 +36,7 @@ gem 'momentjs-rails', '>= 2.9.0'
 gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'yelp', require: 'yelp'
 gem 'trip_advisor'
+gem 'hashie'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
