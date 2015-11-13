@@ -5,7 +5,7 @@ class Clip < ActiveRecord::Base
   scope :yelp, -> { where("uri like '%yelp.com%") }
   scope :tripadvisor, -> { where("uri like '%tripadvisor.com%") }
 
-  delegate :latitude, :longitude, :name, to: :metadata, allow_nil: true
+  delegate :latitude, :longitude, :name, :address, :image_url, to: :metadata, allow_nil: true
 
   def yelp?
     uri =~ /yelp\.com/

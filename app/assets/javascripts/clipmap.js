@@ -94,7 +94,7 @@ function initMap() {
     bounds.extend(loc)
 
     var infowindow = new google.maps.InfoWindow({
-      content: $(clip).data('name')
+      content: '<h5>'+$(clip).data('name')+'</h5><img src="'+$(clip).data('image')+'"><p>'+$(clip).data('address')+'</p>'
     });
 
     var marker = new google.maps.Marker({
@@ -106,6 +106,7 @@ function initMap() {
     marker.addListener('click', function() {
       infowindow.open(map, marker);
     });
+    infowindow.open(map,marker);
   });
 
   map.fitBounds(bounds);

@@ -20,4 +20,9 @@ class YelpMetaData < MetaData
   end
 
   delegate :name, to: :yelp_data
+  delegate :image_url, to: :yelp_data
+
+  def address
+    yelp_data.location.display_address.join(" ")
+  end
 end

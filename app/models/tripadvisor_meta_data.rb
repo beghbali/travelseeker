@@ -22,4 +22,12 @@ class TripadvisorMetaData < MetaData
   end
 
   delegate :name, to: :tripadvisor_data
+
+  def image_url
+    nil
+  end
+
+  def address
+    tripadvisor_data.address_obj.address_string
+  end
 end
