@@ -4,5 +4,5 @@
       img.media-object src=clip.image_url
   .media-body
     h4.media-heading
-      = link_to clip.name, clip.url
+      = link_to clip.name || clip.uri, clip.url
     p= clip.address
