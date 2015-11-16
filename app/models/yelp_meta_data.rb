@@ -1,6 +1,6 @@
 class YelpMetaData < MetaData
 
-  attr_accessor :yelp_data
+  attr_accessor :yelp_data, :business_id
 
   def self.business_id_from_url(url)
     url.split('/').last.try(:split, '?').try(:first)
@@ -8,7 +8,11 @@ class YelpMetaData < MetaData
 
   def initialize(business_id)
     super()
-    self.yelp_data = Yelp.client.business(business_id).try(:business)
+    @business_id = business_id
+  end
+
+  def yelp_data
+    @yelp_data ||= Yelp.client.business(business_id).try(:business)
   end
 
   def latitude
@@ -19,10 +23,14 @@ class YelpMetaData < MetaData
     yelp_data.location.coordinate.longitude
   end
 
-  delegate :name, to: :yelp_data
-  delegate :image_url, to: :yelp_data
+  delegate :name, :image_url, :url, to: :yelp_data
 
   def address
     yelp_data.location.display_address.join(" ")
   end
+
+  def reference
+    yelp_data.id
+  end
+
 end

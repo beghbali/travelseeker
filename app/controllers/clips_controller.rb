@@ -27,6 +27,7 @@ class ClipsController < ApplicationController
   def create
     @clip = Clip.new(clip_params)
     @clip.session_id = session.id
+    @clip.near = Clip.last_clip_location_for_session(session.id)
 
     respond_to do |format|
       if @clip.save

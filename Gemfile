@@ -37,6 +37,7 @@ gem 'bootstrap3-datetimepicker-rails', '~> 4.0.0'
 gem 'yelp', require: 'yelp'
 gem 'trip_advisor'
 gem 'hashie'
+gem 'google_places'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

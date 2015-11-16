@@ -84,6 +84,8 @@ function initMap() {
   });
 
   var bounds = new google.maps.LatLngBounds();
+  var lastActive;
+
   $.each ($('.clip'), function(index, clip) {
     loc = new google.maps.LatLng($(clip).data('latitude'), $(clip).data('longitude'))
 
@@ -94,7 +96,7 @@ function initMap() {
     bounds.extend(loc)
 
     var infowindow = new google.maps.InfoWindow({
-      content: '<h5>'+$(clip).data('name')+'</h5><img src="'+$(clip).data('image')+'"><p>'+$(clip).data('address')+'</p>'
+      content: '<h5><a href="'+$(clip).data('url')+'">'+$(clip).data('name')+'</h5><img src="'+$(clip).data('image')+'"><p>'+$(clip).data('address')+'</p>'
     });
 
     var marker = new google.maps.Marker({
@@ -106,9 +108,13 @@ function initMap() {
     marker.addListener('click', function() {
       infowindow.open(map, marker);
     });
-    infowindow.open(map,marker);
+    if ($(clip).data('active') == true) {
+      infowindow.open(map,marker);
+      lastActive = loc;
+    }
   });
 
   map.fitBounds(bounds);
   map.panToBounds(bounds);
+  map.setCenter(lastActive);
 }

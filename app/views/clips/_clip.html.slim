@@ -1,7 +1,8 @@
-.clip.media data-latitude=clip.latitude data-longitude=clip.longitude data-name=clip.name data-address=clip.address data-image=clip.image_url
+.clip.media data-latitude=clip.latitude data-longitude=clip.longitude data-name=clip.name data-address=clip.address data-image=clip.image_url data-url=clip.url data-active="#{last_clip?(clip)}"
   .media-left
-    a href='#'
+    a href=clip.url
       img.media-object src=clip.image_url
   .media-body
-    h4.media-heading= clip.name
+    h4.media-heading
+      = link_to clip.name, clip.url
     p= clip.address
