@@ -40,11 +40,11 @@ section.clips data-available-tags=@available_tags
       #map.tab-pane.active role='tabpanel'
         #clipmap
       #clips.tab-pane role='tabpanel'
-        = render @allclips
+        = render @allclips, show_details: true, selected: false
       #resources.tab-pane role='tabpanel'
         =render 'shared/resources'
   .col-md-3.clips-list
-    = render @clips, open_details: true
+    = render @clips, show_details: true, selected: true
 
 
 script async='true' defer='defer' src='https://maps.googleapis.com/maps/api/js?&callback=initMap'

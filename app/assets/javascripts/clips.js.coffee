@@ -8,6 +8,7 @@
 #= require clipmap
 
 $ ->
+  window.autosaves = {}
   available_tags = $('[data-available-tags]').data('available-tags')
   typeahead_engine = new Bloodhound(
     local: available_tags,
@@ -17,8 +18,16 @@ $ ->
   typeahead_engine.initialize()
   $('[data-tokens]').tokenfield(
     typeahead: [null, { source: typeahead_engine.ttAdapter() }]
-    delimeter: ", "
+    delimeter: ","
   ).on 'tokenfield:createdtoken tokenfield:removedtoken', (e)->
     $target = $(e.target)
     $target.prop('value', $target.tokenfield('getTokensList'))
-    $(e.target.closest('form')).trigger('submit.rails')
+    $($target.closest('form')).trigger('submit.rails')
+
+  $('[data-autosave]').on 'change paste keyup', (e)->
+    timer = window.autosaves[e.target.id]
+    clearTimeout(timer) if timer?
+    window.autosaves[e.target.id] = setTimeout (->
+      $target = $(e.target)
+      $($target.closest('form')).trigger('submit.rails')
+      ), 1000

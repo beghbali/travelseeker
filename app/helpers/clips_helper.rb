@@ -5,6 +5,7 @@ module ClipsHelper
   end
 
   def tags_placeholder_for(clip)
-    clip.tag_list.any? ? 'e.g. lodging, first day, paris, etc' : nil
+    clip.tag_list.any? ? nil : 'e.g. lodging, first day, paris, etc'
   end
+
 end

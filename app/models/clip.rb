@@ -1,8 +1,12 @@
 class Clip < ActiveRecord::Base
   acts_as_taggable
+  acts_as_commentable
 
   attr_accessor :metadata, :near
 
+  has_one :comment, as: :commentable
+
+  accepts_nested_attributes_for :comment
 
   before_save :set_reference
   before_save :set_location
@@ -12,7 +16,7 @@ class Clip < ActiveRecord::Base
   scope :for_session, ->(session_id) { where(session_id: session_id).order(created_at: :desc)}
   scope :known_location, -> { where('latitude IS NOT NULL') }
 
-  delegate :latitude, :longitude, :name, :address, :reference, :url, to: :metadata, allow_nil: true
+  delegate :latitude, :longitude, :name, :address, :reference, :url, :rating_image_url, :phone, :hours, to: :metadata, allow_nil: true
 
   def self.last_clip_location_for_session(session_id)
     Rails.cache.fetch(['last_clip_location', session_id, Clip.for_session(session_id).known_location.count]) do
@@ -22,6 +26,11 @@ class Clip < ActiveRecord::Base
 
   def self.available_tags_for(session_id)
     for_session(session_id).map(&:tag_list).flatten.uniq
+  end
+
+  def comment_attributes=(attrs)
+    comment.try(:delete)
+    super
   end
 
   def set_reference

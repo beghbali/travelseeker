@@ -34,7 +34,15 @@ class GooglePlacesMetaData < MetaData
     google_places_data.lng
   end
 
-  delegate :name, :url, to: :google_places_data
+  delegate :name, to: :google_places_data
+
+  def url
+    google_places_data.url || google_search_url
+  end
+
+  def google_search_url
+    URI::HTTPS.build(host: "www.google.com", path: "/search", query: {q: terms}.to_query).to_s
+  end
 
   def address
     google_places_data.formatted_address || google_places_data.address_components.try(:join, " ")
@@ -51,5 +59,13 @@ class GooglePlacesMetaData < MetaData
 
   def reference
     google_places_data.place_id
+  end
+
+  def phone
+    google_places_data.phone
+  end
+
+  def hours
+    google_places_data.weekday_text
   end
 end

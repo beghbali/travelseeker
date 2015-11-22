@@ -23,7 +23,7 @@ class YelpMetaData < MetaData
     yelp_data.location.coordinate.longitude
   end
 
-  delegate :name, :image_url, :url, to: :yelp_data
+  delegate :name, :image_url, :url, :phone, to: :yelp_data
 
   def address
     yelp_data.location.display_address.join(" ")
@@ -31,6 +31,10 @@ class YelpMetaData < MetaData
 
   def reference
     yelp_data.id
+  end
+
+  def rating_image_url
+    yelp_data.instance_variable_get("@rating_img_url")
   end
 
 end

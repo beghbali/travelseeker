@@ -86,7 +86,7 @@ function initMap() {
   var bounds = new google.maps.LatLngBounds();
   var lastActive;
 
-  $.each ($('.clip'), function(index, clip) {
+  $.each ($('.clip.selected'), function(index, clip) {
     loc = new google.maps.LatLng($(clip).data('latitude'), $(clip).data('longitude'))
 
     if (isNaN(loc.lat()) || isNaN(loc.lng())) {

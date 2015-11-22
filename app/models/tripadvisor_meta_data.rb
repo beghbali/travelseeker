@@ -31,7 +31,7 @@ class TripadvisorMetaData < MetaData
     tripadvisor_data.longitude
   end
 
-  delegate :name, to: :tripadvisor_data
+  delegate :name, :rating_image_url, to: :tripadvisor_data
 
   def image_url
     nil
@@ -48,4 +48,5 @@ class TripadvisorMetaData < MetaData
   def url
     tripadvisor_data.web_url
   end
+
 end
