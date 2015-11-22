@@ -19,23 +19,32 @@ section.input
   = bootstrap_nested_form_for @clip || Clip.new do |f|
     = f.text_field :uri, placeholder: 'paste in a link', hide_label: true
 
-section.clips
-  ul.nav.nav-tabs
-    li.active role="presentation"
-      =link_to "Map", "#map", 'data-toggle' => 'tab', role: 'tab', 'aria-controls' => "map"
-    li role="presentation"
-      =link_to "Clips", "#clips", 'data-toggle' => 'tab', role: 'tab', 'aria-controls' => "clips"
-    li role="presentation"
-      =link_to "Resources", "#resources", 'data-toggle' => 'tab', role: 'tab', 'aria-controls' => "resources"
+section.clips data-available-tags=@available_tags
+  .col-md-1
+    ul
+      li =link_to 'All', clips_path
+      - @available_tags.each do |tag|
+        li
+          =link_to tag, clips_path(tags: tag), 'data-show' => tag
+  .col-md-8
+    ul.nav.nav-tabs
+      li.active role="presentation"
+        =link_to "Map", "#map", 'data-toggle' => 'tab', role: 'tab', 'aria-controls' => "map"
+      li role="presentation"
+        =link_to "Clips", "#clips", 'data-toggle' => 'tab', role: 'tab', 'aria-controls' => "clips"
+      li role="presentation"
+        =link_to "Resources", "#resources", 'data-toggle' => 'tab', role: 'tab', 'aria-controls' => "resources"
 
 
-.tab-content
-  #map.tab-pane.active role='tabpanel'
-    #clipmap
-  #clips.tab-pane role='tabpanel'
-    = render @clips
-  #resources.tab-pane role='tabpanel'
-    =render 'shared/resources'
+    .tab-content
+      #map.tab-pane.active role='tabpanel'
+        #clipmap
+      #clips.tab-pane role='tabpanel'
+        = render @allclips
+      #resources.tab-pane role='tabpanel'
+        =render 'shared/resources'
+  .col-md-3.clips-list
+    = render @clips, open_details: true
 
 
 script async='true' defer='defer' src='https://maps.googleapis.com/maps/api/js?&callback=initMap'

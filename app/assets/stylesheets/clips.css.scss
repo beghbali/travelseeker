@@ -2,6 +2,7 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+//*= require bootstrap-tokenfield
 //*= require shared
 
 $value-color: #FFD9B3;
@@ -30,7 +31,16 @@ body {
 }
 
 .clips {
+  display: block;
 
+  .clips-list {
+    overflow: scroll;
+    height: 40em;
+  }
+
+  ul {
+    list-style-type: none;
+  }
   .nav-tabs {
     li {
       width: 33.5%;
@@ -54,5 +64,9 @@ body {
     height: 40em;
   }
 
+}
+
+footer {
+  overflow: hidden;
 }
 

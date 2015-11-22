@@ -38,6 +38,9 @@ gem 'yelp', require: 'yelp'
 gem 'trip_advisor'
 gem 'hashie'
 gem 'google_places'
+gem 'acts-as-taggable-on', '~> 3.4'
+gem 'bootstrap_tokenfield_rails'
+gem 'twitter-typeahead-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

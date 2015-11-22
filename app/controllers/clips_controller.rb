@@ -5,7 +5,10 @@ class ClipsController < ApplicationController
   # GET /clips
   # GET /clips.json
   def index
-    @clips = Clip.where(session_id: session.id)
+    tags = Array.wrap params.permit(:tags)[:tags]
+    @clips = @allclips = Clip.where(session_id: session.id)
+    @clips = @allclips.tagged_with(tags, any: true) if tags.any?
+    @available_tags = Clip.available_tags_for(session.id)
   end
 
   # GET /clips/1
@@ -72,7 +75,7 @@ class ClipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clip_params
-      params[:clip].permit(:uri)
+      params.require(:clip).permit(:uri, :tag_list)
     end
 
 end

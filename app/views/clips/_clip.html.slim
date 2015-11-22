@@ -6,3 +6,5 @@
     h4.media-heading
       = link_to clip.name || clip.uri, clip.url
     p= clip.address
+    = bootstrap_nested_form_for clip, remote: true do |f|
+      = f.text_field :tag_list, hide_label: true, placeholder: tags_placeholder_for(clip), class: 'tokenize', 'data-tokens' => clip.tag_list

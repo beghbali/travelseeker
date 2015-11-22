@@ -1,6 +1,8 @@
 class Clip < ActiveRecord::Base
+  acts_as_taggable
 
   attr_accessor :metadata, :near
+
 
   before_save :set_reference
   before_save :set_location
@@ -16,6 +18,10 @@ class Clip < ActiveRecord::Base
     Rails.cache.fetch(['last_clip_location', session_id, Clip.for_session(session_id).known_location.count]) do
       Clip.for_session(session_id).known_location.first.try(:location)
     end
+  end
+
+  def self.available_tags_for(session_id)
+    for_session(session_id).map(&:tag_list).flatten.uniq
   end
 
   def set_reference

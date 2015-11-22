@@ -12,8 +12,10 @@ class GooglePlacesMetaData < MetaData
 
   def google_places_data
     @google_places_data ||= begin
-      response = client.spots_by_query(terms, lat: location.try(:latitude), long: location.try(:longitude)).first
-      raise NoGooglePlacesRecordFoundError unless response.present?
+      Rails.cache.fetch(['google-places', terms, location], 1.day) do
+        response = client.spots_by_query(terms, lat: location.try(:latitude), long: location.try(:longitude)).first
+        raise NoGooglePlacesRecordFoundError unless response.present?
+      end
     end
   rescue GooglePlaces::OverQueryLimitError
     Rails.logger.warn "Over quota for google places. failed for terms #{terms}"
