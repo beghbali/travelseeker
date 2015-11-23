@@ -31,3 +31,5 @@ $ ->
       $target = $(e.target)
       $($target.closest('form')).trigger('submit.rails')
       ), 1000
+
+  $('section.value').slideUp(5000)

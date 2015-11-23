@@ -132,6 +132,7 @@ body {
     margin: 10px 0 0;
     text-align: center;
     text-transform: capitalize;
+    word-wrap: break-word;
 }
 .card h5{
     margin: 5px 0;

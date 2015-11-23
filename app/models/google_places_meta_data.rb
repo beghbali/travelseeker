@@ -12,8 +12,11 @@ class GooglePlacesMetaData < MetaData
 
   def google_places_data
     @google_places_data ||= begin
-      Rails.cache.fetch(['google-places', terms, location], 1.day) do
-        response = client.spots_by_query(terms, lat: location.try(:latitude), long: location.try(:longitude)).first
+      Rails.cache.fetch(['google-places', terms, location], expires_in: 1.second) do
+        response = begin
+          (location &&
+          query_by_location.first) || query_by_terms
+        end
         raise NoGooglePlacesRecordFoundError unless response.present?
       end
     end
@@ -21,6 +24,8 @@ class GooglePlacesMetaData < MetaData
     Rails.logger.warn "Over quota for google places. failed for terms #{terms}"
   rescue GooglePlacesMetaData::NoGooglePlacesRecordFoundError
     Rails.logger.warn "No spots found. failed for terms #{terms}"
+  rescue GooglePlaces::InvalidRequestError
+    Rails.logger.warn "Invalid request: #{terms}, #{location.inspect}"
   ensure
     @google_places_data = NullObject.new
     return @google_places_data
@@ -67,5 +72,17 @@ class GooglePlacesMetaData < MetaData
 
   def hours
     google_places_data.weekday_text
+  end
+
+  private def query_by_location
+    res = client.spots_by_query(terms, lat: location.try(:latitude), long: location.try(:longitude), radius: 50000)
+    puts res, "<<<<"
+    res
+  end
+
+  private def query_by_terms
+    res = client.spots_by_query(terms, radius: 50000)
+    puts res, ">>>>>"
+    res
   end
 end

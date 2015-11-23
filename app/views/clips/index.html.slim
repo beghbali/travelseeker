@@ -21,10 +21,13 @@ section.input
 
 section.clips data-available-tags=@available_tags
   .col-md-1
-    ul
-      li =link_to 'All', clips_path
+    ul.list-group
+      li.list-group-item
+        span.badge=Clip.for_session(session.id).count
+        =link_to 'All', clips_path
       - @available_tags.each do |tag|
-        li
+        li.list-group-item
+          span.badge=Clip.for_session(session.id).tagged_with(tag).count
           =link_to tag, clips_path(tags: tag), 'data-show' => tag
   .col-md-8
     ul.nav.nav-tabs
@@ -40,7 +43,11 @@ section.clips data-available-tags=@available_tags
       #map.tab-pane.active role='tabpanel'
         #clipmap
       #clips.tab-pane role='tabpanel'
-        = render @allclips, show_details: true, selected: false
+        - @allclips.in_groups_of(3) do |group|
+          .row
+            - group.compact.each do |clip|
+              .col-md-4
+                = render clip, show_details: true, selected: false
       #resources.tab-pane role='tabpanel'
         =render 'shared/resources'
   .col-md-3.clips-list
