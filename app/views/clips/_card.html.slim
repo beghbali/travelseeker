@@ -1,0 +1,33 @@
+.card-container.manual-flip onclick="rotateCard(this)"
+  .card
+    .front
+      .cover
+        =image_tag('rotating_card_thumb.png')
+      .place
+        img.img-circle src=clip.image_url
+      .content
+        .main
+          h3.name= link_to clip.name || clip.uri, clip.url
+          p.hours= clip.hours
+          h5
+            i.fa.fa-map-marker.fa-fw.text-muted
+            = clip.address
+          -if clip.phone.present?
+            h5
+              i.fa.fa-phone.fa-fw.text-muted
+              = clip.phone
+        .footer
+          .rating
+            = image_tag clip.rating_image_url
+    .back
+      .header
+        h5.motto= clip.name
+      .content
+        .main
+          = bootstrap_nested_form_for clip, remote: true do |f|
+            = f.text_field :tag_list, hide_label: true, placeholder: tags_placeholder_for(clip), class: 'tokenize', 'data-tokens' => clip.tag_list.join(',')
+
+            div
+              .comment data-autosave=true
+                = f.fields_for :comment, clip.comment || clip.build_comment do |c|
+                  = c.text_area :comment, hide_label: true, placeholder: 'Comments, notes'

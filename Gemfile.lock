@@ -102,6 +102,8 @@ GEM
       multipart-post (>= 1.2, < 3)
     faraday_middleware (0.10.0)
       faraday (>= 0.7.4, < 0.10)
+    font-awesome-rails (4.4.0.0)
+      railties (>= 3.2, < 5.0)
     fuzzy_match (2.0.4)
     google_places (0.32.0)
       httparty (~> 0.13.1)
@@ -241,6 +243,7 @@ DEPENDENCIES
   bootstrap_tokenfield_rails
   byebug
   coffee-rails (~> 4.0.0)
+  font-awesome-rails
   google_places
   hashie
   jbuilder (~> 1.2)

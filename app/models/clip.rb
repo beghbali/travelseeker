@@ -16,7 +16,7 @@ class Clip < ActiveRecord::Base
   scope :for_session, ->(session_id) { where(session_id: session_id).order(created_at: :desc)}
   scope :known_location, -> { where('latitude IS NOT NULL') }
 
-  delegate :latitude, :longitude, :name, :address, :reference, :url, :rating_image_url, :phone, :hours, to: :metadata, allow_nil: true
+  delegate :latitude, :longitude, :name, :address, :reference, :url, :rating_image_url, :phone, :hours, :image_url, to: :metadata, allow_nil: true
 
   def self.last_clip_location_for_session(session_id)
     Rails.cache.fetch(['last_clip_location', session_id, Clip.for_session(session_id).known_location.count]) do
@@ -72,18 +72,6 @@ class Clip < ActiveRecord::Base
 
   def google_places
     @google_places ||= GooglePlacesMetaData.new(uri, near)
-  end
-
-  def image_url
-    if tripadvisor?
-      gp = GooglePlacesMetaData.new(name, Location.new(self.slice(*%i(latitude longitude))))
-      gp.image_url
-    else
-      metadata.try(:image_url)
-    end
-  rescue GooglePlacesMetaData::NoGooglePlacesRecordFoundError
-    Rails.logger.warn "No spots found. failed for terms #{uri}"
-    nil
   end
 
   def metadata

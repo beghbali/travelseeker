@@ -42,6 +42,7 @@ gem 'acts-as-taggable-on', '~> 3.4'
 gem 'bootstrap_tokenfield_rails'
 gem 'twitter-typeahead-rails'
 gem 'acts_as_commentable'
+gem "font-awesome-rails"
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

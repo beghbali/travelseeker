@@ -4,6 +4,8 @@
 
 //*= require bootstrap-tokenfield
 //*= require shared
+//*= require rotating-card
+//*= require font-awesome
 
 $value-color: #FFD9B3;
 
@@ -28,6 +30,11 @@ body {
 
 .input {
   background-color: $value-color;
+}
+
+.img.media-object {
+  min-height: 100px;
+  min-width: 100px;
 }
 
 .clips {

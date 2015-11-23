@@ -2,6 +2,8 @@ class TripadvisorMetaData < MetaData
 
   attr_accessor :tripadvisor_data, :client, :business_id
 
+  alias_method :data, :tripadvisor_data
+
   def self.business_id_from_url(url)
     url.split('-').detect{|segment| segment =~ /^d\d+$/}[1..-1]
   end

@@ -1,6 +1,7 @@
 class YelpMetaData < MetaData
 
   attr_accessor :yelp_data, :business_id
+  alias_method :data, :yelp_data
 
   def self.business_id_from_url(url)
     url.split('/').last.try(:split, '?').try(:first)

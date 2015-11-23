@@ -46,5 +46,16 @@ section.clips data-available-tags=@available_tags
   .col-md-3.clips-list
     = render @clips, show_details: true, selected: true
 
+javascript:
 
-script async='true' defer='defer' src='https://maps.googleapis.com/maps/api/js?&callback=initMap'
+  function rotateCard(btn){
+    if($(event.target).is('input') || $(event.target).is('textarea')) {
+      return;
+    }
+    var $card = $(btn).closest('.card-container');
+    if($card.hasClass('hover')){
+        $card.removeClass('hover');
+    } else {
+        $card.addClass('hover');
+    }
+  }
