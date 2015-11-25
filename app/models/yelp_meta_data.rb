@@ -30,7 +30,7 @@ class YelpMetaData < MetaData
     yelp_data.location.display_address.join(" ")
   end
 
-  def reference
+  def external_reference
     yelp_data.id
   end
 

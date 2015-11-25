@@ -96,7 +96,7 @@ function initMap() {
     bounds.extend(loc)
 
     var infowindow = new google.maps.InfoWindow({
-      content: '<h5><a href="'+$(clip).data('url')+'">'+$(clip).data('name')+'</h5><img src="'+$(clip).data('image')+'"><p>'+$(clip).data('address')+'</p>'
+      content: '<h5><a href=#"'+$(clip).prop('id')+'">'+$(clip).data('name')+'</h5>'
     });
 
     var marker = new google.maps.Marker({

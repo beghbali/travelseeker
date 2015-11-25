@@ -43,7 +43,7 @@ class TripadvisorMetaData < MetaData
     tripadvisor_data.address_obj.try(:address_string)
   end
 
-  def reference
+  def external_reference
     tripadvisor_data.location_id
   end
 

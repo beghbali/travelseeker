@@ -16,7 +16,7 @@ class Clip < ActiveRecord::Base
   scope :for_session, ->(session_id) { where(session_id: session_id).order(created_at: :desc)}
   scope :known_location, -> { where('latitude IS NOT NULL') }
 
-  delegate :latitude, :longitude, :name, :address, :reference, :url, :rating_image_url, :phone, :hours, :image_url, to: :metadata, allow_nil: true
+  delegate :name, :address, :external_reference, :url, :rating_image_url, :phone, :hours, :image_url, to: :metadata, allow_nil: true
 
   def self.last_clip_location_for_session(session_id)
     Rails.cache.fetch(['last_clip_location', session_id, Clip.for_session(session_id).known_location.count]) do
@@ -34,7 +34,15 @@ class Clip < ActiveRecord::Base
   end
 
   def set_reference
-    self.reference = reference
+    self.reference = external_reference
+  end
+
+  def latitude
+    self[:latitude] || metadata.latitude
+  end
+
+  def longitude
+    self[:longitude] || metadata.longitude
   end
 
   def location
@@ -71,7 +79,7 @@ class Clip < ActiveRecord::Base
   end
 
   def google_places
-    @google_places ||= GooglePlacesMetaData.new(uri, near)
+    @google_places ||= GooglePlacesMetaData.new(uri, near, reference)
   end
 
   def metadata
