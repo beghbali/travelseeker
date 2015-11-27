@@ -75,16 +75,15 @@ function initMap() {
 
   // Create a map object and specify the DOM element for display.
   var map = new google.maps.Map(document.getElementById('clipmap'), {
-    center: {lat: -34.397, lng: 150.644},
     scrollwheel: false,
     // Apply the map style array to the map.
     styles: styleArray,
-    zoom: 8,
+    zoom: 1,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
   var bounds = new google.maps.LatLngBounds();
-  var lastActive;
+  var lastActive = new google.maps.LatLng(0,0);
 
   $.each ($('.clip.selected'), function(index, clip) {
     loc = new google.maps.LatLng($(clip).data('latitude'), $(clip).data('longitude'))

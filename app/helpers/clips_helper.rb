@@ -5,7 +5,7 @@ module ClipsHelper
   end
 
   def tags_placeholder_for(clip)
-    clip.tag_list.any? ? nil : 'e.g. lodging, first day, paris, etc'
+    clip.tag_list.any? ? nil : 'Add tags/categories'
   end
 
   def format_hours(hours_string)

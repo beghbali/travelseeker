@@ -1,16 +1,17 @@
-section.value
-  h2
-    | A better bucket list
-  ul.list-inline
-    li.col-md-4
-      span.glyphicon.glyphicon-floppy-saved aria-hidden="true"
-      p Remember interesting restaurants, activities and hotels
-    li.col-md-4
-      span.glyphicon.glyphicon-th-list
-      p All the information you need, auto-organized and in one place
-    li.col-md-4
-      span.glyphicon.glyphicon-map-marker
-      p Make better decisions, from visualizing everything on a map
+- unless session[:seen_hero]
+  section.value
+    h2
+      | A better bucket list & itinerary
+    ul.list-inline
+      li.col-md-4
+        span.glyphicon.glyphicon-floppy-saved aria-hidden="true"
+        p Remember restaurants, activities and hotels you're interested in
+      li.col-md-4
+        span.glyphicon.glyphicon-th-list
+        p Have all the information you need, auto-organized and in one place
+      li.col-md-4
+        span.glyphicon.glyphicon-map-marker
+        p Make better decisions, from visualizing everything on a map
 
 
 section.input
