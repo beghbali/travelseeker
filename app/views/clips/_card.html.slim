@@ -4,11 +4,13 @@
       .cover
         =image_tag('rotating_card_thumb.png')
       .place
-        img.img-circle src=clip.image_url
+        img.img-circle src="#{clip.image_url || asset_path('discovercoolstuff.png')}"
       .content
         .main
           h3.name= link_to clip.name || clip.uri, clip.url
-          p.hours= clip.hours
+          .rating
+            = image_tag clip.rating_image_url
+          p.hours= format_hours(clip.hours)
           h5
             i.fa.fa-map-marker.fa-fw.text-muted
             = clip.address
@@ -17,8 +19,9 @@
               i.fa.fa-phone.fa-fw.text-muted
               = clip.phone
         .footer
-          .rating
-            = image_tag clip.rating_image_url
+          button.btn.btn-simple
+            i.fa.fa-mail-forward
+            | Add Notes
     .back
       .header
         h5.motto= clip.name
@@ -31,3 +34,7 @@
               .comment data-autosave=true
                 = f.fields_for :comment, clip.comment || clip.build_comment do |c|
                   = c.text_area :comment, hide_label: true, placeholder: 'Comments, notes'
+        .footer
+          button.btn.btn-simple
+            i.fa.fa-mail-forward
+            | Details

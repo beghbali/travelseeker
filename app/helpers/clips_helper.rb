@@ -8,4 +8,7 @@ module ClipsHelper
     clip.tag_list.any? ? nil : 'e.g. lodging, first day, paris, etc'
   end
 
+  def format_hours(hours_string)
+    hours_string && hours_string.gsub(/\n+/, '<br>').html_safe
+  end
 end
