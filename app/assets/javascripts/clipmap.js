@@ -73,19 +73,22 @@ function initMap() {
     }
 ]
 
+  var center = new google.maps.LatLng(0,0);
   // Create a map object and specify the DOM element for display.
   var map = new google.maps.Map(document.getElementById('clipmap'), {
+    center: center,
     scrollwheel: false,
     // Apply the map style array to the map.
     styles: styleArray,
-    zoom: 1,
+    zoom: 2,
     mapTypeId: google.maps.MapTypeId.ROADMAP
   });
 
   var bounds = new google.maps.LatLngBounds();
   var lastActive = new google.maps.LatLng(0,0);
 
-  $.each ($('.clip.selected'), function(index, clip) {
+  var pins = $('.clip.selected');
+  $.each (pins, function(index, clip) {
     loc = new google.maps.LatLng($(clip).data('latitude'), $(clip).data('longitude'))
 
     if (isNaN(loc.lat()) || isNaN(loc.lng())) {
@@ -113,7 +116,10 @@ function initMap() {
     }
   });
 
-  map.fitBounds(bounds);
+  if(pins.length > 0) {
+    map.fitBounds(bounds);
+  }
+
   map.panToBounds(bounds);
   map.setCenter(lastActive);
 }
