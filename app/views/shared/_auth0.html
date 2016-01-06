@@ -1,0 +1,16 @@
+<script src="https://cdn.auth0.com/js/lock-7.12.min.js"></script>
+<script type="text/javascript">
+
+  var lock = new Auth0Lock('MxKyQL0YDa80L8WwLWSjqZmnJ9qFojVK', 'zentrips.auth0.com');
+
+
+  function signin() {
+    lock.show({
+        callbackURL: ''
+      , responseType: 'code'
+      , authParams: {
+        scope: 'openid profile'
+      }
+    });
+  }
+</script>

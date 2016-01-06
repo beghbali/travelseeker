@@ -1,5 +1,6 @@
 class Trip < ActiveRecord::Base
   has_many :clips
+  belongs_to :user
 
   accepts_nested_attributes_for :clips
 

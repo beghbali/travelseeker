@@ -1,4 +1,6 @@
 Zentrips::Application.routes.draw do
+  get "auth0/callback"
+  get "auth0/failure"
   resources :trips do
     get :trip_details
     resources :day, only: [:show], controller: :trips, param: :day
@@ -19,6 +21,9 @@ Zentrips::Application.routes.draw do
       get 'thank_you'
     end
   end
+
+  get "/auth/auth0/callback" => "auth0#callback"
+  get "/auth/failure" => "auth0#failure"
 
   get 'travel-better' => "surveys#travel_better"
 

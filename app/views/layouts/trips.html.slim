@@ -33,5 +33,6 @@ html lang="en"
         .highlighted data-path=asset_path('pin_highlighted.svg')
     script async='true' defer='defer' src='https://maps.googleapis.com/maps/api/js?&callback=initMap&libraries=places'
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.min.js"
+    = render 'shared/auth0'
     = render 'shared/google_analytics'
     = render 'shared/olark'

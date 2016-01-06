@@ -17,7 +17,7 @@ nav.navbar.navbar-default.navbar-fixed-top
           .tag class=tag_class(tag)
             = @trip.clips.tagged_with(tag).count
       .nav.navbar-nav.navbar-form.navbar-right
-        .btn.btn-default Save my trip
+        .btn.btn-default.save Save my trip
 
 .map
   #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude

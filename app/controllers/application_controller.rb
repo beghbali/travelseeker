@@ -6,4 +6,5 @@ class ApplicationController < ActionController::Base
 
   def faq
   end
+
 end

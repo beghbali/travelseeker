@@ -43,6 +43,8 @@ gem 'bootstrap_tokenfield_rails'
 gem 'twitter-typeahead-rails'
 gem 'acts_as_commentable'
 gem "font-awesome-rails"
+gem 'omniauth', '~> 1.2'
+gem 'omniauth-auth0', '~> 1.1'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

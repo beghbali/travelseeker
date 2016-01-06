@@ -25,6 +25,9 @@ $ ->
 
   $('.new_trip').on 'submit', (e)->
     #needs error handling
-    e.preventDefault() if !!$(@).find('#trip_latitude').prop('value') || !!$(@).find('#trip_longitude').prop('value')
+    e.preventDefault() if !!$(@).find('#trip_latitude').prop('value') || !!$(@).find('#trip_longitude').prop('value');
+
+  $('.btn.save').on 'click', ->
+    window.signin();
 
 
