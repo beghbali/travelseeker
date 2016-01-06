@@ -6,7 +6,11 @@
 
   function signin() {
     lock.show({
-        callbackURL: ''
+      <% if Rails.env.development? %>
+        callbackURL: 'http://localhost:3000/auth/auth0/callback'
+      <% else %>
+        callbackURL: 'https://zentrips.co/auth/auth0/callback'
+      <% end %>
       , responseType: 'code'
       , authParams: {
         scope: 'openid profile'
