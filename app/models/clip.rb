@@ -47,7 +47,8 @@ class Clip < ActiveRecord::Base
   end
 
   def date=(date)
-    date_list.add date.strftime("%B #{date.to_date.day.ordinalize}") unless date.blank?
+    date = date.to_date
+    date_list.add date.strftime("%B #{date.day.ordinalize}") unless date.blank?
   end
 
   def day=(day)
