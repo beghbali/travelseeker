@@ -13,12 +13,12 @@ class Trip < ActiveRecord::Base
   end
 
   def context
-    start_date.nil? ? 'Days' : starte_data.strftime("%B")
+    start_date.nil? ? 'Days' : start_date.strftime("%B")
   end
 
   def end_date=(date)
     return if date.blank?
-    days = (end_date - start_date).to_i
+    self.days = (date.to_date - start_date).to_i
   end
 
   def end_date

@@ -5,6 +5,7 @@
 #= require clipmap
 #= require clips
 $ ->
+  $.fn.datepicker.defaults.format = "yyyy-mm-dd";
   $('.day').on 'click', (e)->
     $(@).toggleClass('active');
 
@@ -25,7 +26,7 @@ $ ->
 
   $('.new_trip').on 'submit', (e)->
     #needs error handling
-    e.preventDefault() if !!$(@).find('#trip_latitude').prop('value') || !!$(@).find('#trip_longitude').prop('value');
+    e.preventDefault() if $(@).find('#trip_latitude').prop('value').length == 0 || $(@).find('#trip_longitude').prop('value').length == 0;
 
   $('.btn.save').on 'click', ->
     window.signin();

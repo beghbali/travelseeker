@@ -22,7 +22,7 @@ module TripsHelper
   end
 
   def ordinal_date(date)
-    date.strftime("%B %d #{date.day.ordinalize}")
+    date.strftime("%B #{date.day.ordinalize}")
   end
 
   def day_class(day)

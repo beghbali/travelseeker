@@ -38,7 +38,7 @@ class Clip < ActiveRecord::Base
   end
 
   def available_date_tags
-    trip.dates.map{|date| date.strftime("%B %d #{date.day.ordinalize}")}
+    trip.dates.map{|date| date.strftime("%B #{date.day.ordinalize}")}
   end
 
   def comment_attributes=(attrs)
@@ -47,7 +47,7 @@ class Clip < ActiveRecord::Base
   end
 
   def date=(date)
-    date_list.add date.strftime("%B %d #{date.day.ordinalize}") unless date.blank?
+    date_list.add date.strftime("%B #{date.day.ordinalize}") unless date.blank?
   end
 
   def day=(day)
