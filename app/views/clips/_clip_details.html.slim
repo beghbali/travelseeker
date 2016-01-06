@@ -23,8 +23,8 @@ img.banner src="#{clip.image_url || asset_path('discovercoolstuff.png')}"
         = f.fields_for :comment, clip.comment || clip.build_comment do |c|
           = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
 
-  a.btn.btn-info.pull-left href=clip.url View on #{clip.source}
-  a.pull-right href=clip_path(clip) method='delete' Remove
+  a.btn.btn-info.pull-left href=clip.url target='_blank' View on #{clip.source}
+  =link_to 'Remove', clip_path(clip), method: :delete ,class: 'pull-right'
   .btn.btn-primary.btn-block.back
     i.fa.fa-arrow-left
     span Back
