@@ -164,6 +164,7 @@ select.form-control, input[data-provide='datepicker'] {
   background: white;
   border-radius: 0.25em;
   min-width: 25%;
+  max-width: 25%;
   padding: 1em;
   height: 90%;
 
@@ -214,9 +215,38 @@ select.form-control, input[data-provide='datepicker'] {
   }
 }
 
-img.x-insert-image {
-  width: 100%;
-  height: 20vh;
+.clip {
+  img.banner {
+    width: 100%;
+    height: 15em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    border-top-right-radius: 0.25em;
+    border-top-left-radius: 0.25em;
+  }
+  .clip-details {
+    margin-top: 15em;
+
+    .back {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3em;
+      background-color: $dropdown-color;
+      color: $dropdown-text-color;
+      cursor: pointer;
+      border-bottom-right-radius: 0.25em;
+      border-bottom-left-radius: 0.25em;
+      text-align: center;
+      font-weight: bold;
+      margin: auto 0;
+      background-color: black;
+      border-top-right-radius: 0;
+      border-top-left-radius: 0;
+    }
+  }
 }
 
 .tag {
@@ -276,13 +306,13 @@ body, html {
 
 
 .navbar-nav.search {
-  width: 60%;
+  max-width: 60%;
 
   form {
     .form-control, .input-group, .form-group, input[type=text] {
       width: 100%;
     }
-    .input-group-addon {
+    .input-group-btn {
       width: 10%;
     }
   }

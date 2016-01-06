@@ -18,6 +18,7 @@ function initAutocomplete(map) {
 }
 
 function setZoom(map, location) {
+  var geocoder = new google.maps.Geocoder();
   geocoder.geocode( { 'location': location}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
       map.setCenter(results[0].geometry.location);
@@ -27,11 +28,13 @@ function setZoom(map, location) {
           });
       if (results[0].geometry.viewport)
         map.fitBounds(results[0].geometry.viewport);
+        if (map.getZoom() > 16) map.setZoom(15);
     } else {
       //needs error handling
     }
   });
 }
+
 function initMap() {
 
   // Specify features and elements to define styles.
@@ -125,6 +128,8 @@ function initMap() {
   var lastActive = new google.maps.LatLng(0,0);
 
   var pins = $('.clip.selected');
+  var markers = [];
+
   $.each (pins, function(index, clip) {
     loc = new google.maps.LatLng($(clip).data('latitude'), $(clip).data('longitude'))
 
@@ -152,6 +157,7 @@ function initMap() {
       infowindow.open(map,marker);
       lastActive = loc;
     }
+    markers.push(marker);
   });
 
   if(pins.length > 0) {

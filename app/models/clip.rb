@@ -1,10 +1,11 @@
 class Clip < ActiveRecord::Base
-  acts_as_taggable
+  acts_as_taggable_on :type, :days, :dates
   acts_as_commentable
 
   attr_accessor :metadata, :near
 
   has_one :comment, as: :commentable
+  belongs_to :trip
 
   accepts_nested_attributes_for :comment
 
@@ -24,8 +25,20 @@ class Clip < ActiveRecord::Base
     end
   end
 
-  def self.available_tags_for(session_id)
-    for_session(session_id).map(&:tag_list).flatten.uniq
+  def self.available_tags_for(session_id, type="tag")
+    for_session(session_id).map(&:"#{type}_list").flatten.uniq
+  end
+
+  def available_type_tags
+    %w(Food Activity Lodging)
+  end
+
+  def available_day_tags
+    trip.dates.map{|day| "Day #{day}"} unless trip.dates_known?
+  end
+
+  def available_date_tags
+    trip.dates.map{|date| date.strftime("%B %d #{date.day.ordinalize}")}
   end
 
   def comment_attributes=(attrs)
@@ -34,11 +47,11 @@ class Clip < ActiveRecord::Base
   end
 
   def date=(date)
-    tag_list.add date.strftime("%B %d #{date.day.ordinalize}")
+    date_list.add date.strftime("%B %d #{date.day.ordinalize}") unless date.blank?
   end
 
   def day=(day)
-    tag_list.add "Day #{day}"
+    day_list.add "Day #{day}"
   end
 
   def set_reference

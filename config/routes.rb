@@ -1,5 +1,6 @@
 Zentrips::Application.routes.draw do
   resources :trips do
+    get :trip_details
     resources :day, only: [:show], controller: :trips, param: :day
   end
 

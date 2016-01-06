@@ -3,16 +3,24 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 #= require clipmap
-
+#= require clips
 $ ->
   $('.day').on 'click', (e)->
     $(@).toggleClass('active');
 
-  $('.clips > li').on 'click', (e)->
+  $('.trip').on 'click', '.clips > li', (e)->
     clipDetails = $(@).children().first();
     trip = clipDetails.closest('.trip');
     trip.toggleClass('hide');
     trip.parent().append(clipDetails);
+    clipDetails.toggleClass('hide');
+
+  $(document).on 'click', '.clip-details .back', (e)->
+    clipDetails = $(@).closest('.clip');
+    trip = clipDetails.parent().find('.trip');
+    trip.load('/trips/'+trip.data('id')+'/trip_details');
+    trip.toggleClass('hide');
+    $($(clipDetails).data('ref')).append(clipDetails);
     clipDetails.toggleClass('hide');
 
   $('.new_trip').on 'submit', (e)->

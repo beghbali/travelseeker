@@ -1,4 +1,4 @@
-img src="#{clip.image_url || asset_path('discovercoolstuff.png')}"
+img.banner src="#{clip.image_url || asset_path('discovercoolstuff.png')}"
 .clip-details
   h2.name= link_to clip.name || clip.uri, clip.url
   h4= clip.address
@@ -8,13 +8,23 @@ img src="#{clip.image_url || asset_path('discovercoolstuff.png')}"
     .col-md-6
       h4 Contact
       p= clip.phone
-      = image_tag clip.rating_image_url
+      -if clip.rating_image_url
+        = image_tag clip.rating_image_url
   hr
-  =bootstrap_nested_form_for clip do |f|
-    = f.select(:tag_list, Clip.available_tags_for(clip.session_id), hide_label: true)
-    .comment data-autosave=true
-      = f.fields_for :comment, clip.comment || clip.build_comment do |c|
-        = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
+  =bootstrap_nested_form_for clip, remote: true do |f|
+    .row
+      -day_or_date = clip.trip.dates_known? ? :date : :day
+      .col-md-8
+        = f.select(:"#{day_or_date}_list", clip.send("available_#{day_or_date}_tags").insert(0, "Assign #{day_or_date.to_s.camelize}"), {hide_label: true}, {data: {autosave: true}})
+      .col-md-4
+        = f.select(:type_list, clip.available_type_tags.insert(0, "Assign Type"), {hide_label: true}, {data: {autosave: true}})
+    .row
+      .comment.col-md-12 data-autosave=true
+        = f.fields_for :comment, clip.comment || clip.build_comment do |c|
+          = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
 
   a.btn.btn-info.pull-left href=clip.url View on #{clip.source}
-  a.btn.btn-link.pull-right href=clip_path(clip) method='delete'
+  a.pull-right href=clip_path(clip) method='delete' Remove
+  .btn.btn-primary.btn-block.back
+    i.fa.fa-arrow-left
+    span Back

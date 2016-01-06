@@ -77,7 +77,7 @@ class ClipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clip_params
-      params.require(:clip).permit(:uri, :tag_list, comment_attributes: [:comment])
+      params.require(:clip).permit(:uri, :date_list, :day_list, :type_list, comment_attributes: [:comment])
     end
 
 end

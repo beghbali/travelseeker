@@ -7,12 +7,12 @@ nav.navbar.navbar-default.navbar-fixed-top
         =bootstrap_nested_form_for :trips do |t|
           = t.select :trip, user_trips, hide_label: true, inline: true, class: 'selectpicker'
       .nav.navbar-nav.navbar-form.search
-        =bootstrap_nested_form_for @trip do |t|
-          = t.fields_for :clips, @trip.clips.build  do |c|
-            = c.text_field :uri, placeholder: 'Type search terms or paste a link', hide_label: true, append: c.select(:tag_list, general_tags, hide_label: true), class: 'autocomplete-places'
-            = c.hidden_field :day, value: 1
-            = c.hidden_field :date, value: @trip.start_date
-      .nav.navbar-nav.navbar-form
+          =bootstrap_nested_form_for @trip, class: 'navbar-form' do |t|
+            = t.fields_for :clips, @trip.clips.build  do |c|
+              = c.text_field :uri, placeholder: 'Type search terms or paste a link', hide_label: true, append: c.submit(class: 'btn btn-default'), class: 'autocomplete-places'
+              = c.hidden_field :day, value: 1
+              = c.hidden_field :date, value: @trip.start_date
+      .nav.navbar-nav.navbar-form.hidden-md.hidden-sm.hidden.xs
         -general_tags.each do |tag|
           .tag class=tag_class(tag)
             = @trip.clips.tagged_with(tag).count
