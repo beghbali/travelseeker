@@ -1,0 +1,33 @@
+nav.navbar.navbar-default.navbar-fixed-top
+  .container-fluid
+    .navbar-header
+      a.navbar-brand href='#' Zentrips
+    .collapse.navbar-collapse
+      .nav.navbar-nav.navbar-form
+        =bootstrap_nested_form_for :trips do |t|
+          = t.select :trip, user_trips, hide_label: true, inline: true, class: 'selectpicker'
+      .nav.navbar-nav.navbar-form.search
+        =bootstrap_nested_form_for @trip do |t|
+          = t.fields_for :clips, @trip.clips.build  do |c|
+            = c.text_field :uri, placeholder: 'Type search terms or paste a link', hide_label: true, append: c.select(:tag_list, general_tags, hide_label: true), class: 'autocomplete-places'
+            = c.hidden_field :day, value: 1
+            = c.hidden_field :date, value: @trip.start_date
+      .nav.navbar-nav.navbar-form
+        -general_tags.each do |tag|
+          .tag class=tag_class(tag)
+            = @trip.clips.tagged_with(tag).count
+      .nav.navbar-nav.navbar-form.navbar-right
+        .btn.btn-default Save my trip
+
+.map
+  #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
+  .days
+    .context
+      = @trip.context.first(3)
+    - (1..@trip.days).each do |day|
+      .day class=day_class(day)
+        =link_to day, trip_day_path(@trip, day)
+    .add-day
+      =link_to '+', trip_path(@trip, trip: { days: @trip.days + 1}), method: :patch
+  .details
+    =render @trip

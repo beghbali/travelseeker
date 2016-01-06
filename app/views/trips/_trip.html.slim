@@ -1,0 +1,17 @@
+.trip
+  h1= trip.name
+  h3= dates_or_days(trip)
+
+  ul.trip-days
+    - trip.dates.each do |date|
+      li class=day_class(date)
+        h4= date_or_day(date)
+        ul.clips
+          - trip.clips.tagged_with(date_or_day(date)).each do |clip|
+            li class=day_class(date)
+              -selected = @day == date
+              .clip.hide data-latitude=clip.latitude data-longitude=clip.longitude data-name=clip.name data-address=clip.address data-image=clip.image_url data-url=clip.url data-active="#{last_clip?(clip)}" class="#{ selected ? 'selected' : '' }" id="#{selected ? 'clip-' : ''}#{clip.reference || (clip.name || clip.uri).parameterize}"
+                =render 'clips/clip_details', clip: clip
+              span=clip.name
+              h3=clip.tag_list.first
+

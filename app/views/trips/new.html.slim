@@ -1,0 +1,33 @@
+.hero
+  .row
+    h1 Welcome To Zentrips
+    .col-md-4
+    .col-md-4
+      p Planning a trip is hard, having input from people who all want to different things, when ever there is something you want to do on the trip add it to Zentrips to make a well rounded plan of your whole trip.
+    .col-md-4
+  .row
+    .col-md-4
+    .col-md-4
+      = bootstrap_nested_form_for @trip do |f|
+        .row
+          .col-md-12
+            = f.text_field :location, placeholder: 'Where are you going?', hide_label: true, class: 'autocomplete-places'
+            = f.hidden_field :latitude
+            = f.hidden_field :longitude
+        .row
+          .col-md-4
+            = f.text_field :start_date, 'data-provide' => "datepicker", hide_label: true, placeholder: 'Start Date (optional)', inline: true
+          .col-md-4
+            = f.text_field :end_date, 'data-provide' => "datepicker", hide_label: true, placeholder: 'End Date (optional)', inline: true
+          .col-md-4
+            = f.submit 'Create Trip', class: 'btn btn-default btn-block'
+    .col-md-4
+- if show_video?
+  .video
+    div class="wistia_embed wistia_async_7tglvexfea" &nbsp;
+  #clipmap
+- else
+  .map
+    #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
+
+script async='true' charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js"

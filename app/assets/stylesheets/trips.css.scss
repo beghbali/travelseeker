@@ -1,0 +1,289 @@
+// Place all the styles related to the Trips controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+//*= require font-awesome
+
+$frame-color: rgb(12, 162, 248);
+$inactive-color: rgb(136, 136, 136);
+$inactive-element-color: rgb(242, 242, 242);
+$active-color: rgb(12, 162, 248);
+$active-element-color: rgba(12, 162, 248, 0.09);
+$dropdown-color: rgb(182, 227, 252);
+$dropdown-text-color: rgb(12, 162, 248);
+$tag-color: rgb(10, 145, 222);
+
+@font-face {
+  font-family: 'Brandon Text Medium';
+  src: url(/assets/BrandonText-Medium.otf) format("truetype");
+}
+
+@mixin all-text-colors($color) {
+  color:$color;
+  a {
+    color:$color;
+    &:visited {
+      color:$color;
+    }
+  }
+}
+
+.navbar-fixed-top {
+  z-index: 999;
+}
+
+.navbar-header .navbar-brand {
+  margin-top: 0.25em;
+  @include all-text-colors(white);
+}
+
+.btn {
+  line-height: 2em;
+}
+
+.btn-default {
+  color: $frame-color;
+}
+
+body {
+  font-family: "Helvetica Neue";
+  margin: 0;
+  font-size: 16px;
+}
+
+select.form-control, input[data-provide='datepicker'] {
+  background-color: $dropdown-color;
+  color: $dropdown-text-color;
+}
+
+
+
+.form-control {
+  height: 3em;
+}
+
+.input-group-addon:last-child {
+  padding: 0;
+  border:0;
+  background-color: transparent;
+  select {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    border-left: 0;
+    // -webkit-appearance: none;
+    // -moz-appearance: none;
+  }
+}
+
+.container {
+}
+.hero {
+  // height: 40vh;
+  width: 100vw;
+  background: $frame-color;
+  text-align: center;
+  background-image: asset_url('scene.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  color: white;
+  padding-top: 8em;
+
+  .mask {
+    background: linear-gradient(white, $frame-color);
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    opacity: 0.5;
+  }
+  h1 {
+    font-weight: bolder;
+    margin: 0 0 1em 0;
+  }
+
+  p {
+    opacity: 0.8;
+  }
+  input {
+    // width: 80%;
+    margin: 0 auto;
+  }
+}
+.map {
+  height: 60vh;
+  #clipmap {
+    height: 100%;
+  }
+}
+
+.video div {
+  height: 60vh;
+}
+
+.days {
+  position:absolute;
+  top: 5em;
+  left: 1em;
+  background: white;
+  border-radius: 0.25em;
+
+  .context {
+    font-size: 0.75em;
+    padding-top: 1em;
+    text-align: center;
+  }
+
+  .day, .add-day {
+    text-align: center;
+    width: 2em;
+    height: 2em;
+    font-size: 0.75em;
+    margin: 0.5em;
+    padding: 0.3em;
+    text-decoration: none;
+    @include all-text-colors($inactive-color);
+    &.active{
+      border-radius: 50%;
+      background-color: $frame-color;
+      a {
+        text-decoration: inherit;
+      }
+      @include all-text-colors(white);
+    }
+  }
+  .add-day {
+    background-color: $inactive-element-color;
+    border-radius: 50%;
+  }
+}
+
+.details {
+  position:absolute;
+  top: 5em;
+  right: 1em;
+  background: white;
+  border-radius: 0.25em;
+  min-width: 25%;
+  padding: 1em;
+  height: 90%;
+
+  ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-top: 1em;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: 1.5em;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 0.75em;
+    color: $inactive-color;
+  }
+
+  h4 {
+    font-size: 0.75em;
+    color: $inactive-color;
+  }
+
+  li.active {
+    h4 {
+      color: $active-color;
+    }
+  }
+  .clips li {
+    background-color: $inactive-element-color;
+    border-radius: 0.25em;
+    margin-top: 0.25em;
+    padding: 1em;
+    cursor: pointer;
+
+    &.active {
+      background-color: $active-element-color;
+    }
+
+    span {
+      font-weight: bold;
+    }
+    h3 {
+      float: right;
+    }
+  }
+}
+
+img.x-insert-image {
+  width: 100%;
+  height: 20vh;
+}
+
+.tag {
+  background-color: $tag-color;
+  color: white;
+  padding: 0.5em;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+  border-radius: 5em;
+  width: 4em;
+  font-size: 0.6em;
+  display: inline-block;
+  margin-top: 0.5em;
+  font-family: 'FontAwesome';
+  text-align: right;
+  position: relative;
+
+  &:before {
+    position: absolute;
+    left:0.5em;
+    top:0.25;
+  }
+  &.food:before {
+    content: "\f0f5";
+  }
+  &.activity:before {
+    content: "\f06e";
+  }
+  &.lodging:before {
+    content: "\f236";
+  }
+
+  :after {
+    position: absolute;
+    top:0;
+    left: 0;
+  }
+}
+
+.trips#show {
+  overflow: hidden;
+  .map {
+    height: 100%;
+    margin-top: 2em;
+  }
+}
+body, html {
+  height: 100%;
+}
+.navbar {
+  background-color: $frame-color;
+  // margin: 0;
+  height: 3em;
+  margin: auto 0;
+  @include all-text-colors(white);
+}
+
+
+.navbar-nav.search {
+  width: 60%;
+
+  form {
+    .form-control, .input-group, .form-group, input[type=text] {
+      width: 100%;
+    }
+    .input-group-addon {
+      width: 10%;
+    }
+  }
+}

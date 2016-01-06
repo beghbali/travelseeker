@@ -1,3 +1,37 @@
+function initAutocomplete(map) {
+   var input = /** @type {!HTMLInputElement} */
+      $('.autocomplete-places')[0];
+
+  var autocomplete = new google.maps.places.Autocomplete(input);
+  autocomplete.bindTo('bounds', map);
+
+  autocomplete.addListener('place_changed', function() {
+    var place = autocomplete.getPlace();
+    if (!place.geometry) {
+      window.alert("Could not pinpoint that location or point of interest, please select a choice from the autocomplete drop down");
+      return;
+    }
+
+    $('#trip_latitude').prop('value', place.geometry.location.lat);
+    $('#trip_longitude').prop('value', place.geometry.location.lng);
+  });
+}
+
+function setZoom(map, location) {
+  geocoder.geocode( { 'location': location}, function(results, status) {
+    if (status == google.maps.GeocoderStatus.OK) {
+      map.setCenter(results[0].geometry.location);
+      var marker = new google.maps.Marker({
+          map: map,
+              position: results[0].geometry.location
+          });
+      if (results[0].geometry.viewport)
+        map.fitBounds(results[0].geometry.viewport);
+    } else {
+      //needs error handling
+    }
+  });
+}
 function initMap() {
 
   // Specify features and elements to define styles.
@@ -72,8 +106,10 @@ function initMap() {
         ]
     }
 ]
+  var centerLat = $('#clipmap').data('center-lat') || 0;
+  var centerLng = $('#clipmap').data('center-lng') || 0;
 
-  var center = new google.maps.LatLng(0,0);
+  var center = new google.maps.LatLng(centerLat, centerLng);
   // Create a map object and specify the DOM element for display.
   var map = new google.maps.Map(document.getElementById('clipmap'), {
     center: center,
@@ -81,7 +117,8 @@ function initMap() {
     // Apply the map style array to the map.
     styles: styleArray,
     zoom: 2,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
+    mapTypeId: google.maps.MapTypeId.ROADMAP,
+    mapTypeControl: false
   });
 
   var bounds = new google.maps.LatLngBounds();
@@ -104,7 +141,8 @@ function initMap() {
     var marker = new google.maps.Marker({
       position: loc,
       map: map,
-      title: $(clip).data('name')
+      title: $(clip).data('name'),
+      icon: $('.markers .highlighted').data('path')
     });
 
     marker.addListener('click', function() {
@@ -122,4 +160,6 @@ function initMap() {
 
   map.panToBounds(bounds);
   map.setCenter(lastActive);
+  initAutocomplete(map);
+  setZoom(map, center);
 }

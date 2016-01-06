@@ -1,4 +1,10 @@
 Zentrips::Application.routes.draw do
+  resources :trips do
+    resources :day, only: [:show], controller: :trips, param: :day
+  end
+
+
+
   resources :clips
 
   # The priority is based upon order of creation: first created -> highest priority.
@@ -22,5 +28,5 @@ Zentrips::Application.routes.draw do
   get 'faq' => 'application#faq'
   get 'about' => 'application#about'
   get 'blog' => redirect('https://zentrips.squarespace.com/')
-  root 'clips#index'
+  root 'trips#new'
 end

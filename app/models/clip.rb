@@ -33,6 +33,14 @@ class Clip < ActiveRecord::Base
     super
   end
 
+  def date=(date)
+    tag_list.add date.strftime("%B %d #{date.day.ordinalize}")
+  end
+
+  def day=(day)
+    tag_list.add "Day #{day}"
+  end
+
   def set_reference
     self.reference = external_reference
   end
@@ -80,6 +88,16 @@ class Clip < ActiveRecord::Base
 
   def google_places
     @google_places ||= GooglePlacesMetaData.new(uri, near, reference)
+  end
+
+  def source
+    if yelp?
+      "Yelp"
+    elsif tripadvisor?
+      "TripAdvisor"
+    else
+      "Google Places"
+    end
   end
 
   def metadata

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151122081743) do
+ActiveRecord::Schema.define(version: 20151231035143) do
 
   create_table "clips", force: true do |t|
     t.string   "uri"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20151122081743) do
     t.string   "reference"
     t.float    "latitude"
     t.float    "longitude"
+    t.integer  "trip_id"
   end
 
   create_table "comments", force: true do |t|
@@ -71,5 +72,16 @@ ActiveRecord::Schema.define(version: 20151122081743) do
   end
 
   add_index "tags", ["name"], name: "index_tags_on_name", unique: true
+
+  create_table "trips", force: true do |t|
+    t.string   "location"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.date     "start_date"
+    t.integer  "days",       default: 1
+    t.string   "session_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end
