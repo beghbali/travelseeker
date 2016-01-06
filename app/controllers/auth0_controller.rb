@@ -16,6 +16,11 @@ class Auth0Controller < ApplicationController
 
   private def set_redirect_path
     user_trips = Trip.find_by_session_id(session[:id])
-    @redirect_path = trip_path(user_trips.last)
+
+    if user_trips.nil?
+      @redirect_path = new_trip_path
+    else
+      @redirect_path = trip_path(user_trips.last)
+    end
   end
 end
