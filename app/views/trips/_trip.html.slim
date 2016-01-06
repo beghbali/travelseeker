@@ -10,7 +10,7 @@
           - trip.clips.tagged_with(date_or_day(date)).each do |clip|
             li.row class=day_class(date) id="clip_#{clip.id}"
               -selected = @day == date
-              .clip.hide data-latitude=clip.latitude data-longitude=clip.longitude data-name=clip.name data-address=clip.address data-image=clip.image_url data-url=clip.url data-active="#{last_clip?(clip)}" class="#{ selected ? 'selected' : '' }" id="#{selected ? 'clip-' : ''}#{clip.reference || (clip.name || clip.uri).parameterize}" data-ref="#clip_#{clip.id}"
+              .clip.hide data-latitude=clip.latitude data-longitude=clip.longitude data-name=clip.name data-address=clip.address data-image=clip.image_url data-url=clip.url class="#{ selected ? 'selected' : '' }" id="#{selected ? 'clip-' : ''}#{clip.reference || (clip.name || clip.uri).parameterize}" data-ref="#clip_#{clip.id}"
                 =render 'clips/clip_details', clip: clip
               .col-md-8
                 span=clip.name
