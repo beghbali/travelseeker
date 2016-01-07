@@ -4,6 +4,7 @@
 
 #= require clipmap
 #= require clips
+
 $ ->
   $.fn.datepicker.defaults.format = "yyyy-mm-dd";
   $('.day').on 'click', (e)->

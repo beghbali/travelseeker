@@ -1,10 +1,18 @@
 .hero
   .row
     h1 Welcome To Zentrips
-    .col-md-4
-    .col-md-4
-      p Planning a trip is hard, having input from people who all want to different things, when ever there is something you want to do on the trip add it to Zentrips to make a well rounded plan of your whole trip.
-    .col-md-4
+    h4 Say goodbye to travel planning stress
+  .row
+    ul.list-inline
+      li.col-md-4
+        h2 collect
+        p Painlessly add activities, hotels, and restaurants you’re excited about
+      li.col-md-4
+        h2 visualize
+        p Make better decisions from seeing all your ideas pinned to your personal trip map
+      li.col-md-4
+        h2 do
+        p Have all your trip information in one place: organized, searchable, and available offline.
   .row
     .col-md-4
     .col-md-4
@@ -31,3 +39,4 @@
     #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
 
 script async='true' charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js"
+= render 'shared/olark'

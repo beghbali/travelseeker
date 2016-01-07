@@ -3,16 +3,16 @@ nav.navbar.navbar-default.navbar-fixed-top
     .navbar-header
       a.navbar-brand href='#' Zentrips
     .collapse.navbar-collapse
-      .nav.navbar-nav.navbar-form
+      .nav.navbar-nav.navbar-form.trip-selection
         =bootstrap_nested_form_for :trips do |t|
           = t.select :trip, user_trips, hide_label: true, inline: true, class: 'selectpicker'
       .nav.navbar-nav.navbar-form.search
           =bootstrap_nested_form_for @trip, class: 'navbar-form' do |t|
             = t.fields_for :clips, @trip.clips.build  do |c|
-              = c.text_field :uri, placeholder: 'Type search terms or paste a link', hide_label: true, append: c.submit(class: 'btn btn-default'), class: 'autocomplete-places'
+              = c.text_field :uri, placeholder: 'Type place name or paste a link', hide_label: true, append: c.submit(class: 'btn btn-default'), class: 'autocomplete-places'
               = c.hidden_field :day, value: 1
               = c.hidden_field :date, value: @trip.start_date
-      .nav.navbar-nav.navbar-form.hidden-md.hidden-sm.hidden.xs
+      .nav.navbar-nav.navbar-form.hidden-md.hidden-sm.hidden-xs
         -general_tags.each do |tag|
           .tag class=tag_class(tag)
             = @trip.clips.tagged_with(tag).count
@@ -26,7 +26,7 @@ nav.navbar.navbar-default.navbar-fixed-top
       = @trip.context.first(3)
     - (1..@trip.days).each do |day|
       .day class=day_class(day)
-        =link_to formatted_trip_day(@trip, day), trip_day_path(@trip, day)
+        =link_to formatted_trip_day(@trip, day), trip_day_path(@trip, day), data: {no_turbolink: true}
     .add-day
       =link_to '+', trip_path(@trip, trip: { days: @trip.days + 1}), method: :patch
   .details

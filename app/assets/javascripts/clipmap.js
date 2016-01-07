@@ -121,7 +121,11 @@ function initMap() {
     styles: styleArray,
     zoom: 2,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
-    mapTypeControl: false
+    mapTypeControl: false,
+    zoomControl: true,
+    zoomControlOptions: {
+      position: google.maps.ControlPosition.LEFT_BOTTOM
+    },
   });
 
   var bounds = new google.maps.LatLngBounds();

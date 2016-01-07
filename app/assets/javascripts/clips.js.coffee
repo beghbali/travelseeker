@@ -2,10 +2,8 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
-#= require bootstrap-tab
 #= require twitter/typeahead
 #= require bootstrap-tokenfield
-#= require clipmap
 
 $ ->
   window.autosaves = {}

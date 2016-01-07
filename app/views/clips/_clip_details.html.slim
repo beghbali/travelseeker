@@ -17,14 +17,17 @@ img.banner src="#{clip.image_url || asset_path('discovercoolstuff.png')}"
       .col-md-8
         = f.select(:"#{day_or_date}_list", clip.send("available_#{day_or_date}_tags").insert(0, "Assign #{day_or_date.to_s.camelize}"), {hide_label: true}, {data: {autosave: true}})
       .col-md-4
-        = f.select(:type_list, clip.available_type_tags.insert(0, "Assign Type"), {hide_label: true}, {data: {autosave: true}})
+        = f.select(:type_list, clip.available_type_tags.zip(clip.available_type_tags).insert(0, ["Assign Type", nil]), {hide_label: true}, {data: {autosave: true}})
     .row
       .comment.col-md-12 data-autosave=true
         = f.fields_for :comment, clip.comment || clip.build_comment do |c|
           = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
 
-  a.btn.btn-info.pull-left href=clip.url target='_blank' View on #{clip.source}
-  =link_to 'Remove', clip_path(clip), method: :delete ,class: 'pull-right'
+  .row
+    .col-md-8
+      a.btn.btn-info href=clip.url target='_blank' View on #{clip.source}
+    .col-md-4.delete
+      =link_to 'Remove', clip_path(clip), method: :delete, class:'btn btn-link'
   .btn.btn-primary.btn-block.back
     i.fa.fa-arrow-left
     span Back

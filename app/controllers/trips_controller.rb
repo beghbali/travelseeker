@@ -11,13 +11,13 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
-    @location = @trip.location
+    @location = @trip.clips.last.try(:location) || @trip.location
     @day = params[:day].try(:to_i)
     redirect_to trip_day_path(@trip, day: 1) unless @day.present?
   end
 
   def trip_details
-    render partial: 'trip', locals: {trip: @trip}
+    render partial: 'trip', locals: {trip: @trip}, layout: false
   end
 
   # GET /trips/new
