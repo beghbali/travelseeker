@@ -2,8 +2,8 @@ class Auth0Controller < ApplicationController
   before_action :set_redirect_path
 
   def callback
-    session[:userinfo] = request.env['omniauth.auth']
-    user = User.find_or_create_by_email(session[:userinfo][:info][:email])
+    user_info = request.env['omniauth.auth']
+    user = User.find_or_create_by_email(user_info[:info][:email])
     user.claim_trips_for_session!(session[:id])
     redirect_to @redirect_path
   end
