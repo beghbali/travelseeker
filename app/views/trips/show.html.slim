@@ -26,7 +26,7 @@ nav.navbar.navbar-default.navbar-fixed-top
       = @trip.context.first(3)
     - (1..@trip.days).each do |day|
       .day class=day_class(day)
-        =link_to day, trip_day_path(@trip, day)
+        =link_to formatted_trip_day(@trip, day), trip_day_path(@trip, day)
     .add-day
       =link_to '+', trip_path(@trip, trip: { days: @trip.days + 1}), method: :patch
   .details

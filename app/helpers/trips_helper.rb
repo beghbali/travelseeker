@@ -32,4 +32,9 @@ module TripsHelper
   def show_video?
     !session[:seen_video]
   end
+
+  def formatted_trip_day(trip, day)
+    trip.dates_known? ? trip.date_on_day(day).day : day
+  end
+
 end

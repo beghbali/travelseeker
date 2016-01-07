@@ -18,11 +18,15 @@ class Trip < ActiveRecord::Base
 
   def end_date=(date)
     return if date.blank?
-    self.days = (date.to_date - start_date).to_i
+    self.days = (date.to_date - start_date).to_i + 1
   end
 
   def end_date
     start_date.nil? ? nil : start_date + days
+  end
+
+  def date_on_day(day)
+    start_date.nil? ? nil : start_date + day - 1
   end
 
   def dates_known?
