@@ -87,4 +87,5 @@ Zentrips::Application.configure do
       :enable_starttls_auto => true,
       :port => 465
     }
+  config.react.variant = :production
 end

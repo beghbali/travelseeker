@@ -4,7 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   layout 'clips'
 
+  helper_method :current_user
+
   def faq
   end
 
+  def current_user
+    @current_user ||= User.find_by_id(session[:user_id]) || User.new(trips: Trip.where(session_id: session.id))
+  end
 end

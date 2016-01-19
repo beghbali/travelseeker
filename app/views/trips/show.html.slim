@@ -18,16 +18,12 @@ nav.navbar.navbar-default.navbar-fixed-top
             = @trip.clips.tagged_with(tag).count
       .nav.navbar-nav.navbar-form.navbar-right
         .btn.btn-default.save Save my trip
+/ =react_component 'Trip', { prerender: true, trip: @trip }
 
 .map
   #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
-  .days
-    .context
-      = @trip.context.first(3)
-    - (1..@trip.days).each do |day|
-      .day class=day_class(day)
-        =link_to formatted_trip_day(@trip, day), trip_day_path(@trip, day), data: {no_turbolink: true}
-    .add-day
-      =link_to '+', trip_path(@trip, trip: { days: @trip.days + 1}), method: :patch
+  .notes
+    = react_component 'TripNotes', {prerender: true, trip: @trip, expanded: false}
+
   .details
     =render @trip

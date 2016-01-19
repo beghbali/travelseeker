@@ -5,6 +5,7 @@ class Auth0Controller < ApplicationController
     user_info = request.env['omniauth.auth']
     user = User.find_or_create_by_email(user_info[:info][:email])
     user.claim_trips_for_session!(session.id)
+    session[:user_id] = user.id
     redirect_to @redirect_path
   end
 

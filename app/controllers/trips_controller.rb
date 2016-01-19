@@ -5,7 +5,7 @@ class TripsController < ApplicationController
   # GET /trips
   # GET /trips.json
   def index
-    @trips = Trip.all
+    @trips = current_user.trips
   end
 
   # GET /trips/1
@@ -79,6 +79,6 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:location, :latitude, :longitude, :start_date, :end_date, :days, clips_attributes: [:uri, :day_list, :date_list, :type_list, :day, :date])
+      params.require(:trip).permit(:location, :latitude, :longitude, :start_date, :end_date, :days, :notes, clips_attributes: [:uri, :day_list, :date_list, :type_list, :day, :date])
     end
 end
