@@ -33,6 +33,6 @@ Zentrips::Application.routes.draw do
   get 'explore/(:destination)' => 'requests#new', as: :explore, version: 3
   get 'faq' => 'application#faq'
   get 'about' => 'application#about'
-  get 'blog' => redirect('https://zentrips.squarespace.com/')
+  get 'blog' => redirect('https://travelseeker.squarespace.com/')
   root 'trips#new'
 end
