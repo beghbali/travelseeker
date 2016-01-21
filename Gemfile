@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.2'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
 gem 'pg'
 
 # Use SCSS for stylesheets
@@ -55,6 +55,7 @@ group :doc do
 end
 
 group :development do
+  gem 'sqlite3'
   gem 'byebug'
   gem "better_errors"
   gem "binding_of_caller"

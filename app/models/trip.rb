@@ -1,6 +1,7 @@
 class Trip < ActiveRecord::Base
   has_many :clips
   belongs_to :user
+  belongs_to :parent, class_name: 'Trip'
 
   accepts_nested_attributes_for :clips
 

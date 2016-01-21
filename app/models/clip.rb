@@ -30,7 +30,7 @@ class Clip < ActiveRecord::Base
   end
 
   def available_type_tags
-    %w(Food Activity Lodging)
+    %w(Food Activity Lodging Unassigned)
   end
 
   def available_day_tags

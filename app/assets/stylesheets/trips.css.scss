@@ -407,6 +407,9 @@ select.form-control, input[data-provide='datepicker'] {
   &.lodging:before {
     content: "\f236";
   }
+  &.unassigned:before {
+    content: "\f11a";
+  }
 
   :after {
     position: absolute;
