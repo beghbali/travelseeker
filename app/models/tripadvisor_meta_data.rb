@@ -4,6 +4,8 @@ class TripadvisorMetaData < MetaData
 
   alias_method :data, :tripadvisor_data
 
+  delegate :address, :city, :state, :country, to: :address_obj, allow_nil: true
+
   def self.business_id_from_url(url)
     url.split('-').detect{|segment| segment =~ /^d\d+$/}[1..-1]
   end
@@ -39,9 +41,11 @@ class TripadvisorMetaData < MetaData
     nil
   end
 
-  def address
-    tripadvisor_data.address_obj.try(:address_string)
+  def address_obj
+    @address_obj ||= tripadvisor_data.address_obj
   end
+
+  def city
 
   def external_reference
     tripadvisor_data.location_id

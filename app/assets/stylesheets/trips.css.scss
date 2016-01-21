@@ -84,8 +84,12 @@ $hint-color: green;
 }
 
 .navbar-header .navbar-brand {
-  margin-top: 0.25em;
+  padding: 0.25em;
   @include all-text-colors(white);
+
+  img {
+    width: 10em;
+  }
 }
 
 .btn {

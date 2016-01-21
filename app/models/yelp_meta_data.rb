@@ -2,6 +2,9 @@ class YelpMetaData < MetaData
 
   attr_accessor :yelp_data, :business_id
   alias_method :data, :yelp_data
+  alias_method :state, :state_code
+
+  delegate :city, :state_code, :country_code, to: :location, allow_nil: true
 
   def self.business_id_from_url(url)
     url.split('/').last.try(:split, '?').try(:first)
@@ -28,6 +31,14 @@ class YelpMetaData < MetaData
 
   def address
     yelp_data.location.display_address.join(" ")
+  end
+
+  def location
+    yelp_data.location
+  end
+
+  def country
+    ISO3166::Country.new(country_code).name
   end
 
   def external_reference

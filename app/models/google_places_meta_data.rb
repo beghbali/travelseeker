@@ -2,6 +2,7 @@ class GooglePlacesMetaData < MetaData
   class NoGooglePlacesRecordFoundError < StandardError; end
 
   attr_accessor :google_places_data, :client, :location, :terms, :reference
+  delegate :city, :state, :country, to: :google_places_data, allow_nil: true
 
   def initialize(terms, location=nil, reference=nil)
     super()

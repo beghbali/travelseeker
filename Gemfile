@@ -48,6 +48,7 @@ gem 'omniauth-auth0', '~> 1.1'
 gem 'react-rails', '~> 1.5.0'
 gem 'rails-backbone'
 gem 'react-bootstrap-rails'
+gem 'countries'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
