@@ -1,3 +1,6 @@
+.btn.btn-primary.btn-block.back
+  i.fa.fa-arrow-left
+    span Back
 img.banner src="#{clip.image_url || asset_path('discovercoolstuff.png')}"
 .clip-details
   h2.name= link_to clip.name || clip.uri, clip.url
@@ -24,10 +27,6 @@ img.banner src="#{clip.image_url || asset_path('discovercoolstuff.png')}"
           = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
 
   .row
-    .col-md-8
-      a.btn.btn-info href=clip.url target='_blank' View on #{clip.source}
-    .col-md-4.delete
-      =link_to 'Remove', clip_path(clip), method: :delete, class:'btn btn-link'
-  .btn.btn-primary.btn-block.back
-    i.fa.fa-arrow-left
-    span Back
+    a.btn.btn-info.btn-block href=clip.url target='_blank' View on #{clip.source}
+  .row.delete
+      =link_to 'Remove', clip_path(clip), method: :delete, class:'btn btn-danger btn-block'

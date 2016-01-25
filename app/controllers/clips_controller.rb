@@ -64,7 +64,7 @@ class ClipsController < ApplicationController
   def destroy
     @clip.destroy
     respond_to do |format|
-      format.html { redirect_to trip_url(@clip.trip) }
+      format.html { redirect_to trip_path(@clip.trip.parent), turbolinks: true }
       format.json { head :no_content }
     end
   end

@@ -1,0 +1,12 @@
+ul.clips
+  - trip.clips.tagged_with(tag, on: context).each do |clip|
+    li.row class=day_class(date) id="clip_#{clip.id}"
+      -selected = @day == date || trip == @selected_trip
+      .clip.hide data-latitude=clip.latitude data-longitude=clip.longitude data-name=clip.name data-address=clip.address data-image=clip.image_url data-url=clip.url class="#{ selected ? 'selected' : '' }" id="#{selected ? 'clip-' : ''}#{clip.reference || (clip.name || clip.uri).parameterize}" data-ref="#clip_#{clip.id}"
+        =render 'clips/clip_details', clip: clip
+      .col-md-8
+        span=clip.name
+      .col-md-4
+        h3 class=tag_class(clip.type_list.last)
+        = link_to clip_path(clip), method: :delete, remote: true do
+          i.fa.fa-trash

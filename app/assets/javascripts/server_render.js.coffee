@@ -1,12 +1,10 @@
 #= require jquery
 #= require jquery_ujs
 #= require turbolinks
-#= require turbolinks.redirect
 #= require react
 #= require react-mixin
 #= require react_ujs
 #= require underscore
-#= require best_in_place
 #= require backbone
 #= require backbone_rails_sync
 #= require backbone-react-component
@@ -29,16 +27,3 @@
 #= require bootstrap-carousel
 #= require bootstrap-tab
 #= require bootstrap-modal
-#= require best_in_place.jquery-ui
-
-$ ->
-  goto_anchor = $('[data-goto]').data('goto')
-
-  if goto_anchor
-    window.location = window.location.href + goto_anchor
-  $('.bootstrap_form-datetimepicker').datetimepicker();
-  $('.carousel').carousel();
-
-  $('[data-mirror-to]').on 'keyup input', ->
-    target = $($(@).data('mirror-to'))
-    target.val($(@).val())

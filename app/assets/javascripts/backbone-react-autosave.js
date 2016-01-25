@@ -20,7 +20,7 @@
 
   var mixin = Backbone.React.Utils.Autosave.mixin = {
     componentWillMount: function() {
-      this.startAutoSave();
+      // this.startAutoSave();
     },
     componentWillUnmount: function() {
       this.queueAutoSave();
@@ -31,6 +31,7 @@
     },
     stopAutoSave: function() {
       clearInterval(this.state.autosave);
+      this.setState({autosave: null});
     },
     saveData: function() {
       this.setState({ loading: true }, function() {

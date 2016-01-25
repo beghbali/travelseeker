@@ -2,8 +2,19 @@ class Trip < ActiveRecord::Base
   has_many :clips
   belongs_to :user
   belongs_to :parent, class_name: 'Trip'
+  has_many :trips, foreign_key: :parent_id
 
   accepts_nested_attributes_for :clips
+
+  scope :in_city, ->(city) { where(city: city) }
+
+  def all_clips
+    Clip.joins('inner join trips on clips.trip_id = trips.id').where(trip_id: trips.pluck(:id)).order('clips.created_at')
+  end
+
+  def as_json(options={})
+    super(options).merge({end_date: end_date})
+  end
 
   def location
     Location.new(self.slice(:latitude, :longitude))
@@ -20,6 +31,21 @@ class Trip < ActiveRecord::Base
   def end_date=(date)
     return if date.blank?
     self.days = (date.to_date - start_date).to_i + 1
+  end
+
+  def days
+    @days ||= begin
+      if trips.any?
+        last_subtrip = trips.map(&:end_date).compact.sort.last
+        (last_subtrip && start_date && (last_subtrip - start_date).to_i) || 1
+      else
+        self[:days]
+      end
+    end
+  end
+
+  def start_date
+    @start_date ||= self[:start_date] || trips.map(&:start_date).compact.sort.first
   end
 
   def end_date

@@ -10,16 +10,17 @@ $ ->
   $('.day').on 'click', (e)->
     $(@).toggleClass('active');
 
-  $('.trip').on 'click', '.clips > li', (e)->
-    clipDetails = $(@).children().first();
-    trip = clipDetails.closest('.trip');
-    trip.toggleClass('hide');
-    trip.parent().append(clipDetails);
-    clipDetails.toggleClass('hide');
+  $('.trip').on 'click', '.trip .clips > li', (e)->
+    if !$(e.target).is('i')
+      clipDetails = $(@).children().first();
+      trip = clipDetails.closest('.trip').parents('.trip').first();
+      trip.toggleClass('hide');
+      trip.parent().append(clipDetails);
+      clipDetails.toggleClass('hide');
 
-  $(document).on 'click', '.clip-details .back', (e)->
+  $(document).on 'click', '.clip .back', (e)->
     clipDetails = $(@).closest('.clip');
-    trip = clipDetails.parent().find('.trip');
+    trip = clipDetails.parent().find('.trip').parents('.trip').first();
     trip.load('/trips/'+trip.data('id')+'/trip_details');
     trip.toggleClass('hide');
     $($(clipDetails).data('ref')).append(clipDetails);
@@ -32,4 +33,30 @@ $ ->
   $('.btn.save').on 'click', ->
     window.signin();
 
+  # $('.datetime-picker').datetimepicker()
+  $('.datetime-picker').on 'click', (e)->
+    e.preventDefault()
+    $(e.target).append($('<input type="text" style="display:initial"></input>').daterangepicker({
+      locale: {
+        format: 'YYYY-MM-DD'
+      },
+      startDate: $(e.target).data('startdate') || '2015-01-01',
+      endDate: $(e.target).data('enddate') || '2015-12-31',
+      opens: 'left',
+      autoApply: true
+    }).on 'apply.daterangepicker', (e, picker)->
+      trip = $(e.target).closest('.trip');
 
+      # Zentrips.Trips.get(trip_id).save({start_date: picker.startDate, end_date: picker.endDate},{patch: true});
+      $.ajax
+        headers:
+          'Content-Type' : 'application/json',
+          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+        type: 'PATCH',
+        url: '/trips/'+trip.data('id'),
+        dataType: 'script'
+        data: JSON.stringify({trip: {start_date: picker.startDate, end_date: picker.endDate}})
+        success: (data)->
+          $(e.target).first('input').remove();
+          # Trubolinks.replace(data, { change: trip.prop('id')} )
+    )

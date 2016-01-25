@@ -1,18 +1,15 @@
-.trip data-id=trip.id
-  h1= trip.name
-  h3= dates_or_days(trip)
+.trip data-id=trip.id id="trip"
+  h1.trip-selection
+    =bootstrap_nested_form_for :trips do |t|
+      = t.select :trip, user_trips, hide_label: true, inline: true, class: 'selectpicker'
+  h3.dates
+    -if trip.dates_known?
+      = dates_or_days(trip)
+    -else
+      | No dates selected
+      =< "(#{dates_or_days(trip)})"
 
-  ul.trip-days
-    - trip.dates.each do |date|
-      li class=day_class(date)
-        h4= date_or_day(date)
-        ul.clips
-          - trip.clips.tagged_with(date_or_day(date)).each do |clip|
-            li.row class=day_class(date) id="clip_#{clip.id}"
-              -selected = @day == date
-              .clip.hide data-latitude=clip.latitude data-longitude=clip.longitude data-name=clip.name data-address=clip.address data-image=clip.image_url data-url=clip.url class="#{ selected ? 'selected' : '' }" id="#{selected ? 'clip-' : ''}#{clip.reference || (clip.name || clip.uri).parameterize}" data-ref="#clip_#{clip.id}"
-                =render 'clips/clip_details', clip: clip
-              .col-md-8
-                span=clip.name
-              .col-md-4
-                h3=clip.type_list.last
+  ul.subtrips
+    - trip.trips.each do |subtrip|
+      li.trip data-id=subtrip.id id="trips:#{subtrip.id}"
+        = render 'subtrip', trip: subtrip

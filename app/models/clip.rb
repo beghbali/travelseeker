@@ -11,13 +11,14 @@ class Clip < ActiveRecord::Base
 
   before_save :set_reference
   before_save :set_location
+  before_save :create_and_assign_to_new_trip
 
   scope :yelp, -> { where("uri like '%yelp.com%") }
   scope :tripadvisor, -> { where("uri like '%tripadvisor.com%") }
   scope :for_session, ->(session_id) { where(session_id: session_id).order(created_at: :desc)}
   scope :known_location, -> { where('latitude IS NOT NULL') }
 
-  delegate :name, :address, :external_reference, :url, :rating_image_url, :phone, :hours, :image_url, to: :metadata, allow_nil: true
+  delegate :name, :address, :city, :state, :country, :external_reference, :url, :rating_image_url, :phone, :hours, :image_url, to: :metadata, allow_nil: true
 
   def self.last_clip_location_for_session(session_id)
     Rails.cache.fetch(['last_clip_location', session_id, Clip.for_session(session_id).known_location.count]) do
@@ -39,6 +40,19 @@ class Clip < ActiveRecord::Base
 
   def available_date_tags
     trip.dates.map{|date| date.strftime("%B #{date.day.ordinalize}")}
+  end
+
+  def same_location_as(obj_with_country)
+    ISO3166::Country.find_by_name(self.country) == ISO3166::Country.find_by_name(obj_with_country.country)
+  end
+
+  def create_and_assign_to_new_trip
+    designated_trip = trip.trips.in_city(city).first ||
+      trip.trips.create!(location: city, latitude: latitude, longitude: longitude,
+        session_id: session_id, user_id: trip.user_id, parent_id: trip, city: city, state: state, country: country)
+    puts "CITY: #{designated_trip.try(:city)}"
+    self.trip = designated_trip
+    type_list.add 'Unassigned'
   end
 
   def comment_attributes=(attrs)

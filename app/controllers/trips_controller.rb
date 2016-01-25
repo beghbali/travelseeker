@@ -13,7 +13,8 @@ class TripsController < ApplicationController
   def show
     @location = @trip.clips.last.try(:location) || @trip.location
     @day = params[:day].try(:to_i)
-    redirect_to trip_day_path(@trip, day: 1) unless @day.present?
+    @selected_trip = @trip.all_clips.last.try(:trip)
+    redirect_to trip_day_path(@trip, day: 1) unless @day.present? || performed?
   end
 
   def trip_details
@@ -38,7 +39,7 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to @trip, notice: 'Trip was successfully created.' }
+        format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully created.', change: 'trip' }
         format.json { render action: 'show', status: :created, location: @trip, day: 1 }
       else
         format.html { render action: 'new' }
@@ -52,7 +53,7 @@ class TripsController < ApplicationController
   def update
     respond_to do |format|
       if @trip.update(trip_params)
-        format.html { redirect_to @trip, notice: 'Trip was successfully updated.' }
+        format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully updated.', change: "trip" }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -81,4 +82,5 @@ class TripsController < ApplicationController
     def trip_params
       params.require(:trip).permit(:location, :latitude, :longitude, :start_date, :end_date, :days, :notes, clips_attributes: [:uri, :day_list, :date_list, :type_list, :day, :date])
     end
+
 end

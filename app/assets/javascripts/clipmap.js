@@ -28,7 +28,7 @@ function setZoom(map, location) {
           });
       if (results[0].geometry.viewport)
         map.fitBounds(results[0].geometry.viewport);
-        if (map.getZoom() > 16) map.setZoom(15);
+        if (map.getZoom() > 15) map.setZoom(14);
     } else {
       //needs error handling
     }
@@ -171,5 +171,5 @@ function initMap() {
   map.panToBounds(bounds);
   map.setCenter(lastActive);
   initAutocomplete(map);
-  setZoom(map, center);
+  setZoom(map, lastActive);
 }

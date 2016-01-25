@@ -2,7 +2,9 @@ class GooglePlacesMetaData < MetaData
   class NoGooglePlacesRecordFoundError < StandardError; end
 
   attr_accessor :google_places_data, :client, :location, :terms, :reference
-  delegate :city, :state, :country, to: :google_places_data, allow_nil: true
+
+  delegate :name, :region, :country, to: :google_places_data, allow_nil: true
+  alias_method :state, :region
 
   def initialize(terms, location=nil, reference=nil)
     super()
@@ -46,8 +48,6 @@ class GooglePlacesMetaData < MetaData
     google_places_data.lng
   end
 
-  delegate :name, to: :google_places_data
-
   def url
     google_places_data.url || google_search_url
   end
@@ -57,7 +57,17 @@ class GooglePlacesMetaData < MetaData
   end
 
   def address
-    google_places_data.formatted_address || google_places_data.address_components.try(:join, " ")
+    google_places_data.formatted_address || google_places_data.address_components.map{|c| c['long_name']}.join(" ")
+  end
+
+  def city
+    data =
+      data = google_places_data.address_components && google_places_data.address_components.detect{|c| c['types'].include? 'locality'}
+    data.present? ? data['long_name'] : address_components[1]
+  end
+
+  def address_components
+    google_places_data.formatted_address.present? ? google_places_data.formatted_address.split(',') : []
   end
 
   def image_url

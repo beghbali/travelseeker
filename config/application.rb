@@ -26,5 +26,8 @@ module Zentrips
     config.generators do |g|
       g.template_engine :slim
     end
+    config.react.server_renderer_options = {
+        files: ["server_render.js"] # files to load for prerendering
+    }
   end
 end

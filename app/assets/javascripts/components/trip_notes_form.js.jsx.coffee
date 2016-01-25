@@ -1,8 +1,12 @@
 class @TripNotesForm extends React.Component
-  mixins: [Backbone.React.Utils.Autosave.mixin]
+  # mixins: [Backbone.React.Utils.Autosave.mixin]
 
   @propTypes =
-    model: React.PropTypes.instanceOf(Zentrips.Models.Trip).isRequired
+    model: React.PropTypes.object.isRequired
+
+  constructor: (props)->
+    super(props)
+    this.state = {loading: false}
 
   handleChange: ->
     this.props.model.set { notes: this.refs.input.getValue() }
@@ -13,16 +17,15 @@ class @TripNotesForm extends React.Component
   classNames: ->
     if @state.loading then 'warning' else 'success'
 
-  render: ->
-    form = new Backbone.Form
-      model: @props.model
+  shouldComponentUpdate: (nextProps, nextState)->
+    false
 
-    #`<div dangerouslySetInnerHTML={{__html: form.render().el.outerHTML }} />`
+  render: ->
     Input = ReactBootstrap.Input
 
     `<Input
         type="textarea"
-        value={this.state.value}
+        value={this.props.model.attributes.notes}
         placeholder="Type in any general notes about your trip to organize your thoughts"
         label={false}
         bsStyle={this.classNames()}

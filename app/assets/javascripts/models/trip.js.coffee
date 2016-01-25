@@ -5,4 +5,5 @@ class Zentrips.Models.Trip extends Backbone.Model
     notes:   'TextArea'
 
   toJSON: (options)->
-    { notes: this.attributes.notes }
+    { notes: this.attributes.notes, start_date: this.attributes.start_date, end_date: this.attributes.end_date }
+

@@ -6,7 +6,7 @@ module TripsHelper
   end
 
   def general_tags
-    %w(Food Activity Lodging)
+    %w(Food Activity Lodging Unassigned)
   end
 
   def tag_class(tag)
@@ -34,7 +34,14 @@ module TripsHelper
   end
 
   def formatted_trip_day(trip, day)
-    trip.dates_known? ? trip.date_on_day(day).day : day
+    trip.dates_known? ? trip.date_on_day(day).day.ordinalize : day.ordinalize
   end
 
+  def dates(trip)
+    trip.dates_known? ? "#{formatted_trip_day(trip, 1)} - #{formatted_trip_day(trip, trip.days-1)}" : ""
+  end
+
+  def add_or_change_dates(trip)
+    trip.dates_known? ? 'Change dates' : 'Add dates'
+  end
 end

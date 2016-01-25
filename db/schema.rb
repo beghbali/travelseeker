@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160121055720) do
+ActiveRecord::Schema.define(version: 20160121094816) do
 
   create_table "clips", force: true do |t|
     t.string   "uri"
@@ -85,6 +85,9 @@ ActiveRecord::Schema.define(version: 20160121055720) do
     t.integer  "user_id"
     t.text     "notes"
     t.integer  "parent_id"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
   end
 
   create_table "users", force: true do |t|

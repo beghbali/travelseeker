@@ -1,30 +1,45 @@
-nav.navbar.navbar-default.navbar-fixed-top
+nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to_json}"
   .container-fluid
     .navbar-header
-      a.navbar-brand href='#'
+      a.navbar-brand.hidden-sm.hidden-xs href='#'
         =image_tag('TravelSeeker-logo.png')
-    .collapse.navbar-collapse
-      .nav.navbar-nav.navbar-form.trip-selection
-        =bootstrap_nested_form_for :trips do |t|
-          = t.select :trip, user_trips, hide_label: true, inline: true, class: 'selectpicker'
-      .nav.navbar-nav.navbar-form.search
-          =bootstrap_nested_form_for @trip, class: 'navbar-form' do |t|
-            = t.fields_for :clips, @trip.clips.build  do |c|
-              = c.text_field :uri, placeholder: 'Type place name or paste a link', hide_label: true, append: c.submit(class: 'btn btn-default'), class: 'autocomplete-places'
-              = c.hidden_field :day, value: 1
-              = c.hidden_field :date, value: @trip.start_date
-      .nav.navbar-nav.navbar-form.hidden-md.hidden-sm.hidden-xs
+      a.navbar-brand.visible-sm.visible-xs href='#'
+        =image_tag('parachute.png')
+    .nav.navbar-nav.navbar-form.search
+        =bootstrap_nested_form_for @trip, class: 'navbar-form form-horizontal' do |t|
+          = t.fields_for :clips, @trip.clips.build  do |c|
+            = c.text_field :uri, placeholder: 'Type place name or paste a link', hide_label: true, append: c.submit(class: 'btn btn-default'), class: 'autocomplete-places'
+            = c.hidden_field :day_list, value: 'Unassigned'
+    .nav.navbar-nav.navbar-right
+      .nav.navbar-nav.navbar-form.collapse.navbar-collapse.visible-mdlg
         -general_tags.each do |tag|
-          .tag class=tag_class(tag)
-            = @trip.clips.tagged_with(tag).count
-      .nav.navbar-nav.navbar-form.navbar-right
-        .btn.btn-default.save Save my trip
-/ =react_component 'Trip', { prerender: true, trip: @trip }
+          .tag class=tag_class(tag) title=tag
+            = Clip.tagged_with(tag).where(trip_id: @trip.trip_ids).count
+      .nav.navbar-nav.navbar-form
+        ul.nav.navbar-nav
+          li
+            i.fa.fa-share-alt data-toggle="modal" data-target="#shareModal"
+            .btn.btn-link.share.hidden-xs data-toggle="modal" data-target="#shareModal" Share Trip
+          li
+            .btn.btn-default.save.hidden-xs Save my trip
+            .btn.btn-default.save.visible-xs
+              i.fa.fa-save
 
 .map
   #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
   .notes
-    = react_component 'TripNotes', {prerender: true, trip: @trip, expanded: false}
+    = react_component 'TripNotes', { trip: @trip, expanded: false }, { prerender: false }
 
   .details
     =render @trip
+
+.modal.fade id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title id="shareyModalLabel"
+          |Share this link with co-travelers and friends to get their inputs
+      .modal-body
+        h2 = trip_url(@trip)
