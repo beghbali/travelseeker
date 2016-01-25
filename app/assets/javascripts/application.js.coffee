@@ -6,7 +6,6 @@
 #= require react-mixin
 #= require react_ujs
 #= require underscore
-#= require best_in_place
 #= require backbone
 #= require backbone_rails_sync
 #= require backbone-react-component
@@ -28,7 +27,6 @@
 #= require bootstrap-carousel
 #= require bootstrap-tab
 #= require bootstrap-modal
-#= require best_in_place.jquery-ui
 
 $ ->
   goto_anchor = $('[data-goto]').data('goto')
