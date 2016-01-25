@@ -50,7 +50,7 @@ class ClipsController < ApplicationController
   def update
     respond_to do |format|
       if @clip.update(clip_params)
-        format.html { redirect_to @clip, notice: 'Clip was successfully updated.' }
+        format.html { redirect_to @clip.trip.parent || @clip.trip, notice: 'Clip was successfully updated.', change: 'trips'}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
