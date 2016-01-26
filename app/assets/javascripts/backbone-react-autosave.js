@@ -1,5 +1,6 @@
 
 (function (root, factory) {
+  'use strict';
   // Universal module definition
   if (typeof define === 'function' && define.amd) {
     define(['react', 'react-dom', 'backbone', 'underscore'], factory);
@@ -20,7 +21,6 @@
 
   var mixin = Backbone.React.Utils.Autosave.mixin = {
     componentWillMount: function() {
-      // this.startAutoSave();
     },
     componentWillUnmount: function() {
       this.queueAutoSave();
@@ -35,9 +35,9 @@
     },
     saveData: function() {
       this.setState({ loading: true }, function() {
-        this.props.model.save(this.props.model.attributes, {patch: true}).always(() => {
-          this.setState({loading: false});
-        });
+        this.props.model.save(this.props.model.attributes, {patch: true}).always(function () {
+         this.setState({loading: false})
+       });
       });
     },
     queueAutoSave: function() {
