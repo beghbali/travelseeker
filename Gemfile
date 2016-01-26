@@ -50,7 +50,7 @@ gem 'rails-backbone'
 gem 'react-bootstrap-rails'
 gem 'countries'
 gem 'best_in_place', '~> 3.0.1'
-gem 'turbolinks-redirect'
+gem 'jquery-turbolinks'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

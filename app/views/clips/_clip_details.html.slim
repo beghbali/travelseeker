@@ -3,7 +3,7 @@
     span Back
 img.banner src="#{clip.image_url || asset_path('discovercoolstuff.png')}"
 .clip-details
-  h2.name= link_to clip.name || clip.uri, clip.url
+  h2.name= clip.name || clip.uri
   h4= clip.address
   .row
     .col-md-6

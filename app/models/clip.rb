@@ -11,6 +11,7 @@ class Clip < ActiveRecord::Base
 
   before_save :set_reference
   before_save :set_location
+  before_save :remove_unassigned_tag, if: -> { day_list.include? 'Unassigned' }
   before_create :create_and_assign_to_new_trip
 
   scope :yelp, -> { where("uri like '%yelp.com%") }
@@ -28,6 +29,10 @@ class Clip < ActiveRecord::Base
 
   def self.available_tags_for(session_id, type="tag")
     for_session(session_id).map(&:"#{type}_list").flatten.uniq
+  end
+
+  def remove_unassigned_tag
+    day_list.remove 'Unassigned'
   end
 
   def available_type_tags

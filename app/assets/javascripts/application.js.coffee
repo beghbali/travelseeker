@@ -1,7 +1,7 @@
 #= require jquery
+#= require jquery.turbolinks
 #= require jquery_ujs
 #= require turbolinks
-#= require turbolinks.redirect
 #= require react
 #= require react-mixin
 #= require react_ujs

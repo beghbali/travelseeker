@@ -1,15 +1,14 @@
 .trip.selected data-id=trip.id id="trip" data-latitude=trip.latitude data-longitude=trip.longitude data-name=trip.name
-  h1.trip-selection
-    =bootstrap_nested_form_for :trips do |t|
-      = t.select :trip, user_trips, hide_label: true, inline: true, class: 'selectpicker'
+  h2 = trip.name
   h3.dates
     -if trip.dates_known?
       = dates_or_days(trip)
     -else
       | No dates selected
       =< "(#{dates_or_days(trip)})"
+    =< link_to add_or_change_dates(trip), '', class: 'datetime-picker', 'data-startdate' => trip.start_date, 'data-enddate' => trip.end_date
 
   ul.subtrips
     - trip.trips.each do |subtrip|
-      li.trip data-id=subtrip.id id="trips:#{subtrip.id}"
+      li.trip data-id=subtrip.id id="trip:#{subtrip.id}"
         = render 'subtrip', trip: subtrip

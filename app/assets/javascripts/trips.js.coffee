@@ -40,8 +40,8 @@ $ ->
       locale: {
         format: 'YYYY-MM-DD'
       },
-      startDate: $(e.target).data('startdate') || '2015-01-01',
-      endDate: $(e.target).data('enddate') || '2015-12-31',
+      startDate: $(e.target).data('startdate') || '2016-01-01',
+      endDate: $(e.target).data('enddate') || '2016-12-31',
       opens: 'left',
       autoApply: true
     }).on 'apply.daterangepicker', (e, picker)->
@@ -50,6 +50,7 @@ $ ->
       # Zentrips.Trips.get(trip_id).save({start_date: picker.startDate, end_date: picker.endDate},{patch: true});
       $.ajax
         headers:
+          'Accepts' : 'text/javascript'
           'Content-Type' : 'application/json',
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         type: 'PATCH',
@@ -58,5 +59,5 @@ $ ->
         data: JSON.stringify({trip: {start_date: picker.startDate, end_date: picker.endDate}})
         success: (data)->
           $(e.target).first('input').remove();
-          # Trubolinks.replace(data, { change: trip.prop('id')} )
+          Trubolinks.replace(data, { change: trip.prop('id')} )
     )

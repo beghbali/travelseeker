@@ -20,6 +20,23 @@ $subtrip-color: rgb(255, 219, 88);
   src: url(/assets/BrandonText-Medium.otf) format("truetype");
 }
 
+@mixin tags() {
+  font-family: 'FontAwesome';
+
+  &.food:before {
+    content: "\f0f5";
+  }
+  &.activity:before {
+    content: "\f06e";
+  }
+  &.lodging:before {
+    content: "\f236";
+  }
+  &.unassigned:before {
+    content: "\f11a";
+  }
+}
+
 @mixin all-text-colors($color) {
   color:$color;
   a {
@@ -404,48 +421,44 @@ select.form-control, input[data-provide='datepicker'] {
 }
 
 .tag {
-  background-color: $tag-color;
-  color: white;
-  padding: 0.5em;
   margin-left: 0.5em;
   margin-right: 0.5em;
-  border-radius: 5em;
-  width: 4em;
-  font-size: 0.6em;
-  display: inline-block;
-  margin-top: 0.5em;
-  font-family: 'FontAwesome';
-  text-align: right;
-  position: relative;
 
-  &:before {
-    position: absolute;
-    left:0.5em;
-    top:0.25;
-  }
-  &.food:before {
-    content: "\f0f5";
-  }
-  &.activity:before {
-    content: "\f06e";
-  }
-  &.lodging:before {
-    content: "\f236";
-  }
-  &.unassigned:before {
-    content: "\f11a";
+  &.pill {
+    background-color: $tag-color;
+    color: white;
+    padding: 0.5em;
+    border-radius: 5em;
+    width: 4em;
+    font-size: 0.6em;
+    display: inline-block;
+    margin-top: 0.5em;
+    text-align: right;
+    position: relative;
+
+    &:before {
+      position: absolute;
+      left:0.5em;
+      top:0.25;
+    }
+    :after {
+      position: absolute;
+      top:0;
+      left: 0;
+    }
   }
 
-  :after {
-    position: absolute;
-    top:0;
-    left: 0;
-  }
+  @include tags();
 }
 
 .trip {
   overflow-y: scroll;
   margin-top: 1em;
+
+  &.selected{
+    margin-top: 0;
+  }
+
   > a {
     display: inline;
   }
@@ -458,10 +471,6 @@ select.form-control, input[data-provide='datepicker'] {
     input {
       width: 100%;
     }
-  }
-
-  .dates {
-    text-align: center;
   }
 
   > .row {
@@ -574,6 +583,11 @@ body, html {
       font-size: small;
     }
    }
+}
+@media (max-width: 1600px) {
+  .collapse.navbar-collapse.hidden-mdlg {
+    display: none !important;
+  }
 }
 
 
