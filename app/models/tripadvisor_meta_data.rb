@@ -45,8 +45,6 @@ class TripadvisorMetaData < MetaData
     @address_obj ||= tripadvisor_data.address_obj
   end
 
-  def city
-
   def external_reference
     tripadvisor_data.location_id
   end
@@ -54,5 +52,4 @@ class TripadvisorMetaData < MetaData
   def url
     tripadvisor_data.web_url
   end
-
 end
