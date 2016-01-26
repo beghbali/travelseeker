@@ -58,6 +58,7 @@ class Clip < ActiveRecord::Base
     puts "CITY: #{designated_trip.try(:city)}"
     self.trip = designated_trip
     type_list.add 'Unassigned'
+    day_list.add 'Unassigned'
   end
 
   def comment_attributes=(attrs)

@@ -9,7 +9,6 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
         =bootstrap_nested_form_for @trip, class: 'navbar-form form-horizontal' do |t|
           = t.fields_for :clips, @trip.clips.build  do |c|
             = c.text_field :uri, placeholder: 'Type place name or paste a link', hide_label: true, append: c.submit('Add Item', class: 'btn btn-default'), class: 'autocomplete-places'
-            = c.hidden_field :day_list, value: 'Unassigned'
     .nav.navbar-nav.navbar-form.collapse.navbar-collapse.hidden-mdlg
       -general_tags.each do |tag|
         .tag.pill class=tag_class(tag) title=tag
