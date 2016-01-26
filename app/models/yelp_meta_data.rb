@@ -2,9 +2,9 @@ class YelpMetaData < MetaData
 
   attr_accessor :yelp_data, :business_id
   alias_method :data, :yelp_data
-  alias_method :state, :state_code
 
   delegate :city, :state_code, :country_code, to: :location, allow_nil: true
+  alias_method :state, :state_code
 
   def self.business_id_from_url(url)
     url.split('/').last.try(:split, '?').try(:first)
