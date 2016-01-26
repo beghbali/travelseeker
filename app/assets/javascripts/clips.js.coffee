@@ -22,10 +22,10 @@ $ ->
     $target.prop('value', $target.tokenfield('getTokensList'))
     $($target.closest('form')).trigger('submit.rails')
 
-  $('[data-autosave]').on 'change paste keyup', (e)->
+  $(document).on 'change paste keyup', '[data-autosave]', (e)->
     timer = window.autosaves[e.target.id]
     clearTimeout(timer) if timer?
     window.autosaves[e.target.id] = setTimeout (->
       $target = $(e.target)
       $($target.closest('form')).trigger('submit.rails')
-      ), 1000
+      ), 600

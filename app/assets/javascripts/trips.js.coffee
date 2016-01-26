@@ -13,18 +13,24 @@ $ ->
   $('.trip').on 'click', '.trip .clips > li', (e)->
     if !$(e.target).is('i')
       clipDetails = $(@).children().first();
-      trip = clipDetails.closest('.trip').parents('.trip').first();
+      trip = $('.trip.selected').first();
       trip.toggleClass('hide');
       trip.parent().append(clipDetails);
       clipDetails.toggleClass('hide');
+      subtrip = clipDetails.data('trip');
+      $('.clip[data-trip!='+subtrip+']').removeClass('selected');
+      initMap();
 
   $(document).on 'click', '.clip .back', (e)->
     clipDetails = $(@).closest('.clip');
-    trip = clipDetails.parent().find('.trip').parents('.trip').first();
+    trip = $('.trip.selected').first();
     trip.load('/trips/'+trip.data('id')+'/trip_details');
     trip.toggleClass('hide');
     $($(clipDetails).data('ref')).append(clipDetails);
     clipDetails.toggleClass('hide');
+    subtrip = clipDetails.data('trip');
+    $('.clip').addClass('selected')
+    initMap();
 
   $('.new_trip').on 'submit', (e)->
     #needs error handling
@@ -54,7 +60,7 @@ $ ->
           'Content-Type' : 'application/json',
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         type: 'PATCH',
-        url: '/trips/'+trip.data('id'),
+        url: '/trips/'+trip.dataType('id'),
         dataType: 'script'
         data: JSON.stringify({trip: {start_date: picker.startDate, end_date: picker.endDate}})
         success: (data)->
