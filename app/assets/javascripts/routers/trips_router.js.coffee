@@ -10,8 +10,8 @@ class Zentrips.Routers.Trips extends Backbone.Router
     ":id/edit"    : "edit"
     ".*"          : "index"
 
-  index: ->
-    @view = new Zentrips.Views.TripsIndex({collection: @trips})
+  # index: ->
+  #   @view = new Zentrips.Views.TripsIndex({collection: @trips})
 
   # newtrip: ->
   #   @view = new Zentrips.Views.tripsNewView({collection: @trips})
