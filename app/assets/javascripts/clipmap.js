@@ -131,7 +131,7 @@ function initMap() {
   var bounds = new google.maps.LatLngBounds();
   var lastActive = new google.maps.LatLng(0,0);
 
-  var pins = $('.clip.selected');
+  var pins = $('.clip.selected').length == 0 ? $('.trip.selected') : $('.clip.selected')
   var markers = [];
 
   $.each (pins, function(index, clip) {
@@ -171,5 +171,5 @@ function initMap() {
   map.panToBounds(bounds);
   map.setCenter(lastActive);
   initAutocomplete(map);
-  setZoom(map, lastActive);
+  setZoom(map, center);
 }

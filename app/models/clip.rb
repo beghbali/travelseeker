@@ -11,7 +11,7 @@ class Clip < ActiveRecord::Base
 
   before_save :set_reference
   before_save :set_location
-  before_save :create_and_assign_to_new_trip
+  before_create :create_and_assign_to_new_trip
 
   scope :yelp, -> { where("uri like '%yelp.com%") }
   scope :tripadvisor, -> { where("uri like '%tripadvisor.com%") }
