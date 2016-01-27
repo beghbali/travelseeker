@@ -61,9 +61,14 @@ class GooglePlacesMetaData < MetaData
   end
 
   def city
-    return google_places_data.city if google_places_data.city.present?
-    data = google_places_data.address_components && google_places_data.address_components.detect{|c| c['types'].include? 'locality'}
-    data.present? ? data['long_name'] : address_components[1]
+    begin
+      if google_places_data.city.present?
+        google_places_data.city
+      else
+        data = google_places_data.address_components && google_places_data.address_components.detect{|c| c['types'].include? 'locality'}
+        data.present? ? data['long_name'] : address_components[1]
+      end
+    end.try(:strip!)
   end
 
   def address_components
@@ -71,7 +76,7 @@ class GooglePlacesMetaData < MetaData
   end
 
   def image_url
-    google_places_data.presence && google_places_data.photos[0].try(:fetch_url, 300)
+    google_places_data.presence && google_places_data.photos[0].try(:fetch_url, 300) rescue nil
   end
 
   def external_reference

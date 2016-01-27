@@ -1,4 +1,5 @@
 class Trip < ActiveRecord::Base
+  auto_strip_attributes :city, :state, :country, :location, nullify: true
   has_many :clips
   belongs_to :user
   belongs_to :parent, class_name: 'Trip'
@@ -49,7 +50,7 @@ class Trip < ActiveRecord::Base
   end
 
   def end_date
-    start_date.nil? ? nil : start_date + days
+    start_date.nil? ? nil : start_date + days - 2
   end
 
   def date_on_day(day)

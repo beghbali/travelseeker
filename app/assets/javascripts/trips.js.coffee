@@ -7,10 +7,10 @@
 
 $ ->
   $.fn.datepicker.defaults.format = "yyyy-mm-dd";
-  $('.day').on 'click', (e)->
+  $(document).on 'click', '.day', (e)->
     $(@).toggleClass('active');
 
-  $('.trip').on 'click', '.trip .clips > li', (e)->
+  $(document).on 'click', '.trip .trip .clips > li', (e)->
     if !$(e.target).is('i')
       clipDetails = $(@).children().first();
       trip = $('.trip.selected').first();
@@ -32,15 +32,15 @@ $ ->
     $('.clip').addClass('selected')
     initMap();
 
-  $('.new_trip').on 'submit', (e)->
+  $(document).on 'submit', '.new_trip', (e)->
     #needs error handling
     e.preventDefault() if $(@).find('#trip_latitude').prop('value').length == 0 || $(@).find('#trip_longitude').prop('value').length == 0;
 
-  $('.btn.save').on 'click', ->
+  $(document).on 'click', '.btn.save', ->
     window.signin();
 
   # $('.datetime-picker').datetimepicker()
-  $('.datetime-picker').on 'click', (e)->
+  $(document).on 'click', '.datetime-picker', (e)->
     e.preventDefault()
     $(e.target).append($('<input type="text" style="display:initial"></input>').daterangepicker({
       locale: {
@@ -60,10 +60,13 @@ $ ->
           'Content-Type' : 'application/json',
           'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
         type: 'PATCH',
-        url: '/trips/'+trip.dataType('id'),
+        url: '/trips/'+trip.data('id'),
         dataType: 'script'
+        format: 'js'
         data: JSON.stringify({trip: {start_date: picker.startDate, end_date: picker.endDate}})
         success: (data)->
           $(e.target).first('input').remove();
-          Trubolinks.replace(data, { change: trip.prop('id')} )
+          Turbolinks.replace(data, { change: trip.prop('id')} )
+        complete: (xhr, status)->
+          console.log(status)
     )

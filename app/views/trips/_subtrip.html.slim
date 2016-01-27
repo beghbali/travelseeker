@@ -7,13 +7,14 @@
 .row
   .col-md-6
     = link_to add_or_change_dates(trip), '', class: 'datetime-picker', 'data-startdate' => trip.start_date, 'data-enddate' => trip.end_date
+ul.trip-unassigned
+  li
+    h4 Unassigned
+    = render 'clips/tagged_clips', trip: trip, tag: 'Unassigned', date: nil, context: :days
+
 ul.trip-days
   - trip.dates.each do |date|
     li class=day_class(date)
       h4= date_or_day(date)
       = render 'clips/tagged_clips', trip: trip, tag: date_or_day(date), date: date, context: :days
       = render 'clips/tagged_clips', trip: trip, tag: date_or_day(date), date: date, context: :dates
-ul.trip-unassigned
-  li
-    h4 Unassigned
-    = render 'clips/tagged_clips', trip: trip, tag: 'Unassigned', date: nil, context: :days

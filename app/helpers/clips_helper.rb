@@ -11,4 +11,9 @@ module ClipsHelper
   def format_hours(hours_string)
     hours_string && hours_string.gsub(/\n+/, '<br>').html_safe
   end
+
+  def google_static_map_url(location, width)
+    require 'uri'
+    "https://maps.googleapis.com/maps/api/staticmap?size=300x200&markers=icon:#{URI.encode(asset_path('pin_highlighted.svg'))}|#{[location.latitude, location.longitude].join(',')}"
+  end
 end

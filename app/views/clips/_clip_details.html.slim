@@ -1,7 +1,7 @@
 .btn.btn-primary.btn-block.back
   i.fa.fa-arrow-left
     span Back
-img.banner src="#{clip.image_url || asset_path('discovercoolstuff.png')}"
+img.banner src="#{clip.image_url || google_static_map_url(clip.location, 300)}"
 .clip-details
   h2.name= clip.name || clip.uri
   h4= clip.address

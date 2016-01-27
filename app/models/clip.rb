@@ -14,12 +14,16 @@ class Clip < ActiveRecord::Base
   before_save :remove_unassigned_tag, if: -> { day_list.include? 'Unassigned' }
   before_create :create_and_assign_to_new_trip
 
+  after_destroy :remove_orphaned_trip
+
   scope :yelp, -> { where("uri like '%yelp.com%") }
   scope :tripadvisor, -> { where("uri like '%tripadvisor.com%") }
   scope :for_session, ->(session_id) { where(session_id: session_id).order(created_at: :desc)}
   scope :known_location, -> { where('latitude IS NOT NULL') }
 
   delegate :name, :address, :city, :state, :country, :external_reference, :url, :rating_image_url, :phone, :hours, :image_url, to: :metadata, allow_nil: true
+
+  validates :uri, presence: true
 
   def self.last_clip_location_for_session(session_id)
     Rails.cache.fetch(['last_clip_location', session_id, Clip.for_session(session_id).known_location.count]) do
@@ -29,6 +33,10 @@ class Clip < ActiveRecord::Base
 
   def self.available_tags_for(session_id, type="tag")
     for_session(session_id).map(&:"#{type}_list").flatten.uniq
+  end
+
+  def remove_orphaned_trip
+    trip.destroy unless trip.clips.any? || trip.trips.any?
   end
 
   def remove_unassigned_tag

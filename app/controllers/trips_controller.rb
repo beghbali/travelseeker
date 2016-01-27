@@ -1,6 +1,7 @@
 class TripsController < ApplicationController
   layout 'trips'
   before_action :set_trip, only: [:show, :edit, :update, :destroy, :trip_details]
+  before_action :set_show_variables, only: [:show, :update]
 
   # GET /trips
   # GET /trips.json
@@ -11,9 +12,6 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
-    @location = @trip.clips.last.try(:location) || @trip.location
-    @day = params[:day].try(:to_i)
-    @selected_trip = @trip.all_clips.last.try(:trip)
     redirect_to trip_day_path(@trip, day: 1) unless @day.present? || performed?
   end
 
@@ -56,7 +54,7 @@ class TripsController < ApplicationController
         format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully updated.', change: "trip" }
         format.json { head :no_content }
       else
-        format.html { render action: 'edit' }
+        format.html { render action: 'show' }
         format.json { render json: @trip.errors, status: :unprocessable_entity }
       end
     end
@@ -67,7 +65,7 @@ class TripsController < ApplicationController
   def destroy
     @trip.destroy
     respond_to do |format|
-      format.html { redirect_to trips_url }
+      format.html { redirect_to @trip.parent || trips_url, change: 'trip' }
       format.json { head :no_content }
     end
   end
@@ -76,6 +74,12 @@ class TripsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_trip
       @trip = Trip.find(params[:id] || params[:trip_id])
+    end
+
+    def set_show_variables
+      @location = @trip.clips.last.try(:location) || @trip.location
+      @day = params[:day].try(:to_i)
+      @selected_trip = @trip.all_clips.last.try(:trip)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
