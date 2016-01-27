@@ -1,5 +1,5 @@
 GIT
-  remote: git://github.com/rails/turbolinks.git
+  remote: https://github.com/rails/turbolinks.git
   revision: dd31f4b2996f2300631f89339ada82c65b95f4c2
   branch: master
   specs:
