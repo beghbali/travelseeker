@@ -113,6 +113,11 @@ function initMap() {
   var centerLng = $('#clipmap').data('center-lng') || 0;
 
   var center = new google.maps.LatLng(centerLat, centerLng);
+
+  if ($('.clip[data-active=true]').length > 0) {
+    var activePin = $('.clip[data-active=true]').first();
+    center = new google.maps.LatLng(activePin.data('latitude'), activePin.data('longitude'));
+  }
   // Create a map object and specify the DOM element for display.
   var map = new google.maps.Map(document.getElementById('clipmap'), {
     center: center,
@@ -129,8 +134,8 @@ function initMap() {
   });
 
   var bounds = new google.maps.LatLngBounds();
-  var lastActive = new google.maps.LatLng(0,0);
 
+  var lastActive = new google.maps.LatLng(0,0);
   var pins = $('.clip.selected').length == 0 ? $('.trip.selected') : $('.clip.selected')
   var markers = [];
 
@@ -172,4 +177,5 @@ function initMap() {
   map.setCenter(lastActive);
   initAutocomplete(map);
   setZoom(map, center);
+
 }

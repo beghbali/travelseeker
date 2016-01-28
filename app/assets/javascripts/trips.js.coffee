@@ -19,6 +19,8 @@ $ ->
       clipDetails.toggleClass('hide');
       subtrip = clipDetails.data('trip');
       $('.clip[data-trip!='+subtrip+']').removeClass('selected');
+      $('.clip[data-trip='+subtrip+']').addClass('selected');
+      clipDetails.attr('data-active', true);
       initMap();
 
   $(document).on 'click', '.clip .back', (e)->
@@ -30,6 +32,7 @@ $ ->
     clipDetails.toggleClass('hide');
     subtrip = clipDetails.data('trip');
     $('.clip').addClass('selected')
+    clipDetails.attr('data-active', false);
     initMap();
 
   $(document).on 'submit', '.new_trip', (e)->
@@ -42,7 +45,8 @@ $ ->
   # $('.datetime-picker').datetimepicker()
   $(document).on 'click', '.datetime-picker', (e)->
     e.preventDefault()
-    $(e.target).append($('<input type="text" style="display:initial"></input>').daterangepicker({
+    $input = $('<input type="text" style="display:initial"></input>');
+    $(e.target).append($input.daterangepicker({
       locale: {
         format: 'YYYY-MM-DD'
       },
