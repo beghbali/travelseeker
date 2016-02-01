@@ -10,6 +10,13 @@ $ ->
   $(document).on 'click', '.day', (e)->
     $(@).toggleClass('active');
 
+  $(document).on 'click', '.trip', (e)->
+    tripId = $(@).data('id')
+    $('.clip[data-trip!='+tripId+']').removeClass('selected');
+    $('.clip[data-trip='+tripId+']').addClass('selected');
+    drawPins(window.map);
+    # $(@).find('.clip').addClass('.selected');
+
   $(document).on 'click', '.trip .trip .clips > li', (e)->
     if !$(e.target).is('i')
       clipDetails = $(@).children().first();
@@ -18,10 +25,11 @@ $ ->
       trip.parent().append(clipDetails);
       clipDetails.toggleClass('hide');
       subtrip = clipDetails.data('trip');
-      $('.clip[data-trip!='+subtrip+']').removeClass('selected');
-      $('.clip[data-trip='+subtrip+']').addClass('selected');
+      # $('.clip[data-trip!='+subtrip+']').removeClass('selected');
+      # $('.clip[data-trip='+subtrip+']').addClass('selected');
       clipDetails.attr('data-active', true);
-      initMap();
+      clipDetails.addClass('selected');
+      drawPins(window.map);
 
   $(document).on 'click', '.clip .back', (e)->
     clipDetails = $(@).closest('.clip');
@@ -33,7 +41,7 @@ $ ->
     subtrip = clipDetails.data('trip');
     $('.clip').addClass('selected')
     clipDetails.attr('data-active', false);
-    initMap();
+    drawPins(window.map);
 
   $(document).on 'submit', '.new_trip', (e)->
     #needs error handling

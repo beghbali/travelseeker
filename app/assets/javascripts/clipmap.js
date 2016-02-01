@@ -114,10 +114,6 @@ function initMap() {
 
   var center = new google.maps.LatLng(centerLat, centerLng);
 
-  if ($('.clip[data-active=true]').length > 0) {
-    var activePin = $('.clip[data-active=true]').first();
-    center = new google.maps.LatLng(activePin.data('latitude'), activePin.data('longitude'));
-  }
   // Create a map object and specify the DOM element for display.
   var map = new google.maps.Map(document.getElementById('clipmap'), {
     center: center,
@@ -133,10 +129,15 @@ function initMap() {
     },
   });
 
+  window.map = map;
+  drawPins(map);
+  initAutocomplete(map);
+}
+
+function drawPins(map) {
   var bounds = new google.maps.LatLngBounds();
 
-  var lastActive = new google.maps.LatLng(0,0);
-  var pins = $('.clip.selected').length == 0 ? $('.trip.selected') : $('.clip.selected')
+  var pins =  $('.clip.selected');
   var markers = [];
 
   $.each (pins, function(index, clip) {
@@ -164,7 +165,6 @@ function initMap() {
     });
     if ($(clip).data('active') == true) {
       infowindow.open(map,marker);
-      lastActive = loc;
     }
     markers.push(marker);
   });
@@ -173,9 +173,7 @@ function initMap() {
     map.fitBounds(bounds);
   }
 
-  map.panToBounds(bounds);
-  map.setCenter(lastActive);
-  initAutocomplete(map);
-  setZoom(map, center);
+  var zoom = map.getZoom();
+  if (zoom > 15) map.setZoom(zoom - 1);
 
 }

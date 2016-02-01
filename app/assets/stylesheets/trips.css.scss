@@ -454,6 +454,7 @@ select.form-control, input[data-provide='datepicker'] {
 .trip {
   overflow-y: scroll;
   margin-top: 1em;
+  cursor: pointer;
 
   &.selected{
     margin-top: 0;
