@@ -10,7 +10,7 @@ $ ->
   $(document).on 'click', '.day', (e)->
     $(@).toggleClass('active');
 
-  $(document).on 'click', '.trip', (e)->
+  $(document).on 'click', '.subtrips .trip', (e)->
     tripId = $(@).data('id')
     $('.clip[data-trip!='+tripId+']').removeClass('selected');
     $('.clip[data-trip='+tripId+']').addClass('selected');
@@ -82,3 +82,6 @@ $ ->
         complete: (xhr, status)->
           console.log(status)
     )
+  $(document).on 'page:partial-load', ->
+    $('.clip.selected').first().attr('data-active', true); #set one of the ones in view to be the active oen
+    drawPins(window.map);

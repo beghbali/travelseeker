@@ -21,13 +21,14 @@ function setZoom(map, location) {
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode( { 'location': location}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-      map.setCenter(results[0].geometry.location);
+      var result = results[0]
+      map.setCenter(result.geometry.location);
       var marker = new google.maps.Marker({
           map: map,
-              position: results[0].geometry.location
+              position: result.geometry.location
           });
-      if (results[0].geometry.viewport)
-        map.fitBounds(results[0].geometry.viewport);
+      if (result.geometry.viewport)
+        map.fitBounds(result.geometry.viewport);
         if (map.getZoom() > 15) map.setZoom(14);
     } else {
       //needs error handling
@@ -131,13 +132,12 @@ function initMap() {
 
   window.map = map;
   drawPins(map);
-  initAutocomplete(map);
 }
 
 function drawPins(map) {
   var bounds = new google.maps.LatLngBounds();
 
-  var pins =  $('.clip.selected');
+  var pins = $('.clip.selected');
   var markers = [];
 
   $.each (pins, function(index, clip) {
@@ -171,9 +171,16 @@ function drawPins(map) {
 
   if(pins.length > 0) {
     map.fitBounds(bounds);
+  } else {
+    var trip = $('.trip.selected');
+    var tripLocation = new google.maps.LatLng($(trip).data('latitude'), $(trip).data('longitude'));
+    map.setCenter(tripLocation);
+    bounds.extend(tripLocation);
+    map.fitBounds(bounds);
+    setZoom(map, tripLocation);
   }
 
   var zoom = map.getZoom();
   if (zoom > 15) map.setZoom(zoom - 1);
-
+  initAutocomplete(map);
 }
