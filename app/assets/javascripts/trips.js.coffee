@@ -27,7 +27,7 @@ $ ->
       subtrip = clipDetails.data('trip');
       # $('.clip[data-trip!='+subtrip+']').removeClass('selected');
       # $('.clip[data-trip='+subtrip+']').addClass('selected');
-      clipDetails.attr('data-active', true);
+      clipDetails.data('active', true);
       clipDetails.addClass('selected');
       drawPins(window.map);
 
@@ -40,7 +40,7 @@ $ ->
     clipDetails.toggleClass('hide');
     subtrip = clipDetails.data('trip');
     $('.clip').addClass('selected')
-    clipDetails.attr('data-active', false);
+    clipDetails.data('active', false);
     drawPins(window.map);
 
   $(document).on 'submit', '.new_trip', (e)->
@@ -83,5 +83,5 @@ $ ->
           console.log(status)
     )
   $(document).on 'page:partial-load', ->
-    $('.clip.selected').first().attr('data-active', true); #set one of the ones in view to be the active oen
+    $('.clip.selected').first().data('active', true); #set one of the ones in view to be the active oen
     drawPins(window.map);

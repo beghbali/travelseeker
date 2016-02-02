@@ -121,7 +121,7 @@ function initMap() {
     scrollwheel: false,
     // Apply the map style array to the map.
     styles: styleArray,
-    zoom: 2,
+    zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControl: false,
     zoomControl: true,
@@ -165,6 +165,7 @@ function drawPins(map) {
     });
     if ($(clip).data('active') == true) {
       infowindow.open(map,marker);
+      map.setCenter(loc);
     }
     markers.push(marker);
   });
@@ -179,8 +180,15 @@ function drawPins(map) {
     map.fitBounds(bounds);
     setZoom(map, tripLocation);
   }
+  // zoomChangeBoundsListener =
+  //   google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+  //     var zoom = this.getZoom()
+  //       if ( zoom >= 15) {
+  //         this.setZoom(14);
+  //       } else if (zoom <=8) {
+  //         this.setZoom(9);
+  //       }
+  // });
 
-  var zoom = map.getZoom();
-  if (zoom > 15) map.setZoom(zoom - 1);
   initAutocomplete(map);
 }
