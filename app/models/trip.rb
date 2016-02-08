@@ -1,6 +1,7 @@
 class Trip < ActiveRecord::Base
   auto_strip_attributes :city, :state, :country, :location, nullify: true
   has_many :clips
+  has_many :commitments, -> { where('scheduled_at IS NOT NULL') },  class_name: 'Clip'
   belongs_to :user
   belongs_to :parent, class_name: 'Trip'
   has_many :trips, foreign_key: :parent_id
@@ -8,6 +9,7 @@ class Trip < ActiveRecord::Base
   accepts_nested_attributes_for :clips
 
   scope :in_city, ->(city) { where(city: city) }
+  scope :by_commitments, -> { joins(:clips).order('clips.scheduled_at ASC')}
 
   def all_clips
     Clip.joins('inner join trips on clips.trip_id = trips.id').where(trip_id: trips.pluck(:id)).order('clips.created_at')
@@ -29,6 +31,10 @@ class Trip < ActiveRecord::Base
     start_date.nil? ? 'Days' : start_date.strftime("%B")
   end
 
+  def start_date=(date)
+    self[:start_date] = date.is_a?(String) ? date.to_date : date
+  end
+
   def end_date=(date)
     return if date.blank?
     self.days = (date.to_date - start_date).to_i + 1
@@ -38,7 +44,7 @@ class Trip < ActiveRecord::Base
     @days ||= begin
       if trips.any?
         last_subtrip = trips.map(&:end_date).compact.sort.last
-        (last_subtrip && start_date && (last_subtrip - start_date).to_i) || 1
+        (last_subtrip && start_date && (last_subtrip - start_date).to_i) || self[:days]
       else
         self[:days]
       end
@@ -65,7 +71,7 @@ class Trip < ActiveRecord::Base
     if dates_known?
       start_date..end_date
     else
-      1..days
+      parent.try(:dates) || []
     end
   end
 end

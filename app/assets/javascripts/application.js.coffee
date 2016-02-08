@@ -1,6 +1,7 @@
 #= require jquery
 #= require jquery.turbolinks
 #= require jquery_ujs
+#= require jquery-easing
 #= require turbolinks
 #= require react
 #= require react-mixin
@@ -38,3 +39,12 @@ $ ->
   $('[data-mirror-to]').on 'keyup input', ->
     target = $($(@).data('mirror-to'))
     target.val($(@).val())
+
+  window.autosaves = {}
+  $(document).on 'change paste keyup', '[data-autosave=true]', (e)->
+    timer = window.autosaves[e.target.id]
+    clearTimeout(timer) if timer?
+    window.autosaves[e.target.id] = setTimeout (->
+      $target = $(e.target)
+      $($target.closest('form')).trigger('submit.rails')
+      ), 600

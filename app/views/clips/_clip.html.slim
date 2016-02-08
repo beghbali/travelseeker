@@ -1,3 +1,13 @@
-.clip data-latitude=clip.latitude data-longitude=clip.longitude data-name=clip.name data-address=clip.address data-image=clip.image_url data-url=clip.url data-active="#{last_clip?(clip)}" class="#{ selected ? 'selected' : '' }" id="#{selected ? 'clip-' : ''}#{clip.reference || (clip.name || clip.uri).parameterize}"
-  = render 'card', clip: clip
-
+.row
+  -selected = (@day == clip.scheduled_day || clip.trip == @selected_trip)
+  .clip.hide data-latitude=clip.latitude data-longitude=clip.longitude data-name=clip.name data-address=clip.address data-image=clip.image_url data-url=clip.url class="#{ selected ? 'selected' : '' }" id="clip_#{clip.id}" data-ref="#clip_#{clip.id}" data-trip=clip.trip.id data-clip-details="#clip_detail_#{clip.id}"
+    = content_for :clip_details do
+      =render 'clips/clip_details', clip: clip
+  .col-md-10
+    span=clip.name
+  .col-md-1
+    h3 class=tag_class(clip.type_list.last)
+    span.tag class=tag_class(clip.type_list.first)
+  .col-md-1
+    = link_to clip_path(clip), method: :delete, remote: true, class: 'hidden' do
+      i.fa.fa-trash

@@ -5,8 +5,39 @@
 #= require clipmap
 #= require clips
 
+
 $ ->
   $.fn.datepicker.defaults.format = "yyyy-mm-dd";
+  initDateRangePicker= ->
+    $('.datetime-picker ~ input').daterangepicker({
+        locale: {
+          format: 'YYYY-MM-DD'
+        },
+        startDate: $(@).siblings('.datetime-picker').data('startdate') || '2016-01-01',
+        endDate: $(@).siblings('.datetime-picker').data('enddate') || '2016-12-31',
+        opens: 'left',
+        autoApply: true,
+        autoUpdateInput: true,
+        timePicker: false
+      }).on 'apply.daterangepicker', (e, picker)->
+        trip = $(@).closest('.trip');
+
+        # Zentrips.Trips.get(trip_id).save({start_date: picker.startDate, end_date: picker.endDate},{patch: true});
+        $.ajax
+          headers:
+            'Accepts' : 'text/javascript'
+            'Content-Type' : 'application/json',
+            'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+          type: 'PATCH',
+          url: '/trips/'+trip.data('id'),
+          dataType: 'script'
+          format: 'js'
+          data: JSON.stringify({trip: {start_date: picker.startDate, end_date: picker.endDate}})
+          success: (data)->
+            Turbolinks.replace(data, { change: trip.prop('id')} )
+          complete: (xhr, status)->
+            console.log(status)
+
   $(document).on 'click', '.day', (e)->
     $(@).toggleClass('active');
 
@@ -15,32 +46,28 @@ $ ->
     $('.clip[data-trip!='+tripId+']').removeClass('selected');
     $('.clip[data-trip='+tripId+']').addClass('selected');
     drawPins(window.map);
-    # $(@).find('.clip').addClass('.selected');
 
   $(document).on 'click', '.trip .trip .clips > li', (e)->
-    if !$(e.target).is('i')
-      clipDetails = $(@).children().first();
-      trip = $('.trip.selected').first();
-      trip.toggleClass('hide');
-      trip.parent().append(clipDetails);
-      clipDetails.toggleClass('hide');
-      subtrip = clipDetails.data('trip');
-      # $('.clip[data-trip!='+subtrip+']').removeClass('selected');
-      # $('.clip[data-trip='+subtrip+']').addClass('selected');
+    if !$(e.target).is('i') && !$(e.target).is('select')
+      clipDetails = $($(@).find('.clip').data('clip-details'));
+      $trip = $('.trip.selected').first();
+      # $trip.toggleClass('hide');
+      $trip.hide("slide", {direction: "left" }, 1000)
+      # $trip.parent().append(clipDetails);
+      # clipDetails.toggleClass('hide');
+      clipDetails.show("slide", { direction: "right" }, 1000).removeClass('hidden');
       clipDetails.data('active', true);
       clipDetails.addClass('selected');
       drawPins(window.map);
 
-  $(document).on 'click', '.clip .back', (e)->
-    clipDetails = $(@).closest('.clip');
+  $(document).on 'click', '.clip-details .back', (e)->
+    clipDetails = $(@).closest('.clip-details')
     trip = $('.trip.selected').first();
     trip.load('/trips/'+trip.data('id')+'/trip_details');
-    trip.toggleClass('hide');
-    $($(clipDetails).data('ref')).append(clipDetails);
-    clipDetails.toggleClass('hide');
-    subtrip = clipDetails.data('trip');
+    trip.show("slide", { direction: "right" }, 1000)
+    clipDetails.hide("slide", {direction: "left" }, 1000).addClass('hidden');
     $('.clip').addClass('selected')
-    clipDetails.data('active', false);
+    $(clipDetails.data('clip')).data('active', false);
     drawPins(window.map);
 
   $(document).on 'submit', '.new_trip', (e)->
@@ -50,38 +77,13 @@ $ ->
   $(document).on 'click', '.btn.save', ->
     window.signin();
 
-  # $('.datetime-picker').datetimepicker()
-  $(document).on 'click', '.datetime-picker', (e)->
-    e.preventDefault()
-    $input = $('<input type="text" style="display:initial"></input>');
-    $(e.target).append($input.daterangepicker({
-      locale: {
-        format: 'YYYY-MM-DD'
-      },
-      startDate: $(e.target).data('startdate') || '2016-01-01',
-      endDate: $(e.target).data('enddate') || '2016-12-31',
-      opens: 'left',
-      autoApply: true
-    }).on 'apply.daterangepicker', (e, picker)->
-      trip = $(e.target).closest('.trip');
 
-      # Zentrips.Trips.get(trip_id).save({start_date: picker.startDate, end_date: picker.endDate},{patch: true});
-      $.ajax
-        headers:
-          'Accepts' : 'text/javascript'
-          'Content-Type' : 'application/json',
-          'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
-        type: 'PATCH',
-        url: '/trips/'+trip.data('id'),
-        dataType: 'script'
-        format: 'js'
-        data: JSON.stringify({trip: {start_date: picker.startDate, end_date: picker.endDate}})
-        success: (data)->
-          $(e.target).first('input').remove();
-          Turbolinks.replace(data, { change: trip.prop('id')} )
-        complete: (xhr, status)->
-          console.log(status)
-    )
+  initDateRangePicker();
+
   $(document).on 'page:partial-load', ->
     $('.clip.selected').first().data('active', true); #set one of the ones in view to be the active oen
     drawPins(window.map);
+    initDateRangePicker();
+
+  $('.trip-selection select').on 'change', ->
+    window.location = $(@).prop('value')

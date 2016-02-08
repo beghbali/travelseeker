@@ -35,6 +35,9 @@ $subtrip-color: rgb(255, 219, 88);
   &.unassigned:before {
     content: "\f11a";
   }
+  &.transit:before {
+    content: "\f072";
+  }
 }
 
 @mixin all-text-colors($color) {
@@ -146,19 +149,6 @@ select.form-control, input[data-provide='datepicker'] {
 
 .form-control {
   height: 3em;
-}
-
-.input-group-addon:last-child {
-  padding: 0;
-  border:0;
-  background-color: transparent;
-  select {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-    border-left: 0;
-    // -webkit-appearance: none;
-    // -moz-appearance: none;
-  }
 }
 
 .container {
@@ -416,6 +406,9 @@ select.form-control, input[data-provide='datepicker'] {
     }
     .delete {
       text-align: right;
+      .btn-link {
+        color: red;
+      }
     }
   }
 }

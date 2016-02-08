@@ -6,8 +6,9 @@ ul.clips
         =render 'clips/clip_details', clip: clip
       .col-md-10
         span=clip.name
-        span.tag class=tag_class(clip.type_list.first) title=tag
-      .col-md-2
+      .col-md-1
         h3 class=tag_class(clip.type_list.last)
-        = link_to clip_path(clip), method: :delete, remote: true do
+        span.tag class=tag_class(clip.type_list.first) title=tag
+      .col-md-1
+        = link_to clip_path(clip), method: :delete, remote: true, class: 'hidden' do
           i.fa.fa-trash

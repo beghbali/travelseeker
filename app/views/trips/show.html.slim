@@ -14,9 +14,9 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
         .tag.pill class=tag_class(tag) title=tag
           = Clip.tagged_with(tag).where(trip_id: @trip.trip_ids).count
     .nav.navbar-nav.navbar-right
-      .nav.navbar-nav.navbar-form.collapse.navbar-collapse.visible-mdlg
+      .nav.navbar-nav.navbar-form.collapse.navbar-collapse.visible-mdlg.trip-selection
         =bootstrap_nested_form_for :trips do |t|
-          = t.select :trip, user_trips, hide_label: true, inline: true, class: 'selectpicker'
+          = t.select :trip, user_trips, hide_label: true, inline: true
 
       .nav.navbar-nav.navbar-form
         ul.nav.navbar-nav
@@ -35,6 +35,8 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
 
   .details
     =render @trip
+    = yield :clip_details
+
 
 .modal.fade id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel"
   .modal-dialog role="document"

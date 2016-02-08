@@ -49,4 +49,6 @@ class YelpMetaData < MetaData
     yelp_data.instance_variable_get("@rating_img_url")
   end
 
+  def type
+  end
 end

@@ -9,6 +9,7 @@ class Clip < ActiveRecord::Base
 
   accepts_nested_attributes_for :comment
 
+  TYPES = %w(Food Activity Lodging Transit Unassigned)
   before_save :set_reference
   before_save :set_location
   before_save :remove_unassigned_tag, if: -> { day_list.include? 'Unassigned' }
@@ -35,6 +36,24 @@ class Clip < ActiveRecord::Base
     for_session(session_id).map(&:"#{type}_list").flatten.uniq
   end
 
+  TYPES.each do |type|
+    define_method "#{type.downcase}?" do
+      type_list.include? type
+    end
+  end
+
+  def ancestor
+    parent = trip
+    while parent.parent.present?
+      parent = parent.parent
+    end
+    parent
+  end
+
+  def scheduled_day
+    scheduled_at.try(:to_date)
+  end
+
   def remove_orphaned_trip
     trip.destroy unless trip.clips.any? || trip.trips.any?
   end
@@ -44,7 +63,7 @@ class Clip < ActiveRecord::Base
   end
 
   def available_type_tags
-    %w(Food Activity Lodging Unassigned)
+    TYPES
   end
 
   def available_day_tags
@@ -65,7 +84,7 @@ class Clip < ActiveRecord::Base
         session_id: session_id, user_id: trip.user_id, parent_id: trip, city: city, state: state, country: country)
     puts "CITY: #{designated_trip.try(:city)}"
     self.trip = designated_trip
-    type_list.add 'Unassigned'
+    type_list.add(metadata.type || 'Unassigned')
     day_list.add 'Unassigned'
   end
 

@@ -52,4 +52,7 @@ class TripadvisorMetaData < MetaData
   def url
     tripadvisor_data.web_url
   end
+
+  def type
+  end
 end

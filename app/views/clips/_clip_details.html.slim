@@ -1,8 +1,9 @@
-.btn.btn-primary.btn-block.back
-  i.fa.fa-arrow-left
-    span Back
-img.banner src="#{clip.image_url || google_static_map_url(clip.location, 300)}"
-.clip-details
+.clip-details.hidden id="clip_detail_#{clip.id}" data-clip="#clip_#{clip.id}"
+  .btn.btn-primary.btn-block.back
+    i.fa.fa-arrow-left
+      span Back
+  img.banner src="#{clip.image_url || google_static_map_url(clip.location, 300)}"
+
   h2.name= clip.name || clip.uri
   h4= clip.address
   .row
@@ -13,20 +14,24 @@ img.banner src="#{clip.image_url || google_static_map_url(clip.location, 300)}"
       p= clip.phone
       -if clip.rating_image_url
         = image_tag clip.rating_image_url
+  .row
+    .col-md-12
+      a href=clip.url target='_blank' View on #{clip.source}
   hr
   =bootstrap_nested_form_for clip, remote: true do |f|
     .row
       -day_or_date = clip.trip.dates_known? ? :date : :day
       .col-md-8
-        = f.select(:"#{day_or_date}_list", clip.send("available_#{day_or_date}_tags").insert(0, "Assign #{day_or_date.to_s.camelize}"), {hide_label: true}, {data: {autosave: true}})
+        = f.datetime_picker :scheduled_at, format: :db, datetimepicker_format: "YYYY-MM-DD HH:mm Z", label: scheduled_label(clip)
       .col-md-4
-        = f.select(:type_list, clip.available_type_tags.zip(clip.available_type_tags).insert(0, ["Assign Type", nil]), {hide_label: true}, {data: {autosave: true}})
+        = f.select(:type_list, clip.available_type_tags.zip(clip.available_type_tags).insert(0, ["Assign Type", nil]), {label: 'Type'})
     .row
-      .comment.col-md-12 data-autosave=true
+      .comment.col-md-12
         = f.fields_for :comment, clip.comment || clip.build_comment do |c|
           = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
-
+    .row
+      button.btn.btn-success.btn-block type='submit' Save
   .row
-    a.btn.btn-info.btn-block href=clip.url target='_blank' View on #{clip.source}
-  .row.delete
-      =link_to 'Remove', clip_path(clip), method: :delete, class:'btn btn-danger btn-block'
+    .col-md-12.delete
+      = link_to clip_path(clip), method: :delete do
+        .btn.btn-link remove

@@ -60,6 +60,16 @@ class GooglePlacesMetaData < MetaData
     google_places_data.formatted_address || google_places_data.address_components.map{|c| c['long_name']}.join(" ")
   end
 
+  def type
+    if (google_places_data.types & ["restaurant", "food", "bar"]).length > 0
+      "Food"
+    elsif (google_places_data.types & ["airport", "train_station", "transit_station"]).length > 0
+      "Transit"
+    elsif (google_places_data.types & ["point_of_interest"]).length > 0
+      "Activity"
+    end
+  end
+
   def city
     begin
       if google_places_data.city.present?

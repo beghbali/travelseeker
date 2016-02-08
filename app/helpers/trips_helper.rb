@@ -1,8 +1,8 @@
 module TripsHelper
 
-  def user_trips(user=nil)
-    trips = Array.wrap(user.try(:trips) || @trip)
-    options_for_select(trips.map{|trip| [trip.name, trip_path(trip)]})
+  def user_trips(user=current_user)
+    trips = Array.wrap(user.try(:trips) || @trip).reverse
+    options_for_select(trips.map{|trip| [trip.name, trip_path(trip)]}, trip_path(@trip))
   end
 
   def general_tags

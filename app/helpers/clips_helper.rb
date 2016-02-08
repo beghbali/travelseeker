@@ -16,4 +16,14 @@ module ClipsHelper
     require 'uri'
     "https://maps.googleapis.com/maps/api/staticmap?size=300x200&markers=icon:#{URI.encode(asset_path('pin_highlighted.svg'))}|#{[location.latitude, location.longitude].join(',')}"
   end
+
+  def scheduled_label(clip)
+    if clip.transit?
+      "Departure Time"
+    elsif clip.lodging?
+      "Checkin Time"
+    else
+      "Reservation Time"
+    end
+  end
 end
