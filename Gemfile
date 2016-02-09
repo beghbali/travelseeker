@@ -49,7 +49,6 @@ gem 'react-rails', '~> 1.5.0'
 gem 'rails-backbone'
 gem 'react-bootstrap-rails'
 gem 'countries'
-gem 'best_in_place', '~> 3.0.1'
 gem 'jquery-turbolinks'
 gem "auto_strip_attributes", "~> 2.0"
 
