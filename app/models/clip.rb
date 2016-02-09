@@ -50,6 +50,10 @@ class Clip < ActiveRecord::Base
     parent
   end
 
+  def scheduled_at=(date_or_string)
+    self[:scheduled_at] = date_or_string.to_datetime.utc
+  end
+
   def scheduled_day
     scheduled_at.try(:to_date)
   end

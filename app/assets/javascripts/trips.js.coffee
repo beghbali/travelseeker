@@ -9,6 +9,11 @@
 $ ->
   $.fn.datepicker.defaults.format = "yyyy-mm-dd";
   initDateRangePicker= ->
+    $('.bootstrap_form-datetimepicker').datetimepicker({sideBySide: false, allowInputToggle: true, keepOpen: false, format: "YYYY-MM-DD HH:mm Z", useCurrent: false});
+    $(document).on 'click', '.datetime-picker',(e) ->
+      e.preventDefault();
+      $(@).next('input').daterangepicker('show')
+
     $('.datetime-picker ~ input').daterangepicker({
         locale: {
           format: 'YYYY-MM-DD'
@@ -49,23 +54,21 @@ $ ->
 
   $(document).on 'click', '.trip .trip .clips > li', (e)->
     if !$(e.target).is('i') && !$(e.target).is('select')
-      clipDetails = $($(@).find('.clip').data('clip-details'));
+      $clip = $(@).find('.clip')
+      clipDetails = $($clip.data('clip-details'));
       $trip = $('.trip.selected').first();
-      # $trip.toggleClass('hide');
-      $trip.hide("slide", {direction: "left" }, 1000)
-      # $trip.parent().append(clipDetails);
-      # clipDetails.toggleClass('hide');
-      clipDetails.show("slide", { direction: "right" }, 1000).removeClass('hidden');
-      clipDetails.data('active', true);
-      clipDetails.addClass('selected');
+      $trip.addClass('hidden');
+      clipDetails.removeClass('hidden');
+      $clip.data('active', true);
+      $clip.addClass('selected');
       drawPins(window.map);
 
   $(document).on 'click', '.clip-details .back', (e)->
     clipDetails = $(@).closest('.clip-details')
-    trip = $('.trip.selected').first();
-    trip.load('/trips/'+trip.data('id')+'/trip_details');
-    trip.show("slide", { direction: "right" }, 1000)
-    clipDetails.hide("slide", {direction: "left" }, 1000).addClass('hidden');
+    $trip = $('.trip.selected').first();
+    $trip.load('/trips/'+$trip.data('id')+'/trip_details');
+    $trip.removeClass('hidden');
+    clipDetails.addClass('hidden');
     $('.clip').addClass('selected')
     $(clipDetails.data('clip')).data('active', false);
     drawPins(window.map);
@@ -87,3 +90,4 @@ $ ->
 
   $('.trip-selection select').on 'change', ->
     window.location = $(@).prop('value')
+

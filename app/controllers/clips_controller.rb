@@ -50,7 +50,7 @@ class ClipsController < ApplicationController
   def update
     respond_to do |format|
       if @clip.update(clip_params)
-        format.html { redirect_to @clip.ancestor, notice: 'Clip was successfully updated.', change: "trip"}
+        format.html { redirect_to @clip.ancestor, notice: 'Clip was successfully updated.', change: "list"}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -64,7 +64,7 @@ class ClipsController < ApplicationController
   def destroy
     @clip.destroy
     respond_to do |format|
-      format.html { redirect_to trip_path(@clip.trip.parent), change: 'trip' }
+      format.html { redirect_to trip_path(@clip.trip.parent), change: 'list' }
       format.json { head :no_content }
     end
   end

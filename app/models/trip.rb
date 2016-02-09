@@ -11,8 +11,26 @@ class Trip < ActiveRecord::Base
   scope :in_city, ->(city) { where(city: city) }
   scope :by_commitments, -> { joins(:clips).order('clips.scheduled_at ASC')}
 
+  def commitments
+    Clip.where(trip_id: trip_ids + [id]).where('clips.scheduled_at IS NOT NULL').order('clips.scheduled_at ASC, clips.trip_id')
+  end
+
+  def commitments_by_trip
+    result = []
+    commitments.map do |commitment|
+      if result.last
+        if result.last[0] == commitment.trip
+          result.last[1] << commitment
+          next
+        end
+      end
+      result << [commitment.trip, [commitment]]
+    end
+    result
+  end
+
   def all_clips
-    Clip.joins('inner join trips on clips.trip_id = trips.id').where(trip_id: trips.pluck(:id)).order('clips.created_at')
+    Clip.joins('inner join trips on clips.trip_id = trips.id').where(trip_id: trips.pluck(:id) + [id]).order('clips.created_at')
   end
 
   def as_json(options={})

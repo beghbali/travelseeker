@@ -37,7 +37,7 @@ class TripsController < ApplicationController
 
     respond_to do |format|
       if @trip.save
-        format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully created.', change: 'trip' }
+        format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully created.', change: 'list' }
         format.json { render action: 'show', status: :created, location: @trip, day: 1 }
       else
         format.html { render action: 'new' }
@@ -51,7 +51,7 @@ class TripsController < ApplicationController
   def update
     respond_to do |format|
       if @trip.update(trip_params)
-        format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully updated.', change: "trip" }
+        format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully updated.', change: "list" }
         format.json { head :no_content }
       else
         format.html { render action: 'show' }

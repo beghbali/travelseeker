@@ -33,7 +33,7 @@ $ ->
 
   if goto_anchor
     window.location = window.location.href + goto_anchor
-  $('.bootstrap_form-datetimepicker').datetimepicker();
+
   $('.carousel').carousel();
 
   $('[data-mirror-to]').on 'keyup input', ->

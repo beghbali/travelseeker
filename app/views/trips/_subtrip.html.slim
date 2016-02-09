@@ -2,15 +2,15 @@
   .col-md-6 = trip.name
 
 ul.trip-commitments
-  - trip.commitments.group_by{|c| c.scheduled_at.to_date}.each do |date, commitments|
+  - commitments.group_by{|c| c.scheduled_at.to_date}.each do |date, commitments|
     li class=day_class(date)
       h4= date_or_day(date)
       ul.clips
         - commitments.each do |commitment|
           li class=day_class(date) id="clip_#{commitment.id}"
             = render commitment
-  li
-    h4 Unassigned
+  li class=show_wishlist_class(wishlist_shown, trip)
+    h4 Wishlist
     ul.clips
       - trip.clips.tagged_with('Unassigned', on: :days).each do |clip|
         li id="clip_#{clip.id}"

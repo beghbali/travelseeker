@@ -44,4 +44,8 @@ module TripsHelper
   def add_or_change_dates(trip)
     trip.dates_known? ? 'Change dates' : 'Add dates'
   end
+
+  def show_wishlist_class(wishlist_shown, trip)
+    wishlist_shown[trip.id] ? 'hidden' : ''
+  end
 end

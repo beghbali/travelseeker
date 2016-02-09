@@ -52,9 +52,6 @@ GEM
     babel-transpiler (0.7.0)
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
-    best_in_place (3.0.3)
-      actionpack (>= 3.2)
-      railties (>= 3.2)
     better_errors (2.1.1)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
@@ -64,7 +61,7 @@ GEM
     bootstrap-sass (3.3.3)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
-    bootstrap3-datetimepicker-rails (4.0.0)
+    bootstrap3-datetimepicker-rails (4.14.30)
       momentjs-rails (>= 2.8.1)
     bootstrap_form (2.2.0)
     bootstrap_form-datetimepicker (0.0.1)
@@ -154,7 +151,7 @@ GEM
     mini_portile (0.6.2)
     minitest (4.7.5)
     molinillo (0.3.1)
-    momentjs-rails (2.9.0)
+    momentjs-rails (2.11.0)
       railties (>= 3.1)
     multi_json (1.11.2)
     multi_xml (0.5.5)
@@ -287,11 +284,10 @@ DEPENDENCIES
   acts_as_commentable
   auto_strip_attributes (~> 2.0)
   aws-ses (~> 0.6.0)
-  best_in_place (~> 3.0.1)
   better_errors
   binding_of_caller
   bootstrap-sass (~> 3.3.3)
-  bootstrap3-datetimepicker-rails (~> 4.0.0)
+  bootstrap3-datetimepicker-rails (~> 4.14.30)
   bootstrap_form
   bootstrap_form-datetimepicker
   bootstrap_tokenfield_rails

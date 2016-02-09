@@ -1,14 +1,18 @@
-.trip.selected data-id=trip.id id="trip" data-latitude=trip.latitude data-longitude=trip.longitude data-name=trip.name
-  h2 = trip.name
-  h3.dates
-    -if trip.dates_known?
-      = dates_or_days(trip)
-    -else
-      | No dates selected
-      =< "(#{dates_or_days(trip)})"
-    =< link_to add_or_change_dates(trip), '', class: 'datetime-picker', 'data-startdate' => trip.start_date, 'data-enddate' => trip.end_date
-    input.hidden type='text' value="#{trip.start_date} - #{trip.end_date}"
-  ul.subtrips
-    - trip.trips.by_commitments.each do |subtrip|
-      li.trip data-id=subtrip.id id="trip:#{subtrip.id}"
-        = render 'subtrip', trip: subtrip
+#list
+  =render collection: trip.all_clips.to_a, partial: '/clips/clip_details', as: :clip
+  .trip.selected data-id=trip.id id="trip" data-latitude=trip.latitude data-longitude=trip.longitude data-name=trip.name
+    h2 = trip.name
+    h3.dates
+      -if trip.dates_known?
+        = dates_or_days(trip)
+      -else
+        | No dates selected
+        =< "(#{dates_or_days(trip)})"
+      =< link_to add_or_change_dates(trip), '', remote: true, class: 'datetime-picker', 'data-startdate' => trip.start_date, 'data-enddate' => trip.end_date
+      input.hidden type='text' value="#{trip.start_date} - #{trip.end_date}"
+    ul.subtrips
+      - wishlist_shown = {}
+      - (trip.commitments_by_trip + trip.trips.product([[]])).each do |subtrip, commitments|
+        li.trip data-id=subtrip.id id="trip:#{subtrip.id}"
+          = render 'subtrip', trip: subtrip, commitments: commitments, wishlist_shown: wishlist_shown
+        - wishlist_shown[subtrip.id] = true

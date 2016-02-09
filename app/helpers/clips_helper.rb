@@ -19,11 +19,27 @@ module ClipsHelper
 
   def scheduled_label(clip)
     if clip.transit?
-      "Departure Time"
+      "Add Departure Time"
     elsif clip.lodging?
-      "Checkin Time"
+      "Add Checkin Time"
     else
-      "Reservation Time"
+      "Add Reservation Time"
     end
+  end
+
+  def present_commitment(clip)
+    begin
+      if clip.transit?
+        "departs at"
+      elsif clip.lodging?
+        "checkin at"
+      else
+        "reservation at"
+      end
+    end + " #{clip.scheduled_at.try(:strftime, "%I:%M %P")}"
+  end
+
+  def scheduled_class(clip)
+    clip.scheduled_at.present? ? '' : 'hidden'
   end
 end
