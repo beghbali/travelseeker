@@ -29,5 +29,8 @@ module Zentrips
     # config.react.server_renderer_options = {
     #     files: ["server_render.js"] # files to load for prerendering
     # }
+
+    config.time_zone = 'Pacific Time (US & Canada)'
+    # config.active_record.default_timezone = 'Pacific Time (US & Canada)'
   end
 end

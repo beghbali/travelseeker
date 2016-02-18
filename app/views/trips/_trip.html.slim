@@ -6,9 +6,9 @@
       -if trip.dates_known?
         = dates_or_days(trip)
       -else
-        | No dates selected
-        =< "(#{dates_or_days(trip)})"
-      =< link_to add_or_change_dates(trip), '', remote: true, class: 'datetime-picker', 'data-startdate' => trip.start_date, 'data-enddate' => trip.end_date
+        /!| No dates selected
+        /!=< "(#{dates_or_days(trip)})"
+      /!=< link_to add_or_change_dates(trip), '', class: 'datetime-picker', 'data-startdate' => trip.start_date, 'data-enddate' => trip.end_date
       input.hidden type='text' value="#{trip.start_date} - #{trip.end_date}"
     ul.subtrips
       - wishlist_shown = {}

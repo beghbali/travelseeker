@@ -8,6 +8,9 @@ function initAutocomplete(map) {
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
     if (!place.geometry) {
+      if (/https?:/.test(place.name)) {
+        return true;
+      }
       window.alert("Could not pinpoint that location or point of interest, please select a choice from the autocomplete drop down");
       return;
     }

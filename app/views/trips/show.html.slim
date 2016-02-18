@@ -28,13 +28,16 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
             .btn.btn-default.save.visible-xs
               i.fa.fa-save
 
-.map
-  #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
-  .notes
-    = react_component 'TripNotes', { trip: @trip, expanded: false }, { prerender: false }
+.row
+  .col-md-8
+    .map
+      #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
+      .notes
+        = react_component 'TripNotes', { trip: @trip, expanded: false }, { prerender: false }
 
-  .details
-    =render @trip
+  .col-md-4
+    .details
+      =render @trip
 
 .modal.fade id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel"
   .modal-dialog role="document"

@@ -51,7 +51,7 @@ class Clip < ActiveRecord::Base
   end
 
   def scheduled_at=(date_or_string)
-    self[:scheduled_at] = date_or_string.to_datetime.utc
+    self[:scheduled_at] = date_or_string.try(:to_datetime)
   end
 
   def scheduled_day
@@ -127,6 +127,10 @@ class Clip < ActiveRecord::Base
     self.longitude = longitude
   end
 
+  def link?
+    !!(uri =~ /https?:/)
+  end
+
   def yelp?
     !!(uri =~ /yelp\.com/)
   end
@@ -155,11 +159,17 @@ class Clip < ActiveRecord::Base
     @google_places ||= GooglePlacesMetaData.new(uri, near, reference)
   end
 
+  def weblink
+    @weblink ||= WeblinkMetaData.new(uri)
+  end
+
   def source
     if yelp?
       "Yelp"
     elsif tripadvisor?
       "TripAdvisor"
+    elsif link?
+      "Web Link"
     else
       "Google Places"
     end
@@ -171,6 +181,8 @@ class Clip < ActiveRecord::Base
         yelp
       elsif tripadvisor?
         tripadvisor
+      elsif link?
+        weblink
       else
         google_places
       end

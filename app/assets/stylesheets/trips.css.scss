@@ -15,9 +15,16 @@ $tag-color: rgb(10, 145, 222);
 $hint-color: green;
 $subtrip-color: rgb(255, 219, 88);
 
+
+$navbar-height: 6rem;
+
 @font-face {
   font-family: 'Brandon Text Medium';
   src: url(/assets/BrandonText-Medium.otf) format("truetype");
+}
+
+@mixin under-navbar() {
+  margin-top: $navbar-height;
 }
 
 @mixin tags() {
@@ -317,16 +324,17 @@ select.form-control, input[data-provide='datepicker'] {
 }
 
 .details {
-  position:absolute;
-  top: 5em;
-  right: 1em;
-  background: white;
-  border-radius: 0.25em;
-  width: 25%;
+  // position:absolute;
+  // top: 5em;
+  // right: 1em;
+  // background: white;
+  // border-radius: 0.25em;
+  // width: 25%;
   padding: 1em;
   height: auto;
-  max-height: 90%;
+  // max-height: 90%;
   overflow-y: scroll;
+  @include under-navbar();
 
   ul {
     list-style-type: none;
@@ -479,8 +487,8 @@ select.form-control, input[data-provide='datepicker'] {
 .trips#show {
   overflow: hidden;
   .map {
-    height: 100%;
-    margin-top: 2em;
+    height: 100vh;
+    @include under-navbar();
   }
 }
 body, html {
@@ -489,7 +497,7 @@ body, html {
 .navbar {
   background-color: $frame-color;
   // margin: 0;
-  height: 3em;
+  height: $navbar-height;
   margin: auto 0;
   @include all-text-colors(white);
 }
