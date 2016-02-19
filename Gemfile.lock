@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/turbolinks/turbolinks-classic.git
-  revision: ee7c0c23679a31b5c6e2455869998084b99fd33f
+  revision: 37a7c296232d20a61bd1946f600da7f2009189db
   branch: master
   specs:
     turbolinks (3.0.0)
