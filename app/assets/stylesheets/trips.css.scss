@@ -528,6 +528,11 @@ body, html {
   cursor: pointer;
 }
 
+.bootstrap-datetimepicker-widget .dropdown-menu {
+  z-index: 10000;
+  overflow: visible;
+}
+
 @media (min-width: 768px) {
    .navbar-nav.search {
       max-width: 50%;
