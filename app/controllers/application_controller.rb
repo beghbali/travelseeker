@@ -5,11 +5,16 @@ class ApplicationController < ActionController::Base
   layout 'clips'
 
   helper_method :current_user
+  helper_method :signed_in?
 
   def faq
   end
 
   def current_user
     @current_user ||= User.find_by_id(session[:user_id]) || User.new(trips: Trip.where(session_id: session.id))
+  end
+
+  def signed_in?
+    current_user.id.present?
   end
 end

@@ -77,7 +77,7 @@ $ ->
     #needs error handling
     e.preventDefault() if $(@).find('#trip_latitude').prop('value').length == 0 || $(@).find('#trip_longitude').prop('value').length == 0;
 
-  $(document).on 'click', '.btn.save', ->
+  $(document).on 'click', '.save', ->
     window.signin();
 
 

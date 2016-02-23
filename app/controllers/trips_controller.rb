@@ -34,6 +34,7 @@ class TripsController < ApplicationController
   def create
     @trip = Trip.new(trip_params)
     @trip.session_id = session.id
+    @trip.user_id = current_user.id
 
     respond_to do |format|
       if @trip.save

@@ -160,6 +160,16 @@ select.form-control, input[data-provide='datepicker'] {
 
 .container {
 }
+a.save {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  color: white;
+}
+.navbar-nav a.signout {
+  line-height: 0.75em;
+}
 .hero {
   // height: 40vh;
   width: 100vw;

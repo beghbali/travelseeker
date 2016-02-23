@@ -1,6 +1,8 @@
 Zentrips::Application.routes.draw do
   get "auth0/callback"
   get "auth0/failure"
+  delete "signout" => redirect("https://zentrips.auth0.com/v2/logout"), as: :sign_out
+
   resources :trips do
     get :trip_details
     resources :day, only: [:show], controller: :trips, param: :day
