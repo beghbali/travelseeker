@@ -2,7 +2,7 @@ branch-defaults:
   default:
     environment: production
   master:
-    environment: production
+    environment: production-clone
 global:
   application_name: zentrips
   default_ec2_keyname: aws-eb
