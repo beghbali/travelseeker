@@ -33,6 +33,14 @@ module TripsHelper
     !session[:seen_video]
   end
 
+  def show_tips?
+    !session[:seen_tips]
+  end
+
+  def tooltip_options
+    show_tips? ? {'data-toggle' => 'tooltip', 'data-placement' => 'bottom', title: 'TravelSeeker helps you collect what excites you. Look up ideas using your preferred sources of inspiration, such as WikiVoyage or TripAdvisor, then add those ideas here'} : {}
+  end
+
   def formatted_trip_day(trip, day)
     trip.dates_known? ? trip.date_on_day(day).day.ordinalize : day.ordinalize
   end

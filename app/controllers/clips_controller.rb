@@ -33,6 +33,7 @@ class ClipsController < ApplicationController
     @clip.near = Clip.last_clip_location_for_session(session.id)
     session[:seen_hero] = true
     session[:seen_video] = true
+    session[:seen_tips] = true
 
     respond_to do |format|
       if @clip.save

@@ -27,6 +27,7 @@
 #= require bootstrap-carousel
 #= require bootstrap-tab
 #= require bootstrap-modal
+#= require bootstrap-tooltips
 
 $ ->
   goto_anchor = $('[data-goto]').data('goto')

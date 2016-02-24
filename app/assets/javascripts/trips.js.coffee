@@ -91,3 +91,4 @@ $ ->
   $('.trip-selection select').on 'change', ->
     window.location = $(@).prop('value')
 
+   $('[data-toggle="tooltip"]').tooltip()
