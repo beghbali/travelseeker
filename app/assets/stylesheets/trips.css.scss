@@ -141,6 +141,11 @@ $navbar-height: 6rem;
   color: $frame-color;
 }
 
+.nopadding {
+  padding: 0;
+  margin: 0;
+}
+
 body {
   font-family: "Helvetica Neue";
   margin: 0;
@@ -151,8 +156,6 @@ select.form-control, input[data-provide='datepicker'] {
   background-color: $dropdown-color;
   color: $dropdown-text-color;
 }
-
-
 
 .form-control {
   height: 3em;
@@ -334,16 +337,10 @@ a.save {
 }
 
 .details {
-  // position:absolute;
-  // top: 5em;
-  // right: 1em;
-  // background: white;
-  // border-radius: 0.25em;
-  // width: 25%;
   padding: 1em;
-  height: auto;
-  // max-height: 90%;
+  height: 100vh;
   overflow-y: scroll;
+  overflow-x: visible;
   @include under-navbar();
 
   ul {
@@ -410,10 +407,6 @@ a.save {
     width: 100%;
     height: 15em;
     position: relative;
-    // top: 3em;
-    // left: 0;
-    border-top-right-radius: 0.25em;
-    border-top-left-radius: 0.25em;
     z-index: 2000;
   }
 

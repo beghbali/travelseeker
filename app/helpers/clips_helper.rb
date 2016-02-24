@@ -28,6 +28,7 @@ module ClipsHelper
   end
 
   def present_commitment(clip)
+    return "" if clip.scheduled_at.try(:seconds_since_midnight) == 0.0
     begin
       if clip.transit?
         "departs at"

@@ -24,7 +24,7 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
             i.fa.fa-share-alt data-toggle="modal" data-target="#shareModal"
             .btn.btn-link.share.hidden-xs data-toggle="modal" data-target="#shareModal" Share Trip
           li
-            - if signed_in?
+            - if !signed_in?
               .btn.btn-default.save.hidden-xs Save My Trip
               .btn.btn-default.save.visible-xs
                 i.fa.fa-save
@@ -32,13 +32,13 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
               =link_to 'Sign out', sign_out_url(returnTo: new_trip_url), method: :delete, class: 'btn btn-link signout'
 
 .row
-  .col-md-9.pull-left
+  .col-md-9.col-sm-8.col-xs-6.nopadding
     .map
       #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
       .notes
         = react_component 'TripNotes', { trip: @trip, expanded: false }, { prerender: false }
 
-  .col-md-3.pull-right
+  .col-md-3.col-sm-4.col-xs-6
     .details
       =render @trip
 
