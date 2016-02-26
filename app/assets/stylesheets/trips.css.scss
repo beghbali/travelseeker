@@ -344,6 +344,10 @@ a.save {
   overflow-x: visible;
   @include under-navbar();
 
+  > div {
+    margin-bottom: 3em;
+  }
+
   ul {
     list-style-type: none;
     padding-left: 0;

@@ -90,8 +90,8 @@ class TripsController < ApplicationController
     end
 
     def authorize_trip_access
-      if !Rails.env.development?
-        return redirect_to(new_trip_path) if @trip.user != current_user
-      end
+      # if !Rails.env.development?
+      #   return redirect_to(new_trip_path) if @trip.user != current_user
+      # end
     end
 end
