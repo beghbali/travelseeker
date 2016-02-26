@@ -1,12 +1,20 @@
 module TripsHelper
 
-  def user_trips(user=current_user)
+  def user_trips_options(user=current_user)
+    options_for_select(user_trips(user), trip_path(@trip))
+  end
+
+  def user_trips(user)
     trips = Array.wrap(user.try(:trips) || @trip).reverse
-    options_for_select(trips.map{|trip| [trip.name, trip_path(trip)]}, trip_path(@trip))
+    trips.map{|trip| [trip.name, trip_path(trip)]}
   end
 
   def general_tags
     %w(Food Activity Lodging Unassigned)
+  end
+
+  def trips_class(trip_url)
+    trip_path(@trip) == trip_url ? 'chosen' : ''
   end
 
   def tag_class(tag)

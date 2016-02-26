@@ -124,6 +124,7 @@ $navbar-height: 6rem;
     }
   }
 }
+
 @media (max-width: 500px) {
   .navbar-header .navbar-brand {
     &.visible-xs img {
@@ -397,6 +398,7 @@ a.save {
 .clip-details {
   max-height: 80vh;
   overflow-y: scroll;
+  overflow-x: hidden;
 
   .btn {
     // margin-top: 1em;
@@ -491,6 +493,7 @@ a.save {
   overflow: hidden;
   .map {
     height: 100vh;
+    padding-bottom: 3em;
     @include under-navbar();
   }
 }
@@ -508,6 +511,17 @@ body, html {
 .navbar-nav.trip-selection {
   select {
     max-width: 20em;
+  }
+  .dropdown-menu {
+    max-width: 40em;
+    white-space: normal;
+  }
+  .dropdown ul li a{
+    color: black;
+
+    &.chosen {
+      background-color: $active-color;
+    }
   }
 }
 .navbar-nav.search {
@@ -531,9 +545,16 @@ body, html {
   cursor: pointer;
 }
 
-.bootstrap-datetimepicker-widget .dropdown-menu {
-  z-index: 10000;
+.clip-details .bootstrap-datetimepicker-widget {
+  position: inherit;
+  z-index:1 !important;
+}
+.clip-details .bootstrap-datetimepicker-widget.dropdown-menu {
+  z-index: 1;
   overflow: visible;
+  position: fixed;
+  top: 21em;
+  left: 53em;
 }
 
 @media (min-width: 768px) {

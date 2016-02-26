@@ -14,9 +14,19 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
         .tag.pill class=tag_class(tag) title=tag
           = Clip.tagged_with(tag).where(trip_id: @trip.trip_ids).count
     .nav.navbar-nav.navbar-right
-      .nav.navbar-nav.navbar-form.collapse.navbar-collapse.visible-mdlg.trip-selection
-        =bootstrap_nested_form_for :trips do |t|
-          = t.select :trip, user_trips, hide_label: true, inline: true
+      .nav.navbar-nav.navbar-form.trip-selection
+        .dropdown
+          button.btn.btn-default.dropdown-toggle type='button' id='tripsMenu' data-toggle='dropdown' aria-haspopup="true" aria-expanded="true"
+            | My Trips
+            span.caret
+          ul.dropdown-menu aria-labelledby='tripsMenu'
+            - user_trips(current_user).each do |name, url|
+              li
+                a href="#{url}" class=trips_class(url) = name
+
+
+        / =bootstrap_nested_form_for :trips do |t|
+        /   = t.select :trip, user_trips_options, hide_label: true, inline: true
 
       .nav.navbar-nav.navbar-form
         ul.nav.navbar-nav
