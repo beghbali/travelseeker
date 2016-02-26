@@ -544,7 +544,9 @@ body, html {
 .fa-share-alt {
   cursor: pointer;
 }
-
+.clip-details form .bootstrap_form-datetimepicker input{
+  z-index: 1;
+}
 .clip-details .bootstrap-datetimepicker-widget {
   position: inherit;
   z-index:1 !important;

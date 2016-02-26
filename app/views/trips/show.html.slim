@@ -8,13 +8,13 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
     .nav.navbar-nav.navbar-form.search
         =bootstrap_nested_form_for @trip, class: 'navbar-form form-horizontal' do |t|
           = t.fields_for :clips, @trip.clips.build  do |c|
-            = c.text_field :uri, {placeholder: 'Type place name or paste TripAdvisor and Yelp links', hide_label: true, append: c.submit('Add Item', class: 'btn btn-default'), class: 'autocomplete-places'}.merge(tooltip_options)
+            = c.text_field :uri, {placeholder: 'Type place name or paste TripAdvisor and Yelp links', hide_label: true, append: c.submit('Add', class: 'btn btn-default'), class: 'autocomplete-places'}.merge(tooltip_options)
     .nav.navbar-nav.navbar-form.collapse.navbar-collapse.hidden-mdlg
       -general_tags.each do |tag|
         .tag.pill class=tag_class(tag) title=tag
           = Clip.tagged_with(tag).where(trip_id: @trip.trip_ids).count
     .nav.navbar-nav.navbar-right
-      .nav.navbar-nav.navbar-form.trip-selection
+      .nav.navbar-nav.navbar-form.trip-selection.hidden-xs
         .dropdown
           button.btn.btn-default.dropdown-toggle type='button' id='tripsMenu' data-toggle='dropdown' aria-haspopup="true" aria-expanded="true"
             | My Trips
@@ -22,7 +22,7 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
           ul.dropdown-menu aria-labelledby='tripsMenu'
             - user_trips(current_user).each do |name, url|
               li
-                a href="#{url}" class=trips_class(url) = name
+                a href="#{url}" data-no-turbolink=true class=trips_class(url) = name
 
 
         / =bootstrap_nested_form_for :trips do |t|
@@ -31,6 +31,7 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
       .nav.navbar-nav.navbar-form
         ul.nav.navbar-nav
           li
+            i.visible-xs.fa.fa-plane data-toggle="modal" data-target="#tripsModal"
             i.fa.fa-share-alt data-toggle="modal" data-target="#shareModal"
             .btn.btn-link.share.hidden-xs data-toggle="modal" data-target="#shareModal" Share Trip
           li
@@ -40,7 +41,6 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
                 i.fa.fa-save
             - else
               =link_to 'Sign out', sign_out_url(returnTo: new_trip_url), method: :delete, class: 'btn btn-link signout'
-
 .row
   .col-md-9.col-sm-8.col-xs-6.nopadding
     .map
@@ -62,3 +62,20 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
           |Share this link with co-travelers and friends to get their inputs
       .modal-body
         h2 = trip_url(@trip)
+
+.modal.fade id="tripsModal" tabindex="-1" role="dialog" aria-labelledby="tripsModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title id="tripsModalLabel"
+          |My Trips
+      .modal-body
+        .row.visible-xs
+          ul
+            - user_trips(current_user).each do |name, url|
+              li
+                =link_to name, url, data: {'no-turbolink' => true }
+
+

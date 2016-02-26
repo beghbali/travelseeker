@@ -1,6 +1,7 @@
 class TripsController < ApplicationController
   layout 'trips'
   before_action :set_trip, only: [:show, :edit, :update, :destroy, :trip_details]
+  before_action :authorize_trip_access, only: [:show, :edit, :update, :destroy, :trip_details]
   before_action :set_show_variables, only: [:show, :update]
 
   # GET /trips
@@ -88,4 +89,9 @@ class TripsController < ApplicationController
       params.require(:trip).permit(:location, :latitude, :longitude, :start_date, :end_date, :days, :notes, clips_attributes: [:uri, :day_list, :date_list, :type_list, :day, :date])
     end
 
+    def authorize_trip_access
+      if !Rails.env.development?
+        return redirect_to(new_trip_path) if @trip.user != current_user
+      end
+    end
 end
