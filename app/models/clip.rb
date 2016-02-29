@@ -10,9 +10,9 @@ class Clip < ActiveRecord::Base
   accepts_nested_attributes_for :comment
 
   TYPES = %w(Food Activity Lodging Transit Unassigned)
-  before_save :set_reference
+  validates :reference, uniqueness: { scope: :trip_id }
+  before_save :set_reference, if: -> { reference.nil? }
   before_save :set_location
-  before_save :remove_unassigned_tag, if: -> { day_list.include? 'Unassigned' }
   before_create :create_and_assign_to_new_trip
 
   after_destroy :remove_orphaned_trip
@@ -52,6 +52,7 @@ class Clip < ActiveRecord::Base
 
   def scheduled_at=(date_or_string)
     self[:scheduled_at] = date_or_string.try(:to_datetime)
+    remove_unassigned_tag
   end
 
   def scheduled_day

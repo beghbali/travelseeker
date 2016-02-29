@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160207233938) do
+ActiveRecord::Schema.define(version: 20160229164433) do
 
   create_table "clips", force: true do |t|
     t.string   "uri"

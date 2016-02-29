@@ -461,9 +461,9 @@ a.save {
 }
 
 .trip {
-  overflow-y: scroll;
   margin-top: 1em;
   cursor: pointer;
+  overflow: hidden;
 
   &.selected{
     margin-top: 0;
@@ -473,6 +473,7 @@ a.save {
     display: inline;
   }
   .subtrips {
+
     li > div {
       text-align: left;
       // margin-right: 1em;
