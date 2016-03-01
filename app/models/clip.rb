@@ -133,7 +133,7 @@ class Clip < ActiveRecord::Base
   end
 
   def yelp?
-    !!(uri =~ /yelp\.com/)
+    !!(uri =~ /yelp\.com\/biz\//)
   end
 
   def tripadvisor?
