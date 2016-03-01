@@ -21,7 +21,7 @@ class Auth0Controller < ApplicationController
     if user_trips.nil?
       @redirect_path = new_trip_path
     else
-      @redirect_path = trip_path(user_trips.last)
+      @redirect_path = user_trips.any? ? trip_path(user_trips.last) : new_trip_path
     end
   end
 end
