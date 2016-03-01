@@ -1,7 +1,7 @@
 module TripsHelper
 
   def user_trips_options(user=current_user)
-    options_for_select(user_trips(user), trip_path(@trip))
+    options_for_select(['New Trip', new_trip_path] + user_trips(user), trip_path(@trip))
   end
 
   def user_trips(user)
