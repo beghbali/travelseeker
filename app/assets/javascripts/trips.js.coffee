@@ -7,6 +7,9 @@
 
 
 $ ->
+  initBestInPlace= ->
+    $(".best_in_place").best_in_place();
+
   $.fn.datepicker.defaults.format = "yyyy-mm-dd";
   initDateRangePicker= ->
     $('.bootstrap_form-datetimepicker').datetimepicker({sideBySide: false, allowInputToggle: true, keepOpen: false, format: "YYYY-MM-DD HH:mm Z", useCurrent: false});
@@ -82,13 +85,16 @@ $ ->
 
 
   initDateRangePicker();
+  initBestInPlace();
 
   $(document).on 'page:partial-load', ->
     $('.clip.selected').first().data('active', true); #set one of the ones in view to be the active oen
     drawPins(window.map);
     initDateRangePicker();
+    initBestInPlace();
 
   $('.trip-selection select').on 'change', ->
     window.location = $(@).prop('value')
 
-   $('[data-toggle="tooltip"]').tooltip()
+  $('[data-toggle="tooltip"]').tooltip()
+

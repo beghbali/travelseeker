@@ -22,7 +22,7 @@ class Clip < ActiveRecord::Base
   scope :for_session, ->(session_id) { where(session_id: session_id).order(created_at: :desc)}
   scope :known_location, -> { where('latitude IS NOT NULL') }
 
-  delegate :name, :address, :city, :state, :country, :external_reference, :url, :rating_image_url, :phone, :hours, :image_url, to: :metadata, allow_nil: true
+  delegate :address, :city, :state, :country, :external_reference, :url, :rating_image_url, :phone, :hours, :image_url, to: :metadata, allow_nil: true
 
   validates :uri, presence: true
 
@@ -48,6 +48,10 @@ class Clip < ActiveRecord::Base
       parent = parent.parent
     end
     parent
+  end
+
+  def name
+    self[:name] || metadata.name
   end
 
   def scheduled_at=(date_or_string)
@@ -137,7 +141,7 @@ class Clip < ActiveRecord::Base
   end
 
   def tripadvisor?
-    !!(uri =~ /tripadvisor\.com/)
+    !!(uri =~ /tripadvisor\.com\/.+_Review/)
   end
 
   def yelp_business_id

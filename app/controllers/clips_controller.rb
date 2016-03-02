@@ -52,10 +52,10 @@ class ClipsController < ApplicationController
     respond_to do |format|
       if @clip.update(clip_params)
         format.html { redirect_to @clip.ancestor, notice: 'Clip was successfully updated.', change: "list"}
-        format.json { head :no_content }
+        format.json { respond_with_bip(@clip) }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @clip.errors, status: :unprocessable_entity }
+        format.json { respond_with_bip(@clip) }
       end
     end
   end
@@ -78,7 +78,7 @@ class ClipsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def clip_params
-      params.require(:clip).permit(:uri, :scheduled_at, :date_list, :day_list, :type_list, comment_attributes: [:comment])
+      params.require(:clip).permit(:name, :uri, :scheduled_at, :date_list, :day_list, :type_list, comment_attributes: [:comment])
     end
 
 end

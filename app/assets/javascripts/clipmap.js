@@ -1,7 +1,6 @@
 function initAutocomplete(map) {
-   var input = /** @type {!HTMLInputElement} */
+  var input = /* @type {!HTMLInputElement} */
       $('.autocomplete-places')[0];
-
   var autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.bindTo('bounds', map);
 

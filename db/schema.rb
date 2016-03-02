@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229164433) do
+ActiveRecord::Schema.define(version: 20160302083823) do
 
   create_table "clips", force: true do |t|
     t.string   "uri"
@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(version: 20160229164433) do
     t.float    "longitude"
     t.integer  "trip_id"
     t.datetime "scheduled_at"
+    t.string   "name"
   end
 
   create_table "comments", force: true do |t|

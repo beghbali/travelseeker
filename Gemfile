@@ -51,6 +51,8 @@ gem 'react-bootstrap-rails'
 gem 'countries'
 gem 'jquery-turbolinks'
 gem "auto_strip_attributes", "~> 2.0"
+gem 'best_in_place', '~> 3.0.1'
+gem 'jquery-ui-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
