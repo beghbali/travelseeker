@@ -9,6 +9,10 @@
 $ ->
   initBestInPlace= ->
     $(".best_in_place").best_in_place();
+    $(document).on 'focus', '.name .autocomplete-places input, .address .autocomplete-places input', (e)->
+      $input = $(e.target)
+      $clip = $input.closest('.clip-details')
+      initAutocomplete(window.map, $input[0], $clip.find('#clip_latitude'), $clip.find('#clip_longitude'))
 
   $.fn.datepicker.defaults.format = "yyyy-mm-dd";
   initDateRangePicker= ->

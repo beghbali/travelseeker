@@ -1,6 +1,5 @@
-function initAutocomplete(map) {
-  var input = /* @type {!HTMLInputElement} */
-      $('.autocomplete-places')[0];
+function initAutocomplete(map, input, latitude, longitude) {
+
   var autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.bindTo('bounds', map);
 
@@ -14,8 +13,8 @@ function initAutocomplete(map) {
       return;
     }
 
-    $('#trip_latitude').prop('value', place.geometry.location.lat);
-    $('#trip_longitude').prop('value', place.geometry.location.lng);
+    latitude.prop('value', place.geometry.location.lat);
+    longitude.prop('value', place.geometry.location.lng);
   });
 }
 
@@ -192,5 +191,7 @@ function drawPins(map) {
   //       }
   // });
 
-  initAutocomplete(map);
+  var input = /* @type {!HTMLInputElement} */
+      $('.autocomplete-places')[0];
+  initAutocomplete(map, input, $('#trip_latitude'), $('#trip_longitude'));
 }

@@ -22,7 +22,7 @@ class Clip < ActiveRecord::Base
   scope :for_session, ->(session_id) { where(session_id: session_id).order(created_at: :desc)}
   scope :known_location, -> { where('latitude IS NOT NULL') }
 
-  delegate :address, :city, :state, :country, :external_reference, :url, :rating_image_url, :phone, :hours, :image_url, to: :metadata, allow_nil: true
+  delegate :city, :state, :country, :external_reference, :url, :rating_image_url, :phone, :hours, :image_url, to: :metadata, allow_nil: true
 
   validates :uri, presence: true
 
@@ -50,8 +50,18 @@ class Clip < ActiveRecord::Base
     parent
   end
 
+  def address
+    self[:address].presence || metadata.address
+  end
+
   def name
-    self[:name] || metadata.name
+    self[:name].presence || metadata.name || self.uri
+  end
+
+  def name=(new_name)
+    super
+    self.reference = nil
+    self[:address] = nil
   end
 
   def scheduled_at=(date_or_string)
@@ -133,7 +143,7 @@ class Clip < ActiveRecord::Base
   end
 
   def link?
-    !!(uri =~ /https?:/)
+    !!(uri =~ /https?:/) && name == uri
   end
 
   def yelp?
@@ -161,7 +171,7 @@ class Clip < ActiveRecord::Base
   end
 
   def google_places
-    @google_places ||= GooglePlacesMetaData.new(uri, near, reference)
+    @google_places ||= GooglePlacesMetaData.new(self[:name] || uri, near, reference)
   end
 
   def weblink

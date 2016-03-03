@@ -5,10 +5,10 @@
   img.banner src="#{clip.image_url || google_static_map_url(clip.location, 300)}"
 
   h2.name
-    = best_in_place clip, :name, as: :input, value: (clip.name || clip.uri), activator: "#clip_#{clip.id}_name_edit", place_holder: 'Enter Name'
+    = best_in_place clip, :name, as: :input, activator: "#clip_#{clip.id}_name_edit", class: 'autocomplete-places', place_holder: 'Enter Name'
     i.fa.fa-pencil.small id="clip_#{clip.id}_name_edit"
-  h4
-    = best_in_place clip, :address, as: :input, activator: "#clip_#{clip.id}_address_edit", inner_class: 'autocomplete-places', place_holder: 'Enter Address'
+  h4.address
+    = best_in_place clip, :address, as: :input, activator: "#clip_#{clip.id}_address_edit", class: 'autocomplete-places', place_holder: 'Enter Address'
     i.fa.fa-pencil.small id="clip_#{clip.id}_address_edit"
   .row
     .col-md-6
@@ -34,6 +34,8 @@
         = f.fields_for :comment, clip.comment || clip.build_comment do |c|
           = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
     .row
+      =f.hidden_field :latitude
+      =f.hidden_field :longitude
       button.btn.btn-success.btn-block type='submit' Save
   .row
     .col-md-12.delete

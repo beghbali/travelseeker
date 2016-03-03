@@ -20,6 +20,9 @@
 #= require_tree ./routers
 #= require components
 #= require moment
+#= require best_in_place
+#= require jquery-ui
+#= require best_in_place.jquery-ui
 #= require bootstrap-datetimepicker
 #= require jquery_nested_form
 #= require bootstrap-transitions
@@ -29,9 +32,7 @@
 #= require bootstrap-modal
 #= require bootstrap-tooltips
 #= require bootstrap-dropdown
-#= require best_in_place
-#= require jquery-ui
-#= require best_in_place.jquery-ui
+
 
 $ ->
   goto_anchor = $('[data-goto]').data('goto')

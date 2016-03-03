@@ -404,6 +404,9 @@ a.save {
   overflow-y: scroll;
   overflow-x: hidden;
 
+  .best_in_place input {
+    width: 100%;
+  }
   .btn {
     // margin-top: 1em;
     margin-bottom: 1em;

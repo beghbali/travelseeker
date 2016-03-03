@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160302083823) do
+ActiveRecord::Schema.define(version: 20160303175337) do
 
   create_table "clips", force: true do |t|
     t.string   "uri"
@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20160302083823) do
     t.integer  "trip_id"
     t.datetime "scheduled_at"
     t.string   "name"
+    t.string   "address"
   end
 
   create_table "comments", force: true do |t|
