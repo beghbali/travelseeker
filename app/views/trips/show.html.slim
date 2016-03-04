@@ -1,3 +1,6 @@
+-@trip.errors.full_messages.each do |error|
+  .alert.alert-warning= error
+
 nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to_json}"
   .container-fluid
     .navbar-header

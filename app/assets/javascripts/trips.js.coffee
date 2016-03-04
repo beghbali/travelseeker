@@ -101,4 +101,4 @@ $ ->
     window.location = $(@).prop('value')
 
   $('[data-toggle="tooltip"]').tooltip()
-
+  $('.alert').fadeOut(5000);

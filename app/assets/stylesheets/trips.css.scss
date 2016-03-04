@@ -497,11 +497,18 @@ a.save {
   cursor: pointer;
 }
 
-.trips#show {
+.trips#show, .trips#update {
   overflow: hidden;
   .map {
     height: 100vh;
     padding-bottom: 3em;
+    @include under-navbar();
+  }
+
+  > .alert {
+    z-index: 1100;
+    position: fixed;
+    width: 100%;
     @include under-navbar();
   }
 }

@@ -11,6 +11,7 @@ class Clip < ActiveRecord::Base
 
   TYPES = %w(Food Activity Lodging Transit Unassigned)
   validates :reference, uniqueness: { scope: :trip_id }
+  validates :uri, uniqueness: true
   before_save :set_reference, if: -> { reference.nil? }
   before_save :set_location
   before_create :create_and_assign_to_new_trip
@@ -52,6 +53,10 @@ class Clip < ActiveRecord::Base
 
   def address
     self[:address].presence || metadata.address
+  end
+
+  def user_provided_name
+    self[:name] || uri
   end
 
   def name
@@ -143,7 +148,7 @@ class Clip < ActiveRecord::Base
   end
 
   def link?
-    !!(uri =~ /https?:/) && name == uri
+    !!(uri =~ /https?:/) && user_provided_name == uri
   end
 
   def yelp?
@@ -171,7 +176,7 @@ class Clip < ActiveRecord::Base
   end
 
   def google_places
-    @google_places ||= GooglePlacesMetaData.new(self[:name] || uri, near, reference)
+    @google_places ||= GooglePlacesMetaData.new(user_provided_name, near, reference)
   end
 
   def weblink
