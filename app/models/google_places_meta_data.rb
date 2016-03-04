@@ -40,6 +40,10 @@ class GooglePlacesMetaData < MetaData
     NullObject.new
   end
 
+  def has_any_data?
+    google_places_data.class != NullObject
+  end
+
   def latitude
     google_places_data.lat
   end

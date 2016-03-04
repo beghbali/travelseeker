@@ -11,8 +11,8 @@ class Clip < ActiveRecord::Base
 
   TYPES = %w(Food Activity Lodging Transit Unassigned)
   validates :reference, uniqueness: { scope: :trip_id }
-  validates :uri, uniqueness: true
-  before_save :set_reference, if: -> { reference.nil? }
+  validates :uri, uniqueness: { scope: :trip_id }
+  before_validation :set_reference, if: -> { reference.nil? }
   before_save :set_location
   before_create :create_and_assign_to_new_trip
 
@@ -204,7 +204,7 @@ class Clip < ActiveRecord::Base
       elsif link?
         weblink
       else
-        google_places
+        google_places.has_any_data? ? google_places : weblink
       end
   rescue GooglePlacesMetaData::NoGooglePlacesRecordFoundError
     Rails.logger.warn "No spots found. failed for terms #{uri}"
