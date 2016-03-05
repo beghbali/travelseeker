@@ -18,6 +18,8 @@ module ClipsHelper
   end
 
   def scheduled_label(clip)
+    return "Assign Date/Time"
+
     if clip.transit?
       "Add Departure Time"
     elsif clip.lodging?
@@ -29,7 +31,6 @@ module ClipsHelper
 
   def present_commitment(clip)
     return "" if clip.scheduled_at.try(:seconds_since_midnight) == 0.0
-    return "assign date/time"
     begin
       if clip.transit?
         "departs at"
