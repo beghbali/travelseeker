@@ -14,11 +14,15 @@ class GooglePlacesMetaData < MetaData
     @reference = reference
   end
 
+  def data_cache_key
+    ['google-places', terms, reference]
+  end
+
   def google_places_data
     @google_places_data ||= begin
-      Rails.cache.fetch(['google-places', terms, reference], expires_in: 1.day) do
+      Rails.cache.fetch(data_cache_key, expires_in: 1.day) do
         return no_spots_found if terms.blank?
-        response = query_by_reference || (location && query_by_location.first) || query_by_terms.first
+        response = query_by_reference || first_location_search_result || first_terms_search_result
         puts ">>QUERY: #{terms}"
         puts response.inspect
         response.present? ? response : no_spots_found
@@ -80,9 +84,9 @@ class GooglePlacesMetaData < MetaData
         google_places_data.city
       else
         data = google_places_data.address_components && google_places_data.address_components.detect{|c| c['types'].include? 'locality'}
-        data.present? ? data['long_name'] : address_components[1]
+        data.present? ? data['long_name'] : address_components[-2]
       end
-    end.try(:strip!)
+    end.try(:strip)
   end
 
   def address_components
@@ -115,5 +119,15 @@ class GooglePlacesMetaData < MetaData
 
   private def query_by_terms
     client.spots_by_query(terms, radius: 50000)
+  end
+
+  private def first_location_search_result
+    self.reference = (location && query_by_location.first.place_id)
+    query_by_reference
+  end
+
+  private def first_terms_search_result
+    self.reference =  query_by_terms.first.try(:place_id)
+    query_by_reference
   end
 end
