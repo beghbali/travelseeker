@@ -20,13 +20,21 @@ class @TripNotesForm extends React.Component
   shouldComponentUpdate: (nextProps, nextState)->
     false
 
+  placeHolder: ->
+    "Welcome! Here's a space where you can save general notes about your trip.
+    \n\n
+    For more structured travel planning, collect ideas from your usual sources, such as friends and TripAdvisor, and then enter them into the search bar above. We automatically plot your ideas on this map and categorize them for you -- they will appear in the column on the right.
+    \n\n
+    If you like to plan in more detail, use the column on the right to assign ideas to specific days and add specific notes such as booking details. You can also share your plan with friends or travel companions to get their input.
+    "
+
   render: ->
     Input = ReactBootstrap.Input
 
     `<Input
         type="textarea"
         value={this.props.model.attributes.notes}
-        placeholder="Type in any general notes about your trip to organize your thoughts"
+        placeholder={this.placeHolder()}
         label={false}
         bsStyle={this.classNames()}
         hasFeedback

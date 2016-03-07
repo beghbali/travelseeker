@@ -11,7 +11,7 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
     .nav.navbar-nav.navbar-form.search
         =bootstrap_nested_form_for @trip, class: 'navbar-form form-horizontal' do |t|
           = t.fields_for :clips, @trip.clips.build  do |c|
-            = c.text_field :uri, {placeholder: 'Type place name or paste TripAdvisor and Yelp links', hide_label: true, append: c.submit('Add', class: 'btn btn-default'), class: 'autocomplete-places'}.merge(tooltip_options)
+            = c.text_field :uri, {placeholder: 'Type place name or paste TripAdvisor and Yelp links', hide_label: true, append: c.submit('Add', class: 'btn btn-default'), class: 'autocomplete-places'}
     .nav.navbar-nav.navbar-form.collapse.navbar-collapse.hidden-mdlg
       -general_tags.each do |tag|
         .tag.pill class=tag_class(tag) title=tag

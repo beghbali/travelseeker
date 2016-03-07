@@ -132,14 +132,21 @@ function initMap() {
   });
 
   window.map = map;
+  window.markers = [];
   drawPins(map);
+}
+
+function removeMarkers(){
+  for(i=0; i<window.markers.length; i++){
+      window.markers[i].setMap(null);
+  }
 }
 
 function drawPins(map) {
   var bounds = new google.maps.LatLngBounds();
 
   var pins = $('.clip.selected');
-  var markers = [];
+  removeMarkers();
 
   $.each (pins, function(index, clip) {
     loc = new google.maps.LatLng($(clip).data('latitude'), $(clip).data('longitude'))
@@ -168,7 +175,7 @@ function drawPins(map) {
       infowindow.open(map,marker);
       map.setCenter(loc);
     }
-    markers.push(marker);
+    window.markers.push(marker);
   });
 
   if(pins.length > 0) {
