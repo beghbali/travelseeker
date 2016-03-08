@@ -1,4 +1,7 @@
-a.save Sign In
+- if signed_in?
+  a.save Sign In
+- else
+  = link_to 'Sign Out', sign_out_path, method: :delete
 .hero
   .row
     h1 Welcome To TravelSeeker
