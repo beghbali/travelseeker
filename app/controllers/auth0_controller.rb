@@ -1,27 +1,21 @@
 class Auth0Controller < ApplicationController
-  before_action :set_redirect_path
 
   def callback
     user_info = request.env['omniauth.auth']
     user = User.find_or_create_by_email(user_info[:info][:email])
     user.claim_trips_for_session!(session.id)
     session[:user_id] = user.id
-    redirect_to @redirect_path
+    redirect_to after_sign_in_path
   end
 
   def failure
     error_message = request.params['message']
 
-    redirect_to @redirect_path, flash: {error: error_message}
+    redirect_to after_sign_in_path, flash: {error: error_message}
   end
 
-  private def set_redirect_path
-     user_trips = Trip.find_all_by_session_id(session.id)
-
-    if user_trips.nil?
-      @redirect_path = new_trip_path
-    else
-      @redirect_path = user_trips.any? ? trip_path(user_trips.last) : new_trip_path
-    end
+  private def after_sign_in_path
+    trip = current_user.trips.last
+    trip.present? ? trip_path(trip) : new_trip_path
   end
 end
