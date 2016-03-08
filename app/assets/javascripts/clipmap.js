@@ -142,6 +142,30 @@ function removeMarkers(){
   }
 }
 
+function fitToMarkers(markers) {
+
+  var bounds = new google.maps.LatLngBounds();
+
+  // Create bounds from markers
+  for( var index in markers ) {
+      var latlng = markers[index].getPosition();
+      bounds.extend(latlng);
+  }
+
+  // Don't zoom in too far on only one marker
+  if (bounds.getNorthEast().equals(bounds.getSouthWest())) {
+     var extendPoint1 = new google.maps.LatLng(bounds.getNorthEast().lat() + 0.01, bounds.getNorthEast().lng() + 0.01);
+     var extendPoint2 = new google.maps.LatLng(bounds.getNorthEast().lat() - 0.01, bounds.getNorthEast().lng() - 0.01);
+     bounds.extend(extendPoint1);
+     bounds.extend(extendPoint2);
+  }
+
+  map.fitBounds(bounds);
+
+  // Adjusting zoom here doesn't work :/
+
+}
+
 function drawPins(map) {
   var bounds = new google.maps.LatLngBounds();
 
@@ -178,9 +202,11 @@ function drawPins(map) {
     window.markers.push(marker);
   });
 
+  fitToMarkers(window.markers)
+
   if (pins.length == 1) {
-    map.fitBounds(bounds);
-    map.setZoom(map.getZoom()-4);
+    // map.fitBounds(bounds);
+    // map.setZoom(map.getZoom()-4);
   } else if (pins.length > 1) {
     map.fitBounds(bounds);
   } else {
