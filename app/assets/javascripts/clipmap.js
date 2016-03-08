@@ -178,7 +178,10 @@ function drawPins(map) {
     window.markers.push(marker);
   });
 
-  if(pins.length > 0) {
+  if (pins.length == 1) {
+    map.fitBounds(bounds);
+    map.setZoom(map.getZoom()-4);
+  } else if (pins.length > 1) {
     map.fitBounds(bounds);
   } else {
     var trip = $('.trip.selected');
