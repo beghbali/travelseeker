@@ -97,6 +97,10 @@ $ ->
     initDateRangePicker();
     initBestInPlace();
 
+  $(document).on 'click', '[data-open]', (e)->
+    $('.trips > .row > div > .details .back').trigger('click');
+    $($(e.target).data('open')).trigger('click');
+
   $('.trip-selection select').on 'change', ->
     window.location = $(@).prop('value')
 
