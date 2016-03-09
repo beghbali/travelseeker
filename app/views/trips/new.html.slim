@@ -1,22 +1,27 @@
 - if signed_in?
-  a.save Sign In
-- else
   = link_to 'Sign out', sign_out_url(returnTo: new_trip_url), method: :delete, class: 'signout'
+- else
+  a.save Sign In
 .hero
   .row
     h1 Welcome To TravelSeeker
     h4 Say goodbye to travel planning stress
   .row
     ul.list-inline
-      li.col-md-4
-        h2 collect
-        p Painlessly add activities, hotels, and restaurants you’re excited about
-      li.col-md-4
-        h2 visualize
-        p Make better decisions from seeing all your ideas pinned to your personal trip map
-      li.col-md-4
-        h2 do
-        p Have all your trip information in one place: organized, searchable, and available offline.
+      - if signed_in?
+        - current_user.trips.each do |trip|
+          li
+            =link_to trip.name, trip_path(trip)
+      - else
+        li.col-md-4
+          h2 collect
+          p Painlessly add activities, hotels, and restaurants you’re excited about
+        li.col-md-4
+          h2 visualize
+          p Make better decisions from seeing all your ideas pinned to your personal trip map
+        li.col-md-4
+          h2 do
+          p Have all your trip information in one place: organized, searchable, and available offline.
   .row
     .col-md-3
     .col-md-6
