@@ -217,6 +217,13 @@ a.save, a.signout {
     // width: 80%;
     margin: 0 auto;
   }
+
+  a {
+    color: white;
+    &:visited {
+      color: white;
+    }
+  }
 }
 .map {
   height: 60vh;

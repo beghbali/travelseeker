@@ -35,8 +35,9 @@
     },
     saveData: function() {
       this.setState({ loading: true }, function() {
+        self = this
         this.props.model.save(this.props.model.attributes, {patch: true}).always(function () {
-         this.setState({loading: false})
+         self.setState({loading: false})
        });
       });
     },

@@ -110,6 +110,7 @@ class Clip < ActiveRecord::Base
     self.trip = designated_trip
     type_list.add(metadata.type || 'Unassigned')
     day_list.add 'Unassigned'
+    return false if !valid?
   end
 
   def comment_attributes=(attrs)
