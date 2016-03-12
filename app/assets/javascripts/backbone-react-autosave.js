@@ -30,15 +30,18 @@
       this.setState({autosave: setInterval(this.queueAutoSave.bind(this), 5000)});
     },
     stopAutoSave: function() {
+      this.saveData();
       clearInterval(this.state.autosave);
       this.setState({autosave: null});
     },
     saveData: function() {
       this.setState({ loading: true }, function() {
         self = this
-        this.props.model.save(this.props.model.attributes, {patch: true}).always(function () {
-         self.setState({loading: false})
-       });
+        if (this.props.model.hasChanged()) {
+          this.props.model.save(this.props.model.attributes, {patch: true}).always(function () {
+           self.setState({loading: false})
+         });
+        }
       });
     },
     queueAutoSave: function() {
