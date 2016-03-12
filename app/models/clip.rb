@@ -14,6 +14,7 @@ class Clip < ActiveRecord::Base
   validates :uri, uniqueness: { scope: :trip_id }
   before_validation :set_reference, if: -> { reference.nil? }
   before_save :set_location
+  before_save :ensure_tagged
   before_create :create_and_assign_to_new_trip
 
   after_destroy :remove_orphaned_trip
@@ -108,8 +109,8 @@ class Clip < ActiveRecord::Base
         session_id: session_id, user_id: trip.user_id, parent_id: trip, city: city, state: state, country: country)
     puts "CITY: #{designated_trip.try(:city)}"
     self.trip = designated_trip
-    type_list.add(metadata.type || 'Unassigned')
-    day_list.add 'Unassigned'
+    type_list.add metadata.type
+    type_list.remove 'Unassigned' unless type_list.empty?
     return false if !valid?
   end
 
@@ -141,6 +142,11 @@ class Clip < ActiveRecord::Base
 
   def location
     Location.new(self.slice(*%i(latitude longitude)).symbolize_keys)
+  end
+
+  def ensure_tagged
+    day_list.add 'Unassigned' if day_list.empty?
+    type_list.add 'Unassigned' if type_list.empty?
   end
 
   def set_location

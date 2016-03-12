@@ -73,6 +73,8 @@ class GooglePlacesMetaData < MetaData
       "Food"
     elsif (google_places_data.types & ["airport", "train_station", "transit_station"]).length > 0
       "Transit"
+    elsif (google_places_data.types & ["lodging"]).length > 0
+      "Lodging"
     elsif (google_places_data.types & ["point_of_interest"]).length > 0
       "Activity"
     end
