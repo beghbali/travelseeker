@@ -588,6 +588,7 @@ body, html {
       max-width: 50%;
       margin-bottom: 0px;
    }
+
   }
 @media (max-width: 1400px) {
   .collapse.navbar-collapse.visible-mdlg {
@@ -614,6 +615,7 @@ body, html {
    }
    .container-fluid {
      display: flex;
+     overflow: scroll;
    }
    .navbar-nav {
     margin: 0;
@@ -634,10 +636,30 @@ body, html {
     }
    }
 
+
    #shareModal {
     h2 {
       font-size: small;
     }
+   }
+
+   .notes {
+     i {
+       &:after {
+         content: "";
+       }
+     }
+
+     > div > div {
+       padding: 0;
+
+       .notes-section {
+
+         &.expanded {
+           width: 100vw;
+         }
+       }
+     }
    }
 }
 @media (max-width: 1600px) {
@@ -645,5 +667,3 @@ body, html {
     display: none !important;
   }
 }
-
-
