@@ -17,4 +17,10 @@ class ApplicationController < ActionController::Base
   def signed_in?
     current_user.id.present?
   end
+
+  def sign_out
+    session[:user_id] = nil
+    redirect_to "https://zentrips.auth0.com/v2/logout?returnTo=http://www.tryzentrips.com/"
+  end
+
 end

@@ -35,12 +35,12 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
             i.fa.fa-share-alt data-toggle="modal" data-target="#shareModal"
             .btn.btn-link.share.hidden-xs data-toggle="modal" data-target="#shareModal" Share Trip
           li
-            - if !signed_in?
+            - if signed_in?
+              =link_to 'Sign out', sign_out_url, method: :delete, class: 'btn btn-link signout'
+            - else
               .btn.btn-default.save.hidden-xs Save My Trip
               .btn.btn-default.save.visible-xs
                 i.fa.fa-save
-            - else
-              =link_to 'Sign out', sign_out_url(returnTo: new_trip_url), method: :delete, class: 'btn btn-link signout'
 
 .container-fluid
   .row
