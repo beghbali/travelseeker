@@ -71,6 +71,10 @@ class Clip < ActiveRecord::Base
     self[:address] = nil
   end
 
+  def scheduled?
+    scheduled_at.present?
+  end
+
   def scheduled_at=(date_or_string)
     self[:scheduled_at] = date_or_string.try(:to_datetime)
     remove_unassigned_tag if self[:scheduled_at].present?
@@ -156,7 +160,7 @@ class Clip < ActiveRecord::Base
   end
 
   def ensure_tagged
-    day_list.add 'Unassigned' if day_list.empty?
+    day_list.add 'Unassigned' if day_list.empty? && !scheduled?
     type_list.add 'Unassigned' if type_list.empty?
   end
 
