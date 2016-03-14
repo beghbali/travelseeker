@@ -14,6 +14,7 @@ class Clip < ActiveRecord::Base
   validates :uri, uniqueness: { scope: :trip_id }
   before_validation :set_reference, if: -> { reference.nil? }
   before_save :set_location
+  before_save :reassociate_annotated_weblinks, if: :persisted?
   before_save :ensure_tagged
   before_create :create_and_assign_to_new_trip
 
@@ -103,14 +104,24 @@ class Clip < ActiveRecord::Base
     ISO3166::Country.find_by_name(self.country) == ISO3166::Country.find_by_name(obj_with_country.country)
   end
 
-  def create_and_assign_to_new_trip
-    designated_trip = trip.trips.in_city(city).first ||
-      trip.trips.create!(location: city, latitude: latitude, longitude: longitude,
-        session_id: session_id, user_id: trip.user_id, parent_id: trip, city: city, state: state, country: country)
+  def reassociate_annotated_weblinks
+    if trip.city != self.city
+      create_and_assign_to_new_trip(trip.parent)
+    end
+  end
+
+  def existing_city_trip(in_trip)
+    in_trip.trips.in_city(city).first
+  end
+
+  def create_and_assign_to_new_trip(in_trip=self.trip)
+    designated_trip = existing_city_trip(in_trip) ||
+      in_trip.trips.create!(location: city, latitude: latitude, longitude: longitude,
+        session_id: session_id, user_id: in_trip.user_id, parent_id: in_trip, city: city, state: state, country: country)
     puts "CITY: #{designated_trip.try(:city)}"
     self.trip = designated_trip
     type_list.add metadata.type
-    type_list.remove 'Unassigned' unless type_list.empty?
+    type_list.remove 'Unassigned' if type_list.count > 1
     return false if !valid?
   end
 

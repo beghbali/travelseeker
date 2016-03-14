@@ -80,5 +80,4 @@ class ClipsController < ApplicationController
     def clip_params
       params.require(:clip).permit(:name, :address, :latitude, :longitude, :uri, :scheduled_at, :date_list, :day_list, :type_list, comment_attributes: [:comment])
     end
-
 end
