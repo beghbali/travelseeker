@@ -1,7 +1,7 @@
 Zentrips::Application.routes.draw do
   get "auth0/callback"
   get "auth0/failure"
-  delete "signout" => "application#signout", as: :sign_out
+  delete "signout" => "application#sign_out", as: :sign_out
 
   resources :trips do
     get :trip_details
