@@ -56,7 +56,7 @@ class TripsController < ApplicationController
         format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully updated.', change: "list" }
         format.json { head :no_content }
       else
-        format.html { render action: 'show' }
+        format.html { redirect_to @trip.parent || @trip }
         format.json { render json: @trip.errors, status: :unprocessable_entity }
       end
     end

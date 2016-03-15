@@ -193,7 +193,7 @@ function drawPins(map) {
       content: '<h5><a href="" data-open="#'+$(clip).prop('id')+'" onclick="return false;">'+$(clip).data('name')+'</h5>'
     });
 
-    marker = new google.maps.Marker({
+    var marker = new google.maps.Marker({
       position: loc,
       map: map,
       title: $(clip).data('name'),
