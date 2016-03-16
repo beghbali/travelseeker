@@ -1,7 +1,7 @@
 - if signed_in?
   = link_to 'Sign out', sign_out_url, method: :delete, class: 'signout'
 - else
-  a.save Sign In
+  a.save href='javascript:return false;' Sign In
 .hero
   .row
     h1 Welcome To TravelSeeker
