@@ -35,7 +35,7 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
             i.fa.fa-share-alt data-toggle="modal" data-target="#shareModal"
             .btn.btn-link.share.hidden-xs data-toggle="modal" data-target="#shareModal" Share Trip
           li
-            - if !signed_in?
+            - if signed_in?
               =link_to 'Sign out', sign_out_url, method: :delete, class: 'btn btn-link signout hidden-xs'
               =link_to sign_out_url, method: :delete, class: 'btn btn-link signout visible-xs' do
                 i.fa.fa-sign-out
