@@ -174,11 +174,11 @@ class Clip < ActiveRecord::Base
   end
 
   def yelp?
-    !!(uri =~ /yelp\.com\/biz\//)
+    !!(uri =~ /yelp\..{2,3}\/biz\//)
   end
 
   def tripadvisor?
-    !!(uri =~ /tripadvisor\.com\/.+_Review/)
+    !!(uri =~ /tripadvisor\..{2,3}\/.+_Review/)
   end
 
   def yelp_business_id
