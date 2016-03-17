@@ -32,18 +32,23 @@ $navbar-height: 6rem;
 
   &.food:before {
     content: "\f0f5";
+    color: #be5290;
   }
   &.activity:before {
     content: "\f06e";
+    color: #ffc952;
   }
   &.lodging:before {
     content: "\f236";
+    color: #ff7473;
   }
   &.unassigned:before {
     content: "\f128";
+    color: #004e66;
   }
   &.transit:before {
     content: "\f072";
+    color: #47b8e0;
   }
 }
 
