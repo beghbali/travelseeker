@@ -197,7 +197,7 @@ function drawPins(map) {
       position: loc,
       map: map,
       title: $(clip).data('name'),
-      icon: $('.markers .highlighted').data('path')
+      icon: $(clip).data('icon-path')
     });
 
     marker.addListener('click', function() {

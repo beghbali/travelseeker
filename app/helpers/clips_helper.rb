@@ -45,4 +45,8 @@ module ClipsHelper
   def scheduled_class(clip)
     clip.scheduled_at.present? ? '' : 'hidden'
   end
+
+  def icon_path(clip)
+    asset_path("#{clip.type_list.first.downcase}.svg")
+  end
 end
