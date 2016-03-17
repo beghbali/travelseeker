@@ -53,6 +53,10 @@ $ ->
   $(document).on 'click', '.day', (e)->
     $(@).toggleClass('active');
 
+  $(document).on 'click', '.trip > h2', (e)->
+    $('.clip').addClass('selected');
+    drawPins(window.map);
+
   $(document).on 'click', '.subtrips .trip', (e)->
     tripId = $(@).data('id')
     $('.clip[data-trip!='+tripId+']').removeClass('selected');
