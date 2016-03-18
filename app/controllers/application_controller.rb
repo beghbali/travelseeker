@@ -23,4 +23,16 @@ class ApplicationController < ActionController::Base
     redirect_to "https://zentrips.auth0.com/v2/logout?returnTo=http://www.tryzentrips.com/"
   end
 
+  def sign_in(email, uid)
+    if email.present?
+      user = User.find_or_create_by_email(email)
+    else
+      user = User.find_or_create_by_uid(uid)
+    end
+    session[:user_id] = user.id
+  end
+
+  def claim_trips
+    current_user.claim_trips_for_session!(session.id)
+  end
 end

@@ -1,0 +1,5 @@
+.hero
+  .row
+    = bootstrap_form_for current_user, url: confirm_email_auth0_path do |f|
+      = f.email_field :email
+      = f.submit

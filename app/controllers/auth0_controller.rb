@@ -2,11 +2,14 @@ class Auth0Controller < ApplicationController
 
   def callback
     user_info = request.env['omniauth.auth']
-    Rails.logger.error user_info.inspect
-    user = User.find_or_create_by_email(user_info[:info][:email])
-    user.claim_trips_for_session!(session.id)
-    session[:user_id] = user.id
-    redirect_to after_sign_in_path
+    email = user_info[:info][:email]
+
+    if email.present?
+      @email = email
+      confirm_email
+    else
+      redirect_to provide_email_path
+    end
   end
 
   def failure
@@ -15,8 +18,21 @@ class Auth0Controller < ApplicationController
     redirect_to after_sign_in_path, flash: {error: error_message}
   end
 
+  def provide_email
+  end
+
+  def confirm_email
+    sign_in(@email || user_params[:email])
+    claim_trips
+    redirect_to after_sign_in_path
+  end
+
   private def after_sign_in_path
     trip = current_user.trips.last
     trip.present? ? trip_path(trip) : new_trip_path
+  end
+
+  private def user_params
+    params.require(:user).permit(:email)
   end
 end
