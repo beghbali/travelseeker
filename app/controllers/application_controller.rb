@@ -26,10 +26,11 @@ class ApplicationController < ActionController::Base
   def sign_in(email, uid)
     if email.present?
       user = User.find_or_create_by_email(email)
-    else
+      return false if user.persisted? && uid.present? && user.uid != uid
+    elsif uid.present?
       user = User.find_or_create_by_uid(uid)
     end
-    session[:user_id] = user.id
+    session[:user_id] = user.try(:id)
   end
 
   def claim_trips

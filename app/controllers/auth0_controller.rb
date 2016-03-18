@@ -1,4 +1,5 @@
 class Auth0Controller < ApplicationController
+  layout 'trips'
 
   def callback
     user_info = request.env['omniauth.auth']
@@ -23,9 +24,12 @@ class Auth0Controller < ApplicationController
   end
 
   def confirm_email
-    sign_in(@email || user_params[:email])
-    claim_trips
-    redirect_to after_sign_in_path
+    if sign_in(@email || user_params[:email], user_params[:uid])
+      claim_trips
+      redirect_to after_sign_in_path
+    else
+      redirect_to provide_email_auth0_path, flash: { error: 'Please provide an email address'}
+    end
   end
 
   private def after_sign_in_path
@@ -34,6 +38,6 @@ class Auth0Controller < ApplicationController
   end
 
   private def user_params
-    params.require(:user).permit(:email)
+    params.require(:user).permit(:email, :uid)
   end
 end

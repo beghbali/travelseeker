@@ -179,6 +179,16 @@ a.save, a.signout {
 .navbar-nav a.signout {
   line-height: 0.75em;
 }
+.auth0 {
+  .hero {
+    height: 100vh;
+  }
+
+  form {
+    margin-top: 40%;
+  }
+}
+
 .hero {
   // height: 40vh;
   width: 100vw;

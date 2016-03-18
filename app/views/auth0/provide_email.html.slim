@@ -1,5 +1,10 @@
+= stylesheet_link_tag 'trips'
+-flash.each do |key, error|
+  .alert.alert-warning= error
 .hero
   .row
-    = bootstrap_form_for current_user, url: confirm_email_auth0_path, method: :post do |f|
-      = f.email_field :email
-      = f.submit
+    .col-md-6.col-md-push-3
+      = bootstrap_form_for current_user, url: confirm_email_auth0_path, method: :post do |f|
+        = f.email_field :email, placeholder: 'Please provide your email to complete signup'
+        = f.hidden_field :uid
+        = f.submit 'Complete'
