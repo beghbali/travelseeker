@@ -21,6 +21,7 @@ class Auth0Controller < ApplicationController
   end
 
   def provide_email
+    flash.clear
   end
 
   def confirm_email
