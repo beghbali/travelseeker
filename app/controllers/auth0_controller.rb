@@ -7,7 +7,7 @@ class Auth0Controller < ApplicationController
 
     puts user_info.inspect
     if email.present?
-      @uid = user_info[:info][:uid]
+      @uid = user_info[:uid]
       @email = email
       confirm_email
     else
