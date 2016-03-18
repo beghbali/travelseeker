@@ -4,11 +4,12 @@ class Auth0Controller < ApplicationController
     user_info = request.env['omniauth.auth']
     email = user_info[:info][:email]
 
+    puts user_info.inspect
     if email.present?
       @email = email
       confirm_email
     else
-      redirect_to provide_email_path
+      redirect_to provide_email_auth0_path
     end
   end
 
