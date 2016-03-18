@@ -7,6 +7,7 @@ class Auth0Controller < ApplicationController
 
     puts user_info.inspect
     if email.present?
+      @uid = user_info[:info][:uid]
       @email = email
       confirm_email
     else
@@ -25,7 +26,7 @@ class Auth0Controller < ApplicationController
   end
 
   def confirm_email
-    if sign_in(@email || user_params[:email], user_params[:uid])
+    if sign_in(@email || user_params[:email], @uid || user_params[:uid])
       claim_trips
       redirect_to after_sign_in_path
     else
