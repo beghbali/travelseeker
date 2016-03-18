@@ -125,6 +125,9 @@ function initMap() {
     zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControl: false,
+    scrollwheel: true,
+    draggable: true,
+    navigationControl: true,
     zoomControl: true,
     zoomControlOptions: {
       position: google.maps.ControlPosition.LEFT_BOTTOM
