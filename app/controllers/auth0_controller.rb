@@ -2,6 +2,7 @@ class Auth0Controller < ApplicationController
 
   def callback
     user_info = request.env['omniauth.auth']
+    Rails.logger.error user_info.inspect
     user = User.find_or_create_by_email(user_info[:info][:email])
     user.claim_trips_for_session!(session.id)
     session[:user_id] = user.id
