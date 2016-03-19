@@ -31,9 +31,9 @@ class ApplicationController < ActionController::Base
     elsif uid.present?
       user = User.find_or_create_by_uid(uid)
     end
+    Rails.logger.error "#{email}, #{uid}, #{user.inspect}"
     session[:user_id] = user.try(:id)
-    Rails.logger.error "#{email}, #{uid}, #{user}, #{session[:user_id]}"
-
+    session[:user_id].present?
   end
 
   def claim_trips
