@@ -5,7 +5,7 @@ class Auth0Controller < ApplicationController
     user_info = request.env['omniauth.auth']
     email = user_info[:info][:email]
 
-    puts user_info.inspect
+    Rails.logger.error user_info.inspect
     if email.present?
       @uid = user_info[:uid]
       @email = email
