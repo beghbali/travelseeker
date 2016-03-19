@@ -26,7 +26,7 @@ class ApplicationController < ActionController::Base
   def sign_in(email, uid)
     if email.present?
       user = User.find_or_create_by_email(email)
-      # return false if user.persisted? && uid.present? && user.uid != uid
+      return false if user.persisted? && uid.present? && user.uid != uid
     elsif uid.present?
       user = User.find_or_create_by_uid(uid)
     end

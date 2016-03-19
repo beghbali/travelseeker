@@ -119,13 +119,12 @@ function initMap() {
   // Create a map object and specify the DOM element for display.
   var map = new google.maps.Map(document.getElementById('clipmap'), {
     center: center,
-    scrollwheel: false,
-    // Apply the map style array to the map.
     styles: styleArray,
     zoom: 13,
     mapTypeId: google.maps.MapTypeId.ROADMAP,
     mapTypeControl: false,
     scrollwheel: true,
+    scaleControl: true,
     draggable: true,
     navigationControl: true,
     zoomControl: true,
@@ -134,6 +133,7 @@ function initMap() {
     },
   });
 
+  map.enableContinuousZoom();
   window.map = map;
   window.markers = [];
   drawPins(map);

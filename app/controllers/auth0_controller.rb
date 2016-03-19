@@ -3,15 +3,15 @@ class Auth0Controller < ApplicationController
 
   def callback
     user_info = request.env['omniauth.auth']
-    email = user_info[:info][:email]
+    @email = user_info[:info][:email]
+    @uid = user_info[:uid]
 
     Rails.logger.error user_info.inspect
-    if email.present?
-      @uid = user_info[:uid]
-      @email = email
+
+    if @email.present? || @uid.present?
       confirm_email
     else
-      redirect_to provide_email_auth0_path
+      redirect_to new_trip_path
     end
   end
 
