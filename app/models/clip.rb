@@ -76,7 +76,7 @@ class Clip < ActiveRecord::Base
   end
 
   def scheduled_at=(date_or_string)
-    self[:scheduled_at] = date_or_string.try(:to_datetime)
+    self[:scheduled_at] = date_or_string.try(:to_datetime).try(:change, offset: 0)
     remove_unassigned_tag if self[:scheduled_at].present?
   end
 

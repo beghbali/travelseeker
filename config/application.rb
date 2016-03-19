@@ -30,7 +30,7 @@ module Zentrips
     #     files: ["server_render.js"] # files to load for prerendering
     # }
 
-    config.time_zone = 'Pacific Time (US & Canada)'
+    # config.time_zone = 'Pacific Time (US & Canada)'
     # config.active_record.default_timezone = 'UTC'
     # config.active_record.default_timezone = 'Pacific Time (US & Canada)'
     config.assets.initialize_on_precompile = false
