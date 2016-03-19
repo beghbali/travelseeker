@@ -8,7 +8,7 @@ class Auth0Controller < ApplicationController
     @email = user_info[:info][:email]
     @uid = user_info[:uid]
 
-    Rails.logger.error @email, @uid
+    Rails.logger.error "#{@email}, #{@uid}"
 
     if @email.present? || @uid.present?
       confirm_email

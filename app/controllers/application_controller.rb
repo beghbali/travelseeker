@@ -32,7 +32,8 @@ class ApplicationController < ActionController::Base
       user = User.find_or_create_by_uid(uid)
     end
     session[:user_id] = user.try(:id)
-    Rails.logger.error email, uid, user, session[:user_id]
+    Rails.logger.error "#{email}, #{uid}, #{user}, #{session[:user_id]}"
+
   end
 
   def claim_trips
