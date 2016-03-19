@@ -133,7 +133,6 @@ function initMap() {
     },
   });
 
-  map.enableContinuousZoom();
   window.map = map;
   window.markers = [];
   drawPins(map);
