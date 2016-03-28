@@ -4,7 +4,7 @@
 
 //*= require font-awesome
 
-$frame-color: rgb(12, 162, 248);
+$frame-color: white;
 $inactive-color: rgb(136, 136, 136);
 $inactive-element-color: rgb(242, 242, 242);
 $active-color: rgb(12, 162, 248);
@@ -16,7 +16,7 @@ $hint-color: green;
 $subtrip-color: rgb(255, 219, 88);
 
 
-$navbar-height: 6rem;
+$navbar-height: 8rem;
 
 @font-face {
   font-family: 'Brandon Text Medium';
@@ -112,6 +112,24 @@ $navbar-height: 6rem;
     -o-transition-duration: 0.3s;
   }
 }
+
+.btn {
+  border-radius: 1px;
+  box-shadow: 0 0 3px gray;
+}
+
+.btn-default {
+  background-color: #52be80;
+}
+
+.btn-primary {
+  background-color: #26c6da;
+}
+
+.btn-info {
+  background-color: #52be86;
+}
+
 .navbar-fixed-top {
   z-index: 999;
 }
@@ -176,8 +194,20 @@ a.save, a.signout {
   padding: 1em;
   color: white;
 }
+.btn.save {
+  i {
+    padding-left: 0.5em;
+  }
+  &:before {
+    content: "Save";
+  }
+}
 .navbar-nav a.signout {
   line-height: 0.75em;
+}
+
+.navbar-nav > li {
+  margin-right: 1em;
 }
 .auth0 {
   .hero {
@@ -538,10 +568,11 @@ body, html {
   // margin: 0;
   height: $navbar-height;
   margin: auto 0;
+  padding: 0.5em;
   @include all-text-colors(white);
 }
 
-.navbar-nav.trip-selection {
+.trip-selection {
   select {
     max-width: 20em;
   }
@@ -574,6 +605,12 @@ body, html {
 
 .btn.share {
   color: white;
+  i {
+    padding-left: 0.5em;
+  }
+  &:before {
+    content: "Share";
+  }
 }
 
 .fa-share-alt {
@@ -618,6 +655,10 @@ body, html {
    }
   }
 @media (max-width: 767px) {
+   i {
+    color: black;
+  }
+
    .navbar-nav.search {
       max-width: 80%;
       margin-bottom: 0px;
@@ -671,6 +712,12 @@ body, html {
          }
        }
      }
+   }
+
+   a.save {
+    &:after {
+      content: "";
+    }
    }
 }
 @media (max-width: 1600px) {

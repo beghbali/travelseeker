@@ -5,44 +5,45 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
   .container-fluid
     .navbar-header
       a.navbar-brand.hidden-sm.hidden-xs href=new_trip_path
-        =image_tag('TravelSeeker-logo.png')
+        =image_tag('TravelSeeker-logo-magenta.png')
       a.navbar-brand.visible-sm.visible-xs href=new_trip_path
         =image_tag('parachute.png')
     .nav.navbar-nav.navbar-form.search
         =bootstrap_nested_form_for @trip, class: 'navbar-form form-horizontal' do |t|
           = t.fields_for :clips, @trip.clips.build  do |c|
-            = c.text_field :uri, {placeholder: 'Type place name or paste TripAdvisor and Yelp links', hide_label: true, append: c.submit('Add', class: 'btn btn-default'), class: 'autocomplete-places'}
-    .nav.navbar-nav.navbar-form.collapse.navbar-collapse.hidden-mdlg
-      -general_tags.each do |tag|
-        .tag.pill class=tag_class(tag) title=tag
-          = Clip.tagged_with(tag).where(trip_id: @trip.trip_ids).count
+            = c.text_field :uri, {placeholder: 'Type place name or paste TripAdvisor and Yelp links', hide_label: true, append: c.submit('Add to Trip', class: 'btn btn-default'), class: 'autocomplete-places'}
 
     .nav.navbar-nav.navbar-right
-      .nav.navbar-nav.navbar-form.trip-selection.collapse.navbar-collapse.hidden-xs
-        .dropdown
-          button.btn.btn-default.dropdown-toggle type='button' id='tripsMenu' data-toggle='dropdown' aria-haspopup="true" aria-expanded="true"
-            | My Trips
-            span.caret
-          ul.dropdown-menu aria-labelledby='tripsMenu'
-            - ([['New Trip', new_trip_path]] + user_trips(current_user)).each do |name, url|
-              li
-                a href="#{url}" data-no-turbolink=true class=trips_class(url) = name
+      .nav.navbar-nav.navbar-form.collapse.navbar-collapse.hidden-xs
+
 
       .nav.navbar-nav.navbar-form
         ul.nav.navbar-nav
-          li
-            i.visible-xs.fa.fa-plane data-toggle="modal" data-target="#tripsModal"
-            i.fa.fa-share-alt data-toggle="modal" data-target="#shareModal"
-            .btn.btn-link.share.hidden-xs data-toggle="modal" data-target="#shareModal" Share Trip
           li
             - if signed_in?
               =link_to 'Sign out', sign_out_url, method: :delete, class: 'btn btn-link signout hidden-xs'
               =link_to sign_out_url, method: :delete, class: 'btn btn-link signout visible-xs' do
                 i.fa.fa-sign-out
             - else
-              .btn.btn-default.save.hidden-xs Save My Trip
-              .btn.btn-default.save.visible-xs
+              .btn.btn-primary.save.hidden-xs
                 i.fa.fa-save
+              i.fa.fa-save.save.visible-xs
+          li
+            i.visible-xs.fa.fa-plane data-toggle="modal" data-target="#tripsModal"
+            i.fa.fa-share-alt.visible-xs data-toggle="modal" data-target="#shareModal"
+            .btn.btn-primary.share.hidden-xs data-toggle="modal" data-target="#shareModal"
+              i.fa.fa-share-alt
+
+          li.trip-selection.hidden-xs
+            .dropdown
+              button.btn.btn-default.dropdown-toggle type='button' id='tripsMenu' data-toggle='dropdown' aria-haspopup="true" aria-expanded="true"
+                | My Trips
+                span.caret
+
+              ul.dropdown-menu aria-labelledby='tripsMenu'
+                - ([['New Trip', new_trip_path]] + user_trips(current_user)).each do |name, url|
+                  li
+                    a href="#{url}" data-no-turbolink=true class=trips_class(url) = name
 
 .container-fluid
   .row
