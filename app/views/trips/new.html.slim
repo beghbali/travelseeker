@@ -77,9 +77,9 @@ section.trips
     - else
       h4 Check out these example trips planned in TravelSeeker
 
-      ul.list-unstyled
-        -@trips.each do |trip|
-          =link_to trip.name, trip_path(trip), class: 'btn-link btn btn-info'
+    ul.list-unstyled
+      -@trips.each do |trip|
+        =link_to trip.name, trip_path(trip), class: 'btn-link btn btn-info'
 
 section.testimonials
   .container.text-center
