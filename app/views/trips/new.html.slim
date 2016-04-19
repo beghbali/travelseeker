@@ -1,28 +1,11 @@
+#top
 - if signed_in?
   = link_to 'Sign out', sign_out_url, method: :delete, class: 'signout'
 - else
   a.save href='javascript:return false;' Sign In
 .hero
   .row
-    h1 Welcome To TravelSeeker
-    h4 Say goodbye to travel planning stress
-  .row
-    ul.list-inline
-      - if signed_in?
-        li Your trips:
-        - current_user.trips.each do |trip|
-          li
-            =link_to trip.name, trip_path(trip)
-      - else
-        li.col-md-4
-          h2 collect
-          p Painlessly add activities, hotels, and restaurants you’re excited about
-        li.col-md-4
-          h2 visualize
-          p Make better decisions from seeing all your ideas pinned to your personal trip map
-        li.col-md-4
-          h2 do
-          p Have all your trip information in one place: organized, searchable, and available offline.
+    h1 Get the most out of every journey
   .row
     .col-md-3
     .col-md-6
@@ -35,14 +18,75 @@
           .col-md-2
             = f.submit 'Create Trip', class: 'btn btn-default btn-block'
     .col-md-3
-- if show_video?
-  .video
-    div class="wistia_embed wistia_async_7tglvexfea" style="height:100vh"
-      |&nbsp;
-  #clipmap
-- else
-  .map
-    #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
+section.video
+  .container
+    h3.text-center All your travel ideas and details, smartly organized
+    - if show_video?
+      p We simplify travel planning. Simply bookmark ideas and go, or create a detailed itinerary. You'll have all the destination info you need, in one app, right in your pocket. You can spend more time dreaming and less time formatting your notes
+
+      .video
+        div class="wistia_embed wistia_async_7tglvexfea" style="height:60vh"
+          |&nbsp;
+      #clipmap
+    - else
+      .map
+        #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
+
+
+    ul.container.list-unstyled
+      li
+        .media
+          .media-left
+            i.fa.fa-bookmark
+          .media-body
+            h4.media-heading Bookmark what inspires you
+            p Use our website or chrome add-on to painlessly bookmark ideas you read about. We automatically organize every bookmark and pull in useful info like the address and opening hours
+      li
+        .media
+          .media-left
+            i.fa.fa-map
+          .media-body
+            h4.media-heading Bring your trip to life
+            p All your bookmarks are automatically organized and plotted on your personal trip map. It's a more useful and intuitive way to see all the cool things you want to do
+      li
+        .media
+          .media-left
+            i.fa.fa-calendar
+          .media-body
+            h4.media-heading Craft your perfect itinerary
+            p For detailed planning, you can assign items to days, add notes, and import lodging and transportation details
+      li
+        .media
+          .media-left
+            i.fa.fa-share-alt
+          .media-body
+            h4.media-heading Share with friends
+            p Collaborate productively with your travel companions and when friends ask you for recommendations, just share your list
+      li
+        .media
+          .media-left
+            i.fa.fa-bookmark
+          .media-body
+            h4.media-heading Take your beautiful plan with you
+            p Have all your trip information in one place, organized and usable. Access your information offline and even print a back-up pdf.
+
+section.trips
+  .container.text-center
+    - if signed_in?
+      h4 Your Trips
+    - else
+      h4 Check out these example trips planned in TravelSeeker
+
+      ul.list-unstyled
+        -@trips.each do |trip|
+          =link_to trip.name, trip_path(trip), class: 'btn-link btn btn-info'
+
+section.testimonials
+  .container.text-center
+    p "Love this idea. I always find myself trying to plan after I actually get to the destination and end up missing out"  --Maya K, Seattle
+    p "Yes! Brilliant! It's a Pinterest for trips that's actually useful for planning. No more long-ass email chains. This is so much better" --Don S, Atlanta
+
+    = link_to 'Start Planning', '#top', class: 'btn-link btn btn-primary btn-lg btn-block'
 
 script async='true' charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js"
 = render 'shared/olark'

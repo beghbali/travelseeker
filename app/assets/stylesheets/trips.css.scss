@@ -221,7 +221,7 @@ a.save, a.signout {
 }
 
 .hero {
-  // height: 40vh;
+  height: 40vh;
   width: 100vw;
   background: $old-frame-color;
   text-align: center;
@@ -267,6 +267,35 @@ a.save, a.signout {
   a {
     color: white;
     &:visited {
+      color: white;
+    }
+  }
+}
+
+.media {
+  h4 {
+    text-transform: uppercase;
+  }
+  i {
+    font-size: 3em;
+  }
+}
+
+section {
+  h3, h4 {
+    margin-bottom: 2em;
+  }
+  &.video {
+    ul li {
+      margin: 2em;
+    }
+  }
+  &.trips {
+    background-image: asset_url('scene.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: $old-frame-color;
+    .btn-link {
       color: white;
     }
   }
