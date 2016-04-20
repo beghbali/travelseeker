@@ -3,7 +3,7 @@
   = link_to 'Sign out', sign_out_url, method: :delete, class: 'signout'
 - else
   a.save href='javascript:return false;' Sign In
-.hero
+section.hero
   .row
     h1 Get the most out of every journey
   .row
@@ -11,12 +11,12 @@
     .col-md-6
       = bootstrap_nested_form_for @trip do |f|
         .row
-          .col-md-10
+          .col-md-10.col-xs-7
             = f.text_field :location, placeholder: 'Where are you going?', hide_label: true, class: 'autocomplete-places'
             = f.hidden_field :latitude
             = f.hidden_field :longitude
-          .col-md-2
-            = f.submit 'Create Trip', class: 'btn btn-default btn-block'
+          .col-md-2.col-xs-5
+            = f.submit 'Create Trip', class: 'btn btn-default'
     .col-md-3
 section.video
   .container
@@ -32,43 +32,43 @@ section.video
       .map
         #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
 
-
-    ul.container.list-unstyled
-      li
-        .media
-          .media-left
-            i.fa.fa-bookmark
-          .media-body
-            h4.media-heading Bookmark what inspires you
-            p Use our website or chrome add-on to painlessly bookmark ideas you read about. We automatically organize every bookmark and pull in useful info like the address and opening hours
-      li
-        .media
-          .media-left
-            i.fa.fa-map
-          .media-body
-            h4.media-heading Bring your trip to life
-            p All your bookmarks are automatically organized and plotted on your personal trip map. It's a more useful and intuitive way to see all the cool things you want to do
-      li
-        .media
-          .media-left
-            i.fa.fa-calendar
-          .media-body
-            h4.media-heading Craft your perfect itinerary
-            p For detailed planning, you can assign items to days, add notes, and import lodging and transportation details
-      li
-        .media
-          .media-left
-            i.fa.fa-share-alt
-          .media-body
-            h4.media-heading Share with friends
-            p Collaborate productively with your travel companions and when friends ask you for recommendations, just share your list
-      li
-        .media
-          .media-left
-            i.fa.fa-bookmark
-          .media-body
-            h4.media-heading Take your beautiful plan with you
-            p Have all your trip information in one place, organized and usable. Access your information offline and even print a back-up pdf.
+    .container
+      ul.list-unstyled
+        li
+          .media
+            .media-left
+              i.fa.fa-bookmark
+            .media-body
+              h4.media-heading Bookmark what inspires you
+              p Use our website or chrome add-on to painlessly bookmark ideas you read about. We automatically organize every bookmark and pull in useful info like the address and opening hours
+        li
+          .media
+            .media-left
+              i.fa.fa-map
+            .media-body
+              h4.media-heading Bring your trip to life
+              p All your bookmarks are automatically organized and plotted on your personal trip map. It's a more useful and intuitive way to see all the cool things you want to do
+        li
+          .media
+            .media-left
+              i.fa.fa-calendar
+            .media-body
+              h4.media-heading Craft your perfect itinerary
+              p For detailed planning, you can assign items to days, add notes, and import lodging and transportation details
+        li
+          .media
+            .media-left
+              i.fa.fa-share-alt
+            .media-body
+              h4.media-heading Share with friends
+              p Collaborate productively with your travel companions and when friends ask you for recommendations, just share your list
+        li
+          .media
+            .media-left
+              i.fa.fa-mobile-phone
+            .media-body
+              h4.media-heading Take your beautiful plan with you
+              p Have all your trip information in one place, organized and usable. Access your information offline and even print a back-up pdf.
 
 section.trips
   .container.text-center
@@ -79,14 +79,16 @@ section.trips
 
     ul.list-unstyled
       -@trips.each do |trip|
-        =link_to trip.name, trip_path(trip), class: 'btn-link btn btn-info'
+        li =link_to trip.name, trip_path(trip), class: 'btn-link btn btn-info'
 
 section.testimonials
   .container.text-center
-    p "Love this idea. I always find myself trying to plan after I actually get to the destination and end up missing out"  --Maya K, Seattle
-    p "Yes! Brilliant! It's a Pinterest for trips that's actually useful for planning. No more long-ass email chains. This is so much better" --Don S, Atlanta
+    p "Love this idea. I always find myself trying to plan after I actually get to the destination and end up missing out"
+    p.text-right   --Maya K, Seattle
+    p "Yes! Brilliant! It's a Pinterest for trips that's actually useful for planning. No more long-ass email chains. This is so much better"
+    p.text-right  --Don S, Atlanta
 
-    = link_to 'Start Planning', '#top', class: 'btn-link btn btn-primary btn-lg btn-block'
+    = link_to 'Start Planning', '#top', class: 'btn-link btn btn-primary'
 
 script async='true' charset="ISO-8859-1" src="//fast.wistia.com/assets/external/E-v1.js"
 = render 'shared/olark'

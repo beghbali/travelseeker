@@ -24,7 +24,7 @@ class TripsController < ApplicationController
   def new
     @trip = Trip.new
     @location = Location.new(latitude: 0, longitude: 0)
-    sample_trips = Rails.env.production? ? [1028] : [120]
+    sample_trips = Rails.env.production? ? [1028, 1566, 1568] : [120, 110, 106]
     @trips = signed_in? ? current_user.trips : Trip.where(id: sample_trips)
   end
 

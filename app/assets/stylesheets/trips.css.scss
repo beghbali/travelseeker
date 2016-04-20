@@ -231,6 +231,9 @@ a.save, a.signout {
   color: white;
   padding-top: 4em;
 
+  .btn {
+    width: 10em;
+  }
   h4 {
     margin-bottom: 2em;
   }
@@ -252,8 +255,7 @@ a.save, a.signout {
     opacity: 0.5;
   }
   h1 {
-    font-weight: bolder;
-    margin: 0 0 0.5em 0;
+    // font-weight: bolder;
   }
 
   p {
@@ -278,16 +280,30 @@ a.save, a.signout {
   }
   i {
     font-size: 3em;
+    width: 1em;
   }
 }
 
 section {
-  h3, h4 {
+  h1, h2, h3, h4 {
     margin-bottom: 2em;
   }
+
+  p {
+    width: 50%;
+    margin: 0 auto;
+  }
   &.video {
+    ul {
+      margin: 0 auto;
+      width: 50%;
+    }
     ul li {
       margin: 2em;
+      p {
+        text-align: left;
+        width: 100%;
+      }
     }
   }
   &.trips {
@@ -297,6 +313,21 @@ section {
     background-color: $old-frame-color;
     .btn-link {
       color: white;
+    }
+    ul li {
+      margin: 1em;
+      .btn {
+        width: 20em;
+      }
+    }
+  }
+  &.testimonials {
+    p.text-right {
+      margin-bottom: 1em;
+    }
+    .btn {
+      width: 20em;
+      margin: 2em;
     }
   }
 }
