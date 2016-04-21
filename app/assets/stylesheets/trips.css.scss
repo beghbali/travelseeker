@@ -294,6 +294,9 @@ section {
     margin: 0 auto;
   }
   &.video {
+    p:first-of-type {
+      margin-bottom: 2em;
+    }
     ul {
       margin: 0 auto;
       width: 50%;
@@ -606,6 +609,12 @@ section {
   cursor: pointer;
 }
 
+.trips#new {
+  .logo img {
+    width: 15em;
+    padding: 1em;
+  }
+}
 .trips#show, .trips#update {
   overflow: hidden;
   .map {

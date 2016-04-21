@@ -1,4 +1,6 @@
 #top
+.logo.pull-left
+  =image_tag('TravelSeeker-logo-magenta.png')
 - if signed_in?
   = link_to 'Sign out', sign_out_url, method: :delete, class: 'signout'
 - else
