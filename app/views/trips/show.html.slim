@@ -53,7 +53,7 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
 
     .col-md-9.col-md-pull-3.col-sm-8.col-sm-pull-4.nopadding
       .map
-        #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
+        #clipmap data-center-lat=@location.try(:latitude) data-center-lng=@location.try(:longitude)
         .notes
           = react_component 'TripNotes', { trip: @trip, expanded: false }, { prerender: false }
 

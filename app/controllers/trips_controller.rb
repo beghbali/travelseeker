@@ -13,6 +13,7 @@ class TripsController < ApplicationController
   # GET /trips/1
   # GET /trips/1.json
   def show
+    @select_all = true
     redirect_to trip_day_path(@trip, day: 1) unless @day.present? || performed?
   end
 
