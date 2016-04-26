@@ -245,7 +245,7 @@ a.save, a.signout {
   }
 
   &:hover a > i {
-    display: block;
+    display: inline-block;
   }
 }
 .hero {
@@ -375,14 +375,12 @@ section {
 
   > div > div{
     position: fixed;
-    top: $navbar-height;
+    top: $navbar-height+1rem;
     left: 0;
     // transform: rotate(90deg);
     background-color: white;
     text-align: center;
-    border-top-right-radius: 0.5em;
-    border-bottom-right-radius: 0.5em;
-    width: auto;
+    min-width: 8em;
     padding: 2em 1em;
     cursor: pointer;
 
@@ -428,9 +426,13 @@ section {
   }
 
   i {
+    &:before {
+      font-size: 3em;
+      display: block;
+    }
     &:after {
-      content: "Scratchpad";
-      text-transform: uppercase;
+      content: "Notepad";
+      font-size: 1em;
     }
   }
 
@@ -629,7 +631,7 @@ section {
 
   .header {
     background-color: $trip-color;
-    height: 20vh;
+    height: 15vh;
     color:white;
     padding: 3em 1em 1em 1em;
     h1 {
@@ -680,6 +682,20 @@ section {
   color:white;
   padding: 0.5em;
   border-radius: 0.25em;
+}
+
+.card-height {
+  > div {
+    min-height: 1px;
+  }
+
+  height: 20vh;
+
+  .stats {
+    position: absolute;
+    bottom: 0;
+    width: 100%
+  }
 }
 
 .stats > div {
