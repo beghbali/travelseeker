@@ -1,14 +1,25 @@
-.row
+.row.hoverable
   -selected = @select_all || (@day == clip.scheduled_day || clip.trip == @selected_trip)
   .clip.hide data-latitude=clip.latitude data-longitude=clip.longitude data-name=clip.name data-address=clip.address data-image=clip.image_url data-url=clip.url class="#{ selected ? 'selected' : '' }" id="clip_#{clip.id}" data-ref="#clip_#{clip.id}" data-trip=clip.trip.id data-clip-details="#clip_detail_#{clip.id}" data-icon-path=icon_path(clip)
+  .col-md-7
+    .col-md-12
+      .row
+        span=clip.name
 
-  .col-md-10
-    span=clip.name
-    .scheduled class=scheduled_class(clip)
-      = present_commitment(clip)
-  .col-md-1
-    h3 class=tag_class(clip.type_list.last)
-    span.tag class=tag_class(clip.type_list.first)
-  .col-md-1
-    = link_to clip_path(clip), method: :delete, remote: true, class: 'hidden' do
-      i.fa.fa-trash
+      .row
+        -if clip.comment.present?
+          input.comment disabled=true value=clip.comment.try(:comment)
+        -else
+          .comment.placeholder
+
+      .row.stats
+        .col-md-8
+          .scheduled class=scheduled_class(clip)
+            = clip.scheduled_time
+        .col-md-3
+          .tag.pill class=tag_class(clip.type_list.first)
+        .col-md-1
+          = link_to clip_path(clip), method: :delete, remote: true do
+            i.fa.fa-trash
+  .col-md-5
+    div style="height: 20vh;background:url('#{clip.image_url}') no-repeat center center"

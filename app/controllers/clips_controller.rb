@@ -54,7 +54,7 @@ class ClipsController < ApplicationController
         format.html { redirect_to @clip.ancestor, notice: 'Clip was successfully updated.', change: "list"}
         format.json { respond_with_bip(@clip) }
       else
-        format.html { render action: 'edit' }
+        format.html { puts @clip.errors.full_messages; head :unprocessable_entity }
         format.json { respond_with_bip(@clip) }
       end
     end

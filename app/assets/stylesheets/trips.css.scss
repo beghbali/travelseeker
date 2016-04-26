@@ -7,16 +7,15 @@
 $frame-color: white;
 $old-frame-color: rgb(12, 162, 248);
 $inactive-color: rgb(136, 136, 136);
-$inactive-element-color: rgb(242, 242, 242);
+$inactive-element-color: rgb(245, 245, 245);
 $active-color: rgb(12, 162, 248);
 $active-element-color: rgba(12, 162, 248, 0.09);
 $dropdown-color: rgb(182, 227, 252);
 $dropdown-text-color: rgb(12, 162, 248);
 $tag-color: rgb(10, 145, 222);
 $hint-color: green;
-$subtrip-color: rgb(255, 219, 88);
-
-
+$trip-color: rgb(82, 190, 182);
+$subtrip-color: rgba(82, 190, 182, 0.2);
 $navbar-height: 8rem;
 
 @font-face {
@@ -31,25 +30,35 @@ $navbar-height: 8rem;
 @mixin tags() {
   font-family: 'FontAwesome';
 
-  &.food:before {
-    content: "\f0f5";
-    color: #be5290;
+  &.food {
+    &:before {
+      content: "\f0f5";
+    }
+    background-color: #be5290;
   }
-  &.activity:before {
-    content: "\f06e";
-    color: #ffc952;
+  &.activity {
+    &:before {
+      content: "\f06e";
+    }
+    background-color: #ffc952;
   }
-  &.lodging:before {
-    content: "\f236";
-    color: #ff7473;
+  &.lodging {
+    &:before {
+      content: "\f236";
+    }
+    background-color: #ff7473;
   }
-  &.unassigned:before {
-    content: "\f128";
-    color: #004e66;
+  &.unassigned {
+    &:before {
+      content: "\f128";
+    }
+    background-color: #004e66;
   }
-  &.transit:before {
-    content: "\f072";
-    color: #47b8e0;
+  &.transit {
+    &:before {
+      content: "\f072";
+    }
+    background-color: #47b8e0;
   }
 }
 
@@ -112,6 +121,15 @@ $navbar-height: 8rem;
     transition-duration: 0.3s;
     -o-transition-duration: 0.3s;
   }
+}
+
+@mixin box-shadow-2dp() {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12)
+}
+
+.no-gutter > [class*='col-'] {
+  padding-right:0;
+  padding-left:0;
 }
 
 .btn {
@@ -220,6 +238,16 @@ a.save, a.signout {
   }
 }
 
+.hoverable  {
+  a > i{
+    display: none;
+    height: 100%;
+  }
+
+  &:hover a > i {
+    display: block;
+  }
+}
 .hero {
   height: 40vh;
   width: 100vw;
@@ -450,7 +478,7 @@ section {
 }
 
 .details {
-  padding: 1em;
+  padding: 0em;
   height: 100vh;
   overflow-y: scroll;
   overflow-x: visible;
@@ -473,13 +501,14 @@ section {
 
   h3 {
     margin: 0;
-    font-size: 0.75em;
-    color: $inactive-color;
+    font-size: 1em;
+    padding: 0.5em;
+    // color: $inactive-color;
   }
 
   h4 {
     font-size: 0.75em;
-    color: $inactive-color;
+    // color: $inactive-color;
   }
 
   li.active {
@@ -488,12 +517,16 @@ section {
     }
   }
   .clips li {
-    background-color: $inactive-element-color;
-    border-radius: 0.25em;
+    background-color: white;
+    border-radius: 0.125em;
     margin-top: 0.25em;
-    padding: 1em;
+    padding: 0em;
     cursor: pointer;
+    @include box-shadow-2dp;
 
+    img {
+      width: 100%;
+    }
     &.active {
       background-color: $active-element-color;
     }
@@ -506,8 +539,22 @@ section {
     }
 
     i.fa.fa-trash {
-      float:right;
+      font-size: 2em;
+      color: red;
+      padding: 0.125em 0.5em;
     }
+  }
+
+  .clip ~ div > div > div {
+    padding: 0.5em;
+  }
+  input.comment {
+    background-color: $inactive-element-color;
+    border: 0;
+    text-overflow: ellipsis;
+  }
+  .comment.placeholder {
+    height: 1.5em;
   }
 }
 
@@ -515,6 +562,7 @@ section {
   max-height: 80vh;
   overflow-y: scroll;
   overflow-x: hidden;
+  padding: 1em;
 
   .best_in_place input {
     width: 100%;
@@ -549,12 +597,11 @@ section {
   margin-right: 0.5em;
 
   &.pill {
-    background-color: $tag-color;
     color: white;
     padding: 0.5em;
-    border-radius: 5em;
+    border-radius: 0.25em;
     width: 4em;
-    font-size: 0.6em;
+    font-size: 1em;
     display: inline-block;
     margin-top: 0.5em;
     text-align: right;
@@ -563,22 +610,33 @@ section {
     &:before {
       position: absolute;
       left:0.5em;
-      top:0.25;
     }
     :after {
       position: absolute;
       top:0;
       left: 0;
     }
+
+    @include tags();
   }
 
-  @include tags();
 }
 
 .trip {
   margin-top: 1em;
   cursor: pointer;
   overflow: hidden;
+
+  .header {
+    background-color: $trip-color;
+    height: 20vh;
+    color:white;
+    padding: 3em 1em 1em 1em;
+    h1 {
+      margin-top: 0;
+      font-size: 2em;
+    }
+  }
 
   &.selected{
     margin-top: 0;
@@ -591,7 +649,6 @@ section {
 
     li > div {
       text-align: left;
-      // margin-right: 1em;
     }
 
     input {
@@ -601,10 +658,43 @@ section {
 
   > .row {
     background-color: $subtrip-color;
-    padding: 0.25em 0.5em;
+    padding: 1em;
+
+    h2 {
+      font-size: 1.25em;
+      margin: 0;
+      text-align: center;
+    }
   }
 }
 
+.trip-commitments {
+  li {
+    margin: 0.5em;
+    background-color: $inactive-element-color;
+  }
+}
+
+.scheduled {
+  background-color: $trip-color;
+  color:white;
+  padding: 0.5em;
+  border-radius: 0.25em;
+}
+
+.stats > div {
+  padding-left: 0;
+
+  .pill {
+    margin: 0;
+    height: 2.4em;
+    width: 3.5em;
+    &:before {
+      text-align: center;
+      left: 35%;
+    }
+  }
+}
 .datetime-picker  input {
   cursor: pointer;
 }

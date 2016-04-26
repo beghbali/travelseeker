@@ -84,6 +84,10 @@ class Clip < ActiveRecord::Base
     scheduled_at.try(:to_date)
   end
 
+  def scheduled_time
+    scheduled_at.try(:strftime, "%I:%M %P")
+  end
+
   def remove_orphaned_trip
     trip.destroy unless trip.clips.any? || trip.trips.any?
   end

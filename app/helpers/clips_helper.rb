@@ -39,7 +39,7 @@ module ClipsHelper
       else
         "reservation at"
       end
-    end + " #{clip.scheduled_at.try(:strftime, "%I:%M %P")}"
+    end + " #{clip.scheduled_time}"
   end
 
   def scheduled_class(clip)
