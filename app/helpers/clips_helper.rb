@@ -30,7 +30,7 @@ module ClipsHelper
   end
 
   def present_commitment(clip)
-    return "" if clip.scheduled_at.try(:seconds_since_midnight) == 0.0
+    return "" if clip.scheduled_time.nil?
     begin
       if clip.transit?
         "departs at"
@@ -43,7 +43,7 @@ module ClipsHelper
   end
 
   def scheduled_class(clip)
-    clip.scheduled_at.present? ? '' : 'hidden'
+    clip.scheduled_time.present? ? '' : 'hidden'
   end
 
   def icon_path(clip)

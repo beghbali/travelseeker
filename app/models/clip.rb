@@ -85,7 +85,11 @@ class Clip < ActiveRecord::Base
   end
 
   def scheduled_time
-    scheduled_at.try(:strftime, "%I:%M %P")
+    if scheduled_at.try(:seconds_since_midnight) == 0.0
+      nil
+    else
+      scheduled_at.try(:strftime, "%I:%M %p")
+    end
   end
 
   def remove_orphaned_trip

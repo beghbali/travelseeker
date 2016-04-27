@@ -17,6 +17,7 @@ $hint-color: green;
 $trip-color: rgb(82, 190, 182);
 $subtrip-color: rgba(82, 190, 182, 0.2);
 $navbar-height: 8rem;
+$detail-color: #be5290;
 
 @font-face {
   font-family: 'Brandon Text Medium';
@@ -349,6 +350,8 @@ section {
       margin: 1em;
       .btn {
         width: 20em;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
     }
   }
@@ -377,12 +380,13 @@ section {
     position: fixed;
     top: $navbar-height+1rem;
     left: 0;
-    // transform: rotate(90deg);
     background-color: white;
     text-align: center;
     min-width: 8em;
     padding: 2em 1em;
     cursor: pointer;
+    width: 5%;
+    @include box-shadow-2dp;
 
     .glyphicon-ok {
       width: 4em;
@@ -501,16 +505,18 @@ section {
     font-size: 1.5em;
   }
 
+  h2 {
+    margin: 0.125em 0;
+    font-size: 1.25em;
+  }
+
   h3 {
     margin: 0;
     font-size: 1em;
-    padding: 0.5em;
-    // color: $inactive-color;
   }
 
   h4 {
     font-size: 0.75em;
-    // color: $inactive-color;
   }
 
   li.active {
@@ -526,6 +532,10 @@ section {
     cursor: pointer;
     @include box-shadow-2dp;
 
+    &:hover {
+      transform: scale(1.05, 1.05);
+      transition: box-shadow 0.3s ease-in-out;
+    }
     img {
       width: 100%;
     }
@@ -556,7 +566,9 @@ section {
     text-overflow: ellipsis;
   }
   .comment.placeholder {
-    height: 1.5em;
+    height: 3em;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }
 
@@ -564,8 +576,49 @@ section {
   max-height: 80vh;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 1em;
+  padding: 0em;
 
+  .scheduled {
+    font-size: 1.25em;
+    position: relative;
+    top: -3em;
+    left: 0.5em;
+    width: 6em;
+    z-index: 99999;
+  }
+  .header {
+    color: white;
+    padding: 1em;
+    background-color: $detail-color;
+    // position: relative;
+    // top: -3em;
+
+    h2 {
+      padding-top: 0;
+    }
+
+    .pill {
+      &:before {
+        display: block;
+        position: static;
+      }
+      margin-top: 4em;
+      width: auto;
+      font-size: 0.75em;
+      height: auto;
+    }
+  }
+  .back {
+    cursor: pointer;
+  }
+  .container-fluid {
+    &.navigation {
+      font-size: 1.5em;
+      > div {
+        height: 100%;
+      }
+    }
+  }
   .best_in_place input {
     width: 100%;
   }
@@ -583,9 +636,6 @@ section {
 
   z-index: 2000;
 
-  .back {
-    margin-bottom: 1em;
-  }
   .delete {
     text-align: right;
     .btn-link {
@@ -681,7 +731,7 @@ section {
   background-color: $trip-color;
   color:white;
   padding: 0.5em;
-  border-radius: 0.25em;
+  border-radius: 0.125em;
 }
 
 .card-height {
@@ -698,18 +748,18 @@ section {
   }
 }
 
+.pill.pill-icon {
+  margin: 0;
+  height: 2.4em;
+  width: 3.5em;
+  &:before {
+    text-align: center;
+    left: 35%;
+  }
+}
+
 .stats > div {
   padding-left: 0;
-
-  .pill {
-    margin: 0;
-    height: 2.4em;
-    width: 3.5em;
-    &:before {
-      text-align: center;
-      left: 35%;
-    }
-  }
 }
 .datetime-picker  input {
   cursor: pointer;
