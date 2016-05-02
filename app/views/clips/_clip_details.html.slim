@@ -23,6 +23,17 @@
     .col-md-2
       .tag.pill.pill-icon class=tag_class(clip.type_list.first)
         =clip.type_list.first
+  / .container-fluid
+  /   .row.edits
+  /     .col-md-6
+  /       = link_to "#date_#{clip.id}" do
+  /         i.fa.fa-clock-o
+  /         div Set Time
+  /     .col-md-6
+  /       = link_to "#note_#{clip.id}" do
+  /         i.fa.fa-pencil
+  /         div Add Note
+  hr
   .container-fluid
     .row
       .col-md-12
@@ -34,22 +45,21 @@
         a href=clip.url target='_blank' = clip.url
         -if clip.rating_image_url
           = image_tag clip.rating_image_url
-  hr
-
-  .container-fluid
-    .row
-      .container-fluid
+    .row id="note_#{clip.id}"
+      .col-md-12
+        h2 Note
+        =bootstrap_nested_form_for clip, remote: true do |f|
+          = f.fields_for :comment, clip.comment || clip.build_comment do |c|
+            = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
+    .row id="date_#{clip.id}"
+      .col-md-12
+        h2= scheduled_label(clip)
         =bootstrap_nested_form_for clip, remote: true do |f|
           .row
-            -day_or_date = clip.trip.dates_known? ? :date : :day
             .col-md-8
-              = f.datetime_picker :scheduled_at, format: :db, datetimepicker_format: "YYYY-MM-DD HH:mm Z", label: scheduled_label(clip)
+              = f.datetime_picker :scheduled_at, format: :db, datetimepicker_format: "YYYY-MM-DD HH:mm Z", label: false
             .col-md-4
               = f.select(:type_list, clip.available_type_tags.zip(clip.available_type_tags).insert(0, ["Assign Type", nil]), {label: 'Type'})
-          .row
-            .comment.col-md-12
-              = f.fields_for :comment, clip.comment || clip.build_comment do |c|
-                = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
           .row
             .container-fluid
               =f.hidden_field :latitude

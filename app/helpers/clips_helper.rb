@@ -18,7 +18,7 @@ module ClipsHelper
   end
 
   def scheduled_label(clip)
-    return "Assign Date/Time"
+    return "Date/Time"
 
     if clip.transit?
       "Add Departure Time"

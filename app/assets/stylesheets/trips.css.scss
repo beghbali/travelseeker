@@ -303,6 +303,12 @@ a.save, a.signout {
   }
 }
 
+.anchor {
+    display: block;
+    position: relative;
+    top: -$navbar-height;
+    visibility: hidden;
+}
 .media {
   h4 {
     text-transform: uppercase;
@@ -491,7 +497,7 @@ section {
   @include under-navbar();
 
   > div {
-    margin-bottom: 3em;
+    margin-bottom: 5em;
   }
 
   ul {
@@ -506,7 +512,7 @@ section {
   }
 
   h2 {
-    margin: 0.125em 0;
+    margin: 0.5em 0;
     font-size: 1.25em;
   }
 
@@ -517,6 +523,10 @@ section {
 
   h4 {
     font-size: 0.75em;
+  }
+
+  textarea {
+    min-height: 7em;
   }
 
   li.active {
@@ -573,10 +583,10 @@ section {
 }
 
 .clip-details {
-  max-height: 80vh;
+  // max-height: 90vh;
   overflow-y: scroll;
   overflow-x: hidden;
-  padding: 0em;
+  padding: 0 0 1em 0;
 
   .scheduled {
     font-size: 1.25em;
@@ -584,14 +594,13 @@ section {
     top: -3em;
     left: 0.5em;
     width: 6em;
-    z-index: 99999;
+    z-index: 888;
+    margin-bottom: -3em;
   }
   .header {
     color: white;
     padding: 1em;
     background-color: $detail-color;
-    // position: relative;
-    // top: -3em;
 
     h2 {
       padding-top: 0;
@@ -607,6 +616,17 @@ section {
       font-size: 0.75em;
       height: auto;
     }
+  }
+
+  .edits {
+    text-align: center;
+    padding: 1em;
+
+    i {
+      font-size: 3em;
+    }
+
+    @include all-text-colors($detail-color);
   }
   .back {
     cursor: pointer;
@@ -631,10 +651,10 @@ section {
     width: 100%;
     height: 15em;
     position: relative;
-    z-index: 2000;
+    z-index: 888;
   }
 
-  z-index: 2000;
+  z-index: 888;
 
   .delete {
     text-align: right;
@@ -685,6 +705,7 @@ section {
     color:white;
     padding: 3em 1em 1em 1em;
     h1 {
+      text-align: center;
       margin-top: 0;
       font-size: 2em;
     }
@@ -775,7 +796,7 @@ section {
   overflow: hidden;
   .map {
     height: 100vh;
-    padding-bottom: 3em;
+    // padding-bottom: 3em;
     @include under-navbar();
   }
 
