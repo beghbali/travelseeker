@@ -6,7 +6,10 @@ class Trip < ActiveRecord::Base
   belongs_to :parent, class_name: 'Trip'
   has_many :trips, foreign_key: :parent_id
 
+  attr_accessor :readonly
   accepts_nested_attributes_for :clips
+
+  before_create :generate_slug
 
   scope :in_city, ->(city) { where(city: city) }
   scope :by_commitments, -> { joins(:clips).order('clips.scheduled_at ASC')}
@@ -36,6 +39,24 @@ class Trip < ActiveRecord::Base
 
   def as_json(options={})
     super(options).merge({end_date: end_date})
+  end
+
+  def generate_slug
+    while true
+      slug = SecureRandom.hex(10)
+      if !Trip.exists?(slug: slug)
+        self.slug = slug
+        break
+      end
+    end
+  end
+
+  def id
+    self.readonly ? self[:slug] : self[:id]
+  end
+
+  def readonly!
+    self.readonly = true
   end
 
   def location

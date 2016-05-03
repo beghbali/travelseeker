@@ -391,7 +391,6 @@ section {
     min-width: 8em;
     padding: 2em 1em;
     cursor: pointer;
-    width: 5%;
     @include box-shadow-2dp;
 
     .glyphicon-ok {
@@ -412,6 +411,7 @@ section {
       -webkit-transition: width 1s ease;
       -o-transition: width 1s ease;
       transition: width 1s ease;
+      width: 5vw;
 
       &.expanded {
         height: 100vh;
@@ -560,10 +560,12 @@ section {
       float: right;
     }
 
-    i.fa.fa-trash {
+    i.fa.fa-trash, i.fa.fa-clone {
       font-size: 2em;
-      color: red;
       padding: 0.125em 0.5em;
+    }
+    i.fa.fa-trash {
+      color: red;
     }
   }
 
@@ -615,6 +617,9 @@ section {
       width: auto;
       font-size: 0.75em;
       height: auto;
+      max-width: 4.5em;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
@@ -795,7 +800,7 @@ section {
 .trips#show, .trips#update {
   overflow: hidden;
   .map {
-    height: 100vh;
+    height: 92vh;
     // padding-bottom: 3em;
     @include under-navbar();
   }

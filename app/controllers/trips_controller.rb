@@ -14,7 +14,7 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     @select_all = true
-    redirect_to trip_day_path(@trip, day: 1) unless @day.present? || performed?
+    redirect_to trip_day_path(@trip, day: 1) unless @readonly || @day.present? || performed?
   end
 
   def trip_details
@@ -78,7 +78,15 @@ class TripsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_trip
-      @trip = Trip.find(params[:id] || params[:trip_id])
+      id = params[:id] || params[:trip_id]
+      @readonly = false
+      if id =~ /[[:alnum:]]{10}/
+        @trip = Trip.find_by_slug(id)
+        @trip.readonly!
+        @readonly = true
+      else
+        @trip = Trip.find(id)
+      end
     end
 
     def set_show_variables

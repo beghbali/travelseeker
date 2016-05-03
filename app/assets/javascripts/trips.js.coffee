@@ -108,8 +108,9 @@ $ ->
   $('.trip-selection select').on 'change', ->
     window.location = $(@).prop('value')
 
-  $(document).on 'click', '[data-scroll-to]', ->
-    $('html,body').animate({scrollTop: $($(@).data('scroll-to')).offset().top}, 1000);
+  $(document).on 'click', '[data-scroll-to]', (e)->
+    e.preventDefault();
+    $('.details').animate({scrollTop: $($(@).data('scroll-to')).offset().top}, 1000);
 
   $('[data-toggle="tooltip"]').tooltip()
   $('.alert').fadeOut(5000);

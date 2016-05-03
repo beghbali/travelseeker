@@ -60,4 +60,8 @@ module TripsHelper
   def show_wishlist_class(wishlist_shown, trip)
     wishlist_shown[trip.id] ? 'hidden' : ''
   end
+
+  def trip_share_url(trip)
+    trip_url(trip.slug)
+  end
 end

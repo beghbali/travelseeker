@@ -60,6 +60,10 @@ class ClipsController < ApplicationController
     end
   end
 
+  def copy
+    redirect_to new_trip_path, notice: "Copying functionality coming soon so you can add interesting finds to your own trips"
+  end
+
   # DELETE /clips/1
   # DELETE /clips/1.json
   def destroy

@@ -11,12 +11,17 @@
 
       .row.stats
         .col-md-7
-          .scheduled class=scheduled_class(clip)
-            = clip.scheduled_time
+          - unless @readonly
+            .scheduled class=scheduled_class(clip)
+              = clip.scheduled_time
         .col-md-3
           .tag.pill.pill-icon class=tag_class(clip.type_list.first)
         .col-md-2
-          = link_to clip_path(clip), method: :delete, remote: true do
-            i.fa.fa-trash
+          - if @readonly
+            = link_to clip_copy_path(clip), method: :post, remote: true do
+              i.fa.fa-clone
+          - else
+            = link_to clip_path(clip), method: :delete, remote: true do
+              i.fa.fa-trash
   .col-md-5
     div style="height: 20vh;background:url('#{clip.image_url || google_static_map_url(clip.location, 300)}') no-repeat center center"
