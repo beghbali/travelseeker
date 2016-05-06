@@ -1,0 +1,19 @@
+.modal.fade id="Clip#{clip.id}Modal" tabindex="-1" role="dialog" aria-labelledby="clip#{clip.id}ModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title id="clip#{clip.id}ModalLabel"
+          |Change Photo
+      .modal-body
+        .container-fluid
+          =bootstrap_nested_form_for clip, remote: true, multipart: true, authenticity_token: true do |f|
+            .row
+              h3 From a web image url
+              = f.url_field :remote_image_url, hide_label: true
+            .row
+              h3 From your computer
+              = f.file_field :image, hide_label: true
+            .row
+              = f.submit class: 'btn btn-block btn-primary'

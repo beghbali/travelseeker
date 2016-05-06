@@ -1,13 +1,16 @@
 .clip-details.hidden id="clip_detail_#{clip.id}" data-clip="#clip_#{clip.id}"
   .container-fluid.navigation.row
     .col-md-2.back
-      i.fa.fa-long-arrow-left title='Coming soon...'
+      i.fa.fa-long-arrow-left
     .col-md-6
     .col-md-2
       i.fa.fa-location-arrow title='Coming soon...'
     .col-md-2
-      i.fa.fa-taxi
+      i.fa.fa-taxi title='Coming soon...'
   img.banner src="#{clip.image_url || google_static_map_url(clip.location, 300)}"
+  div
+    i.fa.fa-camera data-toggle="modal" data-target="#Clip#{clip.id}Modal" title='Change Photo'
+  = render 'clips/image_uploader', clip: clip
   .scheduled class=scheduled_class(clip)
     = clip.scheduled_time
   .row.header

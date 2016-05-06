@@ -590,6 +590,13 @@ section {
   overflow-x: hidden;
   padding: 0 0 1em 0;
 
+  i.fa.fa-camera {
+    position: absolute;
+    right: 0.25em;
+    z-index: 9999;
+    margin-top: -1em;
+    font-size: 2em;
+  }
   .scheduled {
     font-size: 1.25em;
     position: relative;
@@ -659,6 +666,9 @@ section {
     z-index: 888;
   }
 
+  img.banner ~ div {
+    position: relative;
+  }
   z-index: 888;
 
   .delete {

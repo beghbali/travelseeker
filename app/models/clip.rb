@@ -7,6 +7,8 @@ class Clip < ActiveRecord::Base
   has_one :comment, as: :commentable
   belongs_to :trip
 
+  mount_uploader :image, ClipImageUploader
+
   accepts_nested_attributes_for :comment
 
   TYPES = %w(Food Activity Lodging Transit Unassigned)
@@ -25,7 +27,7 @@ class Clip < ActiveRecord::Base
   scope :for_session, ->(session_id) { where(session_id: session_id).order(created_at: :desc)}
   scope :known_location, -> { where('latitude IS NOT NULL') }
 
-  delegate :city, :state, :country, :external_reference, :url, :rating_image_url, :phone, :hours, :image_url, to: :metadata, allow_nil: true
+  delegate :city, :state, :country, :external_reference, :url, :rating_image_url, :phone, :hours, to: :metadata, allow_nil: true
 
   validates :uri, presence: true
 
@@ -51,6 +53,10 @@ class Clip < ActiveRecord::Base
       parent = parent.parent
     end
     parent
+  end
+
+  def image_url
+    image.url || metadata.image_url
   end
 
   def address
