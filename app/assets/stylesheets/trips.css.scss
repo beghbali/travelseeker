@@ -668,6 +668,10 @@ section {
 
   img.banner ~ div {
     position: relative;
+
+    .modal-dialog {
+      width: 90%;
+    }
   }
   z-index: 888;
 

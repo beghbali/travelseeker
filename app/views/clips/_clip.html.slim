@@ -24,4 +24,4 @@
             = link_to clip_path(clip), method: :delete, remote: true do
               i.fa.fa-trash
   .col-md-5
-    div style="height: 20vh;background:url('#{clip.image_url || google_static_map_url(clip.location, 300)}') no-repeat center center"
+    div style="height: 20vh;background:url('#{clip.image_url || google_static_map_url(clip.location, 300)}') no-repeat center center;background-size:cover;"
