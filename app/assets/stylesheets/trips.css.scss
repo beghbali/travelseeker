@@ -788,7 +788,7 @@ section {
     bottom: 0;
     width: 100%;
 
-    .fa-checked {
+    .fa-check {
       color: green;
     }
   }
@@ -901,6 +901,12 @@ body, html {
   position: fixed;
   top: 21em;
   left: 53em;
+}
+
+#shareModal {
+  input {
+    width: 100%;
+  }
 }
 
 @media (min-width: 768px) {

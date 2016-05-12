@@ -86,6 +86,7 @@ class TripsController < ApplicationController
         @readonly = true
       else
         @trip = Trip.find(id)
+        @readonly = true unless current_user.authored? @trip
       end
     end
 

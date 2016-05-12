@@ -11,4 +11,8 @@ class User < ActiveRecord::Base
     @last_clip ||= Clip.copied.where(trip_id: trips.map(&:id)).order(created_at: :desc).first
     @last_clip.try(:trip).try(:parent)
   end
+
+  def authored? trip
+    trip.user == self
+  end
 end

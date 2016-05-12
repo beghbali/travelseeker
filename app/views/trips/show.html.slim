@@ -24,7 +24,7 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
               =link_to 'Sign out', sign_out_url, method: :delete, class: 'btn btn-link signout hidden-xs'
               =link_to sign_out_url, method: :delete, class: 'btn btn-link signout visible-xs' do
                 i.fa.fa-sign-out
-            - elsif !@readonly
+            - elsif !@readonly && current_user.authored?(@trip)
               .btn.btn-primary.save.hidden-xs
                 i.fa.fa-save
               i.fa.fa-save.save.visible-xs
@@ -70,10 +70,14 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
           h4.modal-title id="shareyModalLabel"
             |Share this link with co-travelers and friends to get their inputs
         .modal-body
-          h2 For Collaboration
-          p = trip_url(@trip)
+          - if current_user.authored?(@trip)
+            h2 For Collaboration
+            em Invite friends to add notes and interesting items to your trip
+            input disabled='disabled' value=trip_url(@trip)
+
           h2 For Sharing
-          p = trip_share_url(@trip)
+          em Share as read-only with people who can benefit from your recommendations
+          input disabled='disabled' value=trip_share_url(@trip)
 
   .modal.fade id="tripsModal" tabindex="-1" role="dialog" aria-labelledby="tripsModalLabel"
     .modal-dialog role="document"
