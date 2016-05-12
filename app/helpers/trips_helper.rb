@@ -64,4 +64,8 @@ module TripsHelper
   def trip_share_url(trip)
     trip_url(trip.slug)
   end
+
+  def ideas_trip(clip)
+    current_user.trips.find_or_create_by_location('Ideas', latitude: clip.latitude, longitude: clip.longitude)
+  end
 end

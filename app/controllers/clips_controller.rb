@@ -61,7 +61,18 @@ class ClipsController < ApplicationController
   end
 
   def copy
-    redirect_to new_trip_path, notice: "Copying functionality coming soon so you can add interesting finds to your own trips"
+    if copy_params[:trip_id].nil?
+      session[:copy_clip_id] = params[:id]
+      redirect_to new_trip_path
+    else
+      clip = Clip.find(params[:id])
+      trip_id = copy_params[:trip_id]
+
+      clip.copy_to(trip_id)
+      respond_to do |format|
+        format.json { respond_with_bip(clip, param: :clip) }
+      end
+    end
   end
 
   # DELETE /clips/1
@@ -78,6 +89,10 @@ class ClipsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_clip
       @clip = Clip.find(params[:id])
+    end
+
+    def copy_params
+      params.require(:clip).permit(:trip_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

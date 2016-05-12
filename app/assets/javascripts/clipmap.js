@@ -238,6 +238,8 @@ function drawPins(map) {
   // });
 
   var input = /* @type {!HTMLInputElement} */
-      $('.autocomplete-places')[0];
-  initAutocomplete(map, input, $('#trip_latitude'), $('#trip_longitude'));
+      $('input.autocomplete-places')[0];
+  if (input != undefined) {
+    initAutocomplete(map, input, $('#trip_latitude'), $('#trip_longitude'));
+  }
 }

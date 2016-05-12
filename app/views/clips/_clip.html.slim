@@ -1,3 +1,6 @@
+-content_for :footer do
+  = render 'clips/copy_clip', clip: clip
+
 .row.hoverable
   -selected = @select_all || (@day == clip.scheduled_day || clip.trip == @selected_trip)
   .clip.hide data-latitude=clip.latitude data-longitude=clip.longitude data-name=clip.name data-address=clip.address data-image=clip.image_url data-url=clip.url class="#{ selected ? 'selected' : '' }" id="clip_#{clip.id}" data-ref="#clip_#{clip.id}" data-trip=clip.trip.id data-clip-details="#clip_detail_#{clip.id}" data-icon-path=icon_path(clip)
@@ -18,8 +21,10 @@
           .tag.pill.pill-icon class=tag_class(clip.type_list.first)
         .col-md-2
           - if @readonly
-            = link_to clip_copy_path(clip), method: :post, remote: true do
-              i.fa.fa-clone
+            - if clip.copied_for?(current_user)
+              i.fa.fa-checked
+            - else
+              i.fa.fa-clone data-toggle="modal" data-target="#CopyClip#{clip.id}Modal"
           - else
             = link_to clip_path(clip), method: :delete, remote: true do
               i.fa.fa-trash

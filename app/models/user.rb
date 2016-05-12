@@ -6,4 +6,9 @@ class User < ActiveRecord::Base
   def claim_trips_for_session!(session_id)
     Trip.where(session_id: session_id).update_all(user_id: self.id)
   end
+
+  def last_trip_copied_to
+    @last_clip ||= Clip.copied.where(trip_id: trips.map(&:id)).order(created_at: :desc).first
+    @last_clip.try(:trip).try(:parent)
+  end
 end

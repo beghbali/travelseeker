@@ -1,0 +1,15 @@
+.modal.fade id="CopyClip#{clip.id}Modal" tabindex="-1" role="dialog" aria-labelledby="copyClip#{clip.id}ModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title id="copyClip#{clip.id}ModalLabel"
+          |Add to your trip
+      .modal-body
+        .container-fluid
+          =bootstrap_form_for clip, url: copy_clip_url(clip), method: :post, remote: true do |f|
+            .row
+              = f.select :trip_id, options_from_collection_for_select([ideas_trip(clip)]+current_user.trips, :id, :name, current_user.last_trip_copied_to.try(:id))
+            .row
+              = f.submit class: 'btn btn-block btn-primary', value: 'Copy to my trip'

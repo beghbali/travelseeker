@@ -17,36 +17,35 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
     .nav.navbar-nav.navbar-right
       .nav.navbar-nav.navbar-form.collapse.navbar-collapse.hidden-xs
 
-
-      - unless @readonly
-        .nav.navbar-nav.navbar-form
-          ul.nav.navbar-nav
-            li
-              - if signed_in?
-                =link_to 'Sign out', sign_out_url, method: :delete, class: 'btn btn-link signout hidden-xs'
-                =link_to sign_out_url, method: :delete, class: 'btn btn-link signout visible-xs' do
-                  i.fa.fa-sign-out
-              - else
-                .btn.btn-primary.save.hidden-xs
-                  i.fa.fa-save
-                i.fa.fa-save.save.visible-xs
-            li
-              i.visible-xs.fa.fa-plane data-toggle="modal" data-target="#tripsModal"
+      .nav.navbar-nav.navbar-form
+        ul.nav.navbar-nav
+          li
+            - if signed_in?
+              =link_to 'Sign out', sign_out_url, method: :delete, class: 'btn btn-link signout hidden-xs'
+              =link_to sign_out_url, method: :delete, class: 'btn btn-link signout visible-xs' do
+                i.fa.fa-sign-out
+            - elsif !@readonly
+              .btn.btn-primary.save.hidden-xs
+                i.fa.fa-save
+              i.fa.fa-save.save.visible-xs
+          li
+            i.visible-xs.fa.fa-plane data-toggle="modal" data-target="#tripsModal"
+            - unless @readonly
               i.fa.fa-share-alt.visible-xs data-toggle="modal" data-target="#shareModal"
               .btn.btn-primary.share.hidden-xs data-toggle="modal" data-target="#shareModal"
                 i.fa.fa-share-alt
 
-            - if signed_in?
-              li.trip-selection.hidden-xs
-                .dropdown
-                  button.btn.btn-default.dropdown-toggle type='button' id='tripsMenu' data-toggle='dropdown' aria-haspopup="true" aria-expanded="true"
-                    | My Trips
-                    span.caret
+          - if signed_in?
+            li.trip-selection.hidden-xs
+              .dropdown
+                button.btn.btn-default.dropdown-toggle type='button' id='tripsMenu' data-toggle='dropdown' aria-haspopup="true" aria-expanded="true"
+                  | My Trips
+                  span.caret
 
-                  ul.dropdown-menu aria-labelledby='tripsMenu'
-                    - ([['New Trip', new_trip_path]] + user_trips(current_user)).each do |name, url|
-                      li
-                        a href="#{url}" data-no-turbolink=true class=trips_class(url) = name
+                ul.dropdown-menu aria-labelledby='tripsMenu'
+                  - ([['New Trip', new_trip_path]] + user_trips(current_user)).each do |name, url|
+                    li
+                      a href="#{url}" data-no-turbolink=true class=trips_class(url) = name
 
 .container-fluid
   .row.no-gutter

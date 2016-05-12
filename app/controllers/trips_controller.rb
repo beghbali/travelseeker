@@ -41,7 +41,7 @@ class TripsController < ApplicationController
     @trip.user_id = current_user.id
 
     respond_to do |format|
-      if @trip.save
+      if @trip.save && copy_clip
         format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully created.', change: 'list' }
         format.json { render action: 'show', status: :created, location: @trip, day: 1 }
       else
@@ -104,5 +104,13 @@ class TripsController < ApplicationController
       # if !Rails.env.development?
       #   return redirect_to(new_trip_path) if @trip.user != current_user
       # end
+    end
+
+    def copy_clip
+      if session[:copy_clip_id].present?
+        clip = Clip.find session[:copy_clip_id]
+        clip.copy_to(@trip.id)
+        session[:copy_clip_id] = nil
+      end
     end
 end

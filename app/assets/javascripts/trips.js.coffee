@@ -58,6 +58,7 @@ $ ->
     drawPins(window.map);
 
   $(document).on 'click', '.subtrips .trip', (e)->
+    return if $(e.target).is('.fa-clone')
     tripId = $(@).data('id')
     $('.clip[data-trip!='+tripId+']').removeClass('selected');
     $('.clip[data-trip='+tripId+']').addClass('selected');
@@ -114,3 +115,7 @@ $ ->
 
   $('[data-toggle="tooltip"]').tooltip()
   $('.alert').fadeOut(5000);
+
+  $('.modal .edit_clip').on('ajax:success', ->
+    $(@).closest('.modal').modal('hide')
+    )

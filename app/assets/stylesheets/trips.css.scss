@@ -563,6 +563,7 @@ section {
     i.fa.fa-trash, i.fa.fa-clone {
       font-size: 2em;
       padding: 0.125em 0.5em;
+      cursor: pointer;
     }
     i.fa.fa-trash {
       color: red;
@@ -669,13 +670,14 @@ section {
   img.banner ~ div {
     position: relative;
 
-    .modal-dialog {
+    > .modal-dialog {
       width: 90%;
     }
   }
   z-index: 888;
 
   .delete {
+    cursor: pointer;
     text-align: right;
     .btn-link {
       color: red;
@@ -784,7 +786,11 @@ section {
   .stats {
     position: absolute;
     bottom: 0;
-    width: 100%
+    width: 100%;
+
+    .fa-checked {
+      color: green;
+    }
   }
 }
 

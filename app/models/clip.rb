@@ -6,6 +6,7 @@ class Clip < ActiveRecord::Base
 
   has_one :comment, as: :commentable
   belongs_to :trip
+  belongs_to :source, class_name: 'Clip'
 
   mount_uploader :image, ClipImageUploader
 
@@ -26,6 +27,8 @@ class Clip < ActiveRecord::Base
   scope :tripadvisor, -> { where("uri like '%tripadvisor.com%") }
   scope :for_session, ->(session_id) { where(session_id: session_id).order(created_at: :desc)}
   scope :known_location, -> { where('latitude IS NOT NULL') }
+  scope :copied, -> { where('source_id IS NOT NULL')}
+  scope :copies_of, ->(clip) { where(source_id: clip.id) }
 
   delegate :city, :state, :country, :external_reference, :url, :rating_image_url, :phone, :hours, to: :metadata, allow_nil: true
 
@@ -183,6 +186,17 @@ class Clip < ActiveRecord::Base
     self.longitude = longitude
   end
 
+  def copy_to(trip_id)
+    copy = self.dup
+    copy.trip_id = trip_id
+    copy.source = self
+    copy.save
+  end
+
+  def copied_for?(user)
+    Clip.copies_of(self).map(&:trip).map(&:user).include? user
+  end
+
   def link?
     !!(uri =~ /https?:/) && user_provided_name == uri
   end
@@ -219,7 +233,7 @@ class Clip < ActiveRecord::Base
     @weblink ||= WeblinkMetaData.new(uri)
   end
 
-  def source
+  def data_source
     if yelp?
       "Yelp"
     elsif tripadvisor?

@@ -56,8 +56,11 @@
     - if @readonly
       .row
         .col-md-12.delete
-          = link_to clip_copy_path(clip), method: :post do
-            i.fa.fa-clone
+          - if @readonly
+            - if clip.copied_for?(current_user)
+              i.fa.fa-checked
+            - else
+              i.fa.fa-clone data-toggle="modal" data-target="#CopyClip#{clip.id}Modal"
     - else
       =bootstrap_nested_form_for clip, remote: true do |f|
         .row id="note_#{clip.id}"
