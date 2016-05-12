@@ -559,15 +559,6 @@ section {
     h3 {
       float: right;
     }
-
-    i.fa.fa-trash, i.fa.fa-clone {
-      font-size: 2em;
-      padding: 0.125em 0.5em;
-      cursor: pointer;
-    }
-    i.fa.fa-trash {
-      color: red;
-    }
   }
 
   .clip ~ div > div > div {
@@ -583,6 +574,18 @@ section {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+}
+
+i.fa.fa-trash, i.fa.fa-clone, i.fa.fa-check {
+  font-size: 2em;
+  padding: 0.125em 0.5em;
+  cursor: pointer;
+}
+i.fa.fa-trash {
+  color: red;
+}
+i.fa.fa-check {
+  color: green;
 }
 
 .clip-details {
@@ -787,10 +790,6 @@ section {
     position: absolute;
     bottom: 0;
     width: 100%;
-
-    .fa-check {
-      color: green;
-    }
   }
 }
 

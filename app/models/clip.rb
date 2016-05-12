@@ -190,6 +190,7 @@ class Clip < ActiveRecord::Base
     copy = self.dup
     copy.trip_id = trip_id
     copy.source = self
+    copy.scheduled_at = nil
     copy.save
   end
 

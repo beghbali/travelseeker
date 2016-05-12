@@ -58,7 +58,7 @@
         .col-md-12.delete
           - if @readonly
             - if clip.copied_for?(current_user)
-              i.fa.fa-check
+              i.fa.fa-check title="Added to trip"
             - else
               i.fa.fa-clone data-toggle="modal" data-target="#CopyClip#{clip.id}Modal"
     - else
