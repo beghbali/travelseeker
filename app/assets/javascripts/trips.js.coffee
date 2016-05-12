@@ -117,5 +117,7 @@ $ ->
   $('.alert').fadeOut(5000);
 
   $('.modal .edit_clip').on('ajax:success', ->
+    $trip = $('.trip.selected').first();
+    $trip.load('/trips/'+$trip.data('id')+'/trip_details');
     $(@).closest('.modal').modal('hide')
     )
