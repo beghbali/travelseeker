@@ -24,7 +24,10 @@
             - if clip.copied_for?(current_user)
               i.fa.fa-check title="Added to trip"
             - else
-              i.fa.fa-clone data-toggle="modal" data-target="#CopyClip#{clip.id}Modal"
+              - if signed_in?
+                i.fa.fa-clone data-toggle="modal" data-target="#CopyClip#{clip.id}Modal"
+              - else
+                i.fa.fa-clone.save
           - else
             = link_to clip_path(clip), method: :delete, remote: true do
               i.fa.fa-trash

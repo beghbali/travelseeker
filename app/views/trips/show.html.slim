@@ -9,7 +9,7 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
       a.navbar-brand.visible-sm.visible-xs href=new_trip_path
         =image_tag('parachute.png')
     .nav.navbar-nav.navbar-form.search
-      - unless @readonly
+      - unless @trip.readonly?
         =bootstrap_nested_form_for @trip, class: 'navbar-form form-horizontal' do |t|
           = t.fields_for :clips, @trip.clips.build  do |c|
             = c.text_field :uri, {placeholder: 'Type place name or paste TripAdvisor and Yelp links', hide_label: true, append: c.submit('Add to Trip', class: 'btn btn-default'), class: 'autocomplete-places'}
@@ -30,7 +30,7 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
               i.fa.fa-save.save.visible-xs
           li
             i.visible-xs.fa.fa-plane data-toggle="modal" data-target="#tripsModal"
-            - unless @readonly
+            - unless @trip.readonly?
               i.fa.fa-share-alt.visible-xs data-toggle="modal" data-target="#shareModal"
               .btn.btn-primary.share.hidden-xs data-toggle="modal" data-target="#shareModal"
                 i.fa.fa-share-alt
@@ -56,11 +56,11 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
     .col-md-9.col-md-pull-3.col-sm-8.col-sm-pull-4.nopadding
       .map
         #clipmap data-center-lat=@location.try(:latitude) data-center-lng=@location.try(:longitude)
-        - unless @readonly
+        - unless @trip.readonly?
           .notes
             = react_component 'TripNotes', { trip: @trip, expanded: false }, { prerender: false }
 
-- unless @readonly
+- unless @trip.readonly?
   .modal.fade id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel"
     .modal-dialog role="document"
       .modal-content
