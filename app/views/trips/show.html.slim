@@ -30,8 +30,9 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
               i.fa.fa-save.save.visible-xs
             - else
               .btn.btn-primary
-                |Sign In
-                i.fa.fa-sign-out.save
+                .save
+                  |Sign In
+                  i.fa.fa-sign-in
 
           li
             i.visible-xs.fa.fa-plane data-toggle="modal" data-target="#tripsModal"
