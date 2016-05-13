@@ -28,6 +28,11 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
               .btn.btn-primary.save.hidden-xs
                 i.fa.fa-save
               i.fa.fa-save.save.visible-xs
+            - else
+              .btn.btn-primary
+                |Sign In
+                i.fa.fa-sign-out.save
+
           li
             i.visible-xs.fa.fa-plane data-toggle="modal" data-target="#tripsModal"
             - unless @trip.readonly?

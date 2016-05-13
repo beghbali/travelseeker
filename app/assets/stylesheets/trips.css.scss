@@ -725,7 +725,7 @@ i.fa.fa-check {
 
   .header {
     background-color: $trip-color;
-    height: 15vh;
+    min-height: 15vh;
     color:white;
     padding: 3em 1em 1em 1em;
     h1 {
@@ -884,6 +884,9 @@ body, html {
   }
 }
 
+i.save {
+  padding-left: 0.5em;
+}
 .fa-share-alt {
   cursor: pointer;
 }
