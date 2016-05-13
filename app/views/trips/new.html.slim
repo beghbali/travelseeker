@@ -81,7 +81,7 @@ section.trips
 
     ul.list-unstyled
       -@trips.each do |trip|
-        li =link_to trip.name, trip_share_url(trip), class: 'btn-link btn btn-info'
+        li =link_to trip.name, signed_in? ? trip_url(trip) : trip_share_url(trip), class: 'btn-link btn btn-info'
 
 section.testimonials
   .container.text-center

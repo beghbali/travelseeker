@@ -3,6 +3,7 @@ class TripsController < ApplicationController
   before_action :set_trip, only: [:show, :edit, :update, :destroy, :trip_details]
   before_action :authorize_trip_access, only: [:show, :edit, :update, :destroy, :trip_details]
   before_action :set_show_variables, only: [:show, :update]
+  before_action :set_new_variables, only: [:new, :create]
 
   # GET /trips
   # GET /trips.json
@@ -25,8 +26,6 @@ class TripsController < ApplicationController
   def new
     @trip = Trip.new
     @location = Location.new(latitude: 0, longitude: 0)
-    sample_trips = Rails.env.production? ? [1028, 1566, 1568] : [120, 110, 106]
-    @trips = signed_in? ? current_user.trips : Trip.where(id: sample_trips)
   end
 
   # GET /trips/1/edit
@@ -96,6 +95,11 @@ class TripsController < ApplicationController
       @selected_trip = @trip.all_clips.last.try(:trip)
     end
 
+    def set_new_variables
+      sample_trips = Rails.env.production? ? [1028, 1566, 1568] : [120, 110, 106]
+      @trips = signed_in? ? current_user.trips : Trip.where(id: sample_trips)
+    end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
       params.require(:trip).permit(:location, :latitude, :longitude, :start_date, :end_date, :days, :notes, clips_attributes: [:uri, :day_list, :date_list, :type_list, :day, :date])
@@ -113,5 +117,6 @@ class TripsController < ApplicationController
         clip.copy_to(@trip.id)
         session[:copy_clip_id] = nil
       end
+      true
     end
 end
