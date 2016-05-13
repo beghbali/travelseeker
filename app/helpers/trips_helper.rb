@@ -68,4 +68,8 @@ module TripsHelper
   def ideas_trip(clip)
     current_user.trips.find_or_create_by_location('Ideas', latitude: clip.latitude, longitude: clip.longitude)
   end
+
+  def current_user_owns_trip?
+    !@readonly && (current_user.authored?(@trip) || @trip.session_id == session.id)
+  end
 end

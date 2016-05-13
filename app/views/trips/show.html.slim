@@ -24,7 +24,7 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
               =link_to 'Sign out', sign_out_url, method: :delete, class: 'btn btn-link signout hidden-xs'
               =link_to sign_out_url, method: :delete, class: 'btn btn-link signout visible-xs' do
                 i.fa.fa-sign-out
-            - elsif !@readonly && current_user.authored?(@trip)
+            - elsif current_user_owns_trip?
               .btn.btn-primary.save.hidden-xs
                 i.fa.fa-save
               i.fa.fa-save.save.visible-xs
