@@ -79,7 +79,7 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
           - if current_user.authored?(@trip)
             h2 For Collaboration
             em Invite friends to add notes and interesting items to your trip
-            input disabled='disabled' value=trip_url(@trip)
+            input disabled='disabled' value=trip_edit_url(@trip)
 
           h2 For Sharing
           em Share as read-only with people who can benefit from your recommendations

@@ -79,12 +79,13 @@ class TripsController < ApplicationController
     def set_trip
       id = params[:id] || params[:trip_id]
       @readonly = false
-      if id =~ /[[:alnum:]]{10}/
-        @trip = Trip.find_by_slug(id)
+
+      if id !~ /[[:alnum:]]{10}/
+        @trip = Trip.find(id)
         @trip.readonly!
         @readonly = true
       else
-        @trip = Trip.find(id)
+        @trip = Trip.find_by_slug(id)
       end
     end
 

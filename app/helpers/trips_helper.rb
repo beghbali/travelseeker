@@ -62,7 +62,11 @@ module TripsHelper
   end
 
   def trip_share_url(trip)
-    trip_url(trip.slug)
+    trip_url(trip)
+  end
+
+  def trip_edit_url(trip)
+    trip_url(trip.id)
   end
 
   def ideas_trip(clip)

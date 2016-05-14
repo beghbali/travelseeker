@@ -51,6 +51,10 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  def to_param
+    self[:slug]
+  end
+
   def id
     self.readonly ? self[:slug] : self[:id]
   end

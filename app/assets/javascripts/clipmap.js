@@ -22,17 +22,18 @@ function setZoom(map, location) {
   var geocoder = new google.maps.Geocoder();
   geocoder.geocode( { 'location': location}, function(results, status) {
     if (status == google.maps.GeocoderStatus.OK) {
-      var result = results[0]
+      var result = results[0];
       map.setCenter(result.geometry.location);
       var marker = new google.maps.Marker({
           map: map,
               position: result.geometry.location
           });
-      if (result.geometry.viewport)
+      if (result.geometry.viewport) {
         map.fitBounds(result.geometry.viewport);
-        if (map.getZoom() > 15) map.setZoom(14);
-    } else {
-      //needs error handling
+      }
+      if (map.getZoom() > 15) {
+        map.setZoom(14);
+      }
     }
   });
 }
@@ -110,7 +111,7 @@ function initMap() {
             }
         ]
     }
-]
+];
   var centerLat = $('#clipmap').data('center-lat') || 0;
   var centerLng = $('#clipmap').data('center-lng') || 0;
 
@@ -130,7 +131,7 @@ function initMap() {
     zoomControl: true,
     zoomControlOptions: {
       position: google.maps.ControlPosition.LEFT_BOTTOM
-    },
+    }
   });
 
   window.map = map;
@@ -176,14 +177,14 @@ function drawPins(map) {
 
   var trip = $('.trip.selected');
   var marker = new google.maps.Marker({
-      position: new google.maps.LatLng(trip.data('latitude'), trip.data('longitude')),
+      position: new google.maps.LatLng(trip.data('latitude') || 0, trip.data('longitude') || 0),
       map: map,
       title: trip.data('name'),
     });
   window.markers.push(marker);
 
   $.each (pins, function(index, clip) {
-    loc = new google.maps.LatLng($(clip).data('latitude'), $(clip).data('longitude'))
+    loc = new google.maps.LatLng($(clip).data('latitude') || 0, $(clip).data('longitude') || 0)
 
     if (isNaN(loc.lat()) || isNaN(loc.lng())) {
       return;
@@ -221,7 +222,7 @@ function drawPins(map) {
     map.fitBounds(bounds);
   } else {
     var trip = $('.trip.selected');
-    var tripLocation = new google.maps.LatLng($(trip).data('latitude'), $(trip).data('longitude'));
+    var tripLocation = new google.maps.LatLng($(trip).data('latitude') || 0, $(trip).data('longitude') || 0);
     map.setCenter(tripLocation);
     bounds.extend(tripLocation);
     map.fitBounds(bounds);
