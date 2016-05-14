@@ -13,7 +13,7 @@ class Trip < ActiveRecord::Base
 
   scope :in_city, ->(city) { where(city: city) }
   scope :by_commitments, -> { joins(:clips).order('clips.scheduled_at ASC')}
-  scope :top_level, -> { where(parent_id: nil) }
+  scope :top_level, -> { where(parent_id: nil).order(updated_at: :desc) }
 
   def commitments
     Clip.where(trip_id: trip_ids + [id]).where('clips.scheduled_at IS NOT NULL').order('clips.scheduled_at ASC, clips.trip_id')
