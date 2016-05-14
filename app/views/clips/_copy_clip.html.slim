@@ -10,7 +10,7 @@
         .container-fluid
           =bootstrap_form_for clip, url: copy_clip_url(clip), method: :post, remote: true do |f|
             .row
-              = f.select :trip_id, options_from_collection_for_select([ideas_trip(clip)]+current_user.trips, :id, :name, current_user.last_trip_copied_to.try(:id))
+              = f.select :trip_id, options_from_collection_for_select(current_user.trips, :id, :name, current_user.last_trip_copied_to.try(:id))
               = f.text_field :new_trip, label: 'OR create a new trip'
             .row
               = f.submit class: 'btn btn-block btn-primary', value: 'Copy to my trip'

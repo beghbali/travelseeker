@@ -109,13 +109,4 @@ class TripsController < ApplicationController
       #   return redirect_to(new_trip_path) if @trip.user != current_user
       # end
     end
-
-    def copy_clip
-      if session[:copy_clip_id].present?
-        clip = Clip.find session[:copy_clip_id]
-        clip.copy_to(@trip.id)
-        session[:copy_clip_id] = nil
-      end
-      true
-    end
 end
