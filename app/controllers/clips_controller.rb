@@ -61,17 +61,17 @@ class ClipsController < ApplicationController
   end
 
   def copy
-    if copy_params[:trip_id].nil?
-      session[:copy_clip_id] = params[:id]
-      redirect_to new_trip_path
-    else
-      clip = Clip.find(params[:id])
-      trip_id = copy_params[:trip_id]
+    clip = Clip.find(params[:id])
+    session[:copy_clip_id] = clip.id
+    trip_id = copy_params[:trip_id]
 
-      clip.copy_to(trip_id)
-      respond_to do |format|
-        format.json { respond_with_bip(clip, param: :clip) }
-      end
+    unless copy_params[:new_trip].blank?
+      trip_id = Trip.create(location: copy_params[:new_trip], session_id: session.id, user_id: current_user.id).id
+    end
+    clip.copy_to(trip_id)
+
+    respond_to do |format|
+      format.json { respond_with_bip(clip, param: :clip) }
     end
   end
 
@@ -92,7 +92,7 @@ class ClipsController < ApplicationController
     end
 
     def copy_params
-      params.require(:clip).permit(:trip_id)
+      params.require(:clip).permit(:trip_id, :new_trip)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -2,7 +2,7 @@ class Clip < ActiveRecord::Base
   acts_as_taggable_on :type, :days, :dates
   acts_as_commentable
 
-  attr_accessor :metadata, :near
+  attr_accessor :metadata, :near, :new_trip
 
   has_one :comment, as: :commentable
   belongs_to :trip

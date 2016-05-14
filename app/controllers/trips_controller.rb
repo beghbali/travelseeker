@@ -40,7 +40,7 @@ class TripsController < ApplicationController
     @trip.user_id = current_user.id
 
     respond_to do |format|
-      if @trip.save && copy_clip
+      if @trip.save
         format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully created.', change: 'list' }
         format.json { render action: 'show', status: :created, location: @trip, day: 1 }
       else
