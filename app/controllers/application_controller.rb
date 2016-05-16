@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def sign_out
-    session[:user_id] = nil
+    reset_session
     redirect_to "https://zentrips.auth0.com/v2/logout?returnTo=http://www.tryzentrips.com/trips/new&client_id=#{ENV['AUTH0_KEY']}"
   end
 
