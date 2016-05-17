@@ -57,11 +57,12 @@ class Trip < ActiveRecord::Base
   end
 
   def id
-    self.readonly ? self[:slug] : self[:id]
+    self.readonly ? self[:id] : self[:slug]
   end
 
   def readonly!
     self.readonly = true
+    trips.map(&:readonly!)
   end
 
   def location
