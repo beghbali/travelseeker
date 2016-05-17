@@ -14,13 +14,13 @@
 
       .row.stats
         .col-md-7
-          - unless @readonly
+          - unless @trip.readonly?
             .scheduled class=scheduled_class(clip)
               = clip.scheduled_time
         .col-md-3
           .tag.pill.pill-icon class=tag_class(clip.type_list.first)
         .col-md-2
-          - if @readonly
+          - if @trip.readonly?
             - if clip.copied_for?(current_user)
               i.fa.fa-check title="Added to trip"
             - else

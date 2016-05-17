@@ -37,8 +37,12 @@ class Auth0Controller < ApplicationController
   end
 
   private def after_sign_in_path
-    trip = current_user.trips.last
-    trip.present? ? trip_path(trip) : new_trip_path
+    if session[:redirect_to].present?
+      session.delete(:redirect_to)
+    else
+      trip = current_user.trips.last
+      trip.present? ? trip_path(trip) : new_trip_path
+    end
   end
 
   private def user_params
