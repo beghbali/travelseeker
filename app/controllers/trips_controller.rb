@@ -1,4 +1,5 @@
 class TripsController < ApplicationController
+  include TripsHelper
   layout 'trips'
   before_action :set_trip, only: [:show, :edit, :update, :destroy, :trip_details]
   before_action :authorize_trip_access, only: [:show, :edit, :update, :destroy, :trip_details]
