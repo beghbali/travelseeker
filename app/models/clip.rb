@@ -143,7 +143,7 @@ class Clip < ActiveRecord::Base
     self.trip = designated_trip
     type_list.add metadata.type
     type_list.remove 'Unassigned' if type_list.count > 1
-    return false if !valid?
+    return false if !valid? || self.trip.nil?
   end
 
   def comment_attributes=(attrs)

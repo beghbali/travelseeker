@@ -15,7 +15,7 @@ class TripsController < ApplicationController
   # GET /trips/1.json
   def show
     @select_all = true
-    session[:redirect_to] = trip_path(@trip) if @trip.readonly?
+    session[:redirect_to] = trip_share_path(@trip) if @trip.readonly?
     redirect_to trip_day_path(@trip, day: 1) unless @trip.readonly? || @day.present? || performed?
   end
 
