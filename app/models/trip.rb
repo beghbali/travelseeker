@@ -57,7 +57,11 @@ class Trip < ActiveRecord::Base
   end
 
   def id
-    self.readonly ? self[:id] : self[:slug]
+    self.readonly? ? canonical_id : slug
+  end
+
+  def canonical_id
+    self[:id]
   end
 
   def readonly!
