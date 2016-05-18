@@ -62,7 +62,7 @@ module TripsHelper
   end
 
   def trip_share_url(trip)
-    trip_url(trip.id)
+    trip_url(trip[:id])
   end
 
   def trip_edit_url(trip)
