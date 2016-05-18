@@ -10,7 +10,8 @@
         span=clip.name
 
       .row
-        .comment.placeholder =clip.comment.try(:comment)
+        - unless @trip.readonly?
+          .comment.placeholder =clip.comment.try(:comment)
 
       .row.stats
         .col-md-7
