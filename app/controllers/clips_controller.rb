@@ -64,7 +64,6 @@ class ClipsController < ApplicationController
     clip = Clip.find(params[:id])
     session[:copy_clip_id] = clip.id
     trip_id = copy_params[:trip_id]
-    session[:redirect_to] = trip_path(clip.ancestor)
 
     unless copy_params[:new_trip].blank?
       trip_id = Trip.create(location: copy_params[:new_trip], session_id: session.id, user_id: current_user.id).id
