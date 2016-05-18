@@ -13,7 +13,7 @@
       input.hidden type='text' value="#{trip.start_date} - #{trip.end_date}"
     .tags
       - general_tags.each do |tag|
-        - tag_count = Clip.tagged_with(tag).where(trip_id: trip.trip_ids).uniq.count
+        - tag_count = Clip.tagged_with(tag, on: :type).where(trip_id: trip.trip_ids).uniq.count
         - if tag_count > 0
           .tag.pill class=tag_class(tag) title=tag = tag_count
     ul.subtrips
