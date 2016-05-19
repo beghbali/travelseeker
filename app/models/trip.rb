@@ -52,11 +52,16 @@ class Trip < ActiveRecord::Base
     end
   end
 
-  def to_param
-    self[:slug]
-  end
+  # def to_param
+  #   self[:slug]
+  # end
 
-  def id
+  # def id
+  #   debugger;2
+  #   self.readonly? ? canonical_id : slug
+  # end
+
+  def presentable_id
     self.readonly? ? canonical_id : slug
   end
 

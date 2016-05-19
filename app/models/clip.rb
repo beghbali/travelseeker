@@ -16,10 +16,10 @@ class Clip < ActiveRecord::Base
   validates :reference, uniqueness: { scope: :trip_id }
   validates :uri, uniqueness: { scope: :trip_id }
   before_validation :set_reference, if: -> { reference.nil? }
+  before_validation :create_and_assign_to_new_trip, on: :create
   before_save :set_location
   before_save :reassociate_annotated_weblinks, if: :persisted?
   before_save :ensure_tagged
-  before_create :create_and_assign_to_new_trip
 
   after_destroy :remove_orphaned_trip
 
@@ -33,6 +33,7 @@ class Clip < ActiveRecord::Base
   delegate :city, :state, :country, :external_reference, :url, :rating_image_url, :phone, :hours, to: :metadata, allow_nil: true
 
   validates :uri, presence: true
+  validates :trip_id, presence: true
 
   def self.last_clip_location_for_session(session_id)
     Rails.cache.fetch(['last_clip_location', session_id, Clip.for_session(session_id).known_location.count]) do
@@ -132,7 +133,7 @@ class Clip < ActiveRecord::Base
   end
 
   def existing_city_trip(in_trip)
-    in_trip.trips.in_city(city).first
+    in_trip && in_trip.trips.in_city(city).first
   end
 
   def create_and_assign_to_new_trip(in_trip=self.trip)
@@ -143,7 +144,6 @@ class Clip < ActiveRecord::Base
     self.trip = designated_trip
     type_list.add metadata.type
     type_list.remove 'Unassigned' if type_list.count > 1
-    return false if !valid? || self.trip.nil?
   end
 
   def comment_attributes=(attrs)

@@ -58,14 +58,14 @@ $ ->
     drawPins(window.map);
 
   $(document).on 'click', '.subtrips .trip', (e)->
-    return if $(e.target).is('.fa-clone')
+    return if $(e.target).is('.clone')
     tripId = $(@).data('id')
     $('.clip[data-trip!='+tripId+']').removeClass('selected');
     $('.clip[data-trip='+tripId+']').addClass('selected');
     drawPins(window.map);
 
   $(document).on 'click', '.trip .trip .clips > li', (e)->
-    if !$(e.target).is('i') && !$(e.target).is('select')
+    if !$(e.target).is('i') && !$(e.target).is('select') &&  !$(e.target).is('.clone')
       $clip = $(@).find('.clip')
       clipDetails = $($clip.data('clip-details'));
       $trip = $('.trip.selected').first();

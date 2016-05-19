@@ -68,7 +68,7 @@ class ClipsController < ApplicationController
     unless copy_params[:new_trip].blank?
       trip_id = Trip.create(location: copy_params[:new_trip], session_id: session.id, user_id: current_user.id).id
     end
-    clip.copy_to(trip_id)
+    clip.copy_to(trip_id.to_i)
 
     respond_to do |format|
       format.json { respond_with_bip(clip, param: :clip) }

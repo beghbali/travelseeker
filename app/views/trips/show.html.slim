@@ -1,7 +1,7 @@
 -@trip.errors.full_messages.each do |error|
   .alert.alert-warning= error
 
-nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to_json}"
+nav.navbar.navbar-default.navbar-fixed-top
   .container-fluid
     .navbar-header
       a.navbar-brand.hidden-sm.hidden-xs href=new_trip_path
@@ -60,6 +60,13 @@ nav.navbar.navbar-default.navbar-fixed-top data-trip="#{([@trip]+@trip.trips).to
         =render @trip
 
     .col-md-9.col-md-pull-3.col-sm-8.col-sm-pull-4.nopadding
+      - if @trip.readonly?
+        .disclaimer
+          .row
+            .col-md-2
+              img src=asset_url('add-to-trip-button.png')
+            .col-md-10
+              p This is someone else's trip but you can save ideas you like into one of your own trips by clicking the 'Add to Trip' icon
       .map
         #clipmap data-center-lat=@location.try(:latitude) data-center-lng=@location.try(:longitude)
         - unless @trip.readonly?

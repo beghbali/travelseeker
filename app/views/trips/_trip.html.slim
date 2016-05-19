@@ -1,7 +1,10 @@
 #list
   =render collection: trip.all_clips.to_a, partial: '/clips/clip_details', as: :clip
-  .trip.selected data-id=trip.id id="trip" data-latitude=trip.latitude data-longitude=trip.longitude data-name=trip.name
+  .trip.selected data-id=trip.presentable_id id="trip" data-latitude=trip.latitude data-longitude=trip.longitude data-name=trip.name
     .header
+      - if trip.parent.present?
+        =link_to trip_path(trip.parent) do
+          i.fa.fa-level-up
       h1 = trip.name
       h3.dates
         -if trip.dates_known?
@@ -18,7 +21,10 @@
           .tag.pill class=tag_class(tag) title=tag = tag_count
     ul.subtrips
       - wishlist_shown = {}
-      - (trip.commitments_by_trip + trip.trips.product([[]])).each do |subtrip, commitments|
-        li.trip data-id=subtrip.id id="trip:#{subtrip.id}"
-          = render 'subtrip', trip: subtrip, commitments: commitments, wishlist_shown: wishlist_shown
-        - wishlist_shown[subtrip.id] = true
+      - if trip.parent.present?
+        = render 'subtrip', trip: trip, commitments: [], wishlist_shown: []
+      - else
+        - (trip.commitments_by_trip + trip.trips.product([[]])).each do |subtrip, commitments|
+          li.trip data-id=subtrip.presentable_id id="trip:#{subtrip.presentable_id}"
+            = render 'subtrip', trip: subtrip, commitments: commitments, wishlist_shown: wishlist_shown
+          - wishlist_shown[subtrip.presentable_id] = true

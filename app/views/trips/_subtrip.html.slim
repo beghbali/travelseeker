@@ -8,12 +8,12 @@ ul.trip-commitments
       ul.clips
         - commitments.each do |commitment|
           li class=day_class(date) id="clip_#{commitment.id}"
-            = render commitment
+            = render commitment, trip: trip
   li class=show_wishlist_class(wishlist_shown, trip)
     h3 Wishlist
     ul.clips
       - trip.clips.tagged_with('Unassigned', on: :days).each do |clip|
         li id="clip_#{clip.id}"
-          = render clip
+          = render clip, trip: trip
 
 
