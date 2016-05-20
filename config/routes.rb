@@ -9,7 +9,12 @@ Zentrips::Application.routes.draw do
   end
 
   resources :trips do
+    collection do
+      get :mytrips
+    end
+
     get :trip_details
+
     resources :day, only: [:show], controller: :trips, param: :day
   end
 

@@ -24,6 +24,11 @@ class TripsController < ApplicationController
     render partial: 'trip', locals: {trip: @trip}, layout: false
   end
 
+  def mytrips
+    @trip = nil
+    render partial: 'mytrips', layout: false
+  end
+
   # GET /trips/new
   def new
     @trip = Trip.new

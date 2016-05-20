@@ -14,7 +14,7 @@ module TripsHelper
   end
 
   def trips_class(trip_url)
-    trip_path(@trip) == trip_url ? 'chosen' : ''
+    (@trip && trip_path(@trip) == trip_url) ? 'chosen' : ''
   end
 
   def tag_class(tag)

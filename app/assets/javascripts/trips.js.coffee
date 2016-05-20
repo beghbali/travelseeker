@@ -119,6 +119,7 @@ $ ->
   $('.modal .edit_clip').on('ajax:success', ->
     $trip = $('.trip.selected').first();
     $trip.load('/trips/'+$trip.data('id')+'/trip_details');
+    $('.trip-selection').load('/trips/mytrips');
     $(@).closest('.modal').modal('hide')
     )
 

@@ -41,17 +41,9 @@ nav.navbar.navbar-default.navbar-fixed-top
               .btn.btn-primary.share.hidden-xs data-toggle="modal" data-target="#shareModal"
                 i.fa.fa-share-alt
 
-          - if signed_in?
+          - if !signed_in?
             li.trip-selection.hidden-xs
-              .dropdown
-                button.btn.btn-default.dropdown-toggle type='button' id='tripsMenu' data-toggle='dropdown' aria-haspopup="true" aria-expanded="true"
-                  | My Trips
-                  span.caret
-
-                ul.dropdown-menu aria-labelledby='tripsMenu'
-                  - ([['New Trip', new_trip_path]] + user_trips(current_user)).each do |name, url|
-                    li
-                      a href="#{url}" data-no-turbolink=true class=trips_class(url) = name
+              = render 'mytrips'
 
 .container-fluid
   .row.no-gutter
