@@ -53,7 +53,7 @@ class Trip < ActiveRecord::Base
   end
 
   def to_param
-    presentable_id
+    presentable_id.to_s
   end
 
   def presentable_id
