@@ -175,7 +175,7 @@ function drawPins(map) {
   var pins = $('.clip.selected');
   removeMarkers();
 
-  var trip = $('.trip.selected');
+  var trip = $('.trip.selected').not('.hidden');
   var marker = new google.maps.Marker({
       position: new google.maps.LatLng(trip.data('latitude') || 0, trip.data('longitude') || 0),
       map: map,
@@ -205,15 +205,19 @@ function drawPins(map) {
 
     marker.addListener('click', function() {
       infowindow.open(map, marker);
-    });
-    if ($(clip).data('active') == true) {
-      infowindow.open(map,marker);
-      map.setCenter(loc);
-    }
+    }.bind(this))
+    ;
     window.markers.push(marker);
+
+    if ($(clip).data('active') == true) {
+      map.setCenter(loc);
+      infowindow.setPosition(marker.getPosition());
+      infowindow.open(map,marker);
+    }
+
   });
 
-  fitToMarkers(window.markers)
+  fitToMarkers(window.markers);
 
   if (pins.length == 1) {
     // map.fitBounds(bounds);
