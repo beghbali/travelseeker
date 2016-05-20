@@ -24,7 +24,8 @@
       - if trip.parent.present?
         = render 'subtrip', trip: trip, commitments: [], wishlist_shown: []
       - else
-        - (trip.commitments_by_trip + trip.trips.product([[]])).each do |subtrip, commitments|
+        - trip_commitments = trip.commitments_by_trip
+        - (trip_commitments + (trip.trips - trip_commitments.map{|c| c[0]}).product([[]])).each do |subtrip, commitments|
           li.trip data-id=subtrip.presentable_id id="trip:#{subtrip.presentable_id}"
             = render 'subtrip', trip: subtrip, commitments: commitments, wishlist_shown: wishlist_shown
           - wishlist_shown[subtrip.presentable_id] = true

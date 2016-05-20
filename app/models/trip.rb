@@ -29,6 +29,7 @@ class Trip < ActiveRecord::Base
           next
         end
       end
+      commitment.trip.readonly! if self.readonly?
       result << [commitment.trip, [commitment]]
     end
     result

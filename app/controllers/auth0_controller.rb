@@ -41,7 +41,8 @@ class Auth0Controller < ApplicationController
     if session[:redirect_to].present?
       session.delete(:redirect_to)
     else
-      trip = current_user.trips.last
+      # this should be last user clip activity and it's ancestor trip
+      trip = current_user.last_trip_copied_to || current_user.trips.last
       trip.present? ? trip_path(trip) : new_trip_path
     end
   end
