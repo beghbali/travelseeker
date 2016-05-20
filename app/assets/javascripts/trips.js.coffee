@@ -124,4 +124,4 @@ $ ->
     $(@).closest('.modal').modal('hide')
     )
 
-  $('.disclaimer').fadeOut(25000);
+  $('.disclaimer').fadeOut(10000);
