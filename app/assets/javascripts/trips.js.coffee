@@ -116,7 +116,7 @@ $ ->
   $('[data-toggle="tooltip"]').tooltip()
   $('.alert').fadeOut(5000);
 
-  $('.modal .edit_clip').on('ajax:success', ->
+  $(document).on('ajax:success', '.modal .edit_clip', ->
     $trip = $('.trip.selected').first();
     $trip.load('/trips/'+$trip.data('id')+'/trip_details');
     $('.trip-selection').load('/trips/mytrips');
