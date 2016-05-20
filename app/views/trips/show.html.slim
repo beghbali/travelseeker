@@ -41,7 +41,7 @@ nav.navbar.navbar-default.navbar-fixed-top
               .btn.btn-primary.share.hidden-xs data-toggle="modal" data-target="#shareModal"
                 i.fa.fa-share-alt
 
-          - if !signed_in?
+          - if signed_in?
             li.trip-selection.hidden-xs
               = render 'mytrips'
 
