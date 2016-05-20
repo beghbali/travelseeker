@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160509070218) do
+ActiveRecord::Schema.define(version: 20160520074942) do
 
   create_table "clips", force: true do |t|
     t.string   "uri"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20160509070218) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "uid"
+    t.string   "image"
   end
 
 end

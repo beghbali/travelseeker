@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   has_many :trips, -> { top_level }
+  mount_uploader :image, ImageUploader
 
   validates :email, uniqueness: true, allow_nil: true
 

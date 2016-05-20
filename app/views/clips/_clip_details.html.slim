@@ -8,9 +8,10 @@
     .col-md-2
       i.fa.fa-taxi title='Coming soon...'
   img.banner src="#{clip.image_url || google_static_map_url(clip.location, 300)}"
-  div
-    i.fa.fa-camera data-toggle="modal" data-target="#Clip#{clip.id}Modal" title='Change Photo'
-  = render 'clips/image_uploader', clip: clip
+  - if !@readonly
+    div
+      i.fa.fa-camera data-toggle="modal" data-target="#Clip#{clip.id}Modal" title='Change Photo'
+    = render 'clips/image_uploader', clip: clip
   .scheduled class=scheduled_class(clip)
     = clip.scheduled_time
   .row.header

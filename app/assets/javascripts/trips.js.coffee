@@ -121,3 +121,5 @@ $ ->
     $trip.load('/trips/'+$trip.data('id')+'/trip_details');
     $(@).closest('.modal').modal('hide')
     )
+
+  $('.disclaimer').fadeOut(25000);

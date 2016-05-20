@@ -186,7 +186,7 @@ function drawPins(map) {
   $.each (pins, function(index, clip) {
     loc = new google.maps.LatLng($(clip).data('latitude') || 0, $(clip).data('longitude') || 0)
 
-    if (isNaN(loc.lat()) || isNaN(loc.lng())) {
+    if (isNaN(loc.lat()) || isNaN(loc.lng()) || (loc.lat() == 0 && loc.lng() == 0)) {
       return;
     }
 

@@ -168,9 +168,21 @@ $detail-color: #be5290;
   }
 }
 
+.avatar {
+  img {
+    width: 6em;
+    height: 6em;
+    border-radius: 50%;
+    z-index: 999999;
+    margin: 1em auto;
+    position: absolute;
+    top: $navbar-height/4;
+    left: 50%;
+  }
+}
 .disclaimer {
   position: absolute;
-  top: 8rem;
+  top: $navbar-height;
   left: 25%;
   width: 50%;
   padding: 1em;

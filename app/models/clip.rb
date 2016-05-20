@@ -8,7 +8,7 @@ class Clip < ActiveRecord::Base
   belongs_to :trip
   belongs_to :source, class_name: 'Clip'
 
-  mount_uploader :image, ClipImageUploader
+  mount_uploader :image, ImageUploader
 
   accepts_nested_attributes_for :comment
 
