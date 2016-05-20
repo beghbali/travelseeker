@@ -5,7 +5,7 @@ module TripsHelper
   end
 
   def user_trips(user)
-    trips = Array.wrap(user.try(:trips) || @trip).reverse
+    trips = Array.wrap(user.try(:trips) || @trip)
     trips.map{|trip| [trip.name, trip_path(trip.slug)]}
   end
 

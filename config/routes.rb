@@ -14,6 +14,7 @@ Zentrips::Application.routes.draw do
     end
 
     get :trip_details
+    get :copyclipmodals
 
     resources :day, only: [:show], controller: :trips, param: :day
   end

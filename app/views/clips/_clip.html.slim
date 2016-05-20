@@ -1,5 +1,6 @@
 -content_for :footer do
-  = render 'clips/copy_clip', clip: clip
+  .copyclipmodals
+    = render 'clips/copy_clip', clip: clip
 
 .row.hoverable
   -selected = @select_all || (@day == clip.scheduled_day || clip.trip == @selected_trip)

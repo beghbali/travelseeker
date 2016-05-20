@@ -120,6 +120,7 @@ $ ->
     $trip = $('.trip.selected').first();
     $trip.load('/trips/'+$trip.data('id')+'/trip_details');
     $('.trip-selection').load('/trips/mytrips');
+    $('.copyclipmodals').load('/trips/'+$trip.data('id')+'/copyclipmodals');
     $(@).closest('.modal').modal('hide')
     )
 

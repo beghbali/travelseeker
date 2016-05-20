@@ -1,7 +1,7 @@
 class TripsController < ApplicationController
   include TripsHelper
   layout 'trips'
-  before_action :set_trip, only: [:show, :edit, :update, :destroy, :trip_details]
+  before_action :set_trip, only: [:show, :edit, :update, :destroy, :trip_details, :copyclipmodals]
   before_action :authorize_trip_access, only: [:show, :edit, :update, :destroy, :trip_details]
   before_action :set_show_variables, only: [:show, :update]
   before_action :set_new_variables, only: [:new, :create]
@@ -27,6 +27,10 @@ class TripsController < ApplicationController
   def mytrips
     @trip = nil
     render partial: 'mytrips', layout: false
+  end
+
+  def copyclipmodals
+    render partial: 'copyclipmodals', layout: false
   end
 
   # GET /trips/new
