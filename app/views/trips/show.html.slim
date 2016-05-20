@@ -61,7 +61,7 @@ nav.navbar.navbar-default.navbar-fixed-top
 
     .col-md-9.col-md-pull-3.col-sm-8.col-sm-pull-4.nopadding
       - if @trip.readonly?
-        - if !current_user.image.present?
+        - if current_user.image.present?
           .avatar
             = image_tag current_user.image_url
         .disclaimer

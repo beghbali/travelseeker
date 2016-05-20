@@ -29,7 +29,7 @@ class Auth0Controller < ApplicationController
   end
 
   def confirm_email
-    if sign_in(@email, @uid)
+    if sign_in(@email, @uid, @image)
       claim_trips
       redirect_to after_sign_in_path
     else
