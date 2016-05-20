@@ -17,7 +17,7 @@ class TripsController < ApplicationController
   def show
     @select_all = true
     session[:redirect_to] = trip_share_url(@trip) if @trip.readonly?
-    redirect_to trip_day_path(@trip, day: 1) unless @trip.readonly? || @day.present? || performed?
+    redirect_to trip_day_path(@trip.presentable_id, day: 1) unless @trip.readonly? || @day.present? || performed?
   end
 
   def trip_details

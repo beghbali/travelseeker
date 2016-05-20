@@ -52,6 +52,10 @@ class Trip < ActiveRecord::Base
     end
   end
 
+  def to_param
+    presentable_id
+  end
+
   def presentable_id
     self.readonly? ? canonical_id : slug
   end

@@ -16,10 +16,10 @@ class Clip < ActiveRecord::Base
   validates :reference, uniqueness: { scope: :trip_id }
   validates :uri, uniqueness: { scope: :trip_id }
   before_validation :set_reference, if: -> { reference.nil? }
-  before_validation :create_and_assign_to_new_trip, on: :create
   before_save :set_location
   before_save :reassociate_annotated_weblinks, if: :persisted?
   before_save :ensure_tagged
+  before_create :create_and_assign_to_new_trip
 
   after_destroy :remove_orphaned_trip
 
@@ -144,6 +144,7 @@ class Clip < ActiveRecord::Base
     self.trip = designated_trip
     type_list.add metadata.type
     type_list.remove 'Unassigned' if type_list.count > 1
+    return valid?
   end
 
   def comment_attributes=(attrs)
