@@ -61,7 +61,7 @@ nav.navbar.navbar-default.navbar-fixed-top
             .col-md-2
               img src=asset_url('add-to-trip-button.png')
             .col-md-10
-              p This is someone else's trip but you can save ideas you like into one of your own trips by clicking the 'Add to Trip' icon
+              p This is someone else's trip but you can save ideas you like into one of your own trips by clicking the green 'Add to Trip' icons in the list on the right
       .map
         #clipmap data-center-lat=@location.try(:latitude) data-center-lng=@location.try(:longitude)
         - unless @trip.readonly?
