@@ -63,6 +63,7 @@ $ ->
     $('.clip[data-trip!='+tripId+']').removeClass('selected');
     $('.clip[data-trip='+tripId+']').addClass('selected');
     drawPins(window.map);
+    return true;
 
   $(document).on 'click', '.trip .trip .clips > li', (e)->
     if !$(e.target).is('i') && !$(e.target).is('select') &&  !$(e.target).is('.clone')
@@ -74,16 +75,18 @@ $ ->
       $clip.data('active', true);
       $clip.addClass('selected');
       drawPins(window.map);
+      return true;
 
   $(document).on 'click', '.clip-details .back', (e)->
     clipDetails = $(@).closest('.clip-details')
     $trip = $('.trip.selected').first();
-    $trip.load('/trips/'+$trip.data('id')+'/trip_details');
+    # $trip.load('/trips/'+$trip.data('id')+'/trip_details');
     $trip.removeClass('hidden');
     clipDetails.addClass('hidden');
     $('.clip').addClass('selected')
     $(clipDetails.data('clip')).data('active', false);
     drawPins(window.map);
+    return true;
 
   $(document).on 'submit', '.new_trip', (e)->
     #needs error handling
@@ -103,7 +106,7 @@ $ ->
     initBestInPlace();
 
   $(document).on 'click', '[data-open]', (e)->
-    $('.trips > .row > div > .details .back').trigger('click');
+    $('.clip-details .back').trigger('click');
     $($(e.target).data('open')).trigger('click');
 
   $('.trip-selection select').on 'change', ->
@@ -116,7 +119,7 @@ $ ->
   $('[data-toggle="tooltip"]').tooltip()
   $('.alert').fadeOut(5000);
 
-  $(document).on('ajax:success', '.modal .edit_clip', ->
+  $(document).on('ajax:success', '.modal .edit_clip', (e)->
     $trip = $('.trip.selected').first();
     $trip.load('/trips/'+$trip.data('id')+'/trip_details');
     $('.trip-selection').load('/trips/mytrips');

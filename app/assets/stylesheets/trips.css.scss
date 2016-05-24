@@ -969,6 +969,23 @@ body, html {
    }
   }
 @media (max-width: 767px) {
+  body {
+    font-size: 0.25em;
+  }
+
+  a.signout, a.save {
+    font-size: 5em;
+  }
+  section {
+    font-size: 3em;
+
+    p {
+      font-size: 2em;
+    }
+    &.video ul, &.video p, &.testimonials p {
+      width: 100%;
+    }
+  }
    i {
     color: black;
   }

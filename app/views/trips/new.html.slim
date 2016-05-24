@@ -1,11 +1,13 @@
 #top
-.logo.pull-left
+.logo.pull-left.hidden-xs
   =image_tag('TravelSeeker-logo-magenta.png')
+.logo.pull-left.visible-xs.clearfix
+  =image_tag('TravelSeeker-logo-chute.png')
 - if signed_in?
   = link_to 'Sign out', sign_out_url, method: :delete, class: 'signout'
 - else
   a.save href='javascript:return false;' Sign In
-section.hero
+section.hero.clearfix
   .row
     h1 Get the most out of every journey
   .row
@@ -34,7 +36,7 @@ section.video
       .map
         #clipmap data-center-lat=@location.latitude data-center-lng=@location.longitude
 
-    .container
+    .container-fluid
       ul.list-unstyled
         li
           .media

@@ -143,6 +143,7 @@ function removeMarkers(){
   for(i=0; i<window.markers.length; i++){
       window.markers[i].setMap(null);
   }
+  window.markers = [];
 }
 
 function fitToMarkers(markers) {
@@ -181,7 +182,10 @@ function drawPins(map) {
       map: map,
       title: trip.data('name'),
     });
-  window.markers.push(marker);
+
+  if (pins.length == 0) {
+    window.markers.push(marker);
+  }
 
   $.each (pins, function(index, clip) {
     loc = new google.maps.LatLng($(clip).data('latitude') || 0, $(clip).data('longitude') || 0)
