@@ -22,7 +22,7 @@ nav.navbar.navbar-default.navbar-fixed-top
           li
             - if signed_in?
               =link_to 'Sign out', sign_out_url, method: :delete, class: 'btn btn-link signout hidden-xs'
-              =link_to sign_out_url, method: :delete, class: 'btn btn-link signout visible-xs' do
+              =link_to sign_out_url, method: :delete, class: 'signout visible-xs' do
                 i.fa.fa-sign-out
             - elsif current_user_owns_trip?
               .btn.btn-primary.save.hidden-xs
