@@ -1,11 +1,11 @@
 .clip-details.hidden id="clip_detail_#{clip.id}" data-clip="#clip_#{clip.id}"
   .container-fluid.navigation.row
-    .col-md-2.back
+    .col-md-2.col-xs-3.col-sm-2.back
       i.fa.fa-long-arrow-left
-    .col-md-6
-    .col-md-2
+    .col-md-6.col-xs-10.col-sm-6
+    .col-md-2.col-xs-3.col-sm-2
       i.fa.fa-location-arrow title='Coming soon...'
-    .col-md-2
+    .col-md-2.col-xs-2.col-sm-2
       i.fa.fa-taxi title='Coming soon...'
   img.banner src="#{clip.image_url || google_static_map_url(clip.location, 300)}"
   - if !@readonly
@@ -15,7 +15,7 @@
   .scheduled class=scheduled_class(clip)
     = clip.scheduled_time
   .row.header
-    .col-md-10
+    .col-md-10.col-xs-14
       h2.name
         = best_in_place clip, :name, as: :input, activator: "#clip_#{clip.id}_name_edit", class: 'autocomplete-places', place_holder: 'Enter Name'
         i.fa.fa-pencil.small id="clip_#{clip.id}_name_edit"
@@ -24,31 +24,31 @@
         i.fa.fa-pencil.small id="clip_#{clip.id}_address_edit"
       h4.phone
         = clip.phone
-    .col-md-2
+    .col-md-2.col-xs-4
       .tag.pill.pill-icon class=tag_class(clip.type_list.first)
         =clip.type_list.first
   .container-fluid
     .row.edits
       - if @readonly
-        .col-md-12
+        .col-md-12.col-xs-16
           i.fa.fa-comment-o title="Adding comments for the trip owner coming soon..."
       - else
-        .col-md-6
+        .col-md-6.col-xs-8
           = link_to "", 'data-scroll-to' => "#date_#{clip.id}" do
             i.fa.fa-clock-o
             div Set Time
-        .col-md-6
+        .col-md-6.col-xs-8
           = link_to "", 'data-scroll-to' => "#note_#{clip.id}" do
             i.fa.fa-pencil
             div Add Note
   hr
   .container-fluid
     .row
-      .col-md-12
+      .col-md-12.col-xs-16
         h2 Hours
         h4.hours= format_hours(clip.hours)
     .row
-      .col-md-12
+      .col-md-12.col-xs-16
         h2 Website
         div
           a href=clip.url target='_blank' = clip.url
@@ -56,7 +56,7 @@
           = image_tag clip.rating_image_url
     - if @readonly
       .row
-        .col-md-12.delete
+        .col-md-12.col-xs-16.delete
           - if @readonly
             - if clip.copied_for?(current_user)
               i.fa.fa-check title="Added to trip"
@@ -68,17 +68,17 @@
     - else
       =bootstrap_nested_form_for clip, remote: true do |f|
         .row id="note_#{clip.id}"
-          .col-md-12
+          .col-md-12.col-xs-16
             h2 Note
             = f.fields_for :comment, clip.comment || clip.build_comment do |c|
               = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
         .row id="date_#{clip.id}"
-          .col-md-12
+          .col-md-12.col-xs-16
             h2= scheduled_label(clip)
             .row
-              .col-md-8
+              .col-md-8.col-xs-10
                 = f.datetime_picker :scheduled_at, format: :db, datetimepicker_format: "YYYY-MM-DD HH:mm Z", label: false
-              .col-md-4
+              .col-md-4.col-xs-6
                 = f.select(:type_list, clip.available_type_tags.zip(clip.available_type_tags).insert(0, ["Assign Type", nil]), {label: 'Type'})
             .row
               .container-fluid
@@ -86,6 +86,6 @@
                 =f.hidden_field :longitude
                 button.btn.btn-success.btn-block type='submit' Save
       .row
-        .col-md-12.delete
+        .col-md-12.col-xs-16.delete
           = link_to clip_path(clip), method: :delete do
             i.fa.fa-trash

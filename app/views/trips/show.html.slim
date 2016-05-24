@@ -29,10 +29,12 @@ nav.navbar.navbar-default.navbar-fixed-top
                 i.fa.fa-save
               i.fa.fa-save.save.visible-xs
             - else
-              .btn.btn-primary
+              .btn.btn-primary.hidden-xs
                 .save
                   |Sign In
                   i.fa.fa-sign-in
+              .save.visible-xs
+                i.fa.fa-sign-in
 
           li
             i.visible-xs.fa.fa-plane data-toggle="modal" data-target="#tripsModal"
@@ -68,38 +70,38 @@ nav.navbar.navbar-default.navbar-fixed-top
           .notes
             = react_component 'TripNotes', { trip: @trip, expanded: false }, { prerender: false }
 
-- unless @trip.readonly?
-  .modal.fade id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel"
-    .modal-dialog role="document"
-      .modal-content
-        .modal-header
-          button type="button" class="close" data-dismiss="modal" aria-label="Close"
-            span aria-hidden="true" &times;
-          h4.modal-title id="shareyModalLabel"
-            |Share this link with co-travelers and friends to get their inputs
-        .modal-body
-          - if current_user.authored?(@trip)
-            h2 For Collaboration
-            em Invite friends to add notes and interesting items to your trip
-            input disabled='disabled' value=trip_edit_url(@trip)
 
-          h2 For Sharing
-          em Share as read-only with people who can benefit from your recommendations
-          input disabled='disabled' value=trip_share_url(@trip)
+.modal.fade id="shareModal" tabindex="-1" role="dialog" aria-labelledby="shareModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title id="shareyModalLabel"
+          |Share this link with co-travelers and friends to get their inputs
+      .modal-body
+        - if current_user.authored?(@trip)
+          h2 For Collaboration
+          em Invite friends to add notes and interesting items to your trip
+          input disabled='disabled' value=trip_edit_url(@trip)
 
-  .modal.fade id="tripsModal" tabindex="-1" role="dialog" aria-labelledby="tripsModalLabel"
-    .modal-dialog role="document"
-      .modal-content
-        .modal-header
-          button type="button" class="close" data-dismiss="modal" aria-label="Close"
-            span aria-hidden="true" &times;
-          h4.modal-title id="tripsModalLabel"
-            |My Trips
-        .modal-body
-          .row.visible-xs
-            ul
-              - user_trips(current_user).each do |name, url|
-                li
-                  =link_to name, url, data: {'no-turbolink' => true }
+        h2 For Sharing
+        em Share as read-only with people who can benefit from your recommendations
+        input disabled='disabled' value=trip_share_url(@trip)
+
+.modal.fade id="tripsModal" tabindex="-1" role="dialog" aria-labelledby="tripsModalLabel"
+  .modal-dialog role="document"
+    .modal-content
+      .modal-header
+        button type="button" class="close" data-dismiss="modal" aria-label="Close"
+          span aria-hidden="true" &times;
+        h4.modal-title id="tripsModalLabel"
+          |My Trips
+      .modal-body
+        .row.visible-xs
+          ul
+            - user_trips(current_user).each do |name, url|
+              li
+                =link_to name, url, data: {'no-turbolink' => true }
 
 
