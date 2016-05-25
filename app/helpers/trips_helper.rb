@@ -10,7 +10,7 @@ module TripsHelper
   end
 
   def general_tags
-    %w(Food Activity Lodging Unassigned)
+    %w(Food Activity Lodging Transit Unassigned)
   end
 
   def trips_class(trip_url)

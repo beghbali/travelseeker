@@ -114,7 +114,7 @@ $ ->
 
   $(document).on 'click', '[data-scroll-to]', (e)->
     e.preventDefault();
-    $('.details').animate({scrollTop: $($(@).data('scroll-to')).offset().top}, 1000);
+    $('.details').animate({scrollTop: $($(@).data('scroll-to')).offset().top}, $(@).data('scroll-duration') || 1000);
 
   $('[data-toggle="tooltip"]').tooltip()
   $('.alert').fadeOut(5000);
