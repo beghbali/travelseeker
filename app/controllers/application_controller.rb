@@ -39,4 +39,23 @@ class ApplicationController < ActionController::Base
   def claim_trips
     current_user.claim_trips_for_session!(session.id)
   end
+
+  def report
+    internal_user_ids = [1,3,8,9,10,11,12,13,14,16,17,37,44,45,46,9,8,10,70,13,71,72,74,75,77,78,18,79,80]
+    trips = Trip.where(parent_id: nil).where('user_id not in(?)', internal_user_ids)
+    users = User.where('id not in (?)', internal_user_ids)
+    clip_count = trips.map(&:all_clips).flatten.count
+
+    report = {
+      total_trips: trips.count,
+      total_users: users.count,
+      total_clips: clip_count,
+      new_users_this_week: users.this_week.count,
+      new_trips_this_week: trips.this_week.count,
+      users_week_over_week_growth: users.this_week.count.to_f/(users.count - users.this_week.count),
+      trips_week_over_week_growth: trips.this_week.count.to_f/(trips.count - trips.this_week.count),
+      clips_per_trip: clip_count/trips.count.to_f
+    }
+    render inline: report.to_json
+  end
 end

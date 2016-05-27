@@ -39,6 +39,8 @@ Zentrips::Application.routes.draw do
     end
   end
 
+  get 'report' => "application#report"
+
   get "/auth/auth0/callback" => "auth0#callback"
   get "/auth/failure" => "auth0#failure"
 
