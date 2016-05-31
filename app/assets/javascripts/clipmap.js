@@ -5,16 +5,17 @@ function initAutocomplete(map, input, latitude, longitude) {
 
   autocomplete.addListener('place_changed', function() {
     var place = autocomplete.getPlace();
-    if (!place.geometry) {
-      if (/https?:/.test(place.name)) {
-        return true;
-      }
-      window.alert("Could not pinpoint that location or point of interest, please select a choice from the autocomplete drop down");
-      return;
-    }
+    // if (!place.geometry) {
+    //   if (/https?:/.test(place.name)) {
+    //     return true;
+    //   }
+    //   window.alert("Could not pinpoint that location or point of interest, please select a choice from the autocomplete drop down");
+    //   return;
+    // }
 
     latitude.prop('value', place.geometry.location.lat);
     longitude.prop('value', place.geometry.location.lng);
+    $(input).closest('form').submit();
   });
 }
 
