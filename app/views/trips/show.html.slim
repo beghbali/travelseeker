@@ -12,6 +12,7 @@ nav.navbar.navbar-default.navbar-fixed-top
       - unless @trip.readonly?
         =bootstrap_nested_form_for @trip, class: 'navbar-form form-horizontal' do |t|
           = t.fields_for :clips, @trip.clips.build  do |c|
+            = c.hidden_field :external_reference
             = c.text_field :uri, {placeholder: 'Type place name or paste TripAdvisor and Yelp links', hide_label: true, append: c.submit('Add to Trip', class: 'btn btn-default'), class: 'autocomplete-places'}
 
     .nav.navbar-nav.navbar-right

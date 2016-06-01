@@ -161,6 +161,10 @@ class Clip < ActiveRecord::Base
     day_list.add "Day #{day}"
   end
 
+  def external_reference=(ref)
+    self.reference = ref
+  end
+
   def set_reference
     self.reference = external_reference
   end
