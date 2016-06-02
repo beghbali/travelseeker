@@ -55,6 +55,7 @@ gem 'best_in_place', '~> 3.0.1'
 gem 'jquery-ui-rails'
 gem 'carrierwave'
 gem 'carrierwave-aws'
+gem 'exifr'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
