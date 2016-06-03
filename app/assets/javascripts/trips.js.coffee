@@ -16,7 +16,7 @@ $ ->
 
   $.fn.datepicker.defaults.format = "yyyy-mm-dd";
   initDateRangePicker= ->
-    $('.bootstrap_form-datetimepicker').datetimepicker({inline: false, sideBySide: false, allowInputToggle: true, keepOpen: false, format: "YYYY-MM-DD HH:mm Z", useCurrent: false});
+    $('.bootstrap_form-datetimepicker').datetimepicker({inline: false, sideBySide: false, allowInputToggle: true, keepOpen: false, format: "YYYY-MM-DD HH:mm A", useCurrent: false});
     $(document).on 'click', '.datetime-picker',(e) ->
       e.preventDefault();
       $(@).next('input').daterangepicker('show')
