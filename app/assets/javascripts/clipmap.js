@@ -4,6 +4,8 @@ function initAutocomplete(map, input, latitude, longitude) {
   autocomplete.bindTo('bounds', map);
 
   autocomplete.addListener('place_changed', function() {
+    $submit = $form.find('.btn');
+    $submit.prop('disabled', 'disabled');
     var place = autocomplete.getPlace();
     // if (!place.geometry) {
     //   if (/https?:/.test(place.name)) {
