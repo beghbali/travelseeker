@@ -4,6 +4,7 @@ function initAutocomplete(map, input, latitude, longitude) {
   autocomplete.bindTo('bounds', map);
 
   autocomplete.addListener('place_changed', function() {
+    $form = $(input).closest('form');
     $submit = $form.find('.btn');
     $submit.prop('disabled', 'disabled');
     var place = autocomplete.getPlace();
@@ -17,7 +18,6 @@ function initAutocomplete(map, input, latitude, longitude) {
 
     latitude.prop('value', place.geometry.location.lat);
     longitude.prop('value', place.geometry.location.lng);
-    $form = $(input).closest('form');
     $form.find('[id*=external_reference]').prop('value', place.place_id);
     $form.submit();
   });
