@@ -17,6 +17,7 @@ class TripsController < ApplicationController
   def show
     @select_all = true
     session[:redirect_to] = @trip.readonly? ? trip_share_url(@trip) : trip_edit_url(@trip)
+    @last_clip_id = @trip.all_clips.reorder(updated_at: :desc).first.try(:id)
     redirect_to trip_day_path(@trip.presentable_id, day: 1) unless @trip.readonly? || @day.present? || performed?
   end
 

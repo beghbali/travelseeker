@@ -127,4 +127,5 @@ $ ->
     $(@).closest('.modal').modal('hide')
     )
 
+  $('.clip[data-active=true]').click();
   $('.disclaimer').fadeOut(10000);
