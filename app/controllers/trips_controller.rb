@@ -17,8 +17,8 @@ class TripsController < ApplicationController
   def show
     @select_all = true
     session[:redirect_to] = @trip.readonly? ? trip_share_url(@trip) : trip_edit_url(@trip)
-    @last_clip_id = @trip.all_clips.reorder(updated_at: :desc).first.try(:id)
-    redirect_to trip_day_path(@trip.presentable_id, day: 1) unless @trip.readonly? || @day.present? || performed?
+    @last_clip_id = session.delete(@trip.id)
+    # redirect_to trip_day_path(@trip.presentable_id, day: 1) unless @trip.readonly? || @day.present? || performed?
   end
 
   def trip_details
@@ -67,6 +67,7 @@ class TripsController < ApplicationController
   def update
     respond_to do |format|
       if @trip.update(trip_params)
+        last_clip(@trip, trip_params[:clips_attributes].any?)
         format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully updated.', change: "list" }
         format.json { head :no_content }
       else
@@ -114,12 +115,18 @@ class TripsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def trip_params
-      params.require(:trip).permit(:location, :latitude, :longitude, :start_date, :end_date, :days, :notes, clips_attributes: [:uri, :day_list, :date_list, :type_list, :day, :date, :external_reference])
+      params.require(:trip).permit(:location, :latitude, :longitude, :start_date, :end_date, :days, :notes, :name, clips_attributes: [:uri, :day_list, :date_list, :type_list, :day, :date, :external_reference])
     end
 
     def authorize_trip_access
       # if !Rails.env.development?
       #   return redirect_to(new_trip_path) if @trip.user != current_user
       # end
+    end
+
+    def last_clip(trip, clip_updated)
+      if clip_updated
+        session[trip.id] = trip.all_clips.reorder(updated_at: :desc).first.try(:id)
+      end
     end
 end

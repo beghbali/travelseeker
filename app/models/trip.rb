@@ -79,6 +79,10 @@ class Trip < ActiveRecord::Base
     self[:location]
   end
 
+  def name=(name)
+    self[:location] = name
+  end
+
   def context
     start_date.nil? ? 'Days' : start_date.strftime("%B")
   end

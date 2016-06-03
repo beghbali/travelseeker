@@ -197,6 +197,7 @@ class Clip < ActiveRecord::Base
     copy.source = self
     copy.scheduled_at = nil
     copy.save
+    copy
   end
 
   def copied_for?(user)

@@ -37,6 +37,7 @@ class ClipsController < ApplicationController
 
     respond_to do |format|
       if @clip.save
+        last_clip(@clip)
         format.html { redirect_to clips_path, notice: 'Clip was successfully created.' }
         format.json { render action: 'index', status: :created, location: @clip }
       else
@@ -51,6 +52,7 @@ class ClipsController < ApplicationController
   def update
     respond_to do |format|
       if @clip.update(clip_params)
+        last_clip(@clip)
         format.html { redirect_to @clip.ancestor, notice: 'Clip was successfully updated.', change: "list"}
         format.json { respond_with_bip(@clip) }
       else
@@ -68,7 +70,8 @@ class ClipsController < ApplicationController
     unless copy_params[:new_trip].blank?
       trip_id = Trip.create(location: copy_params[:new_trip], session_id: session.id, user_id: current_user.id).id
     end
-    clip.copy_to(trip_id.to_i)
+    copy = clip.copy_to(trip_id.to_i)
+    last_clip(copy)
 
     respond_to do |format|
       format.json { respond_with_bip(clip, param: :clip) }
@@ -98,5 +101,9 @@ class ClipsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def clip_params
       params.require(:clip).permit(:name, :address, :latitude, :longitude, :uri, :remote_image_url, :image, :scheduled_at, :date_list, :day_list, :type_list, comment_attributes: [:comment])
+    end
+
+    def last_clip(clip)
+      session[clip.ancestor.id] = clip.id
     end
 end

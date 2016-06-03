@@ -5,7 +5,11 @@
       - if trip.parent.present?
         =link_to trip_path(trip.parent) do
           i.fa.fa-level-up
-      h1 = trip.name
+      - if trip.readonly?
+        h1 = trip.name
+      - else
+        = best_in_place trip, :name, as: :input, activator: "#trip_#{trip.id}_name_edit", place_holder: 'Name your trip', class: 'h1'
+        i.fa.fa-pencil id="trip_#{trip.id}_name_edit"
       h3.dates
         -if trip.dates_known?
           = dates_or_days(trip)
