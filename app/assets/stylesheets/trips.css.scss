@@ -224,7 +224,7 @@ $detail-color: #be5290;
   margin: 0;
 }
 
-.fa-pencil {
+.best_in_place ~ .fa-pencil {
   font-size: 1em;
   color: white;
   padding-left: 0.5em;
@@ -625,7 +625,11 @@ i.fa.fa-trash, .clone, i.fa.fa-check {
   cursor: pointer;
 }
 i.fa.fa-trash {
-  color: red;
+  color: black;
+
+  &:hover {
+    color: red;
+  }
 }
 i.fa.fa-check {
   color: green;

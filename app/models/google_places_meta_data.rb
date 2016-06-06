@@ -15,7 +15,7 @@ class GooglePlacesMetaData < MetaData
   end
 
   def data_cache_key
-    ['google-places', terms, reference]
+    ['google-places', (reference || terms)]
   end
 
   def google_places_data
@@ -23,7 +23,7 @@ class GooglePlacesMetaData < MetaData
       Rails.cache.fetch(data_cache_key, expires_in: 1.day) do
         return no_spots_found if terms.blank?
         response = query_by_reference || first_location_search_result || first_terms_search_result
-        puts ">>QUERY: #{terms}"
+        puts ">>QUERY: #{terms}, #{reference}"
         puts response.inspect
         response.present? ? response : no_spots_found
       end

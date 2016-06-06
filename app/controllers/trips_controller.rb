@@ -67,7 +67,7 @@ class TripsController < ApplicationController
   def update
     respond_to do |format|
       if @trip.update(trip_params)
-        last_clip(@trip, trip_params[:clips_attributes].any?)
+        last_clip(@trip, trip_params[:clips_attributes].present?)
         format.html { redirect_to @trip.parent || @trip, notice: 'Trip was successfully updated.', change: "list" }
         format.json { head :no_content }
       else

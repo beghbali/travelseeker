@@ -119,7 +119,7 @@ $ ->
   $('[data-toggle="tooltip"]').tooltip()
   $('.alert').fadeOut(5000);
 
-  $(document).on('ajax:success', '.modal .edit_clip', (e)->
+  $(document).on('ajax:success', '.modal .edit_clip, .best_in_place', (e)->
     $trip = $('.trip.selected').first();
     $trip.load('/trips/'+$trip.data('id')+'/trip_details');
     $('.trip-selection').load('/trips/mytrips');

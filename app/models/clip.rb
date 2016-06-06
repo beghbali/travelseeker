@@ -67,6 +67,10 @@ class Clip < ActiveRecord::Base
     self[:address].presence || metadata.address
   end
 
+  def address=(new_address)
+    self[:address] = new_address
+  end
+
   def user_provided_name
     self[:name] || uri
   end
@@ -77,8 +81,6 @@ class Clip < ActiveRecord::Base
 
   def name=(new_name)
     super
-    self.reference = nil
-    self[:address] = nil
   end
 
   def scheduled?
