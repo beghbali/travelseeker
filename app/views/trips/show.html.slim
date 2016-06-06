@@ -84,11 +84,11 @@ nav.navbar.navbar-default.navbar-fixed-top
         - if current_user.authored?(@trip)
           h2 For Collaboration
           em Invite friends to add notes and interesting items to your trip
-          input disabled='disabled' value=trip_edit_url(@trip)
+          input readonly=true value=trip_edit_url(@trip) data-highlight='true'
 
         h2 For Sharing
         em Share as read-only with people who can benefit from your recommendations
-        input disabled='disabled' value=trip_share_url(@trip)
+        input readonly=true value=trip_share_url(@trip) data-highlight='true'
 
 .modal.fade id="tripsModal" tabindex="-1" role="dialog" aria-labelledby="tripsModalLabel"
   .modal-dialog role="document"

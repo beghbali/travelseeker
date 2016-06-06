@@ -129,3 +129,5 @@ $ ->
 
   $('.clip[data-active=true]').click();
   $('.disclaimer').fadeOut(10000);
+  $('[data-highlight=true]').on 'focus, click', ->
+    $(@).select();

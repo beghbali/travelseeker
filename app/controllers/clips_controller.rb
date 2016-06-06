@@ -72,6 +72,7 @@ class ClipsController < ApplicationController
     end
     copy = clip.copy_to(trip_id.to_i)
     last_clip(copy)
+    Heap.event('Clip Copied', current_user.email || session.id, copied_clip: clip.id, copied_to_trip: trip_id.to_i)
 
     respond_to do |format|
       format.json { respond_with_bip(clip, param: :clip) }
