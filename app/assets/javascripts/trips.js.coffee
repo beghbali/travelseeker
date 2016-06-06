@@ -58,7 +58,11 @@ $ ->
     drawPins(window.map);
 
   $(document).on 'click', '.subtrips .trip', (e)->
-    return if $(e.target).is('.clone')
+    if $(e.target).is('.clone')
+      clip_id = $(e.target).closest('.clip').data('id')
+      heap.track('Clicked Copy', {clip_id: clip_id})
+      return
+
     tripId = $(@).data('id')
     $('.clip[data-trip!='+tripId+']').removeClass('selected');
     $('.clip[data-trip='+tripId+']').addClass('selected');

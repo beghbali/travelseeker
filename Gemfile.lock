@@ -144,9 +144,6 @@ GEM
     google_places (0.32.0)
       httparty (~> 0.13.1)
     hashie (3.4.3)
-    heap (1.0.2)
-      faraday (>= 0.8.11)
-      faraday_middleware (>= 0.8.0)
     highline (1.6.21)
     hike (1.2.3)
     httparty (0.13.7)
@@ -327,7 +324,6 @@ DEPENDENCIES
   font-awesome-rails
   google_places
   hashie
-  heap
   jbuilder (~> 1.2)
   jquery-rails
   jquery-turbolinks

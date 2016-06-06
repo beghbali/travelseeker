@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :signed_in?
+  helper_method :heap_event
 
   def faq
   end
@@ -57,5 +58,10 @@ class ApplicationController < ActionController::Base
       clips_per_trip: clip_count/trips.count.to_f
     }
     render inline: report.to_json
+  end
+
+  def heap_event(event_name, properties)
+    HTTParty.post('https://heapanalytics.com/api/track', headers: {'Content-Type' => 'application/json'},
+      body: {app_id: '2977918096', identity: current_user.email || session.id, event: event_name, properties: properties}.to_json)
   end
 end
