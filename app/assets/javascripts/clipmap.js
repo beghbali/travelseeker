@@ -4,7 +4,12 @@ function initAutocomplete(map, input, latitude, longitude) {
   autocomplete.bindTo('bounds', map);
 
   autocomplete.addListener('place_changed', function() {
-    $form = latitude.closest('form') || $(input).closest('form');
+    $form = latitude.closest('form');
+
+    if ($form.length == 0) {
+      $form = $(input).closest('form');
+    }
+
     $submit = $form.find('.btn');
     $submit.prop('disabled', 'disabled');
     var place = autocomplete.getPlace();
