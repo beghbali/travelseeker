@@ -18,6 +18,7 @@ $trip-color: rgb(82, 190, 182);
 $subtrip-color: rgba(82, 190, 182, 0.2);
 $navbar-height: 8rem;
 $detail-color: #be5290;
+$card-height: 10vh;
 
 @font-face {
   font-family: 'Brandon Text Medium';
@@ -197,9 +198,9 @@ $detail-color: #be5290;
 }
 .clone {
   background: asset_url('add-to-trip-buttons.png') no-repeat -1001px -234px;
-  width: 151px;
-  height: 150px;
-  zoom: 0.3;
+  width: 3em;
+  height: 3em;
+  zoom: 0.175;
 }
 
 @media (max-width: 500px) {
@@ -584,6 +585,7 @@ section {
     padding: 0em;
     cursor: pointer;
     @include box-shadow-2dp;
+    max-height: $card-height;
 
     &:hover {
       transform: scale(1.05, 1.05);
@@ -616,6 +618,7 @@ section {
     height: 3em;
     overflow: hidden;
     text-overflow: ellipsis;
+    font-size: 0.75em;
   }
 }
 
@@ -831,7 +834,7 @@ i.fa.fa-check {
     min-height: 1px;
   }
 
-  height: 20vh;
+  max-height: $card-height;
 
   .stats {
     position: absolute;
@@ -840,6 +843,9 @@ i.fa.fa-check {
   }
 }
 
+.small-icon {
+  zoom: 0.5;
+}
 .pill.pill-icon {
   margin: 0;
   height: 2.4em;

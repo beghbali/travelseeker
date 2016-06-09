@@ -3,7 +3,7 @@ function initAutocomplete(map, input, latitude, longitude) {
   var autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.bindTo('bounds', map);
 
-  autocomplete.addListener('place_changed', function() {
+  autocomplete.addListener('place_changed', function(e) {
     $form = latitude.closest('form');
 
     if ($form.length == 0) {
@@ -21,8 +21,10 @@ function initAutocomplete(map, input, latitude, longitude) {
     //   return;
     // }
 
-    latitude.prop('value', place.geometry.location.lat());
-    longitude.prop('value', place.geometry.location.lng());
+    if(place.geometry != undefined) {
+      latitude.prop('value', place.geometry.location.lat());
+      longitude.prop('value', place.geometry.location.lng());
+    }
     $form.find('[id*=external_reference]').prop('value', place.place_id);
     $form.submit();
   });
