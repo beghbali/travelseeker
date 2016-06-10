@@ -11,7 +11,6 @@ function initAutocomplete(map, input, latitude, longitude) {
     }
 
     $submit = $form.find('.btn');
-    $submit.prop('disabled', 'disabled');
     var place = autocomplete.getPlace();
     // if (!place.geometry) {
     //   if (/https?:/.test(place.name)) {
@@ -22,11 +21,13 @@ function initAutocomplete(map, input, latitude, longitude) {
     // }
 
     if(place.geometry != undefined) {
+      $submit.prop('disabled', 'disabled');
       latitude.prop('value', place.geometry.location.lat());
       longitude.prop('value', place.geometry.location.lng());
+
+      $form.find('[id*=external_reference]').prop('value', place.place_id);
+      $form.submit();
     }
-    $form.find('[id*=external_reference]').prop('value', place.place_id);
-    $form.submit();
   });
 }
 
