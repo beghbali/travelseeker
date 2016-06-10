@@ -615,7 +615,7 @@ section {
     text-overflow: ellipsis;
   }
   .comment.placeholder {
-    height: 3em;
+    max-height: 3em;
     overflow: hidden;
     text-overflow: ellipsis;
     font-size: 0.75em;
@@ -625,6 +625,7 @@ section {
 i.fa.fa-trash, .clone, i.fa.fa-check {
   font-size: 2em;
   padding: 0.125em 0.5em;
+  margin-top: -0.125em;
   cursor: pointer;
 }
 i.fa.fa-trash {
@@ -829,12 +830,19 @@ i.fa.fa-check {
   border-radius: 0.125em;
 }
 
+.bottom {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  overflow: hidden;
+}
 .card-height {
   > div {
     min-height: 1px;
+    height: 100%;
   }
 
-  max-height: $card-height;
+  height: $card-height;
 
   .stats {
     position: absolute;
