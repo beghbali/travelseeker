@@ -3,6 +3,12 @@ function initAutocomplete(map, input, latitude, longitude) {
   var autocomplete = new google.maps.places.Autocomplete(input);
   autocomplete.bindTo('bounds', map);
 
+  $(input).keypress(function(e) {
+    if (e.which == 13) {
+      google.maps.event.trigger(autocomplete, 'place_changed');
+      return false;
+    }
+  });
   autocomplete.addListener('place_changed', function(e) {
     $form = latitude.closest('form');
 
