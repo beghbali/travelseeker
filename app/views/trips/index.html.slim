@@ -1,0 +1,7 @@
+ul.sitemap
+  - Trip.top_level.each do |trip|
+    li
+      =link_to trip.name, trip_share_url(trip), class: 'btn-link btn btn-info'
+  - Trip.not_top_level.each do |trip|
+    li
+      =link_to trip.name, trip_share_url(trip), class: 'btn-link btn btn-info'

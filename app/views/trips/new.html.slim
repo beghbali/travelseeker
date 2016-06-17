@@ -85,7 +85,8 @@ section.trips
       -@trips.each do |trip|
         li
           =link_to trip.name, (signed_in? ? trip_edit_url(trip) : trip_share_url(trip)), class: 'btn-link btn btn-info'
-
+        li
+          =link_to 'Explore more trips', trips_url, class: 'btn-link btn btn-info'
 section.testimonials
   .container.text-center
     p "Love this idea. I always find myself trying to plan after I actually get to the destination and end up missing out"

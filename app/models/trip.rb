@@ -14,6 +14,7 @@ class Trip < ActiveRecord::Base
   scope :in_city, ->(city) { where(city: city) }
   scope :by_commitments, -> { joins(:clips).order('clips.scheduled_at ASC')}
   scope :top_level, -> { where(parent_id: nil).order(updated_at: :desc) }
+  scope :not_top_level, -> { where('parent_id is not null').order(updated_at: :desc) }
   scope :unclaimed, -> { where(user_id: nil) }
   scope :this_week, -> { where('created_at > ?', Date.today.beginning_of_week)}
 

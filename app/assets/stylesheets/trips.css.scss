@@ -622,6 +622,13 @@ section {
   }
 }
 
+ul.sitemap {
+  list-style: none;
+  li {
+    display: inline-block;
+    margin: 1em;
+  }
+}
 i.fa.fa-trash, .clone, i.fa.fa-check {
   font-size: 2em;
   padding: 0.125em 0.5em;
