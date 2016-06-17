@@ -26,7 +26,7 @@ function initAutocomplete(map, input, latitude, longitude) {
     //   return;
     // }
 
-    if(place.geometry != undefined) {
+    if(place != undefined && place.geometry != undefined) {
       $submit.prop('disabled', 'disabled');
       latitude.prop('value', place.geometry.location.lat());
       longitude.prop('value', place.geometry.location.lng());
