@@ -38,7 +38,7 @@
             i.fa.fa-clock-o
             div Set Time
         .col-md-6.col-xs-8
-          = link_to "", 'data-scroll-to' => "#note_#{clip.id}" do
+          = link_to "", 'data-scroll-to' => "#private_note_#{clip.id}" do
             i.fa.fa-pencil
             div Add Note
   hr
@@ -67,11 +67,16 @@
                 .clone.save
     - else
       =bootstrap_nested_form_for clip, remote: true do |f|
-        .row id="note_#{clip.id}"
+        .row id="public_note_#{clip.id}"
           .col-md-12.col-xs-16
-            h2 Note
+            h2 Public Note
             = f.fields_for :comment, clip.comment || clip.build_comment do |c|
               = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
+        .row id="private_note_#{clip.id}"
+          .col-md-12.col-xs-16
+            h2 Private Note
+            = f.fields_for :private_comment, clip.private_comment || clip.build_private_comment do |c|
+              = c.text_area :private_comment, hide_label: true, placeholder: 'Add private notes'
         .row id="date_#{clip.id}"
           .col-md-12.col-xs-16
             h2= scheduled_label(clip)

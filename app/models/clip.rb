@@ -5,6 +5,7 @@ class Clip < ActiveRecord::Base
   attr_accessor :metadata, :near, :new_trip
 
   has_one :comment, as: :commentable
+  has_one :private_comment, as: :commentable
   belongs_to :trip
   belongs_to :source, class_name: 'Clip'
 
