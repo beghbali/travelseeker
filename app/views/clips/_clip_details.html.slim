@@ -31,7 +31,7 @@
     .row.edits
       - if @readonly
         .col-md-12.col-xs-16
-          i.fa.fa-comment-o title="Adding comments for the trip owner coming soon..."
+          = clip.public_comment.try(:comment)
       - else
         .col-md-6.col-xs-8
           = link_to "", 'data-scroll-to' => "#date_#{clip.id}" do
@@ -70,13 +70,13 @@
         .row id="public_note_#{clip.id}"
           .col-md-12.col-xs-16
             h2 Public Note
-            = f.fields_for :comment, clip.comment || clip.build_comment do |c|
+            = f.fields_for :public_comment, clip.public_comment || clip.build_public_comment do |c|
               = c.text_area :comment, hide_label: true, placeholder: 'Add notes'
         .row id="private_note_#{clip.id}"
           .col-md-12.col-xs-16
             h2 Private Note
             = f.fields_for :private_comment, clip.private_comment || clip.build_private_comment do |c|
-              = c.text_area :private_comment, hide_label: true, placeholder: 'Add private notes'
+              = c.text_area :comment, hide_label: true, placeholder: 'Add private notes'
         .row id="date_#{clip.id}"
           .col-md-12.col-xs-16
             h2= scheduled_label(clip)

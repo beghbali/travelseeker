@@ -1,17 +1,17 @@
 class Clip < ActiveRecord::Base
   acts_as_taggable_on :type, :days, :dates
-  acts_as_commentable
+  acts_as_commentable :public, :private
 
   attr_accessor :metadata, :near, :new_trip
 
-  has_one :comment, as: :commentable
-  has_one :private_comment, as: :commentable
+  has_one :public_comment, -> { where(role: :public_comments) }, as: :commentable, class_name: 'Comment'
+  has_one :private_comment, -> { where(role: :private_comments) }, as: :commentable, class_name: 'Comment'
   belongs_to :trip
   belongs_to :source, class_name: 'Clip'
 
   mount_uploader :image, ImageUploader
 
-  accepts_nested_attributes_for :comment
+  accepts_nested_attributes_for :public_comment, :private_comment
 
   TYPES = %w(Food Activity Lodging Transit Unassigned)
   validates :reference, uniqueness: { scope: :trip_id }
@@ -150,8 +150,13 @@ class Clip < ActiveRecord::Base
     return valid?
   end
 
-  def comment_attributes=(attrs)
-    comment.try(:delete)
+  def public_comment_attributes=(attrs)
+    public_comment.try(:delete)
+    super
+  end
+
+  def private_comment_attributes=(attrs)
+    private_comment.try(:delete)
     super
   end
 

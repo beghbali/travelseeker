@@ -13,8 +13,7 @@
 
         .row-fluid
           .comment.placeholder
-            - unless @trip.readonly?
-              =clip.comment.try(:comment)
+            =clip.public_comment.try(:comment)
 
         .row-fluid.bottom
           .col-md-7.col-xs-12
