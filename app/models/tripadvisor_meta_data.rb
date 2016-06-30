@@ -21,7 +21,7 @@ class TripadvisorMetaData < MetaData
       response = client.get("location/#{business_id}")
       Hashie::Mash.new(JSON.parse response)
     end
-  rescue RestClient::ResourceNotFound
+  rescue RestClient::ResourceNotFound, RestClient::Unauthorized
     Rails.logger.warn "TripAdvisor did not find #{business_id}"
     @tripadvisor_data = NullObject.new
     return @tripadvisor_data
