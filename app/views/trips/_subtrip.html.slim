@@ -9,11 +9,13 @@ ul.trip-commitments
         - commitments.each do |commitment|
           li class=day_class(date) id="clip_#{commitment.id}"
             = render commitment, trip: trip
-  li class=show_wishlist_class(wishlist_shown, trip)
-    h3 Wishlist
-    ul.clips
-      - trip.clips.tagged_with('Unassigned', on: :days).each do |clip|
-        li id="clip_#{clip.id}"
-          = render clip, trip: trip
+  - wishlist = trip.clips.tagged_with('Unassigned', on: :days)
+  - if wishlist.any?
+    li class=show_wishlist_class(wishlist_shown, trip)
+      h3 Wishlist
+      ul.clips
+        - trip.clips.tagged_with('Unassigned', on: :days).each do |clip|
+          li id="clip_#{clip.id}"
+            = render clip, trip: trip
 
 

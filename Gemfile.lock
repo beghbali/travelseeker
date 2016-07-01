@@ -199,6 +199,8 @@ GEM
     omniauth-oauth2 (1.4.0)
       oauth2 (~> 1.0)
       omniauth (~> 1.2)
+    open-weather (0.12.0)
+      json (~> 1)
     pg (0.18.1)
     polyglot (0.3.5)
     rack (1.5.5)
@@ -332,6 +334,7 @@ DEPENDENCIES
   nested_form
   omniauth (~> 1.2)
   omniauth-auth0 (~> 1.1)
+  open-weather
   pg
   rails (= 4.0.2)
   rails-backbone

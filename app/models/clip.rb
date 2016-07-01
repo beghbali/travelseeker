@@ -84,6 +84,11 @@ class Clip < ActiveRecord::Base
     super
   end
 
+  def weather
+    options = { units: "imperial", APPID: ENV['OPEN_WEATHER_API_KEY'] }
+    OpenWeather::Forecast.geocode(location.latitude, location.longitude, options)
+  end
+
   def scheduled?
     scheduled_at.present?
   end
