@@ -33,7 +33,7 @@ html lang="en"
     script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"
     = javascript_include_tag "//cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.1/js/bootstrap-datepicker.min.js"
     = javascript_include_tag params[:controller]
-    script async='true' defer='defer' src="https://maps.googleapis.com/maps/api/js?&callback=initMap&libraries=places&key=#{ENV[GOOGLE_PLACES_API_KEY]}"
+    script async='true' defer='defer' src="https://maps.googleapis.com/maps/api/js?&callback=initMap&libraries=places&key=#{ENV['GOOGLE_PLACES_API_KEY']}"
     =yield(:footer)
     = render 'shared/auth0'
     = render 'shared/google_analytics'
