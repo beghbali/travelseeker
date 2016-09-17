@@ -219,6 +219,11 @@ GEM
       ejs
       jquery-rails
       railties
+    rails_12factor (0.0.3)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.5)
+    rails_stdout_logging (0.0.5)
     railties (4.0.2)
       actionpack (= 4.0.2)
       activesupport (= 4.0.2)
@@ -338,6 +343,7 @@ DEPENDENCIES
   pg
   rails (= 4.0.2)
   rails-backbone
+  rails_12factor
   react-bootstrap-rails
   react-rails (~> 1.5.0)
   sass-rails (~> 4.0.0)

@@ -57,6 +57,7 @@ gem 'carrierwave'
 gem 'carrierwave-aws'
 gem 'exifr'
 gem 'open-weather'
+gem 'rails_12factor' #heroku
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

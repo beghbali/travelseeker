@@ -7,7 +7,7 @@ class Auth0Controller < ApplicationController
     user_info = request.env['omniauth.auth']
     @email = user_info[:info][:email]
     @uid = user_info[:uid]
-    @image = user_info[:info][:image]
+    @image = user_info[:info][:picture]
 
     Rails.logger.error "#{@email}, #{@uid}"
 
