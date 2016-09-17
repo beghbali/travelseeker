@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   def sign_out
     reset_session
-    redirect_to "https://zentrips.auth0.com/v2/logout?returnTo=http://www.tryzentrips.com/trips/new&client_id=#{ENV['AUTH0_KEY']}"
+    redirect_to "https://zentrips.auth0.com/v2/logout?returnTo=https://travelseeker.herokuapp.com/trips/new&client_id=#{ENV['AUTH0_KEY']}"
   end
 
   def sign_in(email, uid, image)
