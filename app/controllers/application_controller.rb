@@ -28,11 +28,11 @@ class ApplicationController < ActionController::Base
     if email.present?
       user = User.find_or_create_by_email(email)
       user.update(uid: uid) if uid.present? && user.uid.nil?
-      user.update(remote_image_url: image) if image.present? && user.image.nil?
       return false if user.persisted? && uid.present? && user.uid != uid
     elsif uid.present?
       user = User.find_or_create_by_uid(uid)
     end
+    user.update(remote_image_url: image) if user.present? && image.present? && user.image.nil?
     session[:user_id] = user.try(:id)
     session[:user_id].present?
   end
