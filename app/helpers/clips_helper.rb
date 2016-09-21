@@ -14,7 +14,7 @@ module ClipsHelper
 
   def google_static_map_url(location, width)
     require 'uri'
-    "https://maps.googleapis.com/maps/api/staticmap?size=300x200&markers=icon:#{URI.encode(asset_path('pin_highlighted.svg'))}|#{[location.latitude, location.longitude].join(',')}"
+    "https://maps.googleapis.com/maps/api/staticmap?key=#{ENV['GOOGLE_API_KEY']}&size=300x200&markers=icon:#{URI.encode(asset_path('pin_highlighted.svg'))}|#{[location.latitude, location.longitude].join(',')}"
   end
 
   def scheduled_label(clip)
